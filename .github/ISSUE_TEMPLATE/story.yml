@@ -1,0 +1,19 @@
+name: Story
+description: Issue for user story
+title: 'USER STORY: '
+labels: User Story
+projects: ['FlashDrag/11']
+body:
+- type: textarea
+  attributes:
+    label: "Description:"
+    placeholder: "As a **role** I can **capability** so that **received benefit**."
+  validations:
+    required: true
+- type: markdown
+  attributes:
+    value: "Thanks for contributing to the CycleBay!"
+
+
+
+

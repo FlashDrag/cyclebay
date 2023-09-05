@@ -1,0 +1,9 @@
+name: Technical Issue
+description: Issue for technical task
+title: 'TECH: '
+labels: Technical Task
+projects: ['FlashDrag/11']
+body:
+- type: textarea
+  attributes:
+    label: "Description:"
