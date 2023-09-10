@@ -6,4 +6,4 @@ projects: ['FlashDrag/11']
 body:
 - type: textarea
   attributes:
-    label: "Description:"
+    label: "Tasks:"

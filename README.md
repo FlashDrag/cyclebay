@@ -1,7 +1,7 @@
 # CycleBay
 
 ## Overview
-
+The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform, uses the AWS S3 cloud service to store static files and utilizes the Stripe payment system to process payments.
 
 Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
@@ -9,12 +9,27 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
 ## Table of Contents
 
+### Projects Goals
+- Create a web application that allows users to buy bycicles online.
+- Target people who love cycling ant are looking for a new bike.
+- The app should allow users to find the bike they want quickly and easily.
+- Implement responsive design to provide an optimal viewing experience across a wide range of devices.
+- Provide a secure payment system.
+
+### Marketing Strategy
+CycleBay's overarching goal is to substantially increase sales and revenue. To achieve this, we are prioritizing product visibility by showcasing our range on digital platforms. Expanding our digital footprint through the creation and active management of our Facebook page will facilitate direct engagement with our target audience. Additionally, our strategic push on social media aims to grow our brand awareness, ensuring CycleBay becomes the go-to e-commerce platform for cycling enthusiasts.
+
+#### Facebook Business Page
+
+- [CycleBay - Facebook Business Page](https://www.facebook.com/)
+
+![Facebook Business Page Header](docs/images/Facebook-Business-Page-Header.png)
+![Facebook Business Page Body](docs/images/Facebook-Business-Page-Body.png)
+
+[Back to top](#table-of-contents)
+
 ## Agile Methodology
 The main goal of the app is to deliver a solution that creates real value for the users and _UX design_ and _Agile Methodology_ are the best way to achieve this goal.
-
-#### Project Goals
-- Create a web application that allows users to buy bycicles online.
-
 
 ### Development process
 This project was developed with the Agile methodology which allowed me to develop the app iteratively and incrementally, and adapt changes with flexibility even in the late stages of development.
@@ -60,6 +75,8 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 ##### Buyer Goals
 
 #### Epic: Viewing and Navigation
+- As a Shopper, I want to be able to see a home page so that I can quickly understand the purpose of the site and learn more about the business
+- As a Shopper, I want to be able to easily navigate throughout the site to find content so that I can find what I'm looking for efficiently
 - As a Shopper, I want to be able to view a list of bikes so that I can select one to purchase
 - As a Shopper, I want to be able to view the details of a bike so that I can identify the price, description, technical characteristics, type, size, rating and image
 - As a Shopper, I want to be able to quickly identify deals, clearance items and special offers so that I can take advantage of special savings on products I'd like to purchase
@@ -73,6 +90,7 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to have a personalized user profile so that I can view my personal order history and order confirmations, and save my payment information
 - As a Shopper, I want to be able to save the products I want to buy later so that I can keep track of them
 - As a Shopper, I want to be able to view my wish list so that I can see what I want to buy later
+- As a Shopper, I want to be able to unsubscribe from the newsletter so that I can stop receiving emails from the store.
 #### Epic: Sorting and Searching
 - As a Site User, I want to be able to sort the list of available products so that I can easily identify the best-rated, best-priced and categorically sorted bikes.
 - As a Shopper, I want to be able to sort a specific category of products so that I can find the best-priced or best-rated product in a specific category or sort the products in that category by name
@@ -80,19 +98,24 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to search for a product by name or description so that I can find a specific product I'd like to purchase
 - As a Shopper, I want to be able to easily see what I've searched for and the number of results so that I can quickly decide whether the product I want is available
 #### Epic: Purchasing and Checkout
-- As a Shopper, I want to be able to easily select the size and quantity of a product when purchasing it, so that I can ensure I don't accidentally select the wrong product, size or quantity
-- As a Shopper, I want to be able to view items in my bag to be purchased, so that I can identify the total cost of my purchase and all items I will receive
+- As a Shopper, I want to be able to easily select the size and quantity of a bike when purchasing it, so that I can ensure I don't accidentally select the wrong bike, size or quantity
+- As a Shopper, I want to be able to view bikes in my bag to be purchased, so that I can identify the total cost of my purchase and all items I will receive
 - As a Shopper, I want to be able to adjust the quantity of individual items in my bag, so that I can easily make changes to my purchase before checkout
+- As a Shopper, I want to be able to remove a Bike from my bag, so that I can remove it if I change my mind
 - As a Shopper, I want to be able to easily enter my payment information so that I can check out quickly and with no hassles
 - As a Shopper, I want to be able to feel my personal and payment information is safe and secure so that I can confidently provide the needed information to make a purchase
 - As a Shopper, I want to be able to view an order confirmation after checkout, so that I can verify I haven't made any mistakes
 - As a Shopper, I want to be able to receive an email confirmation after checking out, so that I can keep the confirmation of what I've purchased for my records
 #### Epic: Newsletters
 - As a Shopper, I want to be able to subscribe to a Newsletter so that I can receive any discounts or special offers available.
-#### Epic: Admin and Store Management
+#### Epic: Store Management
 -  As a Store Owner, I want to be able to add a product to the store, so that I can sell it to customers.
 -  As a Store Owner, I want to be able to edit/update a product, so that I can change the price, description, image or any other attribute of the product.
+- As a Store Owner, I want to be able to add a product category, so that I can group products into categories.
 -  As a Store Owner, I want to be able to delete a product, so that I can remove it from the store.
+-  As a Store Owner, I want to be able to delete a product category, so that I can remove it from the store.
+-  As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
+- As a Store Owner, I need a Facebook page, so that I can promote my store on social media.
 
 [Back to top](#table-of-contents)
 
