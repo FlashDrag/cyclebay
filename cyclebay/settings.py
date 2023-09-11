@@ -56,13 +56,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sites",
     "django.contrib.staticfiles",
-    # Third-party apps
+    # Allauth
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     # Local apps
     "users",
     "home",
+
+    # Other apps
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -77,6 +80,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "cyclebay.urls"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
