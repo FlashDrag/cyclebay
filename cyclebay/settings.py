@@ -43,6 +43,10 @@ ALLOWED_HOSTS = [
     "cyclebay-bc1e75ddbf8e.herokuapp.com",
 ]
 
+# Clickjacking protection. Means that you can
+# only embed your site in an iframe on your own domain.
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -51,6 +55,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -68,7 +74,7 @@ ROOT_URLCONF = "cyclebay.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
