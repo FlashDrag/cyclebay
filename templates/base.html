@@ -49,7 +49,16 @@
 </head>
 
 <body>
-
+  <header>
+    <!-- Delivery banner -->
+    <div class="row">
+      <div class="col-12">
+        <div class="alert p-0 m-0 rounded-0 bg-black text-white text-center">
+          <h4 class="m-0 p-1">Free delivery on orders over €{{ free_delivery_threshold }}</h4>
+        </div>
+      </div>
+    </div>
+  </header>
   {% block page_header %}
   {% endblock %}
 
