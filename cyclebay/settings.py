@@ -45,7 +45,7 @@ ALLOWED_HOSTS = [
 
 # Clickjacking protection. Means that you can
 # only embed your site in an iframe on your own domain.
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # Application definition
 INSTALLED_APPS = [
@@ -54,8 +54,13 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
     "django.contrib.staticfiles",
-
+    # Third-party apps
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # Local apps
     "users",
 ]
 
@@ -67,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "cyclebay.urls"
@@ -74,7 +80,10 @@ ROOT_URLCONF = "cyclebay.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "templates", "allauth"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -90,7 +99,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "cyclebay.wsgi.application"
 
 # Set custom user model as default
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -100,7 +109,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -144,3 +152,63 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# ___Allauth settings___
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of allauth
+    'django.contrib.auth.backends.ModelBackend',
+    # allauth specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+# Specifies the URL that the user will be redirected
+# to after a successful login or logout.
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'accounts/login/'
+
+# Removes the username field from the signup form.
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# Requires the user to enter a unique e-mail address during signup.
+ACCOUNT_EMAIL_REQUIRED = True
+# Removes the username field from the signup form.
+ACCOUNT_USERNAME_REQUIRED = False
+# Allows the user to log in using their e-mail address and password.
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# Prevents multiple signups with the same e-mail address.
+ACCOUNT_UNIQUE_EMAIL = True
+# asks the user to Remember Me at login to keep the user logged in
+# even after closing the browser.
+ACCOUNT_SESSION_REMEMBER = None
+# User gets blocked from logging back in until a timeout.
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+
+# email confirmation
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# Logs the user in after confirming the email address.
+# Works only when user signs up
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
+# Allows avoiding the need to confirm the email address
+# on page form and can be done only by clicking the link
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+
+# Email SMTP settings
+if DEVELOPMENT:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'cyclebay@email.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'  # for gmail
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    # password must be generated from gmail account,
+    # called App Passwords, not the same as account password
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_USE_TLS = True
