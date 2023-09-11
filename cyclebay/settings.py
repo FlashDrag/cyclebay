@@ -89,6 +89,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "cyclebay.wsgi.application"
 
+# Set custom user model as default
+AUTH_USER_MODEL = 'users.User'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
