@@ -69,11 +69,6 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 
 
 #### User Stories
-##### Site Owner Goals
-
-
-##### Buyer Goals
-
 #### Epic: Viewing and Navigation
 - As a Shopper, I want to be able to see a home page so that I can quickly understand the purpose of the site and learn more about the business
 - As a Shopper, I want to be able to easily navigate throughout the site to find content so that I can find what I'm looking for efficiently
@@ -90,7 +85,6 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to have a personalized user profile so that I can view my personal order history and order confirmations, and save my payment information
 - As a Shopper, I want to be able to save the products I want to buy later so that I can keep track of them
 - As a Shopper, I want to be able to view my wish list so that I can see what I want to buy later
-- As a Shopper, I want to be able to unsubscribe from the newsletter so that I can stop receiving emails from the store.
 #### Epic: Sorting and Searching
 - As a Site User, I want to be able to sort the list of available products so that I can easily identify the best-rated, best-priced and categorically sorted bikes.
 - As a Shopper, I want to be able to sort a specific category of products so that I can find the best-priced or best-rated product in a specific category or sort the products in that category by name
@@ -108,13 +102,14 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to receive an email confirmation after checking out, so that I can keep the confirmation of what I've purchased for my records
 #### Epic: Newsletters
 - As a Shopper, I want to be able to subscribe to a Newsletter so that I can receive any discounts or special offers available.
+- As a Shopper, I want to be able to unsubscribe from the newsletter so that I can stop receiving emails from the store.
 #### Epic: Store Management
--  As a Store Owner, I want to be able to add a product to the store, so that I can sell it to customers.
--  As a Store Owner, I want to be able to edit/update a product, so that I can change the price, description, image or any other attribute of the product.
+- As a Store Owner, I want to be able to add a product to the store, so that I can sell it to customers.
+- As a Store Owner, I want to be able to edit/update a product, so that I can change the price, description, image or any other attribute of the product.
 - As a Store Owner, I want to be able to add a product category, so that I can group products into categories.
--  As a Store Owner, I want to be able to delete a product, so that I can remove it from the store.
--  As a Store Owner, I want to be able to delete a product category, so that I can remove it from the store.
--  As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
+- As a Store Owner, I want to be able to delete a product, so that I can remove it from the store.
+- As a Store Owner, I want to be able to delete a product category, so that I can remove it from the store.
+- As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
 - As a Store Owner, I need a Facebook page, so that I can promote my store on social media.
 
 [Back to top](#table-of-contents)

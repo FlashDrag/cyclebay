@@ -1,0 +1,6 @@
+asgiref==3.7.2
+Django==3.2.21
+pycodestyle==2.11.0
+python-dotenv==1.0.0
+pytz==2023.3.post1
+sqlparse==0.4.4
