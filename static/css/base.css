@@ -72,7 +72,7 @@ body {
 
 /* Hero section */
 .callout-container {
-  height: 80vh;
+  height: 70vh;
   background: url("/media/hero_img.png") no-repeat fixed;
   background-position: left top;
   -webkit-background-size: cover;
