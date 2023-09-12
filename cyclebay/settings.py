@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     # Local apps
     "users",
     "home",
+    "products",
 
     # Other apps
     "crispy_forms",
