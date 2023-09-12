@@ -10,6 +10,7 @@ django-allauth==0.56.1
 django-crispy-forms==2.0
 idna==3.4
 oauthlib==3.2.2
+Pillow==10.0.0
 pycodestyle==2.11.0
 pycparser==2.21
 PyJWT==2.8.0
