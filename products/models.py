@@ -34,7 +34,6 @@ class Product(models.Model):
 
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
-    description = models.TextField()
     price = models.DecimalField(max_digits=7, decimal_places=2)
     size = models.CharField(
         max_length=2,
