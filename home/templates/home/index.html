@@ -2,5 +2,25 @@
 {% load static %}
 
 {% block content %}
-  <h1>Hello CycleBay</h1>
+<!-- Callout -->
+<div class="container-fluid callout-container">
+  <!-- It's the first thing that a user sees when they open our page.
+      This is a marketing term describing the main focus, or action, that we want the user to take when they enter our page -->
+  <div class="opaque-overlay">&nbsp;</div>
+  <!-- &nbsp; - non-breaking space, used to add space between elements -->
+  <div class="row mx-sm-5">
+    <div class="col-12">
+      <section class="text-white text-end">
+        <h1 class="mb-3">Journey with <br> CycleBay</h1>
+        <p class="lead mb-4">
+          We're not just selling bicycles - <br> we're promoting a lifestyle!
+        </p>
+        <a class="btn btn-lg btn--cta btn--white" href="">
+          Shop Now
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+<!-- /.callout -->
 {% endblock %}
