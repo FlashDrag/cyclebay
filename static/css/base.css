@@ -56,7 +56,15 @@ body {
 /* ___HOME__ */
 
 /* Navbar */
-
+@media (max-width: 576px) {
+  #delivery-banner {
+    font-size: 16px;
+  }
+  #main-navbar .list-inline-item a {
+    font-size: 16px;
+    padding: 0.5rem 0.5rem;
+  }
+}
 
 /* Hero section */
 .callout-container {
