@@ -17,6 +17,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     class Size(models.TextChoices):
+        XSMALL = "XS", "Extra Small"
         SMALL = "S", "Small"
         MEDIUM = "M", "Medium"
         LARGE = "L", "Large"
@@ -36,7 +37,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=7, decimal_places=2)
     size = models.CharField(
-        max_length=1,
+        max_length=2,
         choices=Size.choices,
         default=Size.OTHER,
     )
