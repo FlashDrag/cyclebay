@@ -110,12 +110,12 @@
             <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
               href="">
               <div class="text-center">
-                <div><i class="fas fa-shopping-bag fa-md"></i></div>
+                <div><i class="fas fa-shopping-cart fa-md"></i></div>
                 <p class="my-0">
                   {% if grand_total %}
                   ${{ grand_total|floatformat:2 }}
                   {% else %}
-                  $0.00
+                  €0.00
                   {% endif %}
                 </p>
               </div>
@@ -142,10 +142,9 @@
   {% block content %}
   {% endblock %}
 
-
   <!-- Footer -->
-  <div class="container-fluid">
-    <div class="row pt-4 pb-2 bg-black text-white">
+  <div class="container-fluid bg-black text-white">
+    <div class="row pt-4 pb-2">
       <!-- Contact -->
       <div class="col-12 col-md-4 my-4 my-md-0 text-center">
         <h5>Contact</h5>
@@ -197,14 +196,14 @@
       <hr class="bg-white mx-auto m-0 p-0 w-50 text-center">
     </div>
     <!-- Bottom -->
-    <div class="row bg-black text-white">
+    <div class="row">
       <div class="col-12 text-md-left">
         <p class="mt-2 mb-0 text-center">
           &copy; 2023 CycleBay
         </p>
       </div>
     </div>
-    <div class="row bg-black text-white">
+    <div class="row">
       <div class="col-12">
         <p class="my-2 text-center">
           Developed by <a href="https://www.linkedin.com/in/pavlo-myskov/" class="text-white">

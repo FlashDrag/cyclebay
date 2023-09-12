@@ -56,6 +56,10 @@ body {
 /* ___HOME__ */
 
 /* Navbar */
+#main-navbar .nav-item a:hover, .nav-link:hover {
+  color: rgb(71, 90, 95) !important;
+}
+
 @media (max-width: 576px) {
   #delivery-banner {
     font-size: 16px;
