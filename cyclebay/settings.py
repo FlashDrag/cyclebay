@@ -156,9 +156,7 @@ STATIC_URL = '/static/'
 # python manage.py collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# URL path for media files where they will be served from
 MEDIA_URL = '/media/'
-# Dir where media files are stored during development
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
