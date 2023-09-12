@@ -24,6 +24,23 @@ class Product(models.Model):
         XLARGE = "X", "XLarge"
         OTHER = "O", "Other"
 
+    class Manufacturer(models.TextChoices):
+        AXESS = "AX", "Axess"
+        CICLISTA = "CI", "Ciclista"
+        CUBE = "CU", "Cube"
+        KTM = "KT", "KTM"
+        OTHER = "O", "Other"
+
+    class Colour(models.TextChoices):
+        BLACK_GREY = "BG", "black/grey"
+        GREEN = "GR", "green"
+        WHITE = "WH", "white"
+        BLUE = "BL", "blue"
+        BRAUN = "BR", "braun"
+        RED_ORANGE = "RO", "red/orange"
+        YELLOW = "YE", "yellow"
+        OTHER = "O", "Other"
+
     category = models.ForeignKey(
         "Category",
         null=True,
@@ -31,17 +48,24 @@ class Product(models.Model):
         on_delete=models.SET_NULL,
         related_name="products",
     )
-
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
-    manufacturer = models.CharField(max_length=254, null=True, blank=True)
+    manufacturer = models.CharField(
+        max_length=2,
+        choices=Manufacturer.choices,
+        default=Manufacturer.OTHER,
+    )
     price = models.DecimalField(max_digits=7, decimal_places=2)
     size = models.CharField(
         max_length=2,
         choices=Size.choices,
         default=Size.OTHER,
     )
-    colour = models.CharField(max_length=50, null=True, blank=True)
+    colour = models.CharField(
+        max_length=2,
+        choices=Colour.choices,
+        default=Colour.OTHER,
+    )
     featured = models.BooleanField(default=False)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
