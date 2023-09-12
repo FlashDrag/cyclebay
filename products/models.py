@@ -24,7 +24,7 @@ class Product(models.Model):
         XLARGE = "X", "XLarge"
         OTHER = "O", "Other"
 
-    class Manufacturer(models.TextChoices):
+    class Brand(models.TextChoices):
         AXESS = "AX", "Axess"
         CICLISTA = "CI", "Ciclista"
         CUBE = "CU", "Cube"
@@ -50,10 +50,10 @@ class Product(models.Model):
     )
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
-    manufacturer = models.CharField(
+    brand = models.CharField(
         max_length=2,
-        choices=Manufacturer.choices,
-        default=Manufacturer.OTHER,
+        choices=Brand.choices,
+        default=Brand.OTHER,
     )
     price = models.DecimalField(max_digits=7, decimal_places=2)
     size = models.CharField(
