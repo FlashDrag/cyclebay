@@ -17,6 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
         "name",
         "price",
         "colour",
+        "sku",
         "featured",
         "image",
     )
@@ -24,6 +25,7 @@ class ProductAdmin(admin.ModelAdmin):
         "category",
         "brand",
         "colour",
+        "sizes",
         "featured",
     )
     search_fields = (
@@ -34,14 +36,7 @@ class ProductAdmin(admin.ModelAdmin):
         "sku",
     )
 
-    ordering = (
-        "category",
-        "brand",
-        "name",
-        "price",
-        "colour",
-        "featured",
-    )
+    ordering = ("sku",)
 
 
 @admin.register(Category)
