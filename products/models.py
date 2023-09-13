@@ -15,32 +15,40 @@ class Category(models.Model):
         return self.friendly_name
 
 
+class Brand(models.Model):
+    name = models.CharField(max_length=254, unique=True)
+    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    def get_friendly_name(self):
+        return self.friendly_name
+
+
+class Size(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    friendly_name = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    def get_friendly_name(self):
+        return self.friendly_name
+
+
+class Colour(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    friendly_name = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    def get_friendly_name(self):
+        return self.friendly_name
+
+
 class Product(models.Model):
-    class Size(models.TextChoices):
-        XSMALL = "XS", "Extra Small"
-        SMALL = "S", "Small"
-        MEDIUM = "M", "Medium"
-        LARGE = "L", "Large"
-        XLARGE = "X", "XLarge"
-        OTHER = "O", "Other"
-
-    class Brand(models.TextChoices):
-        AXESS = "AX", "Axess"
-        CICLISTA = "CI", "Ciclista"
-        CUBE = "CU", "Cube"
-        KTM = "KT", "KTM"
-        OTHER = "O", "Other"
-
-    class Colour(models.TextChoices):
-        BLACK_GREY = "BG", "black/grey"
-        GREEN = "GR", "green"
-        WHITE = "WH", "white"
-        BLUE = "BL", "blue"
-        BRAUN = "BR", "braun"
-        RED_ORANGE = "RO", "red/orange"
-        YELLOW = "YE", "yellow"
-        OTHER = "O", "Other"
-
     category = models.ForeignKey(
         "Category",
         null=True,
@@ -50,21 +58,27 @@ class Product(models.Model):
     )
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
-    brand = models.CharField(
-        max_length=2,
-        choices=Brand.choices,
-        default=Brand.OTHER,
+    brand = models.ForeignKey(
+        Brand,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="products",
     )
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    size = models.CharField(
-        max_length=2,
-        choices=Size.choices,
-        default=Size.OTHER,
+    sizes = models.ManyToManyField(
+        Size,
+        # specify the intermediate model that will be used
+        # to link the two models together
+        through="ProductSize",
+        related_name="products",
     )
-    colour = models.CharField(
-        max_length=2,
-        choices=Colour.choices,
-        default=Colour.OTHER,
+    colour = models.ForeignKey(
+        Colour,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="products",
     )
     featured = models.BooleanField(default=False)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
@@ -72,3 +86,16 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class ProductSize(models.Model):
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    count = models.IntegerField(default=1)
+
+    class Meta:
+        # ensure that the combination of size and product is unique
+        unique_together = ("size", "product")
+
+    def __str__(self) -> str:
+        return f"{self.product.name} - {self.size.name}"
