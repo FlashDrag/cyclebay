@@ -1,0 +1,162 @@
+[
+    {
+        "model": "products.brand",
+        "pk": 1,
+        "fields": {
+            "name": "2r manufaktur",
+            "friendly_name": "2R Manufaktur"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 2,
+        "fields": {
+            "name": "axess",
+            "friendly_name": "Axess"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 3,
+        "fields": {
+            "name": "babboe",
+            "friendly_name": "Babboe"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 4,
+        "fields": {
+            "name": "bergamont",
+            "friendly_name": "Bergamont"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 5,
+        "fields": {
+            "name": "ciclista",
+            "friendly_name": "Ciclista"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 6,
+        "fields": {
+            "name": "cube",
+            "friendly_name": "Cube"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 7,
+        "fields": {
+            "name": "focus",
+            "friendly_name": "Focus"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 8,
+        "fields": {
+            "name": "khebikes",
+            "friendly_name": "KHEbikes"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 9,
+        "fields": {
+            "name": "ktm",
+            "friendly_name": "KTM"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 10,
+        "fields": {
+            "name": "kalkhoff",
+            "friendly_name": "Kalkhoff"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 11,
+        "fields": {
+            "name": "marin",
+            "friendly_name": "Marin"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 12,
+        "fields": {
+            "name": "qio",
+            "friendly_name": "QIO"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 13,
+        "fields": {
+            "name": "scool",
+            "friendly_name": "SCool"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 14,
+        "fields": {
+            "name": "sibmx",
+            "friendly_name": "SIBMX"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 15,
+        "fields": {
+            "name": "scott",
+            "friendly_name": "Scott"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 16,
+        "fields": {
+            "name": "sunday",
+            "friendly_name": "Sunday"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 17,
+        "fields": {
+            "name": "superior",
+            "friendly_name": "Superior"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 18,
+        "fields": {
+            "name": "tern",
+            "friendly_name": "Tern"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 19,
+        "fields": {
+            "name": "trek",
+            "friendly_name": "Trek"
+        }
+    },
+    {
+        "model": "products.brand",
+        "pk": 20,
+        "fields": {
+            "name": "wethepeople",
+            "friendly_name": "wethepeople"
+        }
+    }
+]
