@@ -52,11 +52,11 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 
-
 /* ___HOME__ */
 
 /* Navbar */
-#main-navbar .nav-item a:hover, .nav-link:hover {
+#main-navbar .nav-item a:hover,
+.nav-link:hover {
   color: rgb(71, 90, 95) !important;
 }
 
@@ -114,4 +114,14 @@ body {
   font-weight: bold;
   width: 160px;
 }
-/* hero section */
+
+/* ___Products__ */
+.product-list-card {
+  border-width: 3px;
+  box-shadow: -2px 2px 5px 0px rgb(0 0 0 / 30%);
+}
+
+.product-list-card:hover {
+  border-width: 3px;
+  box-shadow: 0 0 5px 0 #c6c6c6;
+}
