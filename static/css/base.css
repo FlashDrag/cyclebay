@@ -125,3 +125,14 @@ body {
   border-width: 3px;
   box-shadow: 0 0 5px 0 #c6c6c6;
 }
+
+.brand-badge {
+  font-size: 14px;
+}
+
+.color-badge {
+  border: #c6c6c6 1px solid;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px
+}

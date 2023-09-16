@@ -13,66 +13,103 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
         {% for product in products %}
-          <div class="col px-3 mb-3 mb-sm-4">
-            <div class="card h-100 product-list-card">
-              {% if product.image %}
-              <!-- TODO: url 'product_detail' product.id -->
-              <a href="">
-                <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
-              </a>
-              {% else %}
-              <!-- TODO: url 'product_detail' product.id -->
-              <a href="">
-                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-              </a>
-              {% endif %}
-              <div class="card-body pb-0">
-                <p class="mb-0">{{ product.name }}</p>
+        <div class="col px-3 mb-3 mb-sm-4">
+          <div class="card h-100 product-list-card">
+            <div class="card-header bg-white border-bottom-0 d-flex justify-content-between">
+              <!-- brand -->
+              <div>
+                {% if product.brand %}
+                  <a class="badge badge-pill badge-light brand-badge text-muted"
+                    href="{% url 'products' %}?brand={{ product.brand.name }}">
+                    <i class="fas fa-tag mr-1"></i>
+                    {{ product.brand.friendly_name }}
+                  </a>
+                {% endif %}
               </div>
-              <div class="card-footer bg-white pt-0 border-0 text-left">
-                <div class="row">
-                  <div class="col">
-                    <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-                    {% if product.category %}
-                    <p class="small mt-1 mb-0">
-                      <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
-                        <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
-                      </a>
-                    </p>
-                    {% endif %}
-                    {% if product.brand %}
-                    <p class="small mt-1 mb-0">
-                      <a class="text-muted" href="{% url 'products' %}?brand={{ product.brand.name }}">
-                        <i class="fas fa-tag mr-1"></i>{{ product.brand.friendly_name }}
-                      </a>
-                    </p>
-                    {% endif %}
-                    {% if product.colour %}
-                    <p class="small mt-1 mb-0">
-                      <a class="text-muted" href="{% url 'products' %}?colour={{ product.colour.name }}">
-                        <i class="fas fa-tag mr-1"></i>{{ product.colour.friendly_name }}
-                      </a>
-                    </p>
-                    {% endif %}
+              <!-- color badges -->
+              <ul class="list-inline mb-0 text-center color-list" data-color="{{ product.color.name }}"></ul>
+            </div>
+            <!-- product image -->
+            {% if product.image %}
+            <!-- TODO: url 'product_detail' product.id -->
+            <a href="">
+              <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+            {% else %}
+            <!-- TODO: url 'product_detail' product.id -->
+            <a href="">
+              <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+            </a>
+            {% endif %}
+            <!-- product name -->
+            <div class="card-body pb-0">
+              <p class="mb-0">{{ product.name }}</p>
+            </div>
+            <div class="card-footer bg-white pt-0 border-0 text-left">
+              <div class="row">
+                <div class="col">
+                  <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+                  {% if product.category %}
+                  <p class="small mt-1 mb-0">
+                    <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+                      <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
+                    </a>
+                  </p>
+                  {% endif %}
+                  {% if product.color %}
+                  <p class="small mt-1 mb-0">
+                    <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name }}">
+                      <i class="fas fa-tag mr-1"></i>{{ product.color.friendly_name }}
+                    </a>
+                  </p>
+                  {% endif %}
 
-                    <!-- Superusers control buttons -->
-                    {% if request.user.is_superuser %}
-                      <small class="ml-3">
-                        <!-- TODO: url 'edit_product' product.id -->
-                        <a href="">Edit</a> |
-                        <!-- TODO: url 'delete_product' product.id -->
-                        <a href="" class="text-danger">Delete</a>
-                      </small>
-                    {% endif %}
+                  <!-- Superusers control buttons -->
+                  {% if request.user.is_superuser %}
+                  <small class="ml-3">
+                    <!-- TODO: url 'edit_product' product.id -->
+                    <a href="">Edit</a> |
+                    <!-- TODO: url 'delete_product' product.id -->
+                    <a href="" class="text-danger">Delete</a>
+                  </small>
+                  {% endif %}
 
-                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         {% endfor %}
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Attach color badges to each product
+    const colorLists = document.querySelectorAll('.color-list');
+
+    colorLists.forEach(list => {
+      let colors = list.dataset.color;
+      // splits string at any sequence of characters that aren't standard for color representations
+      // "black/grey" or "red-blue" will be split into ["black", "grey"] and ["red", "blue"]
+      const potentialColors = colors.split(/[^a-zA-Z0-9#(),]+/);
+
+      potentialColors.forEach(color => {
+        // if color is a valid hex code or rgb value or whole word color
+        // add a list item with a background color of that color
+        if (color.startsWith('#') || color.startsWith('rgb') || /^[a-zA-Z]+$/.test(color)) {
+          const li = document.createElement('li');
+          li.classList.add("list-inline-item","color-badge");
+          li.style.backgroundColor = color;
+          list.appendChild(li);
+          console.log(list);
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}
