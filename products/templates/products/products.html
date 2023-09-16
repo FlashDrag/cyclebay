@@ -31,8 +31,7 @@
             </div>
             <!-- product image -->
             {% if product.image %}
-            <!-- TODO: url 'product_detail' product.id -->
-            <a href="">
+            <a href="{% url 'product_detail' product.id %}">
               <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
             </a>
             {% else %}
