@@ -37,7 +37,7 @@ class Size(models.Model):
         return self.friendly_name
 
 
-class Colour(models.Model):
+class Color(models.Model):
     name = models.CharField(max_length=50, unique=True)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
 
@@ -73,8 +73,8 @@ class Product(models.Model):
         through="ProductSize",
         related_name="products",
     )
-    colour = models.ForeignKey(
-        Colour,
+    color = models.ForeignKey(
+        Color,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

@@ -73,8 +73,8 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to see a home page so that I can quickly understand the purpose of the site and learn more about the business
 - As a Shopper, I want to be able to easily navigate throughout the site to find content so that I can find what I'm looking for efficiently
 - As a Shopper, I want to be able to view a list of bikes so that I can select one to purchase
-- As a Shopper, I want to be able to view the details of a bike so that I can identify the price, description, technical characteristics, type, size, rating and image
-- As a Shopper, I want to be able to quickly identify deals, clearance items and special offers so that I can take advantage of special savings on products I'd like to purchase
+- As a Shopper, I want to be able to view the details of a bike so that I can identify the price, color, type, size and image
+- As a Shopper, I want to be able to quickly identify special offers so that I can take advantage of special savings on products I'd like to purchase
 - As a Shopper, I want to be able to easily view the total of my purchases at any time so that I can avoid spending too much
 #### Epic: Registration and User Accounts
 - As a Shopper, I want to be able to easily register for an account so that I can have a personal account and be able to view my profile
@@ -89,7 +89,7 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Site User, I want to be able to sort the list of available products so that I can easily identify the best-rated, best-priced and categorically sorted bikes.
 - As a Shopper, I want to be able to sort a specific category of products so that I can find the best-priced or best-rated product in a specific category or sort the products in that category by name
 - As a Shopper, I want to be able to sort multiple categories of products simultaneously so that I can find the best-priced or best-rated product across broad categories
-- As a Shopper, I want to be able to search for a product by name or description so that I can find a specific product I'd like to purchase
+- As a Shopper, I want to be able to search for a product by name, brand or color so that I can find a specific product I'd like to purchase
 - As a Shopper, I want to be able to easily see what I've searched for and the number of results so that I can quickly decide whether the product I want is available
 #### Epic: Purchasing and Checkout
 - As a Shopper, I want to be able to easily select the size and quantity of a bike when purchasing it, so that I can ensure I don't accidentally select the wrong bike, size or quantity

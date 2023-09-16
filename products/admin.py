@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Brand, Size, Colour, Product, ProductSize
+from .models import Category, Brand, Size, Color, Product, ProductSize
 
 
 class ProductSizeInline(admin.TabularInline):
@@ -16,7 +16,7 @@ class ProductAdmin(admin.ModelAdmin):
         "brand",
         "name",
         "price",
-        "colour",
+        "color",
         "sku",
         "featured",
         "image",
@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = (
         "category",
         "brand",
-        "colour",
+        "color",
         "sizes",
         "featured",
     )
@@ -32,7 +32,7 @@ class ProductAdmin(admin.ModelAdmin):
         "name",
         "brand__name",
         "category__name",
-        "colour__name",
+        "color__name",
         "sku",
     )
 
@@ -75,8 +75,8 @@ class SizeAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Colour)
-class ColourAdmin(admin.ModelAdmin):
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
     list_display = (
         "friendly_name",
         "name",
