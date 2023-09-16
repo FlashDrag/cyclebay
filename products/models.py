@@ -87,6 +87,12 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def total_count(self):
+        """ Return the total count of all sizes of a product """
+        return ProductSize.objects.filter(product=self).aggregate(
+            total=models.Sum("count")
+        )["total"]
+
 
 class ProductSize(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
