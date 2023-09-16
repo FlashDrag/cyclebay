@@ -82,6 +82,12 @@ body {
   }
 }
 
+.dropdown-item.active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #bdbdbe;
+}
+
 /* Hero section */
 .callout-container {
   height: 70vh;
