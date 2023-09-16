@@ -126,6 +126,7 @@ body {
   box-shadow: 0 0 5px 0 #c6c6c6;
 }
 
+/* Product list card header */
 .brand-badge {
   font-size: 14px;
 }
@@ -135,4 +136,27 @@ body {
   border-radius: 50%;
   width: 20px;
   height: 20px
+}
+
+/* Scroll to top button */
+.btt-button {
+  height: 42px;
+  width: 42px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
+.btt-link,
+.update-link,
+.remove-item {
+  cursor: pointer;
+}
+
+.btt-button:hover {
+  box-shadow: none !important;
+}
+.btt-link:hover {
+  text-decoration: none;
 }
