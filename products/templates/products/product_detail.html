@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+  <div class="row">
+    <div class="col"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+      <div class="image-container my-5">
+        {% if product.image %}
+        <a href="{{ product.image.url }}" target="_blank">
+          <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+        </a>
+        {% else %}
+        <a href="">
+          <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+      <div class="product-details-container mb-5 mt-md-5">
+        <div class="product-details-header">
+          <p class="mb-0">{{ product.name }}</p>
+          <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+        </div>
+
+       <ul class="list-unstyled mt-2 mt-md-3">
+          {% if product.brand %}
+            <li class="small mt-1 mb-0">
+              <a class="text-muted" href="{% url 'products' %}?brand={{ product.brand.name }}">
+                <i class="fas fa-trademark mr-1"></i>{{ product.brand.friendly_name }}
+              </a>
+            </li>
+          {% endif %}
+          {% if product.category %}
+            <li class="small mt-1 mb-0">
+              <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+                <i class="fas fa-folder-open mr-1"></i>{{ product.category.friendly_name }}
+              </a>
+            </li>
+          {% endif %}
+          {% if product.color %}
+            <li class="small mt-1 mb-0">
+              <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name }}">
+                <i class="fas fa-palette mr-1"></i>{{ product.color.friendly_name }}
+              </a>
+            </li>
+          {% endif %}
+       </ul>
+
+      <!-- Superusers control buttons -->
+      {% if request.user.is_superuser %}
+        <small class="ml-3">
+          <!-- TODO:  url 'edit_product' product.id -->
+          <a href="">Edit</a> |
+          <!-- TODO:  url 'delete_product' product.id -->
+          <a href="" class="text-danger">Delete</a>
+        </small>
+      {% endif %}
+
+        <!-- TODO: action url 'add_to_bag' product.id -->
+        <form class="form" action="" method="POST">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="col-12">
+              {% if product.total_count %}
+                <div class="sizes mt-2 mt-md-4">
+                  <h6 class="text-uppercase">Size</h6>
+                  {% for productsize in product.productsize_set.all %}
+                  <label class="radio" data-toogle="tooltip" data-placement="top"
+                  {% if not productsize.count %}title="Out of stock" {% else %} title="{{ productsize.count }} in stock" {% endif %}>
+                    <input type="radio" name="size" value="{{ productsize.size.name }}" {% if not productsize.count %} disabled {% endif %}>
+                    <span>{{ productsize.size.name }}</span>
+                  </label>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <p class="text-danger">Out of stock</p>
+              {% endif %}
+            </div>
+
+            <div class="col{% if s %}-12 mt-2{% endif %}">
+              <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5">
+                <span class="icon">
+                  <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="text-uppercase">Keep Shopping</span>
+              </a>
+              <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
+            </div>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.sizes label').tooltip();
+    });
+  </script>
+{% endblock %}
