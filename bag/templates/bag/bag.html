@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bag_tools %}
+
+{% block content %}
+<div class="container-fluid mb-2">
+  <div class="row">
+    <div class="col">
+      <hr>
+      <h2 class="logo-font mb-4">Shopping Bag</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Products -->
+    <div class="col-12 col-lg-8">
+      {% for item in bag_items %}
+        <!-- Row for each item -->
+        <div class="row">
+
+          <!-- Product Image -->
+          <div class="col-4">
+            {% if item.product.image %}
+            <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            {% else %}
+              <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+            {% endif %}
+          </div>
+
+          <div class="col-8">
+            <div class="row">
+              <!-- Product info -->
+              <div class="col-12 col-xl-5 d-flex flex-column justify-content-center">
+                <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                <p class="my-0 small text-muted">sku: {{ item.product.sku|lower }}</p>
+                <!-- FIXME: add product size -->
+                <p class="my-0">Size: {% if item.product.sizes %}{{ item.size.friendly_name }}{% else %}N/A{% endif %}</p>
+                <p class="my-0">Color: {% if item.product.color %}{{ item.color.friendly_name }}{% else %}N/A{% endif %}</p>
+              </div>
+
+              <!-- Forms -->
+              <div class="col-12 col-xl-7 text-xl-center d-flex align-items-center justify-content-xl-center">
+                <div class="row mt-2">
+                  <!-- Quantity form -->
+                  <div class="col">
+                    <!-- TODO: url 'adjust_bag' item.item_id -->
+                    <form class="form update-form" action="" method="post">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <div class="input-group-prepend">
+                        <!-- FIXME: product size count get from view or session storage -->
+                          <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}"
+                            min="1" max="{{ productsize.count }}" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}"
+                            style="min-width: 50px; max-width: 60px;">
+                          <!-- submit -->
+                          <div class="input-group-append">
+                            <button type="submit" class="btn btn-sm btn-outline-black rounded-0">
+                              <i class="fas fa-sync-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- Subtotal -->
+                  <div class="col">
+                    <p>&euro;{{ item.product.price | calc_subtotal:item.quantity }}</p>
+                  </div>
+                  <!-- Remove item -->
+                  <div class="col-12 col-sm-auto">
+                    <button class="btn btn-sm btn-outline-black border-danger rounded-0 remove-item" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}">
+                      <span class="d-sm-none">
+                        <small>Remove</small>
+                      </span>
+                      <i class="fas fa-trash-alt text-danger"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- ./forms -->
+            </div>
+          </div>
+
+        </div>
+        <hr>
+        <!-- ./row for each item -->
+      {% endfor %}
+    </div>
+
+    <!-- Summary -->
+    <div class="col-12 col-xl-4"></div>
+  </div>
+
+
+
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $('.btt-link').click(function (e) {
+      window.scrollTo(0, 0)
+    })
+  </script>
+
+{% endblock %}
