@@ -3,23 +3,23 @@
 {% load bag_tools %}
 
 {% block content %}
-<div class="container-fluid mb-2">
+<div class="container-fluid mb-1">
   <div class="row">
     <div class="col">
       <hr>
-      <h2 class="logo-font mb-4">Shopping Bag</h2>
+      <h2 class="logo-font mb-1 mb-lg-4">Shopping Bag</h2>
     </div>
   </div>
 
   <div class="row">
-    <!-- Products -->
-    <div class="col-12 col-lg-8">
+    <!-- Products list -->
+    <div class="col-12 order-1 order-lg-0 col-lg-8">
       {% for item in bag_items %}
         <!-- Row for each item -->
-        <div class="row">
+        <div class="row bg-light py-2 mb-1">
 
           <!-- Product Image -->
-          <div class="col-4">
+          <div class="col-4 d-flex align-items-center">
             {% if item.product.image %}
             <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
             {% else %}
@@ -30,7 +30,7 @@
           <div class="col-8">
             <div class="row">
               <!-- Product info -->
-              <div class="col-12 col-xl-5 d-flex flex-column justify-content-center">
+              <div class="col-12 col-xl-5 mt-4 d-flex flex-column justify-content-center">
                 <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                 <p class="my-0 small text-muted">sku: {{ item.product.sku|lower }}</p>
                 <!-- FIXME: add product size -->
@@ -40,7 +40,7 @@
 
               <!-- Forms -->
               <div class="col-12 col-xl-7 text-xl-center d-flex align-items-center justify-content-xl-center">
-                <div class="row mt-2">
+                <div class="row mt-3 mt-xl-5">
                   <!-- Quantity form -->
                   <div class="col">
                     <!-- TODO: url 'adjust_bag' item.item_id -->
@@ -63,7 +63,7 @@
                     </form>
                   </div>
                   <!-- Subtotal -->
-                  <div class="col">
+                  <div class="col d-flex align-items-center">
                     <p>&euro;{{ item.product.price | calc_subtotal:item.quantity }}</p>
                   </div>
                   <!-- Remove item -->
@@ -82,17 +82,74 @@
           </div>
 
         </div>
-        <hr>
         <!-- ./row for each item -->
       {% endfor %}
     </div>
+    <!-- ./products list -->
 
     <!-- Summary -->
-    <div class="col-12 col-xl-4"></div>
+    <div class="col-12 col-lg-4 my-3">
+      <div class="container">
+        <!-- Header -->
+        <div class="row">
+          <div class="col">
+            <h4><strong>Summary</strong></h4>
+          </div>
+        </div>
+        <!-- Summary -->
+        <div class="row mt-2">
+          <div class="col">
+            <table class="table table-borderless table-sm">
+              <tr class="mb-2">
+                <td class="pr-3">Bag Total</td>
+                <td class="text-right">&euro;{{ total|floatformat:2 }}</td>
+              </tr>
+              <tr class="mb-2">
+                <td class="pr-3">Delivery</td>
+                <td class="text-right">&euro;{{ delivery|floatformat:2 }}</td>
+              </tr>
+              <tr class="mb-2">
+                <td class="pr-3"><strong>Grand Total</strong></td>
+                <td class="text-right"><strong>&euro;{{ grand_total|floatformat:2 }}</strong></td>
+              </tr>
+              {% if free_delivery_delta > 0 %}
+              <tr>
+                <td colspan="2" class="text-danger">
+                  You could get free delivery by spending just <strong>&euro;{{ free_delivery_delta|floatformat:2 }}</strong> more!
+                </td>
+              </tr>
+              {% endif %}
+            </table>
+          </div>
+        </div>
+        <!-- Checkout button -->
+        <div class="row mt-3">
+          <div class="col text-center">
+            <!-- TODO:  url 'checkout' -->
+            <a href="" class="btn w-100 btn-black bg-success rounded-0 btn-lg">
+              <span class="icon">
+                <i class="fas fa-lock"></i>
+              </span>
+              <span class="text-center">Secure Checkout</span>
+              <span>
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </a>
+            <a href="{% url 'products' %}" class="btn w-100 btn-outline-black rounded-0 btn-lg">
+              <span class="icon">
+                <i class="fas fa-store"></i>
+              </span>
+              <span class="text-center">Keep Shopping</span>
+              <span>
+                <i class="fas fa-chevron-left"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ./summary -->
   </div>
-
-
-
 </div>
 {% endblock %}
 
@@ -104,4 +161,25 @@
     })
   </script>
 
+  <script type="text/javascript">
+    // Update quantity on click
+    $('.update-link').click(function(e) {
+        const form = $(this).prev('.update-form');
+        form.submit();
+    })
+
+    // Remove item and reload on click
+    $('.remove-item').click(function(e) {
+        const csrfToken = "{{ csrf_token }}";
+        const itemId = $(this).attr('id').split('remove_')[1];
+        const size = $(this).data('product_size');
+        const url = `/bag/remove/${itemId}`;
+        const data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+  </script>
 {% endblock %}
