@@ -64,6 +64,31 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 
+.horizontal-shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
 /* ___HOME__ */
 
 /* Navbar */
@@ -82,10 +107,10 @@ body {
   }
 }
 
-.dropdown-item.active {
+.dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #bdbdbe;
+  background-color: #bdbdbe !important;
 }
 
 /* Hero section */
@@ -216,4 +241,13 @@ body {
   color: #fff;
   box-shadow: none;
   cursor: default;
+}
+
+.sizes .alert {
+  width: fit-content !important;
+  position: relative;
+  padding: 0.2rem 0.7rem;
+  margin-bottom: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
 }
