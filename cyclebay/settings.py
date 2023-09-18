@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "users",
     "home",
     "products",
+    "bag",
 
     # Other apps
     "crispy_forms",
@@ -98,6 +99,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # Custom context processor for bag contents
+                "bag.contexts.bag_contents",
             ],
         },
     },
@@ -226,3 +229,7 @@ else:
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
     EMAIL_USE_TLS = True
+
+# Stripe settings
+FREE_DELIVERY_THRESHOLD = 100
+STANDARD_DELIVERY_PERCENTAGE = 10
