@@ -46,11 +46,10 @@
   </div>
 </li>
 <li class="list-inline-item">
-  <!-- TODO  href url 'view_bag' -->
   <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-md-none"
-    href="">
+    href="{% url 'view_bag' %}">
     <div class="text-center">
-      <div><i class="fas fa-shopping-bag fa-md"></i></div>
+      <div><i class="fas fa-shopping-cart fa-md"></i></div>
       <p class="my-0">
         {% if grand_total %}
         ${{ grand_total|floatformat:2 }}
