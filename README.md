@@ -268,11 +268,13 @@ The static files are hosted on the cloud service [AWS S3](https://aws.amazon.com
 - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 ### Frameworks, Libraries
 - [Django 3.2](https://docs.djangoproject.com/en/3.2/)
+- [Celery 5.3.4](https://docs.celeryproject.org/en/stable/)
 - [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [jQuery 3.6.4](https://releases.jquery.com/)
 - [Font Awesome 6.4](https://fontawesome.com/)
 - [Stripe](https://stripe.com/docs)
 ### Tools
+- [Redis](https://redis.io/)
 - [Git](https://git-scm.com/)
 - [GitHub Actions](https://docs.github.com/en/actions)
 - [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/)
