@@ -164,6 +164,9 @@ The ER Diagram below shows the structure of the database and the relationships b
 - [ ] Edit product
 - [ ] Delete product
 
+<!-- TODO: dynamic categories. owner can add new category. it will be displayed in navbar dropdown menu -->
+<!-- TODO: dynamic colors. they use own model -->
+<!-- TODO: dynamic sizes -->
 #### List of Products
 - [ ] All products
 - [ ] Clothing products
