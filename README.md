@@ -195,6 +195,7 @@ The ER Diagram below shows the structure of the database and the relationships b
 #### Shopping Bag
 - [ ] Add product to bag
 - [ ] Remove a product from the bag
+- [ ] Product Reservations
 - [ ] View bag
 - [ ] View and adjust the number of each product in the bag
 - [ ] View a subtotal cost of each product in the bag

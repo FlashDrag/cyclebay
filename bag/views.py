@@ -1,8 +1,10 @@
 from django.http import HttpResponse
+from django.db import transaction
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.contrib import messages
 
+from .models import ProductReservation
 from products.models import Product, ProductSize, Size
 
 
@@ -41,8 +43,21 @@ def add_to_bag(request, item_id):
         )
         return redirect(redirect_url)
 
-    product_size_obj.count -= 1
-    product_size_obj.save()
+    # transaction.atomic() ensures that the database changes are
+    # only committed if all the operations succeed
+    with transaction.atomic():
+        # Reduce the product size object count by 1 and save it
+        product_size_obj.count -= 1
+        product_size_obj.save()
+
+        # Create a product reservation object for the product size
+        reservation, created = ProductReservation.objects.get_or_create(
+            product_size=product_size_obj,
+            session_key=request.session.session_key,
+            defaults={"quantity": 0},
+        )
+        reservation.quantity += 1
+        reservation.save()
 
     bag = request.session.get("bag", {})
 
