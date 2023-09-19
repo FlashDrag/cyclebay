@@ -3,6 +3,7 @@
 {% load bag_tools %}
 
 {% block content %}
+<div id="expiration_countdown"></div>
 <div class="container-fluid mb-1">
   <div class="row">
     <div class="col">
@@ -182,4 +183,48 @@
          });
     })
   </script>
+  <script>
+    // The js countdown timer based on this tutorial:
+    // https://www.w3schools.com/howto/howto_js_countdown.asp
+
+    // Set the date we're counting down to
+    const expirationTimestamp = new Date('{{ cart_expiration_time }}').getTime();
+
+    function updateTimer() {
+        // Get today's date and time
+        const now = new Date().getTime();
+        // Find the distance between now and the count down date
+        const distance = expirationTimestamp - now;
+
+        // Time calculations for hours, minutes and seconds
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        let result = "";
+        if (hours > 0) {
+            result += hours + "h ";
+        };
+        if (minutes > 0) {
+            result += minutes + "m ";
+        };
+        if (seconds > 0) {
+            result += seconds + "s ";
+        }
+
+        // Display the result in the element with id="expiration_countdown"
+        document.getElementById("expiration_countdown").innerText = result;
+
+        // If the count down is finished, show appropriate message
+        if (distance < 0) {
+            const msg = `<span class='text-danger'>Your cart has expired and the items have been removed!</span><br>
+                        <small class='text-muted'>If you still want to purchase them, please add them to your cart again.</small>
+                        `;
+            clearInterval(timerInterval);
+            document.getElementById("expiration_countdown").innerHTML = msg;
+        }
+    }
+    // Update the count down every 1 second
+    let timerInterval = setInterval(updateTimer, 1000);
+    </script>
 {% endblock %}
