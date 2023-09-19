@@ -1,11 +1,16 @@
+from django.utils import timezone
+from django.conf import settings
+from cyclebay.celery import app as celery_app
 from django.http import HttpResponse
 from django.db import transaction
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.contrib import messages
 
-from .models import ProductReservation
 from products.models import Product, ProductSize, Size
+from .models import ProductReservation
+from bag.tasks import release_reserving_products
+
 
 
 def view_bag(request):
@@ -73,5 +78,24 @@ def add_to_bag(request, item_id):
         messages.success(request, f"Added {product_size_obj} to your bag")
 
     request.session["bag"] = bag
+
+    # -- Celery --
+    # Revoking the previous task, as new items have been added to the bag
+    existing_task_id = request.session.get("clear_cart_task_id")
+    if existing_task_id:
+        celery_app.control.revoke(existing_task_id)
+        del request.session["clear_cart_task_id"]
+
+    # Schedule the new task and store its ID in the session
+    countdown = int(settings.CART_EXPIRY_TIME) * 60
+    task = release_reserving_products.apply_async(
+        (request.session.session_key,), countdown=countdown
+    )
+    request.session["clear_cart_task_id"] = task.id
+    # add the task expiry time to the session
+    request.session["cart_expiration_time"] = (
+        timezone.now() + timezone.timedelta(seconds=countdown)
+    ).isoformat()
+    request.session.modified = True
 
     return redirect(redirect_url)
