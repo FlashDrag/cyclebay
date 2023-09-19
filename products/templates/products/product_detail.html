@@ -94,6 +94,8 @@
                 </div>
               {% else %}
                 <p class="text-danger">Out of stock</p>
+                <!-- hidden input -->
+                <input type="hidden" name="is_out_of_stock" value="true">
               {% endif %}
             </div>
 
@@ -138,5 +140,11 @@
       $('.sizes h6').removeClass('text-danger');
       $('.sizes-container').removeClass('horizontal-shake');
     });
+  </script>
+  <script>
+    const isOutOfStock = $('input[name="is_out_of_stock"]');
+    if (isOutOfStock.val()) {
+      $('form input[type="submit"]').prop('disabled', true);
+    };
   </script>
 {% endblock %}

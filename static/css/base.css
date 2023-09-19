@@ -57,6 +57,18 @@ body {
   border: 1px solid black;
 }
 
+.btn-black:disabled,
+.btn-black:disabled:hover,
+.btn-black:disabled:active,
+.btn-black:disabled:focus,
+.btn-black:disabled:active:focus {
+  border-color: #c6c6c6;
+  background-color: #c6c6c6;
+  color: #fff;
+  box-shadow: none;
+  cursor: default;
+}
+
 .form-control:focus, .btn:focus {
   color: #495057;
   border-color: #000000;
