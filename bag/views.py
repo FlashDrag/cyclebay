@@ -18,13 +18,14 @@ def add_to_bag(request, item_id):
     """Add a product to the shopping bag"""
 
     product = get_object_or_404(Product, pk=item_id)
-    size_list = request.POST.get("productsize")
+    size = request.POST.get("productsize")
     redirect_url = request.POST.get("redirect_url")
 
     # If the user selected a size, get the size object,
     # otherwise, return an error message and redirect
-    size_obj = Size.objects.filter(name__in=size_list).first()
-    if len(size_list) != 1 or not size_obj:
+    try:
+        size_obj = Size.objects.get(name__exact=size)
+    except Size.DoesNotExist:
         messages.error(request, f"Please select a size for {product.name}")
         return redirect(redirect_url)
 
