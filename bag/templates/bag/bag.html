@@ -216,12 +216,17 @@
         document.getElementById("expiration_countdown").innerText = result;
 
         // If the count down is finished, show appropriate message
-        if (distance < 0) {
-            const msg = `<span class='text-danger'>Your cart has expired and the items have been removed!</span><br>
-                        <small class='text-muted'>If you still want to purchase them, please add them to your cart again.</small>
-                        `;
-            clearInterval(timerInterval);
-            document.getElementById("expiration_countdown").innerHTML = msg;
+        if (distance < 1) {
+          // if the message has not been shown yet, show it and set the flag
+          if ('{{ is_expired_msg_shown }}' === 'False') {
+              const msg = `<span class='text-danger'>Your cart has expired and the items have been removed!</span><br>
+                          <small class='text-muted'>If you still want to purchase them, please add them to your cart again.</small>
+                          `;
+              document.getElementById("expiration_countdown").innerHTML = msg;
+              // set the flag to True in the session storage
+              fetch("{% url 'set_expired_msg_shown' %}");
+          }
+          clearInterval(timerInterval);
         }
     }
     // Update the count down every 1 second

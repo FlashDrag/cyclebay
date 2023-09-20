@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.conf import settings
 from cyclebay.celery import app as celery_app
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db import transaction
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -95,6 +95,17 @@ def add_to_bag(request, item_id):
     request.session["cart_expiration_time"] = (
         timezone.now() + timezone.timedelta(seconds=countdown)
     ).isoformat()
+    # Set the expired message shown flag to False
+    request.session["is_expired_msg_shown"] = False
     request.session.modified = True
 
     return redirect(redirect_url)
+
+
+def set_expired_msg_shown(request):
+    """
+    Set the expired message shown flag in the session
+    to prevent the message from being shown again
+    """
+    request.session["is_expired_msg_shown"] = True
+    return JsonResponse({"success": True})
