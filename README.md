@@ -296,6 +296,49 @@ See [TESTING.md](https://github.com/FlashDrag/cyclebay/blob/master/docs/TESTING.
 ## Deployment, CI/CD
 The Get Job platform is deployed on the [Heroku](https://www.heroku.com/) cloud platform and can be accessed here https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
+
+### Local Deployment
+#### Requirements
+To run this project locally, you will need the following tools:
+- [Git](https://git-scm.com/)
+- [Python 3](https://www.python.org/)
+- [PIP](https://pypi.org/project/pip/)
+- [Virtualenv](https://virtualenv.pypa.io/en/latest/) and [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
+- [Redis](https://redis.io/)
+
+#### Instructions
+1. Clone the repository
+```
+git clone
+```
+2. Create a virtual environment
+```
+# mkvirtualenv <name> <path_to_project>
+$ mkvirtualenv cyclebay .
+```
+3. Activate the virtual environment
+```
+$ workon cyclebay
+```
+4. Install the project dependencies
+```
+pip install -r requirements.txt
+```
+5. Create a .env file in the root directory and add the environment variables from the .env_example file
+```
+6. Run Redis
+```
+redis-server
+```
+7. Run the app
+```
+python manage.py runserver
+```
+8. Run Celery
+```
+celery -A cyclebay worker -l info
+```
+
 ## Credits
 
 ## Contacts
