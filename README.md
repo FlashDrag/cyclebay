@@ -297,7 +297,7 @@ See [TESTING.md](https://github.com/FlashDrag/cyclebay/blob/master/docs/TESTING.
 The Get Job platform is deployed on the [Heroku](https://www.heroku.com/) cloud platform and can be accessed here https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
 
-### Local Deployment
+### Local Deployment for Ubuntu
 #### Requirements
 To run this project locally, you will need the following tools:
 - [Git](https://git-scm.com/)

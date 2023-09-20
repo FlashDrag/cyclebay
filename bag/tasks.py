@@ -1,5 +1,6 @@
 from celery import shared_task
 from django.db import transaction
+from django.contrib.sessions.backends.db import SessionStore
 
 from .models import ProductReservation
 
@@ -22,6 +23,7 @@ def release_reserving_products(session_key):
             session_key=session_key
         ).delete()
 
-        # TODO: clear the bag by setting the session bag to an empty dict
-
-
+        # Clear the session bag
+        store = SessionStore(session_key=session_key)
+        store["bag"] = {}
+        store.save()

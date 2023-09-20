@@ -12,7 +12,6 @@ from .models import ProductReservation
 from bag.tasks import release_reserving_products
 
 
-
 def view_bag(request):
     """A view to return the bag contents page"""
 
@@ -87,7 +86,7 @@ def add_to_bag(request, item_id):
         del request.session["clear_cart_task_id"]
 
     # Schedule the new task and store its ID in the session
-    countdown = int(settings.CART_EXPIRY_TIME) * 60
+    countdown = int(settings.CART_EXPIRY_MINUTES) * 60
     task = release_reserving_products.apply_async(
         (request.session.session_key,), countdown=countdown
     )
