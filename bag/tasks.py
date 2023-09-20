@@ -5,7 +5,7 @@ from django.contrib.sessions.backends.db import SessionStore
 from .models import ProductReservation
 
 
-@shared_task
+@shared_task(ignore_result=True)
 def release_reserving_products(session_key):
     """
     Release reserving products, return them to stock and
@@ -26,4 +26,6 @@ def release_reserving_products(session_key):
         # Clear the session bag
         store = SessionStore(session_key=session_key)
         store["bag"] = {}
+        # Since the task is executed, remove the task ID from the session
+        store["clear_cart_task_id"] = None
         store.save()
