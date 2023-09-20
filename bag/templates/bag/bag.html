@@ -15,7 +15,7 @@
     <div class="container">
       <p class="mt-3 expiration_countdown"></p>
       <p class="lead mb-5">Your cart is empty.</p>
-      <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+      <a href="{% url 'products' %}" class="btn btn-outline-white rounded-0 btn-lg">
         <span class="icon">
           <i class="fas fa-chevron-left"></i>
         </span>
@@ -64,7 +64,7 @@
                               id="id_qty_{{ item.product_size_id }}" style="min-width: 50px; max-width: 60px;">
                             <!-- submit -->
                             <div class="input-group-append">
-                              <button type="submit" class="btn btn-sm btn-outline-black rounded-0">
+                              <button type="submit" class="btn btn-sm btn-outline-white rounded-0">
                                 <i class="fas fa-sync-alt"></i>
                               </button>
                             </div>
@@ -78,7 +78,7 @@
                     </div>
                     <!-- Remove item -->
                     <div class="col-12 col-sm-auto">
-                      <button class="btn btn-sm btn-outline-black border-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}" data-product_size="{{ item.size }}">
+                      <button class="btn btn-sm btn-outline-white border-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}" data-product_size="{{ item.size }}">
                         <span class="d-sm-none">
                           <small>Remove</small>
                         </span>
@@ -145,7 +145,7 @@
                   <i class="fas fa-chevron-right"></i>
                 </span>
               </a>
-              <a href="{% url 'products' %}" class="btn w-100 btn-outline-black rounded-0 btn-lg">
+              <a href="{% url 'products' %}" class="btn w-100 btn-outline-white rounded-0 btn-lg">
                 <span class="icon">
                   <i class="fas fa-store"></i>
                 </span>
@@ -223,8 +223,12 @@
           if ('{{ is_expired_msg_shown }}' === 'False') {
             let msg = "";
             try {
-              // Disable the checkout button and show the appropriate message
+              // Disable the checkout, update form and remove btns and show the appropriate message
               document.getElementById("checkout-button").classList.add("disabled");
+              document.querySelectorAll(".update-form").forEach(function(form) {
+                form.querySelector(".qty_input").setAttribute("disabled", "true");
+                form.querySelector("button[type='submit']").setAttribute("disabled", "true");
+              });
               msg = `<span class='text-danger'>Your cart has expired and the items will be removed!</span><br>
                     <small class='text-muted'>If you still want to purchase them, please add them to your cart again.</small>`;
             } catch (error) {

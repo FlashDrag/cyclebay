@@ -123,13 +123,14 @@ def adjust_bag(request, product_size_id):
     """
 
     product_size_obj = get_object_or_404(ProductSize, pk=product_size_id)
-    quantity = int(request.POST.get("quantity"))
-
     bag = request.session.get("bag", {})
-    product_reservation = ProductReservation.objects.get(
+    product_reservation = get_object_or_404(
+        ProductReservation,
         product_size=product_size_obj,
         session_key=request.session.session_key,
     )
+
+    quantity = int(request.POST.get("quantity"))
 
     if quantity > 0:
         bag[product_size_id] = quantity
