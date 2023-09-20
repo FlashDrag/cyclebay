@@ -1,6 +1,6 @@
+from cyclebay.celery import app as celery_app
 from django.utils import timezone
 from django.conf import settings
-from cyclebay.celery import app as celery_app
 from django.http import HttpResponse, JsonResponse
 from django.db import transaction
 from django.shortcuts import get_object_or_404, render, redirect
@@ -115,3 +115,57 @@ def set_expired_msg_shown(request):
     """
     request.session["is_expired_msg_shown"] = True
     return JsonResponse({"success": True})
+
+
+def adjust_bag(request, product_size_id):
+    """
+    Adjust the quantity of the specified product_size to the specified amount
+    """
+
+    product_size_obj = get_object_or_404(ProductSize, pk=product_size_id)
+    quantity = int(request.POST.get("quantity"))
+
+    bag = request.session.get("bag", {})
+    product_reservation = ProductReservation.objects.get(
+        product_size=product_size_obj,
+        session_key=request.session.session_key,
+    )
+
+    if quantity > 0:
+        bag[product_size_id] = quantity
+        # If the quantity is greater than the number of available products,
+        # raise an exception
+        if quantity > (product_reservation.quantity + product_size_obj.count):
+            raise Exception(
+                "Quantity is greater than the number of available products"
+            )
+        # Reduce the product size object count by the difference between
+        # the new quantity and the old quantity
+        product_size_obj.count -= (quantity - product_reservation.quantity)
+        product_size_obj.save()
+        # Update the product reservation quantity
+        product_reservation.quantity = quantity
+        product_reservation.save()
+        messages.success(
+            request,
+            f"Updated <strong>{product_size_obj}</strong> quantity"
+            f" to <strong>{bag[product_size_id]}</strong>",
+            extra_tags="safe",
+        )
+    else:
+        del bag[product_size_id]
+        # Increase the product size object count by the quantity
+        # that was previously reserved
+        product_size_obj.count += product_reservation.quantity
+        product_size_obj.save()
+        # Delete the product reservation
+        product_reservation.delete()
+        messages.success(
+            request,
+            f"Removed size <strong>{product_size_obj}</strong> from your cart",  # noqa
+            extra_tags="safe",
+        )
+
+    request.session["bag"] = bag
+
+    return redirect(reverse("view_bag"))

@@ -21,6 +21,7 @@ def bag_contents(request):
         bag_items.append(
             {
                 "product_size_id": product_size_id,
+                "product_size_obj": product_size_obj,
                 "quantity": product_size_count,
                 "product": product,
                 "size": product_size_obj.size,
