@@ -70,11 +70,17 @@ def add_to_bag(request, item_id):
         bag[product_size_id] += 1
         messages.success(
             request,
-            f"Updated {product_size_obj} quantity to {bag[product_size_id]}",
+            f"Updated <strong>{product_size_obj}</strong> quantity "
+            f"to <strong>{bag[product_size_id]}</strong>",
+            extra_tags="safe",
         )
     else:
         bag[product_size_id] = 1
-        messages.success(request, f"Added {product_size_obj} to your bag")
+        messages.success(
+            request,
+            f"Added <strong>{product_size_obj}</strong> to your cart",
+            extra_tags="safe",
+        )
 
     request.session["bag"] = bag
 

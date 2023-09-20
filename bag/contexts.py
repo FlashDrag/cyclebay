@@ -24,6 +24,7 @@ def bag_contents(request):
                 "quantity": product_size_count,
                 "product": product,
                 "size": product_size_obj.size,
+                "color": product.color,
             }
         )
 

@@ -50,7 +50,7 @@
 
 <body>
 
-  <header>
+  <header class="position-relative">
     <!-- Delivery banner -->
     <div>
       <div class="alert p-0 m-0 rounded-0 bg-black text-white text-center">
@@ -134,9 +134,8 @@
         {% include 'includes/main-nav.html' %}
       </nav>
     </div>
-  </header>
 
-  {% if messages %}
+    {% if messages %}
     <div class="message-container">
       {% for message in messages %}
         {% with message.level as level %}
@@ -153,6 +152,7 @@
       {% endfor %}
     </div>
   {% endif %}
+  </header>
 
   {% block page_header %}
   {% endblock %}
