@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-      <div class="product-details-container mb-5 mt-md-5">
+      <div class="product-details-container mb-5 mt-md-5 mx-sm-2 mx">
         <div class="product-details-header">
           <p class="mb-0">{{ product.name }}</p>
           <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
@@ -73,8 +73,8 @@
             <div class="col-12">
               {% if product.total_count %}
                 <div class="sizes mt-2 mt-md-4">
-                  <h6 class="text-uppercase">Size</h6>
-                  <div class="sizes-container">
+                  <h6 class="text-uppercase"><strong>Size</strong></h6>
+                  <div class="sizes-container ml-1">
                     {% for productsize in product.productsize_set.all %}
                     <label class="radio" data-toogle="tooltip" data-placement="top"
                     {% if not productsize.count %}title="Out of stock" {% else %} title="{{ productsize.count }} in stock" {% endif %}>
@@ -93,20 +93,25 @@
                   </div>
                 </div>
               {% else %}
-                <p class="text-danger">Out of stock</p>
+                <p class="text-danger mt-2"><strong>Out of stock</strong></p>
                 <!-- hidden input -->
                 <input type="hidden" name="is_out_of_stock" value="true">
               {% endif %}
             </div>
 
-            <div class="col{% if s %}-12 mt-2{% endif %}">
-              <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5">
+            <div class="col d-flex justify-content-around justify-content-sm-start mt-3 ml-sm-1 ml-md-0">
+              <a href="{% url 'products' %}" class="btn btn-outline-white mr-2">
                 <span class="icon">
                   <i class="fas fa-chevron-left"></i>
                 </span>
                 <span class="text-uppercase">Keep Shopping</span>
               </a>
-              <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
+              <button type="submit" class="btn btn-success text-uppercase">
+                <span class="icon">
+                  <i class="fas fa-cart-plus"></i>
+                </span>
+                <span>Add to Cart</span>
+              </button>
             </div>
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
           </div>
@@ -144,7 +149,7 @@
   <script>
     const isOutOfStock = $('input[name="is_out_of_stock"]');
     if (isOutOfStock.val()) {
-      $('form input[type="submit"]').prop('disabled', true);
+      $('form button[type="submit"]').prop('disabled', true);
     };
   </script>
 {% endblock %}

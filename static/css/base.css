@@ -5,6 +5,18 @@ lg: 992px;
 xl: 1200px;
 */
 
+:root {
+  --primary: #0d6efd;
+  --secondary: #6c757d;
+  --success: #198754;
+  --info: #0dcaf0;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #212529;
+}
+
+
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -23,27 +35,22 @@ body {
   background-color: #000000;
 }
 
-.btn-outline-black {
+.btn-outline-white {
   background: white;
   color: black !important; /* use important to override link colors for <a> elements */
   border: 1px solid black;
 }
 
-.btn-outline-black:hover {
+.btn-outline-white:hover {
   background: black;
   color: white !important;
   border: 1px solid black;
 }
 
-.btn-white {
-  color: black;
-  background-color: #ffffff;
-}
-
-.btn-white:hover,
-.btn-white:active,
-.btn-white:focus,
-.btn-white:active:focus {
+.btn-outline-white:hover,
+.btn-outline-white:active,
+.btn-outline-white:focus,
+.btn-outline-white:active:focus {
   background-color: black;
   color: white;
 }
@@ -61,12 +68,21 @@ body {
 .btn-black:disabled:hover,
 .btn-black:disabled:active,
 .btn-black:disabled:focus,
-.btn-black:disabled:active:focus {
-  border-color: #c6c6c6;
-  background-color: #c6c6c6;
-  color: #fff;
-  box-shadow: none;
-  cursor: default;
+.btn-black:disabled:active:focus,
+.btn-outline-black:disabled,
+.btn-outline-black:disabled:hover,
+.btn-outline-black:disabled:active,
+.btn-outline-black:disabled:focus,
+.btn-outline-black:disabled:active:focus,
+.btn-outline-white:disabled,
+.btn-outline-white:disabled:hover,
+.btn-outline-white:disabled:active,
+.btn-outline-white:disabled:focus {
+  border-color: #c6c6c6 !important;
+  background-color: #c6c6c6 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  cursor: default !important;
 }
 
 .form-control:focus, .btn:focus {
@@ -281,9 +297,10 @@ body {
 }
 
 .sizes label.radio input:checked + span {
-  border-color: #000;
-  background-color: #000;
+  border-color: var(--success);
+  background-color: var(--success);
   color: #fff;
+  box-shadow: none;
 }
 
 .sizes input[type="radio"]:disabled + span {
