@@ -86,9 +86,9 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to save the products I want to buy later so that I can keep track of them
 - As a Shopper, I want to be able to view my wish list so that I can see what I want to buy later
 #### Epic: Sorting and Searching
-- As a Site User, I want to be able to sort the list of available products so that I can easily identify the best-rated, best-priced and categorically sorted bikes.
-- As a Shopper, I want to be able to sort a specific category of products so that I can find the best-priced or best-rated product in a specific category or sort the products in that category by name
-- As a Shopper, I want to be able to sort multiple categories of products simultaneously so that I can find the best-priced or best-rated product across broad categories
+- As a Site User, I want to be able to sort the list of available products so that I can easily identify the best-priced, categorically, brandly and colored products
+- As a Shopper, I want to be able to sort a specific category of products so that I can find the best-priced product in a specific category or sort the products in that category by name
+- As a Shopper, I want to be able to use filters so that I can sort multiple categories, brands, colors, price and sizes of products simultaneously
 - As a Shopper, I want to be able to search for a product by name, brand or color so that I can find a specific product I'd like to purchase
 - As a Shopper, I want to be able to easily see what I've searched for and the number of results so that I can quickly decide whether the product I want is available
 #### Epic: Purchasing and Checkout
