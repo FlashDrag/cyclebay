@@ -276,6 +276,7 @@ The static files are hosted on the cloud service [AWS S3](https://aws.amazon.com
 - [Redis](https://redis.io/)
 - [Git](https://git-scm.com/)
 - [GitHub Actions](https://docs.github.com/en/actions)
+- [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html)
 - [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/)
 - [Google Fonts](https://fonts.google.com/)
 - [Heroku](https://www.heroku.com/)
@@ -342,6 +343,7 @@ celery -A cyclebay worker -l info
 
 ### Content
 - [Person Riding Bicycle](https://www.pexels.com/photo/person-riding-bicycle-2924491/) by [SAurabh Narwade](https://www.pexels.com/@daredevil/)
+- [Man Riding Bicycle](https://www.pexels.com/photo/photo-of-man-riding-bicycle-2989567/) by [Josh Hild](https://www.pexels.com/@josh-hild-1270765/)
 
 ## Contacts
 If you have any questions about the project, or you would like to contact me for any other reason, please feel free to contact me by email or via social media.
