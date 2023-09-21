@@ -26,14 +26,14 @@ def all_products(request):
             if sortkey == "name":
                 sortkey = "lower_name"
                 products = products.annotate(lower_name=Lower("name"))
-                # if sorting by category, brand or color use the name of the
-                # category, brand or color instead of the id
-                if sortkey == "category":
-                    sortkey = "category__name"
-                if sortkey == "brand":
-                    sortkey = "brand__name"
-                if sortkey == "color":
-                    sortkey = "color__name"
+            # if sorting by category, brand or color use the name of the
+            # category, brand or color instead of the id
+            if sortkey == "category":
+                sortkey = "category__name"
+            if sortkey == "brand":
+                sortkey = "brand__name"
+            if sortkey == "color":
+                sortkey = "color__name"
             # if direction is in the request.GET, get the direction
             if "direction" in request.GET:
                 direction = request.GET["direction"]
