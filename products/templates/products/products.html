@@ -1,3 +1,5 @@
+<!-- FIXME: all cards content -->
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -10,8 +12,31 @@
     </div>
   </div>
   <div class="row">
-    <div>
-      <!-- TODO: sorting -->
+    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+      <div class="sort-select-wrapper w-50">
+        <select id="sort-selector"
+          class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+          <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+          <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)
+          </option>
+          <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)
+          </option>
+          <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+          <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+          <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)
+          </option>
+          <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)
+          </option>
+          <option value="brand_asc" {% if current_sorting == 'brand_asc' %}selected{% endif %}>Brand (A-Z)
+          </option>
+          <option value="brand_desc" {% if current_sorting == 'brand_desc' %}selected{% endif %}>Brand (Z-A)
+          </option>
+          <option value="color_asc" {% if current_sorting == 'color_asc' %}selected{% endif %}>Color (A-Z)
+          </option>
+          <option value="color_desc" {% if current_sorting == 'color_desc' %}selected{% endif %}>Color (Z-A)
+          </option>
+        </select>
+      </div>
     </div>
     <div class="col-12 col-md-6 order-md-first">
       <p class="text-muted mt-3 text-center text-md-left">
@@ -137,5 +162,27 @@
       });
     });
   });
+</script>
+<script type="text/javascript">
+  $('#sort-selector').change(function () {
+    var selector = $(this);
+    var currentUrl = new URL(window.location);
+
+    var selectedVal = selector.val();
+    if (selectedVal != "reset") {
+      var sort = selectedVal.split("_")[0];
+      var direction = selectedVal.split("_")[1];
+
+      currentUrl.searchParams.set("sort", sort);
+      currentUrl.searchParams.set("direction", direction);
+
+      window.location.replace(currentUrl);
+    } else {
+      currentUrl.searchParams.delete("sort");
+      currentUrl.searchParams.delete("direction");
+
+      window.location.replace(currentUrl);
+    }
+  })
 </script>
 {% endblock %}
