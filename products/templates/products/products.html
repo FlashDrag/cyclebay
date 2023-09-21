@@ -10,6 +10,19 @@
     </div>
   </div>
   <div class="row">
+    <div>
+      <!-- TODO: sorting -->
+    </div>
+    <div class="col-12 col-md-6 order-md-first">
+      <p class="text-muted mt-3 text-center text-md-left">
+        {% if search_term or current_categories or current_brands or current_colors or current_sorting != 'None_None' %}
+          <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+        {% endif %}
+        {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="row">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
         {% for product in products %}

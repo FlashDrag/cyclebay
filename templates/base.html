@@ -66,11 +66,10 @@
         </a>
       </div>
       <div class="col-12 col-md-4 my-auto py-1 py-md-0">
-        <!-- TODO  action= url 'products'-->
-        <form method="GET" action="">
+        <form method="GET" action="{% url 'products' %}">
           <div class="input-group w-100">
             <input class="form-control border border-black" type="text" name="q"
-              placeholder="Search our site">
+              placeholder="Search for bikes ...">
             <div class="input-group-append">
               <button class="form-control btn btn-outline-white" type="submit">
                 <span class="icon">
