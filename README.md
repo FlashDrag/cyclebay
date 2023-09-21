@@ -169,8 +169,8 @@ The ER Diagram below shows the structure of the database and the relationships b
 <!-- TODO: dynamic sizes -->
 #### List of Products
 - [ ] All products
-- [ ] Clothing products
-- [ ] Homeware products
+- [ ] Categories
+Dynamic categories. owner can add new category. it will be displayed in navbar dropdown menu
 - [ ] Special offers
 
 #### Product Details

@@ -102,6 +102,8 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # Custom context processor for bag contents
                 "bag.contexts.bag_contents",
+                # Custom context processor for all categories
+                "products.contexts.all_categories",
             ],
             "builtins": [
                 # Allows us to use the 'crispy' template tag
