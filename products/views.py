@@ -22,20 +22,29 @@ def all_products(request):
         if "category" in request.GET:
             # get category string value and split it into a list
             categories = request.GET["category"].split(",")
-            # filter the products by the category name
-            products = products.filter(category__name__in=categories)
-            # get category objects that match the category names
-            categories = Category.objects.filter(name__in=categories)
+            # exact case insensitive match for category name
+            cat_query = Q()
+            for category in categories:
+                cat_query |= Q(name__iexact=category.strip())
+            categories = Category.objects.filter(cat_query)
+            # filter products by category
+            products = products.filter(category__in=categories)
 
         if "brand" in request.GET:
             brands = request.GET["brand"].split(",")
-            products = products.filter(brand__name__in=brands)
-            brands = Brand.objects.filter(name__in=brands)
+            br_query = Q()
+            for brand in brands:
+                br_query |= Q(name__iexact=brand.strip())
+            brands = Brand.objects.filter(br_query)
+            products = products.filter(brand__in=brands)
 
         if "color" in request.GET:
             colors = request.GET["color"].split(",")
-            products = products.filter(color__name__in=colors)
-            colors = Color.objects.filter(name__in=colors)
+            col_query = Q()
+            for color in colors:
+                col_query |= Q(name__iexact=color.strip())
+            colors = Color.objects.filter(col_query)
+            products = products.filter(color__in=colors)
 
         if "q" in request.GET:
             # get the search query
