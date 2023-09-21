@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.urls import reverse
 from django.db.models import Q
+from django.db.models.functions import Lower
 
 from .models import Brand, Category, Color, Product
 
@@ -17,7 +18,30 @@ def all_products(request):
     direction = None
 
     if request.GET:
-        # TODO: add sorting
+        if "sort" in request.GET:
+            # get the sort key from the request.GET
+            sortkey = request.GET["sort"]
+            sort = sortkey
+            # annotate the products with the lower name if sorting by name
+            if sortkey == "name":
+                sortkey = "lower_name"
+                products = products.annotate(lower_name=Lower("name"))
+                # if sorting by category, brand or color use the name of the
+                # category, brand or color instead of the id
+                if sortkey == "category":
+                    sortkey = "category__name"
+                if sortkey == "brand":
+                    sortkey = "brand__name"
+                if sortkey == "color":
+                    sortkey = "color__name"
+            # if direction is in the request.GET, get the direction
+            if "direction" in request.GET:
+                direction = request.GET["direction"]
+                # if direction is desc, reverse the order of the sort key
+                # for descending order, otherwise sort ascending
+                if direction == "desc":
+                    sortkey = f"-{sortkey}"
+            products = products.order_by(sortkey)
 
         if "category" in request.GET:
             # get category string value and split it into a list
