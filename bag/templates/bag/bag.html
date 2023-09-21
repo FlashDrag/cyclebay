@@ -45,7 +45,6 @@
                 <div class="col-12 col-xl-5 mt-4 d-flex flex-column justify-content-center">
                   <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                   <p class="my-0 small text-muted">sku: {{ item.product.sku|lower }}</p>
-                  <!-- FIXME: add product size -->
                   <p class="my-0">Size: {% if item.product.sizes %}{{ item.size.friendly_name }}{% else %}N/A{% endif %}</p>
                   <p class="my-0">Color: {% if item.product.color %}{{ item.color.friendly_name }}{% else %}N/A{% endif %}</p>
                 </div>
@@ -78,7 +77,7 @@
                     </div>
                     <!-- Remove item -->
                     <div class="col-12 col-sm-auto">
-                      <button class="btn btn-sm btn-outline-white border-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}" data-product_size="{{ item.size }}">
+                      <button class="btn btn-sm btn-outline-white border-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}">
                         <span class="d-sm-none">
                           <small>Remove</small>
                         </span>
@@ -172,28 +171,18 @@
       window.scrollTo(0, 0)
     })
   </script>
-
-  <script type="text/javascript">
-    // Remove item and reload on click
-    $('.remove-item').click(function(e) {
-        const csrfToken = "{{ csrf_token }}";
-        const itemId = $(this).attr('id').split('remove_')[1];
-        const size = $(this).data('product_size');
-        const url = `/bag/remove/${itemId}`;
-        const data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size};
-
-        $.post(url, data)
-         .done(function() {
-             location.reload();
-         });
-    })
-  </script>
   <script>
     // The js countdown timer based on this tutorial:
     // https://www.w3schools.com/howto/howto_js_countdown.asp
 
     // Set the date we're counting down to
     const expirationTimestamp = new Date('{{ cart_expiration_time }}').getTime();
+    // Update the count down every 1 second
+    let timerInterval = setInterval(updateTimer, 1000);
+
+    if (!expirationTimestamp) {
+      clearInterval(timerInterval);
+    }
 
     function updateTimer() {
         // Get today's date and time
@@ -217,28 +206,29 @@
             time_result_str += seconds + "s ";
         }
 
-        // If the count down is finished, show appropriate message
+         // If the count down is finished, show appropriate message
         if (distance < 2) {
-          // if the alert has not been shown yet, show it and set the flag
-          if ('{{ is_expired_msg_shown }}' === 'False') {
-            let msg = "";
-            try {
-              // Disable the checkout, update form and remove btns and show the appropriate message
-              document.getElementById("checkout-button").classList.add("disabled");
-              document.querySelectorAll(".update-form").forEach(function(form) {
-                form.querySelector(".qty_input").setAttribute("disabled", "true");
-                form.querySelector("button[type='submit']").setAttribute("disabled", "true");
-              });
-              msg = `<span class='text-danger'>Your cart has expired and the items will be removed!</span><br>
-                    <small class='text-muted'>If you still want to purchase them, please add them to your cart again.</small>`;
-            } catch (error) {
-              // if the checkout button is not found, show the appropriate message
-              msg = "<span class='text-danger'>Your cart has expired and the items have been removed!</span><br>";
-            }
-            document.querySelector(".expiration_countdown").innerHTML = msg;
-            // set the flag to True in the session storage
-            fetch("{% url 'set_expired_msg_shown' %}");
+          let msg = "";
+          try {
+            // Disable the checkout, update form and remove btns and show the appropriate message
+            document.getElementById("checkout-button").classList.add("disabled");
+            document.querySelectorAll(".update-form").forEach(function(form) {
+              form.querySelector(".qty_input").setAttribute("disabled", "true");
+              form.querySelector("button[type='submit']").setAttribute("disabled", "true");
+            });
+            document.querySelectorAll(".remove-item").forEach(function(btn) {
+              btn.setAttribute("disabled", "true");
+            });
+            msg = `<span class='text-danger'>Your cart has expired and the items will be removed!</span><br>
+                  <small class='text-muted'>If you still want to purchase them, please add them to your cart again.</small>`;
+          } catch (error) {
+            // if the checkout button is not found, show the appropriate message
+            msg = "<span class='text-danger'>Your cart has expired and the items have been removed!</span><br>";
           }
+          document.querySelector(".expiration_countdown").innerHTML = msg;
+          // remove cart expiration time from the session
+          // to prevent the message from showing again
+          fetch("{% url 'remove_cart_expiration_time' %}");
           clearInterval(timerInterval);
         } else {
           // Display the result in the element with "expiration_countdown"
@@ -249,7 +239,19 @@
           `;
         }
     }
-    // Update the count down every 1 second
-    let timerInterval = setInterval(updateTimer, 1000);
+    </script>
+    <script type="text/javascript">
+      // Remove item and reload on click
+      $('.remove-item').click(function(e) {
+          const csrfToken = "{{ csrf_token }}";
+          const productSizeId = $(this).attr('id').split('remove_')[1];
+          const url = `/bag/remove/${productSizeId}`;
+          const data = {'csrfmiddlewaretoken': csrfToken};
+
+          $.post(url, data)
+           .done(function() {
+               location.reload();
+           });
+      })
     </script>
 {% endblock %}

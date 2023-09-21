@@ -38,8 +38,6 @@ def bag_contents(request):
 
     grand_total = delivery + total
 
-    is_expired_msg_shown = request.session.get("is_expired_msg_shown", False)
-
     context = {
         "bag_items": bag_items,
         "total": total,
@@ -49,7 +47,6 @@ def bag_contents(request):
         "free_delivery_threshold": settings.FREE_DELIVERY_THRESHOLD,
         "grand_total": grand_total,
         "cart_expiration_time": request.session.get("cart_expiration_time"),
-        "is_expired_msg_shown": is_expired_msg_shown,
     }
 
     return context

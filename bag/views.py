@@ -108,12 +108,13 @@ def add_to_bag(request, item_id):
     return redirect(redirect_url)
 
 
-def set_expired_msg_shown(request):
+def remove_cart_expiration_time(request):
     """
-    Set the expired message shown flag in the session
+    Remove the cart expiration time from the session
     to prevent the message from being shown again
     """
-    request.session["is_expired_msg_shown"] = True
+    request.session.pop("cart_expiration_time", None)
+
     return JsonResponse({"success": True})
 
 
@@ -154,7 +155,8 @@ def adjust_bag(request, product_size_id):
             extra_tags="safe",
         )
     else:
-        del bag[product_size_id]
+        # Remove the product size item from the bag
+        bag.pop(product_size_id)
         # Increase the product size object count by the quantity
         # that was previously reserved
         product_size_obj.count += product_reservation.quantity
@@ -163,10 +165,47 @@ def adjust_bag(request, product_size_id):
         product_reservation.delete()
         messages.success(
             request,
-            f"Removed size <strong>{product_size_obj}</strong> from your cart",  # noqa
+            f"Removed <strong>{product_size_obj}</strong> from your cart",  # noqa
             extra_tags="safe",
         )
 
     request.session["bag"] = bag
 
     return redirect(reverse("view_bag"))
+
+
+def remove_from_bag(request, product_size_id):
+    """Remove the product size item from the shopping bag and
+    release the reserved products"""
+
+    product_size_obj = get_object_or_404(ProductSize, pk=product_size_id)
+    bag = request.session.get("bag", {})
+    product_reservation = get_object_or_404(
+        ProductReservation,
+        product_size=product_size_obj,
+        session_key=request.session.session_key,
+    )
+
+    # Remove the product size item from the bag
+    bag.pop(product_size_id)
+    # Increase the product size object count by the quantity
+    # that was previously reserved
+    product_size_obj.count += product_reservation.quantity
+    product_size_obj.save()
+    # Delete the product reservation
+    product_reservation.delete()
+    messages.success(
+        request,
+        f"Removed <strong>{product_size_obj}</strong> from your cart",  # noqa
+        extra_tags="safe",
+    )
+
+    request.session["bag"] = bag
+
+    # if bag is empty, remove the cart expiration time from the session,
+    # to prevent the expired message from being shown
+    if not bag:
+        request.session.pop("cart_expiration_time", None)
+        request.session.modified = True
+
+    return HttpResponse(status=200)
