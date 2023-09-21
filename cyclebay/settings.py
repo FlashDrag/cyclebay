@@ -68,6 +68,7 @@ INSTALLED_APPS = [
 
     # Other apps
     "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,13 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # Custom context processor for bag contents
                 "bag.contexts.bag_contents",
+            ],
+            "builtins": [
+                # Allows us to use the 'crispy' template tag
+                # in our templates without having to load it
+                # in every template.
+                "crispy_forms.templatetags.crispy_forms_tags",
+                "crispy_forms.templatetags.crispy_forms_field",
             ],
         },
     },

@@ -176,11 +176,9 @@ The ER Diagram below shows the structure of the database and the relationships b
 #### Product Details
 - [ ] Product category(clickable)
 - [ ] Product price
-- [ ] Product rating
 - [ ] Product image
 - [ ] Product Description
 - [ ] Product sizes
-- [ ] Product Quantity
 - [ ] Add to bag button
 
 #### Search
@@ -197,6 +195,7 @@ The ER Diagram below shows the structure of the database and the relationships b
 - [ ] Remove a product from the bag
 - [ ] Product Reservations
 - [ ] View bag
+- [ ] Countdown timer and auto remove products from the bag after the timer expires
 - [ ] View and adjust the number of each product in the bag
 - [ ] View a subtotal cost of each product in the bag
 - [ ] Delivery calculation
@@ -340,6 +339,9 @@ celery -A cyclebay worker -l info
 ```
 
 ## Credits
+
+### Content
+- [Person Riding Bicycle](https://www.pexels.com/photo/person-riding-bicycle-2924491/) by [SAurabh Narwade](https://www.pexels.com/@daredevil/)
 
 ## Contacts
 If you have any questions about the project, or you would like to contact me for any other reason, please feel free to contact me by email or via social media.
