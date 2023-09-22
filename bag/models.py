@@ -10,3 +10,6 @@ class ProductReservation(models.Model):
     quantity = models.PositiveIntegerField()
     session_key = models.CharField(max_length=32)
     reversed_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.product_size} - {self.quantity}"
