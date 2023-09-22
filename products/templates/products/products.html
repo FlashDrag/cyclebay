@@ -68,7 +68,8 @@
             {% endif %}
           </div>
           <!-- color badges -->
-          <ul class="list-inline mb-0 text-center color-list" data-color="{{ product.color.name }}"></ul>
+          <ul class="list-inline mb-0 text-center color-list position-relative"
+            data-color="{{ product.color.name }}"></ul>
         </div>
         <!-- product image -->
         {% if product.image %}
@@ -110,8 +111,8 @@
             <!-- TODO: url 'delete_product' product.id -->
             <a href="" class="text-danger">Delete</a>
           </small>
-          <!-- else add item to wishlist -->
           {% else %}
+          <!-- add item to wishlist -->
           <!-- TODO: 'add_to_wishlist' product.id -->
           <form action="" method="POST">
             {% csrf_token %}
@@ -159,6 +160,8 @@
           const li = document.createElement('li');
           li.classList.add("list-inline-item","color-badge");
           li.style.backgroundColor = color;
+          // add a stretched-link to filter by that color
+          li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${colors}"></a>`;
           list.appendChild(li);
         }
       });

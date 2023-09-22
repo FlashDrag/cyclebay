@@ -246,6 +246,11 @@ body {
   object-fit: contain;
 }
 
+.color-list:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
 /* Scroll to top button */
 .btt-button {
   height: 42px;
