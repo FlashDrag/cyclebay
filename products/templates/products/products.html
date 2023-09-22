@@ -54,7 +54,7 @@
   </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
     {% for product in products %}
-    <div class="col px-3 mb-3 mb-sm-4">
+    <div class="col px-2 mb-2 mb-sm-3">
       <div class="card h-100 product-list-card">
         <div class="card-header bg-white border-bottom-0 d-flex justify-content-between">
           <!-- brand -->
@@ -62,7 +62,7 @@
             {% if product.brand %}
               <a class="badge badge-pill badge-light brand-badge text-muted"
                 href="{% url 'products' %}?brand={{ product.brand.name }}">
-                <i class="fas fa-tag mr-1"></i>
+                <i class="fas fa-registered mr-1"></i>
                 {{ product.brand.friendly_name }}
               </a>
             {% endif %}
@@ -73,52 +73,53 @@
         <!-- product image -->
         {% if product.image %}
         <a href="{% url 'product_detail' product.id %}">
-          <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+          <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
         </a>
         {% else %}
-        <!-- TODO: url 'product_detail' product.id -->
-        <a href="">
-          <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+        <a href="{% url 'product_detail' product.id %}">
+          <img class="card-img-top" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
         </a>
         {% endif %}
         <!-- product name -->
-        <div class="card-body pb-0">
-          <p class="mb-0">{{ product.name }}</p>
+        <div class="card-body py-2">
+          <h6 class="card-title mb-0">{{ product.name }}</h6>
+          <p class="card-text mb-0 font-weight-bold">
+            &euro;{{ product.price }}
+          </p>
+          {% if product.category %}
+          <p class="card-text small mt-1 mb-0">
+            <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+              <small><i class="fas fa-tags mr-1"></i>{{ product.category.friendly_name }}</small>
+            </a>
+          </p>
+          {% endif %}
         </div>
-        <div class="card-footer bg-white pt-0 border-0 text-left">
-          <div class="row">
-            <div class="col">
-              <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-              {% if not product.total_count %}
-                <p class="small text-danger mb-0">Out of stock</p>
-              {% endif %}
-              {% if product.category %}
-              <p class="small mt-1 mb-0">
-                <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
-                  <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
-                </a>
-              </p>
-              {% endif %}
-              {% if product.color %}
-              <p class="small mt-1 mb-0">
-                <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name }}">
-                  <i class="fas fa-tag mr-1"></i>{{ product.color.friendly_name }}
-                </a>
-              </p>
-              {% endif %}
-
-              <!-- Superusers control buttons -->
-              {% if request.user.is_superuser %}
-              <small class="ml-3">
-                <!-- TODO: url 'edit_product' product.id -->
-                <a href="">Edit</a> |
-                <!-- TODO: url 'delete_product' product.id -->
-                <a href="" class="text-danger">Delete</a>
-              </small>
-              {% endif %}
-
-            </div>
-          </div>
+        <div class="card-footer py-2 border-0 d-flex justify-content-between align-items-center">
+          {% if not product.total_count %}
+            <span class="text-danger">Out of stock</span>
+          {% else %}
+            <a href="{% url 'product_detail' product.id %}" class="btn btn-sm btn-outline-dark rounded-0">
+              View
+            </a>
+          {% endif %}
+          <!-- Superusers control buttons -->
+          {% if not request.user.is_superuser %}
+          <small class="ml-3">
+            <!-- TODO: url 'edit_product' product.id -->
+            <a href="">Edit</a> |
+            <!-- TODO: url 'delete_product' product.id -->
+            <a href="" class="text-danger">Delete</a>
+          </small>
+          <!-- else add item to wishlist -->
+          {% else %}
+          <!-- TODO: 'add_to_wishlist' product.id -->
+          <form action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-dark rounded-0">
+              <i class="fas fa-heart"></i>
+            </button>
+          </form>
+          {% endif %}
         </div>
       </div>
     </div>
