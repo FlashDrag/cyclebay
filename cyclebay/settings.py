@@ -102,6 +102,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # allows access the no image file in media folder
+                # if there is no image for a product
+                'django.template.context_processors.media',
                 # Custom context processor for bag contents
                 "bag.contexts.bag_contents",
                 # Custom context processor for all categories
@@ -245,6 +248,11 @@ else:
 # Stripe settings
 FREE_DELIVERY_THRESHOLD = 100
 STANDARD_DELIVERY_PERCENTAGE = 10
+
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+STRIPE_CURRENCY = 'eur'
 
 
 # Celery settings
