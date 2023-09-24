@@ -1,9 +1,12 @@
+from cyclebay.celery import app as celery_app
 from django.http import HttpResponse, JsonResponse
 from django.db import transaction
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.contrib import messages
-from cyclebay.utils import clear_cart_task
+
+from bag.tasks import release_reserving_products
+from bag.utils import set_cart_expiry
 
 from products.models import Product, ProductSize, Size
 from .models import ProductReservation
@@ -55,7 +58,7 @@ def add_to_bag(request, item_id):
         # Create a product reservation object for the product size
         reservation, created = ProductReservation.objects.get_or_create(
             product_size=product_size_obj,
-            session_key=request.session.session_key,
+            session_key=request.session._get_or_create_session_key(),
             defaults={"quantity": 0},
         )
         reservation.quantity += 1
@@ -81,9 +84,8 @@ def add_to_bag(request, item_id):
 
     request.session["bag"] = bag
 
-    # celery
-    # Set or update the cart expiration
-    clear_cart_task(request)
+    # update the cart expiry time
+    set_cart_expiry(request)
 
     return redirect(redirect_url)
 
@@ -181,11 +183,12 @@ def remove_from_bag(request, product_size_id):
     )
 
     request.session["bag"] = bag
-
-    # if bag is empty, remove the cart expiration time from the session,
-    # to prevent the expired message from being shown
     if not bag:
-        request.session.pop("cart_expiration_time", None)
-        request.session.modified = True
+        # If the bag is empty, revoke the task and
+        # release the reserved products if any exist
+        existing_task_id = request.session.get("clear_cart_task_id")
+        if existing_task_id:
+            celery_app.control.revoke(existing_task_id, terminate=True)
+        release_reserving_products.delay(request.session.session_key)
 
     return HttpResponse(status=200)
