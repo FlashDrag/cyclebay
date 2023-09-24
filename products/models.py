@@ -29,12 +29,16 @@ class Brand(models.Model):
 class Size(models.Model):
     name = models.CharField(max_length=50, unique=True)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
+    order = models.PositiveIntegerField(unique=True)
 
     def __str__(self) -> str:
         return self.name
 
     def get_friendly_name(self):
         return self.friendly_name
+
+    class Meta:
+        ordering = ["order"]
 
 
 class Color(models.Model):
@@ -102,6 +106,7 @@ class ProductSize(models.Model):
     class Meta:
         # ensure that the combination of size and product is unique
         unique_together = ("size", "product")
+        ordering = ["size"]
 
     def __str__(self) -> str:
         return f"{self.product.name} - {self.size.name}"
