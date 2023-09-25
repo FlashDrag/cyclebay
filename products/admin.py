@@ -6,6 +6,8 @@ class ProductSizeInline(admin.TabularInline):
     model = ProductSize
     extra = 1  # how many rows to show
 
+    ordering = ("size",)
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
