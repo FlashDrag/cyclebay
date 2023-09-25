@@ -1,12 +1,10 @@
-from django.http import HttpResponse, JsonResponse
-from django.db import transaction
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.contrib import messages
-from cyclebay.utils import clear_cart_task
+
 
 from products.models import Product, ProductSize, Size
-from .models import ProductReservation
 
 
 def view_bag(request):
@@ -18,6 +16,7 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """Add a product to the shopping bag"""
 
+    # TODO: refactor get_object_or_404 to a try/except block
     product = get_object_or_404(Product, pk=item_id)
     size = request.POST.get("productsize")
     redirect_url = request.POST.get("redirect_url")
@@ -37,6 +36,7 @@ def add_to_bag(request, item_id):
     product_size_id = str(product_size_obj.id)
 
     # If the product size object is out of stock, return an error message
+    # TODO: refactor get_object_or_404 to a try/except block check if product_size_obj is exists  # noqa
     if product_size_obj.count < 1:
         messages.error(
             request,
@@ -44,22 +44,6 @@ def add_to_bag(request, item_id):
             "Please try again later.",
         )
         return redirect(redirect_url)
-
-    # transaction.atomic() ensures that the database changes are
-    # only committed if all the operations succeed
-    with transaction.atomic():
-        # Reduce the product size object count by 1 and save it
-        product_size_obj.count -= 1
-        product_size_obj.save()
-
-        # Create a product reservation object for the product size
-        reservation, created = ProductReservation.objects.get_or_create(
-            product_size=product_size_obj,
-            session_key=request.session.session_key,
-            defaults={"quantity": 0},
-        )
-        reservation.quantity += 1
-        reservation.save()
 
     bag = request.session.get("bag", {})
 
@@ -81,21 +65,7 @@ def add_to_bag(request, item_id):
 
     request.session["bag"] = bag
 
-    # celery
-    # Set or update the cart expiration
-    clear_cart_task(request)
-
     return redirect(redirect_url)
-
-
-def remove_cart_expiration_time(request):
-    """
-    Remove the cart expiration time from the session
-    to prevent the message from being shown again
-    """
-    request.session.pop("cart_expiration_time", None)
-
-    return JsonResponse({"success": True})
 
 
 def adjust_bag(request, product_size_id):
@@ -103,46 +73,43 @@ def adjust_bag(request, product_size_id):
     Adjust the quantity of the specified product_size to the specified amount
     """
 
+    # TODO: refactor get_object_or_404 to a try/except block
     product_size_obj = get_object_or_404(ProductSize, pk=product_size_id)
     bag = request.session.get("bag", {})
-    product_reservation = get_object_or_404(
-        ProductReservation,
-        product_size=product_size_obj,
-        session_key=request.session.session_key,
-    )
 
     quantity = int(request.POST.get("quantity"))
 
     if quantity > 0:
-        bag[product_size_id] = quantity
-        # If the quantity is greater than the number of available products,
-        # raise an exception
-        if quantity > (product_reservation.quantity + product_size_obj.count):
-            raise Exception(
-                "Quantity is greater than the number of available products"
+        if quantity > product_size_obj.count:
+            # If the product is out of stock pass
+            if product_size_obj.count == 0:
+                pass
+            # If the quantity is greater than the number of available products,
+            # return a warning message
+            else:
+                product_plural = (
+                    "product is"
+                    if product_size_obj.count == 1
+                    else "products are"  # noqa
+                )
+                messages.warning(
+                    request,
+                    f"Only <b>{product_size_obj.count}</b> {product_plural} available",  # noqa
+                    extra_tags="safe",
+                )
+        else:
+            bag[product_size_id] = quantity
+            messages.success(
+                request,
+                f"Updated <strong>{product_size_obj}</strong> quantity"
+                f" to <strong>{bag[product_size_id]}</strong>",
+                extra_tags="safe",
             )
-        # Reduce the product size object count by the difference between
-        # the new quantity and the old quantity
-        product_size_obj.count -= (quantity - product_reservation.quantity)
-        product_size_obj.save()
-        # Update the product reservation quantity
-        product_reservation.quantity = quantity
-        product_reservation.save()
-        messages.success(
-            request,
-            f"Updated <strong>{product_size_obj}</strong> quantity"
-            f" to <strong>{bag[product_size_id]}</strong>",
-            extra_tags="safe",
-        )
+
     else:
+        # TODO: refactor get_object_or_404 to a try/except block check if product_size_obj is exists  # noqa
         # Remove the product size item from the bag
         bag.pop(product_size_id)
-        # Increase the product size object count by the quantity
-        # that was previously reserved
-        product_size_obj.count += product_reservation.quantity
-        product_size_obj.save()
-        # Delete the product reservation
-        product_reservation.delete()
         messages.success(
             request,
             f"Removed <strong>{product_size_obj}</strong> from your cart",  # noqa
@@ -158,34 +125,17 @@ def remove_from_bag(request, product_size_id):
     """Remove the product size item from the shopping bag and
     release the reserved products"""
 
-    product_size_obj = get_object_or_404(ProductSize, pk=product_size_id)
-    bag = request.session.get("bag", {})
-    product_reservation = get_object_or_404(
-        ProductReservation,
-        product_size=product_size_obj,
-        session_key=request.session.session_key,
-    )
-
     # Remove the product size item from the bag
+    bag = request.session.get("bag", {})
     bag.pop(product_size_id)
-    # Increase the product size object count by the quantity
-    # that was previously reserved
-    product_size_obj.count += product_reservation.quantity
-    product_size_obj.save()
-    # Delete the product reservation
-    product_reservation.delete()
-    messages.success(
-        request,
-        f"Removed <strong>{product_size_obj}</strong> from your cart",  # noqa
-        extra_tags="safe",
-    )
-
     request.session["bag"] = bag
 
-    # if bag is empty, remove the cart expiration time from the session,
-    # to prevent the expired message from being shown
-    if not bag:
-        request.session.pop("cart_expiration_time", None)
-        request.session.modified = True
+    try:
+        product_size_obj = ProductSize.objects.get(pk=product_size_id)
+        msg = f"Removed <strong>{product_size_obj}</strong> from your cart"
+    except ProductSize.DoesNotExist:
+        msg = "Removed from your cart"
+
+    messages.success(request, msg, extra_tags="safe")
 
     return HttpResponse(status=200)
