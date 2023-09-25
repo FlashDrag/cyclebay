@@ -1,3 +1,6 @@
+import stripe
+import json
+
 from django.shortcuts import (
     render,
     redirect,
@@ -8,17 +11,14 @@ from django.shortcuts import (
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
-from bag.utils import set_cart_expiry
-from profiles.forms import UserProfileForm
 
+from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
-from .forms import OrderForm
-from .models import Order, OrderLineItem
 from products.models import Product
 from bag.contexts import bag_contents
 
-import stripe
-import json
+from .forms import OrderForm
+from .models import Order, OrderLineItem
 
 
 @require_POST
@@ -113,18 +113,16 @@ def checkout(request):
                 Please double check your information.",
             )
     else:
-        bag = request.session.get("bag", {})
-        if not bag:
+        current_bag = bag_contents(request)
+
+        if not current_bag.get("bag_items"):
             messages.error(
-                request, "There's nothing in your bag at the moment"
+                request,
+                "There's nothing in your cart at the moment.\n"
+                "Return to shopping.",
             )
             return redirect(reverse("products"))
 
-        # Revoking the previous task, as a new checkout has been initiated
-        # update the cart expiry time
-        set_cart_expiry(request)
-
-        current_bag = bag_contents(request)
         total = current_bag["grand_total"]
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key

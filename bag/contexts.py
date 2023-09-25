@@ -1,8 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
-from .models import ProductReservation
 from products.models import ProductSize
 
 
@@ -11,31 +10,56 @@ def bag_contents(request):
     bag_items = []
     total = 0
     product_count = 0
-    # request.session["bag"] = {}
+    bag = request.session.get("bag", {})
+    bag_copy = bag.copy()
 
-    product_size_ids = list(map(int, request.session.get("bag", {}).keys()))
-    print('product_size_ids:', product_size_ids)
-    reservations = ProductReservation.objects.filter(
-        # TODO exat match
-        product_size__in=product_size_ids
-    )
-    print('reservations:', reservations)
+    for product_size_id, product_size_count in bag_copy.items():
 
-    for reservation in reservations:
-        product_size_obj = reservation.product_size
-        product = product_size_obj.product
-        total += reservation.quantity * product.price
-        product_count += reservation.quantity
-        bag_items.append(
-            {
-                "product_size_id": product_size_obj.id,
-                "product_size_obj": product_size_obj,
-                "quantity": reservation.quantity,
-                "product": product,
-                "size": product_size_obj.size,
-                "color": product.color,
-            }
-        )
+        try:
+            product_size_obj = ProductSize.objects.get(pk=product_size_id)
+
+            # If the product size count in the bag is greater than the
+            # product size count in the database:
+            if product_size_obj.count < product_size_count:
+                product_size_count = product_size_obj.count
+                # if the product size count in the database is 0,
+                # remove the product size from the bag
+                if product_size_obj.count == 0:
+                    bag.pop(product_size_id)
+                    request.session["bag"] = bag
+                    messages.error(
+                        request,
+                        f"Sorry, <b>{product_size_obj}</b> no longer available"
+                        " in stock and has been removed from your bag.",
+                        extra_tags="safe",
+                        )
+                    # skip adding the product size to the bag
+                    continue
+                else:
+                    # update the bag with the product size count in db
+                    bag[product_size_id] = product_size_count
+
+            # Add the product size to the bag
+            product = product_size_obj.product
+            total += product_size_count * product.price
+            product_count += product_size_count
+            bag_items.append(
+                {
+                    "product_size_id": product_size_id,
+                    "product_size_obj": product_size_obj,
+                    "quantity": product_size_count,
+                    "product": product,
+                    "size": product_size_obj.size,
+                    "color": product.color,
+                }
+            )
+        except ProductSize.DoesNotExist:
+            # If the product size object does not exist in the database,
+            # remove it from the bag
+            bag.pop(product_size_id)
+            request.session["bag"] = bag
+        finally:
+            request.session.modified = True
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
