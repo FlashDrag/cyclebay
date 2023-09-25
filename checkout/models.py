@@ -9,6 +9,8 @@ from django_countries.fields import CountryField
 from products.models import Product, ProductSize
 from profiles.models import UserProfile
 
+from django.contrib.sites.models import Site
+
 
 class Order(models.Model):
     order_number = models.CharField(max_length=32, null=False, editable=False)
@@ -44,7 +46,6 @@ class Order(models.Model):
     )
     receipt_url = models.URLField(max_length=1024, null=True, blank=True)
 
-
     def _generate_order_number(self):
         """
         Generate a random, unique order number using UUID
@@ -70,6 +71,14 @@ class Order(models.Model):
             self.delivery_cost = 0
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
+
+    def get_order_url(self):
+        """
+        Get the order url from the order_number
+        """
+        current_site = Site.objects.get_current()
+        domain = current_site.domain
+        return f"https://{domain}/checkout/order/{self.order_number}/"
 
     def save(self, *args, **kwargs):
         """

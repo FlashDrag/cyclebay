@@ -22,22 +22,21 @@ def bag_contents(request):
             # product size count in the database:
             if product_size_obj.count < product_size_count:
                 product_size_count = product_size_obj.count
-                # if the product size count in the database is 0,
-                # remove the product size from the bag
+
                 if product_size_obj.count == 0:
-                    bag.pop(product_size_id)
-                    request.session["bag"] = bag
                     messages.error(
                         request,
-                        f"Sorry, <b>{product_size_obj}</b> no longer available"
-                        " in stock and has been removed from your bag.",
+                        f"Sorry, <b>{product_size_obj}</b> no longer available",  # noqa
                         extra_tags="safe",
                         )
-                    # skip adding the product size to the bag
-                    continue
                 else:
-                    # update the bag with the product size count in db
-                    bag[product_size_id] = product_size_count
+                    messages.warning(
+                        request,
+                        f"Only <b>{product_size_count}</b> <b>{product_size_obj}</b> available",  # noqa
+                        extra_tags="safe",
+                    )
+                # update the bag with the product size count in db
+                bag[product_size_id] = product_size_count
 
             # Add the product size to the bag
             product = product_size_obj.product
@@ -58,6 +57,10 @@ def bag_contents(request):
             # remove it from the bag
             bag.pop(product_size_id)
             request.session["bag"] = bag
+            messages.error(
+                request,
+                "Sorry, one of the products in your bag is no longer available",  # noqa
+            )
         finally:
             request.session.modified = True
 
@@ -78,7 +81,6 @@ def bag_contents(request):
         "free_delivery_delta": free_delivery_delta,
         "free_delivery_threshold": settings.FREE_DELIVERY_THRESHOLD,
         "grand_total": grand_total,
-        "cart_expiration_time": request.session.get("cart_expiration_time"),
     }
 
     return context

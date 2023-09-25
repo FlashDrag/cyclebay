@@ -80,6 +80,7 @@
                     {% if not productsize.count %}title="Out of stock" {% else %} title="{{ productsize.count }} in stock" {% endif %}>
                       <input type="radio" name="productsize" value="{{ productsize.size.name }}"
                         {% if not productsize.count %} disabled {% endif %} required>
+                        <!-- TODO: add custom filter that checks if productsize.count <= request.session["bag"]["productsize.pk"] -->
                       <span>{{ productsize.size.name }}</span>
                     </label>
                     {% endfor %}

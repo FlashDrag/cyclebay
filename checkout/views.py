@@ -1,6 +1,8 @@
 import stripe
 import json
 
+from django.db.models import F
+from django.db import transaction
 from django.shortcuts import (
     render,
     redirect,
@@ -14,7 +16,7 @@ from django.conf import settings
 
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
-from products.models import Product
+from products.models import Product, ProductSize
 from bag.contexts import bag_contents
 
 from .forms import OrderForm
@@ -23,25 +25,66 @@ from .models import Order, OrderLineItem
 
 @require_POST
 def cache_checkout_data(request):
-    try:
-        pid = request.POST.get("client_secret").split("_secret")[0]
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(
-            pid,
-            metadata={
-                "bag": json.dumps(request.session.get("bag", {})),
-                "save_info": request.POST.get("save_info"),
-                "user": request.user,
-            },
-        )
-        return HttpResponse(status=200)
-    except Exception as e:
+    session_bag = request.session.get("bag", {})
+    # make a copy of the bag in the session to compare with the updated bag
+    session_bag_copy = session_bag.copy()
+    # call the bag_contents function from contexts.py to update the bag
+    current_bag = bag_contents(request)
+    updated_bag = {
+        item["product_size_id"]: item["quantity"]
+        for item in current_bag["bag_items"]  # noqa
+    }
+
+    # check if the bag in the session is the same as the updated bag,
+    # to ensure that the items availibility in the bag has not changed
+    if session_bag_copy != updated_bag:
         messages.error(
             request,
-            "Sorry, your payment cannot be \
-            processed right now. Please try again later.",
+            "The payment not processed because there was a change in your bag."
         )
-        return HttpResponse(content=e, status=400)
+        return HttpResponse(status=400, content="Bag changed")
+
+    with transaction.atomic():
+        try:
+            for item in current_bag["bag_items"]:
+                # select_for_update allows to lock the selected
+                # product size to prevent race conditions until
+                # the transaction is complete
+                product_size_obj = ProductSize.objects.select_for_update().get(
+                    id=item["product_size_id"]
+                )
+                # update the product size count in stock
+                product_size_obj.count = F("count") - item["quantity"]
+                product_size_obj.save()
+
+            # clean the bag with empty product sizes
+            bag = {
+                product_size_id: quantity
+                for product_size_id, quantity in session_bag.items()
+                if quantity > 0
+            }
+
+            pid = request.POST.get("client_secret").split("_secret")[0]
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            stripe.PaymentIntent.modify(
+                pid,
+                metadata={
+                    "bag": json.dumps(bag),
+                    "save_info": request.POST.get("save_info"),
+                    "user": request.user,
+                    "order_total": current_bag["total"],
+                    "delivery_cost": current_bag["delivery"],
+                    "grand_total": current_bag["grand_total"],
+                },
+            )
+            return HttpResponse(status=200)
+        except Exception as e:
+            messages.error(
+                request,
+                "Sorry, your payment cannot be \
+                processed right now. Please try again later.",
+            )
+            return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
@@ -49,7 +92,12 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == "POST":
-        bag = request.session.get("bag", {})
+        # clean the bag with empty product sizes
+        bag = {
+            product_size_id: quantity
+            for product_size_id, quantity in request.session["bag"].items()
+            if quantity > 0
+        }
 
         form_data = {
             "full_name": request.POST["full_name"],
@@ -63,39 +111,44 @@ def checkout(request):
             "county": request.POST["county"],
         }
         order_form = OrderForm(form_data)
+        # transaction.atomic() ensures all database operations are
+        # completed successfully
         if order_form.is_valid():
             order = order_form.save(commit=False)
+            # get receipt_url from the stripe Charge object
+            intent = stripe.PaymentIntent.retrieve(
+                request.POST.get("client_secret").split("_secret")[0]
+            )
+            charge = stripe.Charge.retrieve(intent.latest_charge)
+            metadata = charge.metadata
+            receipt_url = charge.receipt_url
+
             pid = request.POST.get("client_secret").split("_secret")[0]
             order.stripe_pid = pid
+            order.order_total = metadata.get("order_total", 0)
+            order.delivery_cost = metadata.get("delivery_cost", 0)
+            order.grand_total = metadata.get("grand_total", 0)
+            order.receipt_url = receipt_url
             order.original_bag = json.dumps(bag)
             order.save()
-            for item_id, item_data in bag.items():
+            for product_size_id, quantity in bag.items():
                 try:
-                    product = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
-                            order=order,
-                            product=product,
-                            quantity=item_data,
-                        )
-                        order_line_item.save()
-                    else:
-                        for size, quantity in item_data[
-                            "items_by_size"
-                        ].items():
-                            order_line_item = OrderLineItem(
-                                order=order,
-                                product=product,
-                                quantity=quantity,
-                                product_size=size,
-                            )
-                            order_line_item.save()
+                    product_size_obj = ProductSize.objects.get(
+                        pk=product_size_id
+                    )
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product_size_obj.product,
+                        product_size=product_size_obj,
+                        quantity=quantity,
+                    )
+                    order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(
                         request,
                         (
                             "One of the products in your bag wasn't"
-                            " found in our database. "
+                            " found in our database.\n"
                             "Please call us for assistance!"
                         ),
                     )
@@ -113,9 +166,10 @@ def checkout(request):
                 Please double check your information.",
             )
     else:
+        # call the bag_contents function from contexts.py to update the bag
+        # in the session
         current_bag = bag_contents(request)
-
-        if not current_bag.get("bag_items"):
+        if not current_bag.get("bag_items") or current_bag["total"] == 0:
             messages.error(
                 request,
                 "There's nothing in your cart at the moment.\n"

@@ -135,7 +135,8 @@ form.addEventListener('submit', function (ev) {
     }).fail(function (xhr, textStatus, error) {
         // if post fails due to view error
         // just reload the page to display the error in django messages
-        console.error('Failed to cache checkout data. Please try again.');
+        console.log(xhr.responseText);
+        console.error('Failed to cache checkout data.');
         location.reload();
     })
 });

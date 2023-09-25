@@ -200,7 +200,6 @@ Dynamic categories. owner can add new category. it will be displayed in navbar d
 #### Shopping Bag
 - [ ] Add product to bag
 - [ ] Remove a product from the bag
-- [ ] Product Reservations
 - [ ] View bag
 - [ ] Countdown timer and auto remove products from the bag after the timer expires
 - [ ] View and adjust the number of each product in the bag
@@ -210,6 +209,28 @@ Dynamic categories. owner can add new category. it will be displayed in navbar d
 
 #### Checkout (Stripe)
 - [ ] Checkout form with delivery information
+As I'm dealing with stock quantities, I used `transaction.atomic` and `select_for_update` to prevent race conditions and
+ensure that the stock quantity is updated correctly. All rows with `select_for_update()` method (in this case, the `product_size_obj` rows) are fetched are locked for the duration of the transaction, which is in the `transaction.atomic()` block. Once the transaction is committed, the lock is released, and other transactions can access the locked rows. If an exception occurs within the `transaction.atomic()` block, the transaction will be rolled back, and the lock will also be released.
+
+```
+@require_POST
+def cache_checkout_data(request):
+    # ...
+    with transaction.atomic():
+        try:
+            for item in current_bag["bag_items"]:
+                # select_for_update allows to lock the selected
+                # product size to prevent race conditions until
+                # the transaction is complete
+                product_size_obj = ProductSize.objects.select_for_update().get(
+                    id=item["product_size_id"]
+                )
+                # update the product size count in stock using F() expression
+                product_size_obj.count = F("count") - item["quantity"]
+                product_size_obj.save()
+    # ...
+```
+
 - [ ] Card payment
 
 #### Newsletter

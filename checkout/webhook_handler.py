@@ -7,10 +7,12 @@ import stripe
 
 from .models import Order, OrderLineItem
 from profiles.models import UserProfile
-from products.models import Product
+from products.models import ProductSize
 
 import json
 import time
+
+from datetime import datetime
 
 
 class StripeWH_Handler:
@@ -58,6 +60,8 @@ class StripeWH_Handler:
         charge = stripe.Charge.retrieve(intent.latest_charge)
         billing_details = charge.billing_details
         shipping_details = intent.shipping
+        receipt_url = charge.receipt_url
+        metadata = charge.metadata
         grand_total = round(charge.amount / 100, 2)
 
         # Clean data in the shipping details
@@ -135,29 +139,24 @@ class StripeWH_Handler:
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
+                    delivery_cost=metadata.get("delivery_cost", 0),
+                    order_total=metadata.get("order_total", 0),
+                    grand_total=metadata.get("grand_total", 0),
                     original_bag=bag,
                     stripe_pid=pid,
+                    receipt_url=receipt_url,
                 )
-                for item_id, item_data in json.loads(bag).items():
-                    product = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
-                            order=order,
-                            product=product,
-                            quantity=item_data,
-                        )
-                        order_line_item.save()
-                    else:
-                        for size, quantity in item_data[
-                            "items_by_size"
-                        ].items():
-                            order_line_item = OrderLineItem(
-                                order=order,
-                                product=product,
-                                quantity=quantity,
-                                product_size=size,
-                            )
-                            order_line_item.save()
+                for product_size_id, quantity in json.loads(bag).items():
+                    product_size_obj = ProductSize.objects.get(
+                        pk=product_size_id
+                    )
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product_size_obj.product,
+                        product_size=product_size_obj,
+                        quantity=quantity,
+                    )
+                    order_line_item.save()
             except Exception as e:
                 if order:
                     order.delete()
@@ -176,6 +175,7 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.payment_failed webhook from Stripe
         """
+        print("handle_payment_intent_payment_failed", datetime.now())
         return HttpResponse(
             content=f'Webhook received: {event["type"]}', status=200
         )

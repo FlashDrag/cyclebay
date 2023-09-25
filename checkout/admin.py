@@ -44,6 +44,7 @@ class OrderAdmin(admin.ModelAdmin):
         "grand_total",
         "original_bag",
         "stripe_pid",
+        "receipt_url",
     )
 
     list_display = (
