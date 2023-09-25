@@ -42,6 +42,8 @@ class Order(models.Model):
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default=""
     )
+    receipt_url = models.URLField(max_length=1024, null=True, blank=True)
+
 
     def _generate_order_number(self):
         """
@@ -95,8 +97,8 @@ class OrderLineItem(models.Model):
     )
     product_size = models.ForeignKey(
         ProductSize,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         on_delete=models.CASCADE,
         related_name="lineitems",
     )

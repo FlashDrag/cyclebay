@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('lineitem_total', models.DecimalField(decimal_places=2, editable=False, max_digits=6)),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lineitems', to='checkout.order')),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
-                ('product_size', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='lineitems', to='products.productsize')),
+                ('product_size', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lineitems', to='products.productsize')),
             ],
         ),
     ]
