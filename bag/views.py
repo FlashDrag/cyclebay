@@ -1,8 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
-
 
 from products.models import Product, ProductSize, Size
 
@@ -16,25 +15,31 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """Add a product to the shopping bag"""
 
-    # TODO: refactor get_object_or_404 to a try/except block
-    product = get_object_or_404(Product, pk=item_id)
-    size = request.POST.get("productsize")
-    redirect_url = request.POST.get("redirect_url")
-
-    # If the user selected a size, get the size object,
-    # otherwise, return an error message and redirect
     try:
+        product = Product.objects.get(pk=item_id)
+        size = request.POST.get("productsize")
+        redirect_url = request.POST.get("redirect_url")
+        # If the user selected a size, get the size object
         size_obj = Size.objects.get(name__exact=size)
+        # Get the product size object associated with the product and size
+        product_size_obj = ProductSize.objects.get(
+            product=product, size=size_obj
+        )
+        product_size_id = str(product_size_obj.id)
+    except Product.DoesNotExist:
+        messages.error(request, "Sorry, this product is not available")
+        return redirect(redirect_url)
     except Size.DoesNotExist:
         messages.error(request, f"Please select a size for {product.name}")
         return redirect(redirect_url)
-
-    # TODO: refactor get_object_or_404 to a try/except block check if product_size_obj is exists  # noqa
-    # Get the product size object associated with the product and size
-    product_size_obj = get_object_or_404(
-        ProductSize, size=size_obj, product=product
-    )
-    product_size_id = str(product_size_obj.id)
+    except ProductSize.DoesNotExist:
+        messages.error(
+            request,
+            f"Sorry, <b>{product.name}</b> is not available in <b>{size}</b>"
+            "Select another size or try again later.",
+            extra_tags="safe",
+        )
+        return redirect(redirect_url)
 
     # If the product size object is out of stock, return an error message
     if product_size_obj.count < 1:
@@ -86,9 +91,11 @@ def adjust_bag(request, product_size_id):
     """
     Adjust the quantity of the specified product_size to the specified amount
     """
-
-    # TODO: refactor get_object_or_404 to a try/except block
-    product_size_obj = get_object_or_404(ProductSize, pk=product_size_id)
+    try:
+        product_size_obj = ProductSize.objects.get(pk=product_size_id)
+    except ProductSize.DoesNotExist:
+        messages.error(request, "Sorry, this product is not available")
+        return redirect(reverse("view_bag"))
     bag = request.session.get("bag", {})
 
     quantity = int(request.POST.get("quantity"))
@@ -121,7 +128,6 @@ def adjust_bag(request, product_size_id):
             )
 
     else:
-        # TODO: refactor get_object_or_404 to a try/except block check if product_size_obj is exists  # noqa
         # Remove the product size item from the bag
         bag.pop(product_size_id)
         messages.success(
