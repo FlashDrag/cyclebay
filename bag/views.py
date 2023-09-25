@@ -29,6 +29,7 @@ def add_to_bag(request, item_id):
         messages.error(request, f"Please select a size for {product.name}")
         return redirect(redirect_url)
 
+    # TODO: refactor get_object_or_404 to a try/except block check if product_size_obj is exists  # noqa
     # Get the product size object associated with the product and size
     product_size_obj = get_object_or_404(
         ProductSize, size=size_obj, product=product
@@ -36,7 +37,6 @@ def add_to_bag(request, item_id):
     product_size_id = str(product_size_obj.id)
 
     # If the product size object is out of stock, return an error message
-    # TODO: refactor get_object_or_404 to a try/except block check if product_size_obj is exists  # noqa
     if product_size_obj.count < 1:
         messages.error(
             request,
@@ -48,18 +48,32 @@ def add_to_bag(request, item_id):
     bag = request.session.get("bag", {})
 
     if product_size_id in list(bag.keys()):
-        bag[product_size_id] += 1
-        messages.success(
-            request,
-            f"Updated <strong>{product_size_obj}</strong> quantity "
-            f"to <strong>{bag[product_size_id]}</strong>",
-            extra_tags="safe",
-        )
+        # If the product size is already in the bag, check if the
+        # quantity is greater than the number of available products
+        if product_size_obj.count < bag[product_size_id] + 1:
+            messages.error(
+                request,
+                f"Sorry, only <b>{product_size_obj.count}</b> "
+                f"<b>{product_size_obj}</b> available.\n"
+                f"Please check your cart!",
+                extra_tags="safe",
+            )
+        # If the quantity is less than the number of available products,
+        # increment the quantity by 1
+        else:
+            bag[product_size_id] += 1
+            messages.success(
+                request,
+                f"Updated <b>{product_size_obj}</b> quantity "
+                f"to <b>{bag[product_size_id]}</b>",
+                extra_tags="safe",
+            )
     else:
+        # If the product size is not in the bag, add it to the bag
         bag[product_size_id] = 1
         messages.success(
             request,
-            f"Added <strong>{product_size_obj}</strong> to your cart",
+            f"Added <b>{product_size_obj}</b> to your cart",
             extra_tags="safe",
         )
 
@@ -101,8 +115,8 @@ def adjust_bag(request, product_size_id):
             bag[product_size_id] = quantity
             messages.success(
                 request,
-                f"Updated <strong>{product_size_obj}</strong> quantity"
-                f" to <strong>{bag[product_size_id]}</strong>",
+                f"Updated <b>{product_size_obj}</b> quantity"
+                f" to <b>{bag[product_size_id]}</b>",
                 extra_tags="safe",
             )
 
@@ -112,7 +126,7 @@ def adjust_bag(request, product_size_id):
         bag.pop(product_size_id)
         messages.success(
             request,
-            f"Removed <strong>{product_size_obj}</strong> from your cart",  # noqa
+            f"Removed <b>{product_size_obj}</b> from your cart",  # noqa
             extra_tags="safe",
         )
 
@@ -132,7 +146,7 @@ def remove_from_bag(request, product_size_id):
 
     try:
         product_size_obj = ProductSize.objects.get(pk=product_size_id)
-        msg = f"Removed <strong>{product_size_obj}</strong> from your cart"
+        msg = f"Removed <b>{product_size_obj}</b> from your cart"
     except ProductSize.DoesNotExist:
         msg = "Removed from your cart"
 
