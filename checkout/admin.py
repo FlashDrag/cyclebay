@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Order, OrderLineItem
+from .models import Order, OrderLineItem, ProductReservation
+
+admin.site.register(ProductReservation)
 
 
 class OrderLineItemAdminInline(admin.TabularInline):

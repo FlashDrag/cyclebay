@@ -259,7 +259,6 @@ STRIPE_CURRENCY = 'eur'
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
-# Set the time that the cart will release
+# Set the time that the checkout will release
 # the products back to the stock
-# used in bag.views.add_to_bag()
-CART_EXPIRY_MINUTES = os.getenv('CART_EXPIRY_MINUTES', 15)
+CHECKOUT_EXPIRY_MINUTES = os.getenv('CHECKOUT_EXPIRY_MINUTES', 15)

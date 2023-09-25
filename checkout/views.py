@@ -1,3 +1,6 @@
+import stripe
+import json
+
 from django.shortcuts import (
     render,
     redirect,
@@ -8,17 +11,15 @@ from django.shortcuts import (
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
-from bag.utils import set_cart_expiry
-from profiles.forms import UserProfileForm
 
+from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
-from .forms import OrderForm
-from .models import Order, OrderLineItem
 from products.models import Product
 from bag.contexts import bag_contents
 
-import stripe
-import json
+from .forms import OrderForm
+from .models import Order, OrderLineItem
+from .utils import reserve_products
 
 
 @require_POST
@@ -42,6 +43,27 @@ def cache_checkout_data(request):
             processed right now. Please try again later.",
         )
         return HttpResponse(content=e, status=400)
+
+
+"""
+# release the reserved products if any exist
+existing_task_id = request.session.get("clear_cart_task_id")
+if existing_task_id:
+    celery_app.control.revoke(existing_task_id, terminate=True)
+release_reserving_products.delay(request.session.session_key)
+"""
+
+# TODO for checkout reservation
+"""
+def remove_cart_expiration_time(request):
+
+    Remove the cart expiration time from the session
+    to prevent the message from being shown again
+
+    request.session.pop("cart_expiration_time", None)
+
+    return JsonResponse({"success": True})
+"""
 
 
 def checkout(request):
@@ -113,25 +135,29 @@ def checkout(request):
                 Please double check your information.",
             )
     else:
-        bag = request.session.get("bag", {})
-        if not bag:
+        current_bag = bag_contents(request)
+
+        if not current_bag.get("bag_items"):
             messages.error(
-                request, "There's nothing in your bag at the moment"
+                request,
+                "There's nothing in your cart at the moment.\n"
+                "Return to shopping.",
             )
             return redirect(reverse("products"))
 
-        # Revoking the previous task, as a new checkout has been initiated
-        # update the cart expiry time
-        set_cart_expiry(request)
+        # Reserve the products
+        # TODO
+        reserve_products(current_bag, request)
 
-        current_bag = bag_contents(request)
-        total = current_bag["grand_total"]
-        stripe_total = round(total * 100)
+        # TODO
+        # total = current_bag["grand_total"]
+        # stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
+        # TODO
+        # intent = stripe.PaymentIntent.create(
+        #     amount=stripe_total,
+        #     currency=settings.STRIPE_CURRENCY,
+        # )
 
         if request.user.is_authenticated:
             try:
@@ -165,7 +191,8 @@ def checkout(request):
     context = {
         "order_form": order_form,
         "stripe_public_key": stripe_public_key,
-        "client_secret": intent.client_secret,
+        # TODO
+        # "client_secret": intent.client_secret,
     }
 
     return render(request, template, context)

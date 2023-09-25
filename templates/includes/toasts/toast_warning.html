@@ -7,6 +7,6 @@
       </button>
   </div>
   <div class="toast-body bg-white">
-      {{ message }}
+    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
   </div>
 </div>
