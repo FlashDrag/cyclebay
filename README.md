@@ -5,7 +5,9 @@ TODO for app:
 - Create facebook page
 - Add facebook page link to footer
 - Add error pages
-
+- Global context processor for wishlist
+- Style navbar:
+https://htmljstemplates.com/html/bootstrap-5-navbars?utm_content=cmp-true#:~:text=View%20Demo-,8.%20Ecommerce%20(Style%201),-Appropriate%20for%20an
 
 ## Overview
 The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform, uses the AWS S3 cloud service to store static files and utilizes the Stripe payment system to process payments.
@@ -232,6 +234,9 @@ def cache_checkout_data(request):
 ```
 
 - [ ] Card payment
+- [ ] Email confirmation
+- [ ] Order history
+If not authenticated user made an order for existing email, the order will be added to the order history of the user with this email.
 
 #### Newsletter
 - [ ] Subscribe to newsletter
