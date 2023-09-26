@@ -1,9 +1,11 @@
+import stripe
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.conf import settings
-import stripe
+from django.contrib.sites.models import Site
+
 
 from .models import Order, OrderLineItem
 from profiles.models import UserProfile
@@ -23,14 +25,19 @@ class StripeWH_Handler:
 
     def _send_confirmation_email(self, order):
         """Send the user a confirmation email"""
+        current_site = Site.objects.get_current()
         cust_email = order.email
         subject = render_to_string(
             "checkout/confirmation_emails/confirmation_email_subject.txt",
-            {"order": order},
+            {"order": order, "current_site": current_site},
         )
         body = render_to_string(
             "checkout/confirmation_emails/confirmation_email_body.txt",
-            {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL}
+            {
+                "order": order,
+                "contact_email": settings.DEFAULT_FROM_EMAIL,
+                "current_site": current_site,
+            },
         )
 
         send_mail(

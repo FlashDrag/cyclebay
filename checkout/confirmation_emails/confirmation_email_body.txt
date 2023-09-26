@@ -1,6 +1,6 @@
 Hello {{ order.full_name }}!
 
-This is a confirmation of your order at CycleBay. Your order information is below:
+This is a confirmation of your order at {{ current_site.name }}. Your order information is below:
 
 Order Number: {{ order.order_number }}
 Order Date: {{ order.date }}
@@ -19,8 +19,6 @@ We've got your phone number on file as {{ order.phone_number }}.
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 
-Thank you for shopping with us!
 
-Sincerely,
-
-CycleBay
+Thank you for shopping with {{ current_site.name }}!
+{{ current_site.domain }}

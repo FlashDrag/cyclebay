@@ -1,1 +1,1 @@
-CycleBay Confirmation for Order Number {{ order.order_number }}
+{{ current_site.name }} Confirmation for Order Number {{ order.order_number }}
