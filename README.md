@@ -164,6 +164,9 @@ The ER Diagram below shows the structure of the database and the relationships b
 
 #### User Profile
 - [ ] Order history
+All ordered item details additionally stored in json format in the Order model in original_bag field. This allows to display the items in the order history even without reference to the Product model. So the user can see the ordered product details even if the product was deleted from the store. Its kind of a snapshot of the product at the time of purchase. Here is the list of the saved product details:
+product id, product name, product size id, size, quantity, price, color.
+
 - [ ] Order email confirmation
 - [ ] Save delivery information
 - [ ] Wish list

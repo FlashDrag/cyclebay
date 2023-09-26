@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load profile_tools %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
@@ -47,33 +48,33 @@
         <table class="table-sm table-borderless">
           <thead>
             <tr>
-              <th>Order Number</th>
+              <th>Order #</th>
               <th>Date</th>
               <th>Items</th>
-              <th>Order Total</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
             {% for order in orders %}
               <tr>
-                <td>
+                <td class="align-top">
                   <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
                     {{ order.order_number|truncatechars:6 }}
                   </a>
                 </td>
-                <td>{{ order.date }}</td>
-                <td>
-                  <ul class="list-unstyled">
-                    {% for item in order.lineitems.all %}
-                      <li class="small">
-                        {% if item.product.has_sizes %}
-                          Size {{ item.product.size|upper }}
-                        {% endif %}{{ item.product.name }} x{{ item.quantity }}
-                      </li>
-                    {% endfor %}
+                <td class="align-top">{{ order.date|date:"d M Y" }} {{ order.date|time:"H:i" }}</td>
+                <td class="align-top">
+                  <ul class="pl-3 small" style="list-style-type: circle;">
+                    {% with order.original_bag|json_loads as original_bag %}
+                      {% for item in original_bag %}
+                        <li>
+                          {{ item.product_name }} - {{ item.size }} x{{ item.quantity }}
+                        </li>
+                      {% endfor %}
+                    {% endwith %}
                   </ul>
                 </td>
-                <td>${{ order.grand_total }}</td>
+                <td class="align-top">${{ order.grand_total }}</td>
               </tr>
             {% endfor %}
           </tbody>

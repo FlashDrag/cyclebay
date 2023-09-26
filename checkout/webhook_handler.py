@@ -153,15 +153,15 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                     receipt_url=receipt_url,
                 )
-                for product_size_id, quantity in json.loads(bag).items():
+                for item in json.loads(bag):
                     product_size_obj = ProductSize.objects.get(
-                        pk=product_size_id
+                        pk=item.get('product_size_id')
                     )
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product_size_obj.product,
                         product_size=product_size_obj,
-                        quantity=quantity,
+                        quantity=item.get('quantity'),
                     )
                     order_line_item.save()
             except Exception as e:

@@ -51,6 +51,7 @@ def cache_checkout_data(request):
         # transaction as the raised exception is handled
         savepoint = transaction.savepoint()
         try:
+            bag_for_metadata = []
             for item in current_bag["bag_items"]:
                 # select_for_update allows to lock the selected
                 # product size to prevent race conditions until
@@ -61,20 +62,25 @@ def cache_checkout_data(request):
                 # update the product size count in stock
                 product_size_obj.count = F("count") - item["quantity"]
                 product_size_obj.save()
-
-            # clean the bag with empty product sizes
-            bag = {
-                product_size_id: quantity
-                for product_size_id, quantity in session_bag.items()
-                if quantity > 0
-            }
+                if item["quantity"] > 0:
+                    bag_for_metadata.append(
+                        {
+                            "product_id": item["product"].id,
+                            "product_name": item["product"].name,
+                            "product_size_id": item["product_size_id"],
+                            "size": item["size"].name,
+                            "quantity": item["quantity"],
+                            "price": str(item["product"].price),
+                            "color": item["product"].color.name,
+                        }
+                    )
 
             pid = request.POST.get("client_secret").split("_secret")[0]
             stripe.api_key = settings.STRIPE_SECRET_KEY
             stripe.PaymentIntent.modify(
                 pid,
                 metadata={
-                    "bag": json.dumps(bag),
+                    "bag": json.dumps(bag_for_metadata),
                     "save_info": request.POST.get("save_info"),
                     "user": request.user,
                     "order_total": current_bag["total"],
@@ -136,7 +142,7 @@ def checkout(request):
             order.delivery_cost = metadata.get("delivery_cost", 0)
             order.grand_total = metadata.get("grand_total", 0)
             order.receipt_url = receipt_url
-            order.original_bag = json.dumps(bag)
+            order.original_bag = metadata.get("bag", "")
             order.save()
             for product_size_id, quantity in bag.items():
                 try:
@@ -288,6 +294,7 @@ def checkout_success(request, order_number):
     template = "checkout/checkout_success.html"
     context = {
         "order": order,
+        "order_items": json.loads(order.original_bag),
     }
 
     return render(request, template, context)

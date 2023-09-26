@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -52,6 +53,7 @@ def order_history(request, order_number):
     context = {
         'order': order,
         'from_profile': True,
+        'order_items': json.loads(order.original_bag),
     }
 
     return render(request, template, context)
