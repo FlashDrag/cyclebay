@@ -110,7 +110,7 @@
                 <div><i class="fas fa-shopping-cart fa-md"></i></div>
                 <p class="my-0">
                   {% if grand_total %}
-                  ${{ grand_total|floatformat:2 }}
+                  &euro;{{ grand_total|floatformat:2 }}
                   {% else %}
                   €0.00
                   {% endif %}

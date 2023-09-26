@@ -48,7 +48,7 @@
         <table class="table-sm table-borderless">
           <thead>
             <tr>
-              <th>Order #</th>
+              <th>#</th>
               <th>Date</th>
               <th>Items</th>
               <th>Total</th>
@@ -74,7 +74,7 @@
                     {% endwith %}
                   </ul>
                 </td>
-                <td class="align-top">${{ order.grand_total }}</td>
+                <td class="align-top">&euro;{{ order.grand_total }}</td>
               </tr>
             {% endfor %}
           </tbody>

@@ -67,9 +67,9 @@
           <p class="my-0">Grand Total:</p>
         </div>
         <div class="col-3">
-          <p class="my-0">${{ total | floatformat:2 }}</p>
-          <p class="my-0">${{ delivery | floatformat:2 }}</p>
-          <p class="my-0"><strong>${{ grand_total | floatformat:2 }}</strong></p>
+          <p class="my-0">&euro;{{ total | floatformat:2 }}</p>
+          <p class="my-0">&euro;{{ delivery | floatformat:2 }}</p>
+          <p class="my-0"><strong>&euro;{{ grand_total | floatformat:2 }}</strong></p>
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@
             <span class="icon">
               <i class="fas fa-exclamation-circle"></i>
             </span>
-            <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+            <span>Your card will be charged <strong>&euro;{{ grand_total|floatformat:2 }}</strong></span>
           </p>
         </div>
       </form>
