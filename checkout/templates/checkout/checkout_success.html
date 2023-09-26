@@ -17,7 +17,6 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <hr>
       <h2 class="logo-font mb-4">Thank You</h2>
       <hr>
       <p class="text-black">Your order information is below. A confirmation email will be sent to
@@ -192,13 +191,6 @@
   </div>
   <div class="row w-100">
     <div class="col-12 col-lg-7 mx-auto text-right">
-      <!-- receipt -->
-      <a href="{{ order.receipt_url }}" class="btn btn-info rounded-0 my-2" target="_blank">
-        <span class="icon mr-2">
-          <i class="fas fa-receipt"></i>
-        </span>
-        <span class="text-uppercase">View Receipt</span>
-      </a>
       {% if from_profile %}
         <a href="{% url 'profile' %}" class="btn btn-black rounded-0 my-2">
           <span class="icon mr-2">
@@ -207,6 +199,13 @@
           <span class="text-uppercase">Back to Profile</span>
         </a>
       {% endif %}
+      <!-- receipt -->
+      <a href="{{ order.receipt_url }}" class="btn btn-info rounded-0 my-2" target="_blank">
+        <span class="icon mr-2">
+          <i class="fas fa-receipt"></i>
+        </span>
+        <span class="text-uppercase">View Receipt</span>
+      </a>
     </div>
   </div>
 </div>
