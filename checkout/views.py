@@ -46,6 +46,10 @@ def cache_checkout_data(request):
         return HttpResponse(status=400, content="Bag changed")
 
     with transaction.atomic():
+        # savepoint allows to rollback the transaction;
+        # in this case, it is used to manually rollback the
+        # transaction as the raised exception is handled
+        savepoint = transaction.savepoint()
         try:
             for item in current_bag["bag_items"]:
                 # select_for_update allows to lock the selected
@@ -80,6 +84,8 @@ def cache_checkout_data(request):
             )
             return HttpResponse(status=200)
         except Exception as e:
+            # rollback the transaction if there is an error
+            transaction.savepoint_rollback(savepoint)
             messages.error(
                 request,
                 "Sorry, your payment cannot be \
