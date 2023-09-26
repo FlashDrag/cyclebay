@@ -13,6 +13,7 @@ from django.shortcuts import (
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
@@ -170,7 +171,7 @@ def checkout(request):
         # in the session
         current_bag = bag_contents(request)
         if not current_bag.get("bag_items") or current_bag["total"] == 0:
-            messages.error(
+            messages.warning(
                 request,
                 "There's nothing in your cart at the moment.\n"
                 "Return to shopping.",
@@ -250,6 +251,23 @@ def checkout_success(request, order_number):
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
                 user_profile_form.save()
+    else:
+        # Save the order to the user's profile if the user is not authenticated
+        # but has a profile for the email used in the order
+        try:
+            User = get_user_model()
+            user = User.objects.get(email=order.email)
+            profile = UserProfile.objects.get(user=user)
+            order.user_profile = profile
+            order.save()
+            messages.info(
+                request,
+                "Your order has been saved to an existing profile "
+                f"with the email <b>{profile.user.email}</b>.",
+                extra_tags="safe",
+            )
+        except (User.DoesNotExist, UserProfile.DoesNotExist):
+            pass
 
     messages.success(
         request,
