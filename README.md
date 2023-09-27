@@ -85,6 +85,7 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to view the details of a bike so that I can identify the price, color, type, size and image
 - As a Shopper, I want to be able to quickly identify special offers so that I can take advantage of special savings on products I'd like to purchase
 - As a Shopper, I want to be able to easily view the total of my purchases at any time so that I can avoid spending too much
+- As a Shopper, I want to be able to contact the store owner using the contact form so that I can ask any questions I may have
 #### Epic: Registration and User Accounts
 - As a Shopper, I want to be able to easily register for an account so that I can have a personal account and be able to view my profile
 - As a Shopper, I want to be able to easily login or logout so that I can access my personal account information
