@@ -132,23 +132,29 @@
       </nav>
     </div>
 
-    {% if messages %}
     <div class="message-container">
-      {% for message in messages %}
-        {% with message.level as level %}
-          {% if level == 40 %}
-            {% include 'includes/toasts/toast_error.html' %}
-          {% elif level == 30 %}
-            {% include 'includes/toasts/toast_warning.html' %}
-          {% elif level == 25 %}
-            {% include 'includes/toasts/toast_success.html' %}
-          {% else %}
-            {% include 'includes/toasts/toast_info.html' %}
-          {% endif %}
-          {% endwith %}
-      {% endfor %}
+      {% if messages %}
+        {% for message in messages %}
+          {% with message.level as level %}
+            {% if level == 40 %}
+              {% include 'includes/toasts/toast_error.html' %}
+            {% elif level == 30 %}
+              {% include 'includes/toasts/toast_warning.html' %}
+            {% elif level == 25 %}
+              {% include 'includes/toasts/toast_success.html' %}
+            {% else %}
+              {% include 'includes/toasts/toast_info.html' %}
+            {% endif %}
+            {% endwith %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Ajax message container that used to display messages using js -->
+      <div id="ajax-message-container" class="d-none">
+        {% include 'includes/toasts/toast_info.html' %}
+      </div>
+
     </div>
-  {% endif %}
   </header>
 
   {% block page_header %}
