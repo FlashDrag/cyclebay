@@ -99,27 +99,32 @@
           {% if not product.total_count %}
             <span class="text-danger">Out of stock</span>
           {% else %}
-            <a href="{% url 'product_detail' product.id %}" class="btn btn-sm btn-outline-dark rounded-0">
+            <a href="{% url 'product_detail' product.id %}" class="btn btn-sm btn-outline-dark">
               View
             </a>
           {% endif %}
-          <!-- Superusers control buttons -->
-          {% if not request.user.is_superuser %}
-          <small class="ml-3">
-            <!-- TODO: url 'edit_product' product.id -->
-            <a href="">Edit</a> |
-            <!-- TODO: url 'delete_product' product.id -->
-            <a href="" class="text-danger">Delete</a>
-          </small>
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+              <!-- if superuser display superusers control buttons -->
+              <small class="ml-3">
+                <!-- TODO: url 'edit_product' product.id -->
+                <a href="">Edit</a> |
+                <!-- TODO: url 'delete_product' product.id -->
+                <a href="" class="text-danger">Delete</a>
+              </small>
+            {% else %}
+              <!-- if not superuser display add item to wishlist btn -->
+              <button class="wishlist-toggler btn btn-sm btn-{% if not product.is_in_wishlist %}outline-{% endif %}dark"
+                type="button" aria-label="Add to wishlist toggler" data-url="{% url 'add_to_wishlist_toggle' product.id %}">
+                <i class="fas fa-heart"></i>
+              </button>
+            {% endif %}
           {% else %}
-          <!-- add item to wishlist -->
-          <!-- TODO: 'add_to_wishlist' product.id -->
-          <form action="" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-dark rounded-0">
+            <!-- if user not authenticated redirect to login page -->
+            <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-sm btn-outline-dark"
+              aria-label="Add to wishlist button">
               <i class="fas fa-heart"></i>
-            </button>
-          </form>
+            </a>
           {% endif %}
         </div>
       </div>
@@ -136,6 +141,12 @@
 
 {% block postloadjs %}
 {{ block.super }}
+<!-- pass csrf token -->
+<script type="text/javascript">
+  var csrfToken = '{{ csrf_token }}';
+</script>
+<script type="text/javascript" src="{% static 'wishlist/js/wishlist_toggler.js' %}"></script>
+
 <script type="text/javascript">
   $('.btt-link').click(function (e) {
     window.scrollTo(0, 0)
@@ -168,6 +179,7 @@
     });
   });
 </script>
+
 <script type="text/javascript">
   $('#sort-selector').change(function () {
     var selector = $(this);
