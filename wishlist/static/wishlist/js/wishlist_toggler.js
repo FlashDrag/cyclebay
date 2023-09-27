@@ -5,15 +5,23 @@ $(document).ready(function () {
         const wishlistTogglerBtn = $(this);
 
         $.post(url, postData).done(function (responce) {
-            const msgContainer = $('#ajax-message-container');
-            const toastHeader = msgContainer.find('.toast-header strong');
-            const toastBody = msgContainer.find('.toast-body');
-            const toast = msgContainer.find('.toast');
+            const msgContainer = $('.message-container');
+            const ajaxMsgContainer = $('#ajax-message-container');
+            const toastHeader = ajaxMsgContainer.find('.toast-header strong');
+            const toastBody = ajaxMsgContainer.find('.toast-body');
+            const toast = ajaxMsgContainer.find('.toast');
 
-            // Show toast message
+            // Attach message container to screen
+            msgContainer.css({
+                'position': 'fixed',
+                'margin-top': '10px',
+                'top': '25px',
+                'right': '25px',
+                'z-index': '1030'
+            });
             toastHeader.text("Success!");
             toastBody.html(responce.wishlist_message);
-            msgContainer.removeClass('d-none');
+            ajaxMsgContainer.removeClass('d-none');
             toast.toast('show');
 
             // Change button style based on is_in_wishlist value
