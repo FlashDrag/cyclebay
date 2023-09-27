@@ -11,7 +11,7 @@ from .models import Wishlist
 def wishlist(request):
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     context = {
-        'wishlist': wishlist,
+        'wishlist': wishlist.products.all(),
     }
     return render(request, 'wishlist/wishlist.html', context)
 
