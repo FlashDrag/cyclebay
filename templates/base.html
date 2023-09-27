@@ -58,7 +58,7 @@
     </div>
 
     <!-- Navbar -->
-    <div id="topnav" class="row bg-white pt-md-2 d-none d-md-flex">
+    <div id="topnav" class="row bg-white mx-0 pt-md-2 d-none d-md-flex">
       <div class="col-12 col-md-4 my-auto py-1 py-md-0 text-center text-md-left">
         <a href="{% url 'home' %}" class="nav-link main-logo-link">
           <h2 class="logo-font text-black my-0"><strong>CycleBay</strong></h2>
@@ -81,8 +81,16 @@
       </div>
       <div class="col-12 col-md-4 my-auto py-1 py-md-0">
         <ul class="list-inline list-unstyled text-center text-md-right my-0">
+          <li class="list-inline-item">
+            <a class="text-black nav-link px-0 px-lg-2" href="{% url 'wishlist' %}">
+              <div class="text-center">
+                <div><i class="fas fa-heart fa-md"></i></div>
+                <p class="my-0">Wishlist</p>
+              </div>
+            </a>
+          </li>
           <li class="list-inline-item dropdown">
-            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
+            <a class="text-black nav-link px-0 px-lg-2" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
               <div class="text-center">
                 <div><i class="fas fa-user fa-md"></i></div>
@@ -104,7 +112,7 @@
             </div>
           </li>
           <li class="list-inline-item">
-            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
+            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link px-0 px-lg-2"
               href="{% url 'view_bag' %}">
               <div class="text-center">
                 <div><i class="fas fa-shopping-cart fa-md"></i></div>
@@ -121,7 +129,7 @@
         </ul>
       </div>
     </div>
-    <div class="row bg-white">
+    <div class="row bg-white mx-0">
       <nav class="navbar navbar-expand-md navbar-light w-100" id="main-navbar">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
           aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,7 +157,7 @@
         {% endfor %}
       {% endif %}
 
-      <!-- Ajax message container that used to display messages using js -->
+      <!-- The message container that used to display messages with js -->
       <div id="ajax-message-container" class="d-none">
         {% include 'includes/toasts/toast_info.html' %}
       </div>
