@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.db.models import Q
 from django.db.models.functions import Lower
 
+from .utils import annotate_saved_products
 from .models import Brand, Category, Color, Product
 
 
@@ -86,6 +87,9 @@ def all_products(request):
             products = products.filter(queries)
 
     current_sorting = f"{sort}_{direction}"
+
+    if request.user.is_authenticated:
+        products = annotate_saved_products(products, request.user)
 
     context = {
         "products": products,
