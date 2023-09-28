@@ -172,6 +172,7 @@ product id, product name, product size id, size, quantity, price, color.
 - [ ] Order email confirmation
 - [ ] Save delivery information
 - [ ] Wish list
+Defensive design.
 When new user profile is created I used post_save signal to create a new WishList object for this user. This allows to ensure that every user has a wish list.
 
 #### Store Management

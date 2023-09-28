@@ -1,8 +1,12 @@
 $(document).ready(function () {
-    $('.wishlist-toggler').click(function () {
-        const url = $(this).data('url');
+    // use the event delegation with .on() method by the reason that the class is added dynamically
+    // $('.wishlist-toggler').click() works only for elements that are already present in the DOM
+    // at the time the js loads
+    $(document).on('click', '.wishlist-toggler', function () {
+        const url = $(this).attr('data-url');
         const postData = { 'csrfmiddlewaretoken': csrfToken };
         const wishlistTogglerBtn = $(this);
+        const productId = $(wishlistTogglerBtn).attr('data-product-id');
 
         $.post(url, postData).done(function (responce) {
             const msgContainer = $('.message-container');
@@ -26,7 +30,7 @@ $(document).ready(function () {
 
             // If on wishlist page, remove card from DOM
             if ($(wishlistTogglerBtn).hasClass('on-wishlist')) {
-                $(wishlistTogglerBtn).closest('.card').remove();
+                $('#card-product-'+ productId).remove();
             } else {
                 // Otherwise, change button style based on is_in_wishlist value
                 if (responce.is_in_wishlist) {

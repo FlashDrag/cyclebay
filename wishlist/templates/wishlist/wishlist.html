@@ -26,7 +26,7 @@
   <div class="row justify-content-center">
     <div class="col col-lg-8">
       {% for product in wishlist %}
-      <div class="card">
+      <div id="card-product-{{ product.id }}" class="card">
         <div class="row no-gutters">
           <div class="col-md-4 d-flex align-items-center">
             <a href="{% url 'product_detail' product.id %}">
@@ -44,9 +44,8 @@
               <p class="card-text">&euro;{{ product.price }}</p>
             </div>
             <div class="card-footer pt-0 bg-transparent border-0">
-              <button class="btn btn-outline-danger btn-sm wishlist-toggler on-wishlist"
-                type="button" aria-label="Add to wishlist toggler"
-                data-url="{% url 'add_to_wishlist_toggle' product.id %}">
+              <button class="remove-modal-trigger btn btn-outline-danger btn-sm" aria-label="Remove from wishlist modal trigger"
+                type="button" data-product-id="{{ product.id }}" data-url="{% url 'add_to_wishlist_toggle' product.id %}">
                 <i class="fas fa-trash-alt"></i>
                 Remove
               </button>
@@ -71,6 +70,9 @@
   {% endif %}
 </div>
 
+<!-- Error Modal -->
+{% include 'includes/modals/error_modal.html' %}
+
 {% endblock %}
 
 <!-- Stripe.js -->
@@ -78,6 +80,24 @@
 {{ block.super }}
 <script type="text/javascript">
   var csrfToken = '{{ csrf_token }}';
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    // modal trigger
+    const modalTrigger = $(".remove-modal-trigger");
+    const errorModal = $('#errorModal');
+    const submitBtn = errorModal.find(".submit");
+
+    // get data from clicked modal trigger and set it to submit button
+    // it allows to remove item from wishlist using wishlist_toggler.js
+    modalTrigger.click(function () {
+      const url = $(this).attr('data-url');
+      const productId = $(this).attr('data-product-id');
+      submitBtn.addClass('wishlist-toggler on-wishlist');
+      submitBtn.attr( { 'data-url': url, 'data-product-id': productId } );
+      errorModal.modal('show');
+    });
+  });
 </script>
 <script type="text/javascript" src="{% static 'wishlist/js/wishlist_toggler.js' %}"></script>
 {% endblock %}
