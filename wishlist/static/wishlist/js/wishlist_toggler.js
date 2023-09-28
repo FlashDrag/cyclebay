@@ -24,13 +24,18 @@ $(document).ready(function () {
             ajaxMsgContainer.removeClass('d-none');
             toast.toast('show');
 
-            // Change button style based on is_in_wishlist value
-            if (responce.is_in_wishlist) {
-                wishlistTogglerBtn.removeClass('btn-outline-dark');
-                wishlistTogglerBtn.addClass('btn-dark');
+            // If on wishlist page, remove card from DOM
+            if ($(wishlistTogglerBtn).hasClass('on-wishlist')) {
+                $(wishlistTogglerBtn).closest('.card').remove();
             } else {
-                wishlistTogglerBtn.removeClass('btn-dark');
-                wishlistTogglerBtn.addClass('btn-outline-dark');
+                // Otherwise, change button style based on is_in_wishlist value
+                if (responce.is_in_wishlist) {
+                    wishlistTogglerBtn.removeClass('btn-outline-dark');
+                    wishlistTogglerBtn.addClass('btn-dark');
+                } else {
+                    wishlistTogglerBtn.removeClass('btn-dark');
+                    wishlistTogglerBtn.addClass('btn-outline-dark');
+                }
             }
         }).fail(function (xhr, textStatus, error) {
             // TODO: return error page based on status code 'xhr.status', e.g. 404, 500, etc.
