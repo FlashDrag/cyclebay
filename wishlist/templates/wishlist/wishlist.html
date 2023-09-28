@@ -19,35 +19,55 @@
     <div class="col">
       <hr>
       <h2 class="logo-font mb-4">Wishlist</h2>
-      <hr>
     </div>
   </div>
 
   {% if wishlist %}
-    {% for product in wishlist %}
-      <div class="row">
-        <div class="col-2 mb-1">
-          <a href="{% url 'product_detail' product.id %}">
-            {% if product.image %}
-            <img class="w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
-            {% else %}
-            <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-            {% endif %}
-          </a>
-        </div>
-        <div class="col-7">
-          <p class="my-0"><strong>{{ product.name }}</strong></p>
-          <p class="my-0 small">Color: {% if product.color %}{{ product.color.friendly_name }}{% else %}N/A{% endif %}</p>
-          <p class="my-0 small">&euro;{{ product.price }}</p>
+  <div class="row justify-content-center">
+    <div class="col col-lg-8">
+      {% for product in wishlist %}
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="{% url 'product_detail' product.id %}">
+              {% if product.image %}
+              <img class="w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
+              {% else %}
+              <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+              {% endif %}
+            </a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h6 class="card-title">{{ product.name }}</h6>
+              <p class="card-text mb-0">Color: {% if product.color %}{{ product.color.friendly_name }}{% else %}N/A{% endif %}</p>
+              <p class="card-text">&euro;{{ product.price }}</p>
+            </div>
+            <div class="card-footer pt-0 bg-transparent border-0">
+              <button class="btn btn-outline-danger btn-sm wishlist-toggler on-wishlist"
+                type="button" aria-label="Add to wishlist toggler"
+                data-url="{% url 'add_to_wishlist_toggle' product.id %}">
+                <i class="fas fa-trash-alt"></i>
+                Remove
+              </button>
+              <!-- detail view -->
+              <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-info btn-sm" role="button">
+                <i class="fas fa-eye"></i>
+                Detail View
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
   {% else %}
-    <p class="lead">Your wishlist is empty.</p>
-    <a class="btn btn-outline-dark" href="{% url 'products' %}" role="button">
-      <i class="fas fa-arrow-left"></i>
-      Continue Shopping
-    </a>
+  <p class="lead">Your wishlist is empty.</p>
+  <a class="btn btn-outline-dark" href="{% url 'products' %}" role="button">
+    <i class="fas fa-arrow-left"></i>
+    Continue Shopping
+  </a>
   {% endif %}
 </div>
 
@@ -56,4 +76,8 @@
 <!-- Stripe.js -->
 {% block postloadjs %}
 {{ block.super }}
+<script type="text/javascript">
+  var csrfToken = '{{ csrf_token }}';
+</script>
+<script type="text/javascript" src="{% static 'wishlist/js/wishlist_toggler.js' %}"></script>
 {% endblock %}
