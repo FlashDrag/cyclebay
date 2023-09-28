@@ -81,14 +81,16 @@
       </div>
       <div class="col-12 col-md-4 my-auto py-1 py-md-0">
         <ul class="list-inline list-unstyled text-center text-md-right my-0">
-          <li class="list-inline-item">
-            <a class="text-black nav-link px-0 px-lg-2" href="{% url 'wishlist' %}">
-              <div class="text-center">
-                <div><i class="fas fa-heart fa-md"></i></div>
-                <p class="my-0">Wishlist</p>
-              </div>
-            </a>
-          </li>
+          {% if request.user.is_authenticated %}
+            <li class="list-inline-item">
+              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'wishlist' %}">
+                <div class="text-center">
+                  <div><i class="fas fa-heart fa-md"></i></div>
+                  <p class="my-0">Wishlist</p>
+                </div>
+              </a>
+            </li>
+          {% endif %}
           <li class="list-inline-item dropdown">
             <a class="text-black nav-link px-0 px-lg-2" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
