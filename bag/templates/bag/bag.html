@@ -167,28 +167,39 @@
     </div>
   {% endif %}
 </div>
+
+{% include 'includes/modals/error_modal.html' %}
+
 {% endblock %}
 
 {% block postloadjs %}
   {{ block.super }}
   <script type="text/javascript">
-    $('.btt-link').click(function (e) {
-      window.scrollTo(0, 0)
-    })
-  </script>
-
-  <script type="text/javascript">
     // Remove item and reload on click
-    $('.remove-item').click(function(e) {
-        const csrfToken = "{{ csrf_token }}";
+    $(document).ready(function () {
+      // modal trigger
+      const csrfToken = "{{ csrf_token }}";
+      const modalTrigger = $(".remove-item");
+      const errorModal = $('#errorModal');
+      const submitBtn = errorModal.find(".submit");
+
+      // get data from clicked modal trigger and set it to submit button
+      modalTrigger.click(function () {
         const productSizeId = $(this).attr('id').split('remove_')[1];
         const url = `/bag/remove/${productSizeId}`;
-        const data = {'csrfmiddlewaretoken': csrfToken};
 
-        $.post(url, data)
-          .done(function() {
-              location.reload();
+        submitBtn.attr('data-url', url);
+        errorModal.modal('show');
+      });
+
+      // Get passed url from submit button and post it to remove_item view
+      submitBtn.on('click', function () {
+        const url = $(this).attr('data-url');
+        $.post(url, { 'csrfmiddlewaretoken': csrfToken })
+          .done(function () {
+            location.reload();
           });
-    })
+      });
+    });
   </script>
 {% endblock %}
