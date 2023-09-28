@@ -114,14 +114,18 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 #### Epic: Newsletters
 - As a Shopper, I want to be able to subscribe to a Newsletter so that I can receive any discounts or special offers available.
 - As a Shopper, I want to be able to unsubscribe from the newsletter so that I can stop receiving emails from the store.
+- As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
+- As a Store Owner, I need a Facebook page, so that I can promote my store on social media.
 #### Epic: Store Management
 - As a Store Owner, I want to be able to add a product to the store, so that I can sell it to customers.
 - As a Store Owner, I want to be able to edit/update a product, so that I can change the price, description, image or any other attribute of the product.
-- As a Store Owner, I want to be able to add a product category, so that I can group products into categories.
 - As a Store Owner, I want to be able to delete a product, so that I can remove it from the store.
+- As a Store Owner, I want to be able to add a product category, so that users can group products into categories.
 - As a Store Owner, I want to be able to delete a product category, so that I can remove it from the store.
-- As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
-- As a Store Owner, I need a Facebook page, so that I can promote my store on social media.
+- As a Store Owner, I want to be able to add a product brand, so that users can group products into brands.
+- As a Store Owner, I want to be able to delete a product brand, so that I can remove it from the store.
+- As a Store Owner, I want to be able to add a product color, so that users can group products into colors.
+- As a Store Owner, I want to be able to delete a product color, so that I can remove it from the store.
 
 [Back to top](#table-of-contents)
 
@@ -177,6 +181,8 @@ When new user profile is created I used post_save signal to create a new WishLis
 
 #### Store Management
 - [ ] Add product
+    * Add product category
+    * Add product color
 - [ ] Edit product
 - [ ] Delete product
 
