@@ -181,9 +181,41 @@ Defensive design.
 When new user profile is created I used post_save signal to create a new WishList object for this user. This allows to ensure that every user has a wish list.
 
 #### Store Management
-- [ ] Add product
-    * Add product category
-    * Add product color
+In the pursuit of enhancing the overall user experience and streamlining the product management process, I developed a user-friendly interface for store owners. This interface is a significant leap forward as it grants the owners the ability to manage products without having to navigate through the admin panel. It's here that store owners can seamlessly add new products, adjust quantities for different sizes, edit existing products, delete them, and manage a plethora of other product attributes.
+
+A crucial part of this implementation is how store owner manages stock. The stock levels for the products are intrinsically linked to the `ProductSize` model. This design decision enables a more granular control over the inventory. This means each size of a bike has its own stock count. So, if a medium-sized bike is selling fast, we can easily adjust the stock for just that size. This helps the store run smoothly and makes sure customers know exactly what's available.
+
+- ##### Add Product Feature
+The architecture of this feature is rooted in Django's `inlineformset_factory`, which has played a pivotal role in shaping the functionality. This tool allowed me to facilitate the creation of multiple forms for each size of a product, enabling the store owner to edit the quantity for each size individually without having to navigate to a separate page.
+
+The essence of this feature is captured in the `ProductSize` intermediate model. Here, each product size is represented as a unique combination of the product and size, thereby allowing the store owner to allocate different quantities for different sizes of the same product. This mechanism is neatly encapsulated within two forms – `ProductForm` and `ProductSizeForm`. The `ProductForm` is tasked with managing the core attributes of the product, while `ProductSizeForm` handles the sizing details.
+
+```
+class ProductForm(forms.ModelForm):
+    # ... (as shown in the provided code)
+
+class ProductSizeForm(forms.ModelForm):
+    class Meta:
+        model = ProductSize
+        fields = ("size", "count")
+        widgets = {'size': forms.HiddenInput()}
+        labels = {"count": "Quantity",}
+
+ProductSizeFormSet = inlineformset_factory(
+    Product,
+    ProductSize,
+    form=ProductSizeForm,
+    extra=Size.objects.count(),
+    can_delete=True,
+)
+```
+
+In the template, the formset is rendered as a table, where each row corresponds to a different size of the product. The user has the ability to set the quantity for each size, and optionally exclude sizes.
+
+By incorporating these features, I believe I've managed to craft a seamless and intuitive experience for store owners. They can now effortlessly manage their products, allowing them to focus more on growing their business and less on navigating through cumbersome interfaces.
+
+* Add product category
+* Add product color
 - [ ] Edit product
 - [ ] Delete product
 

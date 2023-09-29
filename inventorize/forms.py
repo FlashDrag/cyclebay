@@ -1,17 +1,16 @@
 from django import forms
+from django.forms import inlineformset_factory
+
 from products.models import Product, Category, Brand, Size, Color
 
 from .widgets import CustomClearableFileInput
 from products.models import ProductSize
 
 
-# TODO: User must be able to add quantity for each size
-
-
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ("image_url",)
+        exclude = ("image_url", "sizes")
 
         help_texts = {
             "featured": "Tick this box if you want to offer this product "
@@ -19,23 +18,19 @@ class ProductForm(forms.ModelForm):
         }
 
     field_order = [
-        'category',
-        'brand',
-        'sku',
-        'name',
-        'price',
-        'color',
-        'sizes',
-        'count',
-        'featured',
-        'image',
+        "category",
+        "brand",
+        "sku",
+        "name",
+        "price",
+        "color",
+        "featured",
+        "image",
     ]
 
     image = forms.ImageField(
         label="Image", required=False, widget=CustomClearableFileInput
     )
-    count = forms.IntegerField(min_value=1, initial=1)
-    sizes = forms.ChoiceField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -47,8 +42,6 @@ class ProductForm(forms.ModelForm):
 
         # Change field labels
         self.fields["sku"].label = "SKU"
-        self.fields["count"].label = "Quantity"
-        self.fields["sizes"].label = "Size"
         self.fields["featured"].label = "Special Offer"
 
         # Add placeholders
@@ -58,8 +51,7 @@ class ProductForm(forms.ModelForm):
         ] = "e.g. Cube Access Hybrid Pro 500"
         self.fields["price"].widget.attrs["placeholder"] = "e.g. 899.99"
 
-        # Set friendly names for categories, brands,
-        # sizes and colors
+        # Set friendly names for categories, brands, and colors
         categories = Category.objects.all()
         category_friendly_names = [
             (category.id, category.get_friendly_name())
@@ -73,12 +65,6 @@ class ProductForm(forms.ModelForm):
         ]
         self.fields["brand"].choices = brand_friendly_names
 
-        sizes = Size.objects.all()
-        size_friendly_names = [
-            (size.id, size.get_friendly_name()) for size in sizes
-        ]
-        self.fields["sizes"].choices = size_friendly_names
-
         colors = Color.objects.all()
         color_friendly_names = [
             (color.id, color.get_friendly_name()) for color in colors
@@ -91,3 +77,26 @@ class ProductForm(forms.ModelForm):
                 field.widget.attrs[
                     "class"
                 ] = "border-black rounded-0 management-style-input"
+
+
+class ProductSizeForm(forms.ModelForm):
+    class Meta:
+        model = ProductSize
+        fields = ("size", "count")
+        # hide the size select input to prevent the user from
+        # selecting the same size more than once
+        widgets = {'size': forms.HiddenInput()}
+        labels = {
+            "count": "Quantity",
+        }
+
+
+# The formset allows to create multiple forms for each size
+# of a product, and to edit the quantity of each size.
+ProductSizeFormSet = inlineformset_factory(
+    Product,
+    ProductSize,
+    form=ProductSizeForm,
+    extra=Size.objects.count(),
+    can_delete=True,
+)

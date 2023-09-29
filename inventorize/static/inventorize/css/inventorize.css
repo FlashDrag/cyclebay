@@ -68,3 +68,12 @@ select option[value=""] {
   border-color: #dc3545;
   border-radius: 0;
 }
+
+.formset--table input[type=number] {
+  max-width: 80px;
+}
+
+.formset--table caption {
+  caption-side: top;
+  color: #000;
+}
