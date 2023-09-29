@@ -24,10 +24,46 @@
       {% for field in form %}
       {% if field.name != 'image' %}
       {{ field | as_crispy_field }}
-      {% else %}
-      {{ field }}
       {% endif %}
       {% endfor %}
+
+      {{ formset.management_form }}
+      <div class="formset--table table-responsive">
+        <table class="table table-borderless table-striped table-sm caption-top">
+          <caption class="caption-top py-0">
+            <p class="my-0">Product Sizes*</p>
+            <p class="my-0 pl-3">
+              <small class="text-muted">
+              Not excluded sizes will be added to the product, even if quantity is 0.
+              </small>
+            </p>
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Size Name</th>
+              <th scope="col">Size</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Exclude?</th>
+            </tr>
+          </thead>
+          <tbody class="formset">
+            {% for form in formset %}
+                <tr>
+                  <span>{{ form.size }}</span>
+                  <td>{{ form.size_friendly_name }}</td>
+                  <td>{{ form.size_name }}</td>
+                  <td>{{ form.count }}</t>
+                  <td class="text-center">{{ form.DELETE }}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div id="div_id_image" class="form-group">
+        <p class="mb-2">Choose an image to upload <small class="text-muted">(optional)</small></p>
+        <div>{{ form.image }}</div>
+      </div>
       <div>
         <a class="btn btn-black" href="{% url 'products' %}">Cancel</a>
         <button class="btn btn-success" type="submit">Add Product</button>
@@ -45,5 +81,12 @@
     let file = $('#new-image')[0].files[0];
     $('#filename').text(`Image will be set to: ${file.name}`)
   });
+</script>
+<script type="text/javascript">
+  // add min and max attributes to size input
+  const sizeInput = $('.formset--table input[type="number"]');
+  sizeInput.attr('min', 0);
+  sizeInput.attr('max', 999);
+
 </script>
 {% endblock %}
