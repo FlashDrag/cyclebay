@@ -60,8 +60,7 @@
       <!-- Superusers control buttons -->
       {% if request.user.is_superuser %}
         <small class="ml-3">
-          <!-- TODO:  url 'edit_product' product.id -->
-          <a href="">Edit</a> |
+          <a href="{% url 'edit_product' product.id %}">Edit</a> |
           <!-- TODO:  url 'delete_product' product.id -->
           <a href="" class="text-danger">Delete</a>
         </small>
