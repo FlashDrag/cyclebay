@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Category(models.Model):
@@ -92,7 +93,7 @@ class Product(models.Model):
         return self.name
 
     def total_count(self):
-        """ Return the total count of all sizes of a product """
+        """Return the total count of all sizes of a product"""
         return ProductSize.objects.filter(product=self).aggregate(
             total=models.Sum("count")
         )["total"]
@@ -101,7 +102,9 @@ class Product(models.Model):
 class ProductSize(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    count = models.IntegerField(default=1)
+    count = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(999)]
+    )
 
     class Meta:
         # ensure that the combination of size and product is unique
