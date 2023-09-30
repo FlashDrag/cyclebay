@@ -218,6 +218,8 @@ By incorporating these features, I believe I've managed to craft a seamless and 
 * Add product color
 - [ ] Edit product
 - [ ] Delete product
+To delete a product, I used defensive design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product. Also the app checks if the user is a superuser, and accepts only post requests that implemented by the `@require_POST` decorator and jquery ajax post method.
+
 
 <!-- TODO: dynamic categories. owner can add new category. it will be displayed in navbar dropdown menu -->
 <!-- TODO: dynamic colors. they use own model -->

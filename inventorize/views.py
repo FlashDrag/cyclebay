@@ -1,10 +1,19 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.urls import reverse
 
 from products.models import Product, ProductSize, Size
 from .forms import ProductForm, ProductSizeFormSet
+
+
+# TODO: Add new category, brand and color
+# By default hide the new_category field and show the small button
+# that will TOGGLE the new_category field and disable/enable the
+# existing category select field
+# TODO: Or show the new_category form in a modal
 
 
 @login_required
@@ -27,7 +36,11 @@ def add_product(request):
                 instance.product = product
                 instance.save()
 
-            messages.success(request, "Successfully added product!")
+            messages.success(
+                request,
+                f"<b>{product.name}</b> successfully added",
+                extra_tags="safe",
+            )
             return redirect(reverse("product_detail", args=[product.id]))
         else:
             messages.error(
@@ -105,7 +118,11 @@ def edit_product(request, product_id):
                         instance.product = product
                         instance.save()
 
-            messages.success(request, "Successfully updated product!")
+            messages.success(
+                request,
+                f"<b>{product.name}</b> successfully updated!",
+                extra_tags="safe",
+            )
             return redirect(reverse("product_detail", args=[product.id]))
         else:
             messages.error(
@@ -135,9 +152,7 @@ def edit_product(request, product_id):
             else:
                 # If it doesn't exist, use default count 0 and
                 # set DELETE to True
-                initial_data.append(
-                    {"size": size, "count": 0, "DELETE": True}
-                )
+                initial_data.append({"size": size, "count": 0, "DELETE": True})
         formset = ProductSizeFormSet(
             queryset=ProductSize.objects.filter(product=product),
             initial=initial_data,
@@ -148,7 +163,11 @@ def edit_product(request, product_id):
             sub_form.size_friendly_name = size.friendly_name
             sub_form.size_name = size.name
 
-        messages.info(request, f"You are editing {product.name}")
+        messages.info(
+            request,
+            f"You are editing <b>{product.name}</b>",
+            extra_tags="safe",
+        )
 
     template = "inventorize/edit_product.html"
     context = {
@@ -158,3 +177,27 @@ def edit_product(request, product_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+@require_POST
+def delete_product(request, product_id):
+    """Delete a product from the store"""
+
+    # only store owners can manage products
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only store owners can do that.")
+        return HttpResponse(status=403)
+
+    try:
+        product = Product.objects.get(pk=product_id)
+        product_name = product.name
+        product.delete()
+        messages.success(
+            request, f"<b>{product_name}</b> deleted!", extra_tags="safe"
+        )
+    except Product.DoesNotExist:
+        messages.error(request, "Sorry, this product does not exist")
+        return HttpResponse(status=404)
+    else:
+        return HttpResponse(status=200)

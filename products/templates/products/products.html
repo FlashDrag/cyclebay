@@ -108,8 +108,9 @@
               <!-- if superuser display superusers control buttons -->
               <small class="ml-3">
                 <a href="{% url 'edit_product' product.id %}">Edit</a> |
-                <!-- TODO: url 'delete_product' product.id -->
-                <a href="" class="text-danger">Delete</a>
+                <a href="{% url 'delete_product' product.id %}" class="remove-item text-danger" role="button">
+                  Delete
+                </a>
               </small>
             {% else %}
               <!-- if not superuser display add item to wishlist btn -->
@@ -136,6 +137,11 @@
     <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
   </a>
 </div>
+
+<!-- modal for superusers to delete product -->
+{% include 'includes/modals/error_modal.html' %}
+
+
 {% endblock %}
 
 {% block postloadjs %}
@@ -200,5 +206,39 @@
       window.location.replace(currentUrl);
     }
   })
+</script>
+<!-- Delete product script that use the error modal for superusers  -->
+<script type="text/javascript">
+  // Remove item and reload on click
+  $(document).ready(function () {
+    // modal trigger
+    const csrfToken = "{{ csrf_token }}";
+    const productsUrl = "{% url 'products' %}";
+    const homeUrl = "{% url 'home' %}";
+    const modalTrigger = $(".remove-item");
+    const errorModal = $('#errorModal');
+    const submitBtn = errorModal.find(".submit");
+
+    // get data from clicked modal trigger and set it to submit button on modal
+    modalTrigger.click(function (e) {
+      e.preventDefault();
+      const url = $(this).attr('href');
+
+      submitBtn.attr('data-url', url);
+      errorModal.modal('show');
+    });
+
+    // Get passed url from submit button and post it to remove_item view
+    submitBtn.on('click', function () {
+      const url = $(this).attr('data-url');
+      $.post(url, { 'csrfmiddlewaretoken': csrfToken })
+        .done(function () {
+          location.href = productsUrl;
+        })
+        .fail(function (xhr, status, error) {
+          location.href = homeUrl;
+        });
+    });
+  });
 </script>
 {% endblock %}

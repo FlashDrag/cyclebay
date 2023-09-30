@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
@@ -141,6 +142,7 @@ def adjust_bag(request, product_size_id):
     return redirect(reverse("view_bag"))
 
 
+@require_POST
 def remove_from_bag(request, product_size_id):
     """Remove the product size item from the shopping bag and
     release the reserved products"""
