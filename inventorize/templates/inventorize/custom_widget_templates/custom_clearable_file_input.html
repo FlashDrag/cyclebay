@@ -13,8 +13,10 @@
     {% endif %}
     <br>
     {{ widget.input_text }}
+{% else %}
+<p class="mb-2">Choose an image to upload <small class="text-muted">(optional)</small></p>
 {% endif %}
-<span class="btn btn-outline-info btn-file" role="button">
+<span class="btn btn-outline-info btn-sm btn-file" role="button">
     <i class="fas fa-upload"></i>
     Choose Image <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"
     {% include "django/forms/widgets/attrs.html" %}>
