@@ -8,6 +8,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "categories"
+        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name
@@ -19,6 +20,9 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=254, unique=True)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name
@@ -45,6 +49,9 @@ class Size(models.Model):
 class Color(models.Model):
     name = models.CharField(max_length=50, unique=True)
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name
