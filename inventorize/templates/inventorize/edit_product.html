@@ -4,6 +4,7 @@
 {% block title %}Product Management - Edit Product{% endblock %}
 
 {% block extra_css %}
+  <link rel="stylesheet" href="{% static 'libs/spectrum/spectrum.css' %}">
   <link rel="stylesheet" href="{% static 'inventorize/css/inventorize.css' %}">
 {% endblock %}
 
@@ -21,11 +22,79 @@
     <h4 class="mb-4">Edit Product</h4>
     <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-5" enctype="multipart/form-data">
       {% csrf_token %}
-      {% for field in form %}
-      {% if field.name != 'image' %}
-      {{ field | as_crispy_field }}
-      {% endif %}
-      {% endfor %}
+
+      {{ form.category | as_crispy_field }}
+      <div id="new-category-container">
+        <p>
+          <button class="btn btn-outline-info btn-sm" type="button" data-toggle="collapse" data-target="#collapseNewCategory"
+            aria-expanded="false" aria-controls="collapseNewCategory">
+            <i class="fas fa-plus"></i>
+            Add New Category
+          </button>
+        </p>
+        <div class="collapse mb-3" id="collapseNewCategory">
+          <p class="text-muted mb-0">
+            <small>
+              The new category will be added to the database and selected for this product automatically when you submit the form.
+            </small>
+          </p>
+          <div class="card card-body py-0 pt-3">
+            {{ form.new_category_name | as_crispy_field }}
+            {{ form.new_category_friendly_name | as_crispy_field }}
+          </div>
+        </div>
+      </div>
+
+      {{ form.brand | as_crispy_field }}
+      <div id="new-brand-container">
+        <p>
+          <button class="btn btn-outline-info btn-sm" type="button" data-toggle="collapse" data-target="#collapseNewBrand"
+            aria-expanded="false" aria-controls="collapseNewBrand">
+            <i class="fas fa-plus"></i>
+            Add New Brand
+          </button>
+        </p>
+        <div class="collapse mb-3" id="collapseNewBrand">
+          <p class="text-muted mb-0">
+            <small>
+              The new brand will be added to the database and selected for this product automatically when you submit the form.
+            </small>
+          </p>
+          <div class="card card-body py-0 pt-3">
+            {{ form.new_brand_name | as_crispy_field }}
+            {{ form.new_brand_friendly_name | as_crispy_field }}
+          </div>
+        </div>
+      </div>
+
+      {{ form.sku | as_crispy_field }}
+      {{ form.name | as_crispy_field }}
+      {{ form.price | as_crispy_field }}
+
+      {{ form.color | as_crispy_field }}
+      <div id="new-color-container">
+        <p>
+          <button class="btn btn-outline-info btn-sm" type="button" data-toggle="collapse" data-target="#collapseNewColor"
+            aria-expanded="false" aria-controls="collapseNewColor">
+            <i class="fas fa-plus"></i>
+            Add New Color
+          </button>
+        </p>
+        <div class="collapse mb-3" id="collapseNewColor">
+          <p class="text-muted mb-0">
+            <small>
+              Enter the <b>HEX</b> code for the new color or choose one from the color picker.
+            </small>
+          </p>
+          <div class="card card-body py-0 pt-3">
+            <div class="mb-2 text-center"><input id='colorpicker' /></div>
+            {{ form.new_color_name | as_crispy_field }}
+            {{ form.new_color_friendly_name | as_crispy_field }}
+          </div>
+        </div>
+      </div>
+
+      {{ form.featured | as_crispy_field }}
 
       {{ formset.management_form }}
       <div class="formset--table table-responsive">
@@ -75,6 +144,8 @@
 
 {% block postloadjs %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'libs/spectrum/spectrum.js' %}"></script>
+<script type="text/javascript" src="{% static 'inventorize/js/collapse_elements.js' %}"></script>
 <script type="text/javascript">
   $('#new-image').change(function () {
     let file = $('#new-image')[0].files[0];
