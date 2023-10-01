@@ -1,22 +1,10 @@
-import re
 from django import forms
 from django.forms import inlineformset_factory
-from django.core.exceptions import ValidationError
 
 from products.models import Product, Category, Brand, Size, Color
 
 from .widgets import CustomClearableFileInput
 from products.models import ProductSize
-
-
-def validate_color(value):
-    """Validate the new color name if it is in hex format"""
-    # match both shorthand HEX colors #RGB and full HEX colors #RRGGBB.
-    regex = r"^#(?:[0-9a-fA-F]{3}){1,2}$"
-    if not re.match(regex, value):
-        raise ValidationError(
-            "Please enter a valid HEX color code!"
-        )
 
 
 class ProductForm(forms.ModelForm):
@@ -46,7 +34,6 @@ class ProductForm(forms.ModelForm):
         max_length=7,
         required=False,
         label="",
-        validators=[validate_color],
     )
     new_color_friendly_name = forms.CharField(
         max_length=254,

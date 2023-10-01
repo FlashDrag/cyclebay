@@ -10,6 +10,8 @@ TODO for app:
 https://htmljstemplates.com/html/bootstrap-5-navbars?utm_content=cmp-true#:~:text=View%20Demo-,8.%20Ecommerce%20(Style%201),-Appropriate%20for%20an
 - Attach footer to the bottom of the page
 - Add breadcrumbs
+- Add for special offers new sorting option: Top Selections (based on featured option) and New Arrivals (based on created_at option)
+- FIXME: Standardize the colors in the database, convert them to hex format
 
 ## Overview
 The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform, uses the AWS S3 cloud service to store static files and utilizes the Stripe payment system to process payments.
@@ -351,6 +353,7 @@ The static files are hosted on the cloud service [AWS S3](https://aws.amazon.com
 - [Celery 5.3.4](https://docs.celeryproject.org/en/stable/)
 - [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [jQuery 3.6.4](https://releases.jquery.com/)
+- [Spectrum 1.8](https://bgrins.github.io/spectrum/)
 - [Font Awesome 6.4](https://fontawesome.com/)
 - [Stripe](https://stripe.com/docs)
 ### Tools

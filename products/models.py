@@ -1,9 +1,11 @@
+from re import match
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=254)
+    name = models.CharField(max_length=254, unique=True)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
     class Meta:
@@ -46,8 +48,19 @@ class Size(models.Model):
         ordering = ["order"]
 
 
+def validate_color(value):
+    """Validate the new color name if it is in hex format"""
+    # match both shorthand HEX colors #RGB and full HEX colors #RRGGBB.
+    regex = r"^#(?:[0-9a-fA-F]{3}){1,2}$"
+    if not match(regex, value):
+        raise ValidationError("Please enter a valid HEX color code!")
+
+
 class Color(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    # color name is the HEX color code
+    name = models.CharField(
+        max_length=7, unique=True, validators=[validate_color]
+    )
     friendly_name = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
