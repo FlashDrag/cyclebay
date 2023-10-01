@@ -31,12 +31,14 @@ $(document).ready(function () {
 
         // if new element is cancelled, revert to select element
         $(collapseId).on('hide.bs.collapse', function () {
-            // smoothly show the select element and set it to required
-            $(defaultSelect).show('swing').attr('required', true);
+            // set the new element name input to not required
+            $(newElementInputId).attr('required', false);
             // smoothly revert the margin of the div to 1rem
             $(defaultContainerDivId).animate({
                 marginBottom: "1rem"
             }, 400);
+            // smoothly show the select element and set it to required
+            $(defaultSelect).show('swing').attr('required', true);
             // revert the toggle button to its original state
             $(toggleButton).removeClass('btn-outline-warning').addClass('btn-outline-info').html(`<i class="fas fa-plus"></i> Add New ${elementPrefix}`);
             $(newElementInputId).val('');
