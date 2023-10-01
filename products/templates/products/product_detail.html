@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_filters %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -50,7 +51,7 @@
           {% endif %}
           {% if product.color %}
             <li class="small mt-1 mb-0">
-              <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name }}">
+              <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name|encode_query_param  }}">
                 <i class="fas fa-palette mr-1"></i>{{ product.color.friendly_name }}
               </a>
             </li>
