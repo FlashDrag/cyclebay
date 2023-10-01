@@ -68,7 +68,7 @@
             {% endif %}
           </div>
           <!-- color badges -->
-          <ul class="list-inline mb-0 text-center color-list position-relative"
+          <ul class="list-inline mb-0 text-center color-list"
             data-color="{{ product.color.name }}"></ul>
         </div>
         <!-- product image -->
@@ -167,17 +167,19 @@
       let colors = list.dataset.color;
       // splits string at any sequence of characters that aren't standard for color representations
       // "black/grey" or "red-blue" will be split into ["black", "grey"] and ["red", "blue"]
-      const potentialColors = colors.split(/[^a-zA-Z0-9#(),]+/);
+      const potentialColors = colors.split(/[^a-zA-Z0-9#]+/);
 
       potentialColors.forEach(color => {
-        // if color is a valid hex code or rgb value or whole word color
-        // add a list item with a background color of that color
-        if (color.startsWith('#') || color.startsWith('rgb') || /^[a-zA-Z]+$/.test(color)) {
+        // if color is a valid hex code or whole word color
+        // add a list item color badge with a background color of that color
+        if (color.startsWith('#') || /^[a-zA-Z]+$/.test(color)) {
           const li = document.createElement('li');
-          li.classList.add("list-inline-item","color-badge");
+          // replace # with %23 to pass hex color in url
+          const parsedColor = color.startsWith('#') ? color.replace("#", "%23") : color;
+          li.classList.add("list-inline-item","color-badge", "position-relative");
           li.style.backgroundColor = color;
           // add a stretched-link to filter by that color
-          li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${colors}"></a>`;
+          li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${parsedColor}"></a>`;
           list.appendChild(li);
         }
       });
