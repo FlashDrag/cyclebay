@@ -307,3 +307,42 @@ body {
   border: 1px solid transparent;
   border-radius: 0;
 }
+
+
+/* Mailchimp */
+#mc_embed_signup {
+  font: 14px Helvetica, Arial, sans-serif;
+}
+
+#mc_embed_signup form {
+  margin: 0 !important;
+}
+
+#mc_embed_signup_scroll {
+  max-width: 350px;
+}
+
+.refferal_badge {
+  width: 140px !important;
+}
+
+.mc-field-group {
+  margin-bottom: 2% !important;
+}
+
+#mce-responses {
+  width: 100% !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#mce-success-response {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 10px !important;
+}
+#mc-embedded-subscribe, .mce_inline_error {
+  margin-bottom: 0 !important;
+}
