@@ -1,7 +1,14 @@
 from django import forms
 from django.forms import inlineformset_factory
 
-from products.models import Product, Category, Brand, Size, Color
+from products.models import (
+    Product,
+    Category,
+    Brand,
+    Size,
+    Color,
+    validate_color,
+)
 
 from .widgets import CustomClearableFileInput
 from products.models import ProductSize
@@ -34,6 +41,7 @@ class ProductForm(forms.ModelForm):
         max_length=7,
         required=False,
         label="",
+        validators=[validate_color],
     )
     new_color_friendly_name = forms.CharField(
         max_length=254,
@@ -90,9 +98,7 @@ class ProductForm(forms.ModelForm):
         self.fields["new_category_friendly_name"].widget.attrs[
             "placeholder"
         ] = "e.g. Kids Bikes"
-        self.fields["new_brand_name"].widget.attrs[
-            "placeholder"
-        ] = "e.g. cube"
+        self.fields["new_brand_name"].widget.attrs["placeholder"] = "e.g. cube"
         self.fields["new_brand_friendly_name"].widget.attrs[
             "placeholder"
         ] = "e.g. Cube"
