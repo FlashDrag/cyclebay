@@ -2,7 +2,12 @@
 // in the store owner dashboard
 
 $(document).ready(function () {
+    const elementPrefixes = ['category', 'brand', 'color'];
 
+    /**
+     * Set up collapse handlers for each element
+     * @param {string} elementPrefix - The prefix of the element (category, brand, color)
+     * */
     function setUpCollapseHandlers(elementPrefix) {
         const collapseId = `#collapseNew${elementPrefix.substring(0, 1).toUpperCase() + elementPrefix.substring(1)}`;
         const newElementInputId = `#id_new_${elementPrefix}_name`;
@@ -46,11 +51,30 @@ $(document).ready(function () {
     }
 
     // Set up collapse handlers for each element
-    setUpCollapseHandlers('category');
-    setUpCollapseHandlers('brand');
-    setUpCollapseHandlers('color');
+    for (prefix of elementPrefixes) {
+        setUpCollapseHandlers(prefix);
+    }
 
-    // Color picker
+
+    /**
+     * Expand the collapse element if there is a validation error in the new element input
+     * @param {string} elementPrefix - The prefix of the element (category, brand, color)
+     * */
+    function collapseElementIfError(elementPrefix) {
+        const collapseId = `#collapseNew${elementPrefix.substring(0, 1).toUpperCase() + elementPrefix.substring(1)}`;
+        const newElementInputId = `#id_new_${elementPrefix}_name`;
+
+        if ($(newElementInputId).hasClass('is-invalid')) {
+            $(collapseId).collapse('show');
+        }
+    }
+
+    for (prefix of elementPrefixes) {
+        collapseElementIfError(prefix);
+    }
+
+
+    // __Color picker__
     // https://bgrins.github.io/spectrum/
     $("#colorpicker").spectrum({
         preferredFormat: "hex",
