@@ -102,6 +102,17 @@ def all_products(request):
     return render(request, "products/products.html", context)
 
 
+def featured_products(request):
+    """Featured products"""
+    products = Product.objects.filter(featured=True)
+    if request.user.is_authenticated:
+        products = annotate_saved_products(products, request.user)
+    context = {
+        "products": products,
+    }
+    return render(request, "products/products.html", context)
+
+
 def product_detail(request, product_id):
     """Individual product details"""
     product = get_object_or_404(Product, pk=product_id)

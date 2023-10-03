@@ -14,7 +14,6 @@ TODO for app:
 https://htmljstemplates.com/html/bootstrap-5-navbars?utm_content=cmp-true#:~:text=View%20Demo-,8.%20Ecommerce%20(Style%201),-Appropriate%20for%20an
 - Attach footer to the bottom of the page
 - Add breadcrumbs
-- Add for special offers new sorting option: Top Selections (based on featured option) and New Arrivals (based on created_at option)
 - FIXME: Standardize the colors in the database, convert them to hex format
 
 ## Overview
