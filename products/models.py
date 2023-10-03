@@ -3,6 +3,8 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 
+from cyclebay.models import TimeStampModel
+
 
 class Category(models.Model):
     name = models.CharField(max_length=254, unique=True)
@@ -73,7 +75,7 @@ class Color(models.Model):
         return self.friendly_name
 
 
-class Product(models.Model):
+class Product(TimeStampModel):
     category = models.ForeignKey(
         "Category",
         null=True,
@@ -108,6 +110,9 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name
