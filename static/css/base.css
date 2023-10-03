@@ -166,7 +166,7 @@ body {
 
 /* Hero section */
 .callout-container {
-  height: 70vh;
+  height: 60vh;
   background: url("/media/hero_img.png") no-repeat fixed;
   background-position: left top;
   -webkit-background-size: cover;
@@ -187,16 +187,6 @@ body {
     background-position: center;
     justify-content: center;
   }
-}
-
-/* The opaque overlay, which is used to darken the background image */
-.opaque-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .contant-container {
