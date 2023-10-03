@@ -13,6 +13,8 @@
   {% endblock %}
 
   {% block corecss %}
+  <!-- Animate.css included to the owl library -->
+  <link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/css/animate.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap">
@@ -47,7 +49,7 @@
   <title>CycleBay {% block extra_title %}{% endblock %}</title>
 </head>
 
-<body>
+<body class="bg-light">
 
   <header class="position-relative">
     <!-- Delivery banner -->

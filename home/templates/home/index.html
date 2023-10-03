@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/owlcarousel/assets/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/owlcarousel/assets/owl.theme.default.min.css' %}">
 <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
@@ -73,11 +75,38 @@
  </div>
 <!-- /.value-proposition -->
 
-<!-- Testimonials -->
-<div class="container">
-  <!-- TODO -->
+<!-- Featured Carousel -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Top Selections</h4>
+      <div class="card-group">
+        <div class="row mx-auto owl-carousel owl-theme">
+          {% for product in featured %}
+          <div class="item">
+            <div class="card h-100 border-0">
+              {% if product.image %}
+                  <a href="{% url 'product_detail' product.id %}">
+                      <img class="card-img-top img-fluid product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                  </a>
+                {% else %}
+                  <a href="{% url 'product_detail' product.id %}">
+                      <img class="card-img-top img-fluid product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                  </a>
+                {% endif %}
+              <div class="card-body py-0">
+                <h6 class="text-center">{{ product.name }}</h6>
+                <p class="text-center">{{ product.price }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- /.testimonials -->
+<!-- /.featured carousel -->
 
 <!-- Newsletter -->
 <div class="container-fluid bg-dark text-white py-4 px-4">
@@ -138,6 +167,40 @@
 
 {% block postloadjs %}
 {{ block.super }}
+<!-- Owl Carousel -->
+<!-- https://owlcarousel2.github.io -->
+<script type="text/javascript" src="{% static 'libs/owl_carousel/docs/assets/owlcarousel/owl.carousel.min.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+      loop:true,
+      autoplay:true,
+      autoplayHoverPause:true,
+      animateOut: 'rotateOutDownRight',
+      margin:10,
+      nav:true,
+      navText: [
+        "<i class='text-muted fa fa-chevron-left'></i>",
+        "<i class='text-muted fa fa-chevron-right'></i>"
+      ],
+      responsive:{
+          0:{
+              items:1
+          },
+          576:{
+              items:2
+          },
+          768:{
+              items:3
+          },
+          1000:{
+              items:4
+          }
+      }
+  })
+  });
+</script>
+
 <!-- Mailchimp scripts -->
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 <script type="text/javascript">

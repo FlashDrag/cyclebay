@@ -9,13 +9,6 @@ from products.models import Product, ProductSize, Size
 from .forms import ProductForm, ProductSizeFormSet
 
 
-# TODO: Add new category, brand and color
-# By default hide the new_category field and show the small button
-# that will TOGGLE the new_category field and disable/enable the
-# existing category select field
-# TODO: Or show the new_category form in a modal
-
-
 @login_required
 def add_product(request):
     """Add a product to the store"""

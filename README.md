@@ -2,9 +2,13 @@
 
 TODO for app:
 - Add favicon
-- Create facebook page
-- Add facebook page link to footer
+- Add robots.txt
+- SEO: Add meta tags
+- Add sitemap.xml
 - Add error pages
+- 3 Custom models
+- Check if there is no commented code and no broken internal links
+- Ensure that all pages on the site can be reached by a link from another findable page
 - Global context processor for wishlist
 - Style navbar:
 https://htmljstemplates.com/html/bootstrap-5-navbars?utm_content=cmp-true#:~:text=View%20Demo-,8.%20Ecommerce%20(Style%201),-Appropriate%20for%20an
@@ -23,21 +27,35 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 ## Table of Contents
 
 ### Projects Goals
-- Create a web application that allows users to buy bycicles online.
-- Target people who love cycling ant are looking for a new bike.
-- The app should allow users to find the bike they want quickly and easily.
-- Implement responsive design to provide an optimal viewing experience across a wide range of devices.
-- Provide a secure payment system.
+- Develop a web application enabling users to purchase bicycles online.
+- Cater to cycling enthusiasts in search of a new bicycle.
+- Ensure the app facilitates a quick and user-friendly bike search experience.
+- Incorporate a responsive design to ensure an optimal viewing experience on various devices.
+- Integrate a secure payment system.
 
 ### Marketing Strategy
-CycleBay's overarching goal is to substantially increase sales and revenue. To achieve this, we are prioritizing product visibility by showcasing our range on digital platforms. Expanding our digital footprint through the creation and active management of our Facebook page will facilitate direct engagement with our target audience. Additionally, our strategic push on social media aims to grow our brand awareness, ensuring CycleBay becomes the go-to e-commerce platform for cycling enthusiasts.
+CycleBay's overarching goal is to substantially increase sales and revenue. To achieve this, we are prioritizing product visibility by showcasing our range on digital platforms. Expanding our digital footprint through the creation and active management of our Facebook page will facilitate direct engagement with our target audience. Additionally, our strategic push on social media aims to grow our brand awareness, ensuring that CycleBay becomes the go-to e-commerce platform for cycling enthusiasts.
 
-#### Facebook Business Page
+Our target audience consists of people who love cycling and are in search of a new bike. These individuals are typically very active on social media and are always on the lookout for new products and discounts. Consequently, I decided to leverage social media marketing and email marketing to promote the app. I've set up a Facebook Business Page and initiated a newsletter. The Facebook page will serve to promote the app, while the newsletters sent to subscribers will feature special offers and discounts. As the project doesn't have a budget for paid ads, I've opted for free marketing strategies.
 
-- [CycleBay - Facebook Business Page](https://www.facebook.com/)
+#### Social Media Marketing: Facebook Business Page
+TODO:
+-  Create Facebook Business Page
+- Add facebook page link to footer
 
+I chose the Facebook Business Page because it's an excellent platform for promoting the store and engaging with customers. It provides an opportunity to create a community around the business and to establish lasting relationships with our clients. Furthermore, it offers the potential to create ads and reach a broader audience in the future. I've incorporated a link to the Facebook Business Page in the footer of the store, making it convenient for users to locate and follow the page.
 ![Facebook Business Page Header](docs/images/Facebook-Business-Page-Header.png)
 ![Facebook Business Page Body](docs/images/Facebook-Business-Page-Body.png)
+
+#### Email Marketing: Newsletter
+TODO:
+- Email Marketing: Create newsletter
+- Discounts
+
+Newsletters are effective tools for maintaining regular contact with customers and updating them about special offers and discounts. I used [Mailchimp](https://mailchimp.com/) to create the newsletter. Mailchimp is a renowned email marketing service that facilitates communication with customers, clients, and other interested parties. It provides the means to curate a mailing list and dispatch newsletters to subscribers. I've set up a mailing list and embedded a subscription form in the web application. When users opt into the newsletter, their email addresses are added to the mailing list, enabling me to reach out to all subscribers. For instance, I can disseminate discount codes to entice them to finalize a purchase.
+
+![Newsletter](docs/images/Newsletter.png)
+
 
 [Back to top](#table-of-contents)
 
@@ -355,6 +373,8 @@ The static files are hosted on the cloud service [AWS S3](https://aws.amazon.com
 - [jQuery 3.6.4](https://releases.jquery.com/)
 - [Spectrum 1.8](https://bgrins.github.io/spectrum/)
 - [Font Awesome 6.4](https://fontawesome.com/)
+- [OwlCarousel2 2.3.4](https://owlcarousel2.github.io/)
+- [Animate.css](https://animate.style/)<small>(included to the owlcarousel library)</small>
 - [Stripe](https://stripe.com/docs)
 ### Tools
 - [Redis](https://redis.io/)
