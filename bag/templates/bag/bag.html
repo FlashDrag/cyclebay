@@ -14,7 +14,7 @@
   {% if not bag_items %}
     <div class="container">
       <p class="lead mb-5">Your cart is empty.</p>
-      <a href="{% url 'products' %}" class="btn btn-outline-white rounded-0 btn-lg">
+      <a href="{% url 'products' %}" class="btn btn-outline-info rounded-0 btn-lg">
         <span class="icon">
           <i class="fas fa-chevron-left"></i>
         </span>
@@ -45,7 +45,11 @@
                   <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                   <p class="my-0 small text-muted">sku: {{ item.product.sku|lower }}</p>
                   <p class="my-0">Size: {% if item.product.sizes %}{{ item.size.friendly_name }}{% else %}N/A{% endif %}</p>
-                  <p class="my-0">Color: {% if item.product.color %}{{ item.color.friendly_name }}{% else %}N/A{% endif %}</p>
+                  <p class="my-0">Color: {% if item.product.color %}
+                    <span style="color: {{ item.product.color }}">
+                      {{ item.color.friendly_name }}
+                    </span>{% else %}N/A{% endif %}
+                  </p>
                 </div>
 
                 <!-- Forms -->
@@ -58,12 +62,12 @@
                         {% csrf_token %}
                         <div class="form-group">
                           <div class="input-group-prepend">
-                            <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}"
+                            <input class="form-control form-control-sm qty_input border-info border-right-0" type="number" name="quantity" value="{{ item.quantity }}"
                               min="1" max="{{ item.product_size_obj.count }}" data-product_size_id="{{ item.product_size_id }}"
                               id="id_qty_{{ item.product_size_id }}" style="min-width: 50px; max-width: 60px;">
                             <!-- submit -->
                             <div class="input-group-append">
-                              <button type="submit" class="btn btn-sm btn-outline-white rounded-0">
+                              <button type="submit" class="btn btn-sm btn-outline-info rounded-0">
                                 <i class="fas fa-sync-alt"></i>
                               </button>
                             </div>
@@ -84,11 +88,11 @@
                     </div>
                     <!-- Remove item -->
                     <div class="col-12 col-sm-auto">
-                      <button class="btn btn-sm btn-outline-white border-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}">
+                      <button class="btn btn-sm btn-outline-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}">
                         <span class="d-sm-none">
                           <small>Remove</small>
                         </span>
-                        <i class="fas fa-trash-alt text-danger"></i>
+                        <i class="fas fa-trash-alt"></i>
                       </button>
                     </div>
                   </div>
@@ -141,7 +145,7 @@
           <!-- Checkout button -->
           <div class="row mt-3">
             <div class="col text-center">
-              <a href="{% url 'checkout' %}" id="checkout-button" class="btn w-100 btn-black bg-success rounded-0 btn-lg">
+              <a href="{% url 'checkout' %}" id="checkout-button" class="btn w-100 btn-info rounded-0 btn-lg">
                 <span class="icon">
                   <i class="fas fa-lock"></i>
                 </span>
@@ -150,7 +154,7 @@
                   <i class="fas fa-chevron-right"></i>
                 </span>
               </a>
-              <a href="{% url 'products' %}" class="btn w-100 btn-outline-white rounded-0 btn-lg">
+              <a href="{% url 'products' %}" class="btn w-100 btn-outline-secondary rounded-0 btn-lg">
                 <span class="icon">
                   <i class="fas fa-store"></i>
                 </span>

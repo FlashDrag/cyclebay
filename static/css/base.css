@@ -14,8 +14,13 @@ xl: 1200px;
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #212529;
-}
 
+  --light-cyan: #5bcfded8;
+  --light-orange: #c9653dea;
+  --orange: #c9653d;
+
+  --btn-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 
 body {
   font-family: "Montserrat", sans-serif;
@@ -85,34 +90,113 @@ body {
   cursor: default !important;
 }
 
-.form-control:focus, .btn:focus {
+/* Common btn classes */
+.btn-custom {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-custom + .btn-custom {
+  margin-left: 10px;
+}
+
+.btn-outline-warning {
+  color: var(--light-orange);
+  border-color: var(--light-orange);
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:active,
+.btn-outline-warning:focus,
+.btn-outline-warning:active:focus {
+  background-color: var(--light-orange) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: var(--btn-box-shadow) !important;
+}
+
+/* Btn color variants */
+.btn-outline-info:hover {
+  background: var(--light-cyan);
+  border-color: var(--light-cyan);
+}
+
+.btn-warning {
+  background-color: var(--orange);
+  color: white;
+  border-color: var(--orange);
+}
+.btn-warning:hover,
+.btn-warning:active,
+.btn-warning:focus,
+.btn-warning:active:focus {
+  background-color: var(--light-orange) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-color: var(--light-orange) !important;
+  box-shadow: var(--btn-box-shadow) !important;
+}
+
+/* https://gradientbuttons.colorion.co */
+.btn-cta {
+  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+  margin: 10px;
+  padding: 15px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 5px #eee;
+  border-radius: 5px;
+  display: block;
+}
+
+.btn-cta:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.form-control:focus,
+.custom-select:focus,
+.btn:focus {
   color: #495057;
   border-color: #000000;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+  box-shadow: var(--btn-box-shadow) !important;
 }
 
 .horizontal-shake {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
 
-  20%, 80% {
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-2px, 0, 0);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(2px, 0, 0);
   }
 }
@@ -192,11 +276,6 @@ body {
 .contant-container {
   padding-top: 50px;
   padding-bottom: 50px;
-}
-
-.btn--cta {
-  font-weight: bold;
-  width: 160px;
 }
 
 /* ___Products__ */
@@ -280,8 +359,8 @@ body {
 }
 .sizes label.radio span {
   padding: 2px 9px;
-  border: 1px solid #000;
-  box-shadow: 0 0 2px 0 #000 inset;
+  border: 1px solid var(--light-orange);
+  box-shadow: 0 0 2px 0 var(--light-orange) inset;
   display: inline-block;
   color: #000;
   border-radius: 3px;
@@ -289,12 +368,12 @@ body {
 }
 
 .sizes label.radio input:hover + span {
-  box-shadow: none ;
+  box-shadow: none;
 }
 
 .sizes label.radio input:checked + span {
-  border-color: var(--success);
-  background-color: var(--success);
+  border-color: var(--light-orange);
+  background-color: var(--light-orange);
   color: #fff;
   box-shadow: none;
 }
@@ -316,6 +395,13 @@ body {
   border-radius: 0;
 }
 
+/* Bag */
+.qty_input {
+  border-radius: 0;
+  border-left: 2px solid;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
 
 /* Mailchimp */
 #mc_embed_signup {
@@ -351,6 +437,7 @@ body {
   padding: 0 !important;
   padding-bottom: 10px !important;
 }
-#mc-embedded-subscribe, .mce_inline_error {
+#mc-embedded-subscribe,
+.mce_inline_error {
   margin-bottom: 0 !important;
 }
