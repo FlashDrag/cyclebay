@@ -14,3 +14,7 @@ def home(request):
 
 def privacy(request):
     return render(request, "home/privacy.html")
+
+
+def shipping(request):
+    return render(request, "home/shipping.html")
