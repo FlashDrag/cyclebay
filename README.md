@@ -447,6 +447,7 @@ celery -A cyclebay worker -l info
 ### Content
 - [Person Riding Bicycle](https://www.pexels.com/photo/person-riding-bicycle-2924491/) by [SAurabh Narwade](https://www.pexels.com/@daredevil/)
 - [Man Riding Bicycle](https://www.pexels.com/photo/photo-of-man-riding-bicycle-2989567/) by [Josh Hild](https://www.pexels.com/@josh-hild-1270765/)
+- <a href="https://www.flaticon.com/free-icons/cycling" title="cycling icons">Cycling icon created by amoghdesign - Flaticon</a>
 
 ## Contacts
 If you have any questions about the project, or you would like to contact me for any other reason, please feel free to contact me by email or via social media.

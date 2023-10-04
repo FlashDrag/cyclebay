@@ -35,6 +35,18 @@ body {
   color: black !important;
 }
 
+.text-yellow {
+  color: #ba8b00;
+}
+
+.text-yellow:hover {
+  color: #ba8b00b9 !important;
+}
+
+.nav-link.text-yellow:hover {
+  color: #ba8b00b9 !important;
+}
+
 .btn-black {
   color: white;
   background-color: #000000;
