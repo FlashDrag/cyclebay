@@ -347,24 +347,6 @@ body {
   object-fit: contain;
 }
 
-/* Owl carousel */
-/* Make the owl item cards same height */
-.owl-stage {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-.owl-item {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: auto !important;
-}
-
 /* Scroll to top button */
 .btt-button {
   height: 42px;
