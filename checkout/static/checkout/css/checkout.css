@@ -15,6 +15,18 @@
 .stripe-style-input:focus,
 .stripe-style-input:active {
   box-shadow: 0 1px 3px 0 #cfd7df;
+  border-color: #000 !important;
+}
+
+/* `.StripeElement--complete` - stripe class: https://stripe.com/docs/js/element/the_element_container */
+.StripeElement--complete,
+#payment-form input.form-control:not(:placeholder-shown):valid,
+#payment-form select:valid {
+  border-color: #139b11 !important;
+}
+
+.StripeElement--invalid {
+  border-color: #e41029 !important;
 }
 
 .StripeElement--webkit-autofill {
@@ -22,45 +34,53 @@
 }
 
 .stripe-style-input::placeholder {
-    color: #aab7c4;
+  color: #aab7c4;
 }
 
 .fieldset-label {
-    position: relative;
-    right: .5rem;
+  position: relative;
+  right: 0.5rem;
 }
 
 #payment-form .form-control,
 #card-element {
-    color: #000;
-    border: 1px solid #000;
+  border: 1px solid #aab7c4;
+}
+
+#payment-form input.form-control:focus,
+#payment-form input.form-control:active,
+#card-element:focus,
+#card-element:active {
+  color: #000;
+  border: 1px solid #000;
 }
 
 select,
 select option {
-    color: #000000;
+  color: #000000;
 }
 
-select:invalid,
-select option[value=""] {
-    color: #aab7c4 !important;
+#payment-form select:invalid,
+#payment-form select option[value=""] {
+  border-color: #aab7c4;
+  color: #aab7c4 !important;
 }
 
 #loading-overlay {
-	display: none;
-	position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(23, 162, 184, .85);
-    z-index: 9999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(23, 162, 184, 0.85);
+  z-index: 9999;
 }
 
 .loading-spinner {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100%;
 }
