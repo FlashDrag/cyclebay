@@ -153,27 +153,6 @@ body {
   box-shadow: var(--btn-box-shadow) !important;
 }
 
-/* https://gradientbuttons.colorion.co */
-.btn-cta {
-  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
-  margin: 10px;
-  padding: 15px 25px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 5px #eee;
-  border-radius: 5px;
-  display: block;
-}
-
-.btn-cta:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
 .form-control:focus,
 .custom-select:focus,
 .btn:focus {
@@ -258,36 +237,6 @@ body {
   color: #fff;
   text-decoration: none;
   background-color: #bdbdbe !important;
-}
-
-/* Hero section */
-.callout-container {
-  height: 60vh;
-  background: url("/media/hero_img.png") no-repeat fixed;
-  background-position: left top;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-
-  display: flex;
-  justify-content: end;
-  align-items: center;
-
-  position: relative;
-}
-
-/* Mobile */
-@media (max-width: 576px) {
-  .callout-container {
-    background-position: center;
-    justify-content: center;
-  }
-}
-
-.contant-container {
-  padding-top: 50px;
-  padding-bottom: 50px;
 }
 
 /* ___Products__ */
