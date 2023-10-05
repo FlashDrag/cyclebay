@@ -10,10 +10,6 @@ TODO for app:
 - Test stripe webhook
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
-- Global context processor for wishlist
-- Style navbar:
-https://htmljstemplates.com/html/bootstrap-5-navbars?utm_content=cmp-true#:~:text=View%20Demo-,8.%20Ecommerce%20(Style%201),-Appropriate%20for%20an
-- Attach footer to the bottom of the page
 - Add breadcrumbs
 - FIXME: Standardize the colors in the database, convert them to hex format
 
