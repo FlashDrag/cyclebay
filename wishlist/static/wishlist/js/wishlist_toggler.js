@@ -34,11 +34,11 @@ $(document).ready(function () {
             } else {
                 // Otherwise, change button style based on is_in_wishlist value
                 if (responce.is_in_wishlist) {
-                    wishlistTogglerBtn.removeClass('btn-outline-warning');
-                    wishlistTogglerBtn.addClass('btn-warning');
+                    wishlistTogglerBtn.removeClass('btn-save');
+                    wishlistTogglerBtn.addClass('btn-save-active');
                 } else {
-                    wishlistTogglerBtn.removeClass('btn-warning');
-                    wishlistTogglerBtn.addClass('btn-outline-warning');
+                    wishlistTogglerBtn.removeClass('btn-save-active');
+                    wishlistTogglerBtn.addClass('btn-save');
                 }
             }
         }).fail(function (xhr, textStatus, error) {
