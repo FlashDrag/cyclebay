@@ -1,0 +1,43 @@
+#value-proposition-container .card {
+  background: #ffffff;;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+#value-proposition-container .card--border-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3%;
+  border-radius: 0px 0px 15px 15px;
+}
+
+#value-proposition-container .fa-balance-scale {
+  color: #FFD700;
+}
+#value-proposition-container .card--icon:has(.fa-balance-scale) ~ .card--border-top {
+  background: #FFD700;
+}
+
+#value-proposition-container .fa-ruler {
+  color: #AEDFF7;
+}
+#value-proposition-container .card--icon:has(.fa-ruler) ~ .card--border-top {
+  background: #AEDFF7;
+}
+
+#value-proposition-container .fa-shield-alt {
+  color: #A8E6CF;
+}
+#value-proposition-container .card--icon:has(.fa-shield-alt) ~ .card--border-top {
+  background: #A8E6CF;
+}
+
+#value-proposition-container .fa-certificate {
+  color: #D1B2FF;
+}
+#value-proposition-container .card--icon:has(.fa-certificate) ~ .card--border-top {
+  background: #D1B2FF;
+}
