@@ -178,7 +178,7 @@
 
       <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item d-block d-md-none">
+          <li class="nav-item d-block d-lg-none">
             <a class="logo-font font-weight-bold nav-link text-black" href="{% url 'home' %}" id="home-link">
               Home
             </a>
@@ -215,7 +215,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="contact-us-link">
+            <a class="logo-font font-weight-bold nav-link text-black" href="{% url 'contact' %}" id="contact-us-link">
               Contact Us
             </a>
           </li>
@@ -271,19 +271,19 @@
   {% endblock %}
 
   <!-- Footer -->
-  <footer class="container-fluid bg-dark text-white">
-    <div class="row pt-4 pb-2">
+  <footer class="container-fluid pt-2 pb-2 pt-md-4 pb-md-3 bg-dark text-white">
+    <div class="row">
       <!-- Contact -->
-      <div class="col-12 col-md-4 my-4 my-md-0 text-center">
-        <h5>Contact</h5>
+      <div class="col-12 col-md-4 my-3 my-md-0 text-center">
+        <h5>
+          <a href="{% url 'contact' %}" class="text-white border-bottom" style="text-decoration: none;">
+            Contact Us
+          </a>
+        </h5>
         <ul class="list-unstyled">
           <li class="my-2">
-            <a href="" class="text-white">Contact Us Form</a>
-          </li>
-          <li class="my-2">
             <h6><storng>Our Address:</storng></h6>
-            <p>cyclebay.store@gmail.com</p>
-            <p>
+            <p class="mb-0">
               8 Bayview Lawns<br>
               Dublin<br>
               Ireland
@@ -292,7 +292,7 @@
         </ul>
       </div>
       <!-- Social -->
-      <div class="col-12 col-md-4 my-4 my-md-0 text-center">
+      <div class="col-12 col-md-4 my-3 my-md-0 text-center">
         <h5>Social</h5>
         <p>
           Keep up to date with the latest news and offers from CycleBay
@@ -304,10 +304,10 @@
         </a>
       </div>
       <!-- Payment -->
-      <div class="col-12 col-md-4 my-4 my-md-0 text-center">
+      <div class="col-12 col-md-4 my-3 my-md-0 text-center">
         <h5 class="">Payment Options</h5>
         <p class="d-flex justify-content-center align-items-center">
-          <span class="mr-1">Powered by</span>
+          <span class="pr-2 pb-1">Powered by</span>
           <a href="https://stripe.com/ie">
             <i class="fab fa-stripe fa-2x" aria-label="Stripe logo"></i>
           </a>
@@ -319,26 +319,26 @@
             <i class="fab fa-cc-amex fa-2x"></i>
           </li>
         </ul>
-        <!-- privacy policy -->
-        <a href="{% url 'privacy' %}" class="text-white">Privacy Policy</a>
-        <a href="{% url 'privacy' %}" class="text-white">Shipping</a>
       </div>
-      <!-- Divider -->
-      <hr class="bg-white mx-auto m-0 p-0 w-50 text-center">
+
+      <div class="col-12 text-center">
+        <!-- privacy and shipping policy -->
+        <a href="{% url 'privacy' %}" class="text-white mr-2">Privacy Policy</a>
+        <a href="{% url 'shipping' %}" class="text-white">Shipping</a>
+      </div>
     </div>
+    <!-- Divider -->
+    <hr class="bg-white mx-auto my-2 w-50 text-center">
     <!-- Bottom -->
     <div class="row">
-      <div class="col-12 text-md-left">
-        <p class="mt-2 mb-0 text-center">
+      <div class="col-12 text-center">
+        <p class="mb-0">
           &copy; 2023 CycleBay
         </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <p class="my-2 text-center">
+        <p class="my-0">
           Developed by
-          <a href="https://www.linkedin.com/in/pavlo-myskov/" class="text-white" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/pavlo-myskov/" class="text-white border-bottom" target="_blank" rel="noopener noreferrer"
+            style="text-decoration: none;">
             Pavlo Myskov
           </a>
         </p>
