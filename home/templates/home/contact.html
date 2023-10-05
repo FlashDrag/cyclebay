@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<div class="bg-light py-4 flex-grow-1">
+  <div class="mx-auto" style="max-width: 500px;">
+    <h4 class="mb-4">Contact Us</h4>
+    <form action="{% url 'contact' %}" method="POST" >
+      {% csrf_token %}
+      {{ form | crispy }}
+      <div>
+        <a class="btn btn-outline-secondary" href="{% url 'home' %}" role="button">Cancel</a>
+        <button type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
