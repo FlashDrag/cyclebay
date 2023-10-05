@@ -88,4 +88,15 @@
       }
     });
   </script>
+  <script type="text/javascript">
+    // Add black border to country field if country is selected
+    $("#id_default_country").on('change', function() {
+        if (this.selectedIndex !== 0) {
+            this.style.borderColor = '#139b11';
+        } else {
+            // Otherwise, reset to default if the first option is selected
+            this.style.borderColor = '';
+        }
+    });
+  </script>
 {% endblock %}
