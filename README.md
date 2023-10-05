@@ -1,11 +1,10 @@
 # CycleBay
 
 TODO for app:
-- Add favicon
 - Add robots.txt
 - SEO: Add meta tags
 - Add sitemap.xml
-- Add error pages
+- Test error pages
 - 3 Custom models
 - Test stripe webhook
 - Check if there is no commented code and no broken internal links
