@@ -2,17 +2,8 @@
 {% load static %}
 {% load custom_filters %}
 
-{% block page_header %}
-<div class="container header-container">
-  <div class="row">
-    <div class="col"></div>
-  </div>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="container"><hr></div>
-<div class="container-fluid">
+<div class="container-fluid py-2 flex-grow-1">
   <div class="row d-flex justify-content-center">
     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
       <div class="image-container my-5">
@@ -136,7 +127,7 @@
   </script>
   <script type="text/javascript">
     // Alert if radio button not checked
-    $('.form').submit(function(e) {
+    $('#add-to-bag-form').submit(function(e) {
       if (!$("form input[type='radio']").is(':checked')) {
         e.preventDefault();
         $('.alert').addClass('d-block show');

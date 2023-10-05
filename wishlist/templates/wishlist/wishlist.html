@@ -14,60 +14,61 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <hr>
-      <h2 class="logo-font mb-4">Wishlist</h2>
+<div class="bg-light flex-grow-1 py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2 class="logo-font mb-4">Wishlist</h2>
+      </div>
     </div>
-  </div>
 
-  {% if wishlist %}
-  <div class="row justify-content-center">
-    <div class="col col-lg-8">
-      {% for product in wishlist %}
-      <div id="card-product-{{ product.id }}" class="card">
-        <div class="row no-gutters">
-          <div class="col-md-4 d-flex align-items-center">
-            <a href="{% url 'product_detail' product.id %}">
-              {% if product.image %}
-              <img class="w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
-              {% else %}
-              <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-              {% endif %}
-            </a>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h6 class="card-title">{{ product.name }}</h6>
-              <p class="card-text mb-0">Color: {% if product.color %}{{ product.color.friendly_name }}{% else %}N/A{% endif %}</p>
-              <p class="card-text">&euro;{{ product.price }}</p>
-            </div>
-            <div class="card-footer pt-0 bg-transparent border-0">
-              <button class="remove-modal-trigger btn btn-outline-danger btn-sm" aria-label="Remove from wishlist modal trigger"
-                type="button" data-product-id="{{ product.id }}" data-url="{% url 'add_to_wishlist_toggle' product.id %}">
-                <i class="fas fa-trash-alt"></i>
-                Remove
-              </button>
-              <!-- detail view -->
-              <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-info btn-sm" role="button">
-                <i class="fas fa-eye"></i>
-                Detail View
+    {% if wishlist %}
+    <div class="row justify-content-center">
+      <div class="col col-lg-8">
+        {% for product in wishlist %}
+        <div id="card-product-{{ product.id }}" class="card">
+          <div class="row no-gutters">
+            <div class="col-md-4 d-flex align-items-center">
+              <a href="{% url 'product_detail' product.id %}">
+                {% if product.image %}
+                <img class="w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                {% endif %}
               </a>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h6 class="card-title">{{ product.name }}</h6>
+                <p class="card-text mb-0">Color: {% if product.color %}{{ product.color.friendly_name }}{% else %}N/A{% endif %}</p>
+                <p class="card-text">&euro;{{ product.price }}</p>
+              </div>
+              <div class="card-footer pt-0 bg-transparent border-0">
+                <button class="remove-modal-trigger btn btn-outline-danger btn-sm" aria-label="Remove from wishlist modal trigger"
+                  type="button" data-product-id="{{ product.id }}" data-url="{% url 'add_to_wishlist_toggle' product.id %}">
+                  <i class="fas fa-trash-alt"></i>
+                  Remove
+                </button>
+                <!-- detail view -->
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-info btn-sm" role="button">
+                  <i class="fas fa-eye"></i>
+                  Detail View
+                </a>
+              </div>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
+    {% else %}
+    <p class="lead">Your wishlist is empty.</p>
+    <a class="btn btn-outline-dark" href="{% url 'products' %}" role="button">
+      <i class="fas fa-arrow-left"></i>
+      Continue Shopping
+    </a>
+    {% endif %}
   </div>
-  {% else %}
-  <p class="lead">Your wishlist is empty.</p>
-  <a class="btn btn-outline-dark" href="{% url 'products' %}" role="button">
-    <i class="fas fa-arrow-left"></i>
-    Continue Shopping
-  </a>
-  {% endif %}
 </div>
 
 <!-- Error Modal -->
