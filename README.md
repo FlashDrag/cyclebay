@@ -7,6 +7,7 @@ TODO for app:
 - Add sitemap.xml
 - Add error pages
 - 3 Custom models
+- Test stripe webhook
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
 - Global context processor for wishlist

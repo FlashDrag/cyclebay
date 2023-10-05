@@ -5,20 +5,11 @@
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
-{% block page_header %}
-<div class="container header-container">
-  <div class="row">
-    <div class="col"></div>
-  </div>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="container">
+<div class="container flex-grow-1 my-4">
   <div class="row">
     <div class="col">
       <h2 class="logo-font mb-4">Thank You</h2>
-      <hr>
       <p class="text-black">Your order information is below. A confirmation email will be sent to
         <strong>{{ order.email }}</strong>.</p>
     </div>

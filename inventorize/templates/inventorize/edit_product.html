@@ -8,19 +8,11 @@
   <link rel="stylesheet" href="{% static 'inventorize/css/inventorize.css' %}">
 {% endblock %}
 
-{% block page_header %}
-<div class="container header-container">
-  <div class="row">
-    <div class="col"></div>
-  </div>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="container">
+<div class="container my-4">
   <div class="mx-auto" style="max-width: 500px;">
     <h4 class="mb-4">Edit Product</h4>
-    <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-5" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'edit_product' product.id %}" class="form" enctype="multipart/form-data">
       {% csrf_token %}
 
       {{ form.category | as_crispy_field }}
@@ -133,8 +125,8 @@
         <div>{{ form.image }}</div>
       </div>
       <div>
-        <a class="btn btn-black" href="{% url 'products' %}">Cancel</a>
-        <button class="btn btn-success" type="submit">Update Product</button>
+        <a class="btn btn-outline-secondary" href="{% url 'products' %}">Cancel</a>
+        <button class="btn btn-info" type="submit">Update Product</button>
       </div>
     </form>
   </div>
