@@ -11,10 +11,11 @@
     <h2 class="logo-font mb-2">{% trans "Sign Up" %}</h2>
     <hr class="text-secondary w-100" />
 
-    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+    </p>
 
-    <form class="signup h-100 d-flex flex-column justify-content-between" id="signup_form"
-      method="post" action="{% url 'account_signup' %}">
+    <form class="signup h-100 d-flex flex-column justify-content-between" id="signup_form" method="post"
+      action="{% url 'account_signup' %}">
       {% csrf_token %}
       <div>
         {{ form|crispy }}
@@ -35,4 +36,26 @@
   </div>
 </div>
 
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+  // simple js password validation for signup form
+  $(document).ready(function () {
+    // set password min length to 8
+    $('#signup_form input[type="password"]').attr('minlength', 8);
+  });
+
+  // check if 2-nd matches 1-st password
+  $('#id_password2, #id_password1').on('keyup', function () {
+    if ($('#id_password2').val().length >= 8 && $('#id_password1').val() !== $('#id_password2').val()) {
+      $('#id_password2').css('border-color', 'red');
+    } else {
+      if ($('#id_password2').val().length >= 8 && $('#id_password1').val() === $('#id_password2').val()) {
+        $('#id_password2').css('border-color', 'green');
+      };
+    }
+  });
+</script>
 {% endblock %}
