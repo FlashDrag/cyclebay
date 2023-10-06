@@ -34,22 +34,19 @@ CycleBay's overarching goal is to substantially increase sales and revenue. To a
 Our target audience consists of people who love cycling and are in search of a new bike. These individuals are typically very active on social media and are always on the lookout for new products and discounts. Consequently, I decided to leverage social media marketing and email marketing to promote the app. I've set up a Facebook Business Page and initiated a newsletter. The Facebook page will serve to promote the app, while the newsletters sent to subscribers will feature special offers and discounts. As the project doesn't have a budget for paid ads, I've opted for free marketing strategies.
 
 #### Social Media Marketing: Facebook Business Page
-TODO:
--  Create Facebook Business Page
-- Add facebook page link to footer
-
 I chose the Facebook Business Page because it's an excellent platform for promoting the store and engaging with customers. It provides an opportunity to create a community around the business and to establish lasting relationships with our clients. Furthermore, it offers the potential to create ads and reach a broader audience in the future. I've incorporated a link to the Facebook Business Page in the footer of the store, making it convenient for users to locate and follow the page.
-![Facebook Business Page Header](docs/images/Facebook-Business-Page-Header.png)
-![Facebook Business Page Body](docs/images/Facebook-Business-Page-Body.png)
+
+<small>Since the *Buy Now* call to action button is no longer available to link to an external website, I added a store link to the "About" section of the page and added the *Learn More* button.</small>
+
+[View Facebook Business Page](https://www.facebook.com/people/CycleBay/61552069412658/)
+
+![Facebook Business Page](docs/images/facebook_page.png)
 
 #### Email Marketing: Newsletter
-TODO:
-- Email Marketing: Create newsletter
-- Discounts
-
 Newsletters are effective tools for maintaining regular contact with customers and updating them about special offers and discounts. I used [Mailchimp](https://mailchimp.com/) to create the newsletter. Mailchimp is a renowned email marketing service that facilitates communication with customers, clients, and other interested parties. It provides the means to curate a mailing list and dispatch newsletters to subscribers. I've set up a mailing list and embedded a subscription form in the web application. When users opt into the newsletter, their email addresses are added to the mailing list, enabling me to reach out to all subscribers. For instance, I can disseminate discount codes to entice them to finalize a purchase.
 
-![Newsletter](docs/images/Newsletter.png)
+![Newsletter section](docs/images/mailchimp-section.png)
+![Newsletter admin](docs/images/mailchimp.png)
 
 
 [Back to top](#table-of-contents)
@@ -146,25 +143,28 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 [Back to top](#table-of-contents)
 
 ## UX Design
-### Structure
 The CycleBay website is designed to be simple and easy to navigate. The site has a responsive design to provide an optimal viewing experience across a wide range of devices.
+
+### Site Structure
+The website has 4 main pages with a clear and semantic structure, the information is well organized, every element is easy to find. The consistency and similarity of the structure is manifested on all pages and sections of the site and covers interactivity.
 
 ### Wireframes
 The wireframes were created using [Balsamiq](https://balsamiq.com/). Here are some initial wireframes created at the beginning of the project. The final design may differ from the initial wireframes.
 
+<!-- TODO add wireframes -->
+
 [Back to top](#table-of-contents)
 
-### UI Design
+### Design Choices
 #### Color Scheme
-...
+The color theme of the website is inspired by the colors of the hero image "Teal and Orange". The hero image is a picture of a person riding a bicycle. The colors of the image background are cyan and black, and the color of the person's skin closes to warm orange. This combination of colors is very popular in the film industry and is used to create a cinematic look. This color contrast is also rooted in color theory, where the two colors are almost opposite on the color wheel, making them complementary. The teal and orange moslty used for interactive elements, such as buttons, links, and icons. The black, gray and white colors are used for text and backgrounds, to create a high contrast and ensure readability.
 
-![color Palette](docs/images/Palette.png)
+![color Palette](docs/images/palette.png)
 
 #### Typography
+As a primary font, I have chosen to use the [Montserrat](https://fonts.google.com/specimen/Montserrat) font. It's a geometric sans-serif typeface that is easy to read and invokes a feeling of trust. Since it's designed for fast reading, it's good for product descriptions, and its aesthetic is appealing to the creatives, and businessmen alike.
 
-#### Styling
-
-#### Images
+![Montserrat](docs/images/typography.png)
 
 [Back to top](#table-of-contents)
 
@@ -173,12 +173,16 @@ The Get Job platform uses a relational database to store and manage data. The RD
 
 The ER Diagram below shows the structure of the database and the relationships between the tables. This diagram was created using [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/).
 
+<!-- TODO add db scheme -->
 ![er_diagram](docs/images/erd.png)
 
 [Back to top](#table-of-contents)
 
 ## Features
 ### Existing Features
+
+The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products. The Products page displays all products available in the store. The Product Details page provides detailed information about a specific product. The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The user can also enter the delivery information and proceed to the checkout page.
+
 #### User Authentication and Authorization
 - [ ] User Registration
 - [ ] User login with email confirmation(temporarily disable in settings.py)
