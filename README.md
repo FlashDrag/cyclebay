@@ -179,14 +179,34 @@ The ER Diagram below shows the structure of the database and the relationships b
 [Back to top](#table-of-contents)
 
 ## Features
-### Existing Features
 
-The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products. The Products page displays all products available in the store. The Product Details page provides detailed information about a specific product. The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The user can also enter the delivery information and proceed to the checkout page.
+### Common Features
+- #### Navbar
+The navbar is fully responsive and collapses into a hamburger menu on smaller screens. The right side of the navbar is always visible on all screens, since it contains the most important links for the user. I didn't see the point to make the navbar sticky or fixed, since the page content is not too long, except the products page, but in this case the user can use the *Back to top* button. In some cases, the fixed navbar can be annoying and distract the user from the main goal.
 
-#### User Authentication and Authorization
+The navbar consists of two horizontal sections:
+
+- The top section is narrow and contains on left side the *Join us on Facebook* link that opens the Facebook page in a new tab. On the right side, there are *Login* and *Register* links. If a user is authenticated, the *Login* and *Register* links are replaced with the *Profile*<small>(for staff only)</small> and *Logout* links.
+
+- The bottom section is main navbar and contains the *CycleBay* logo and the following links on the left side: *Home*, *All Bikes* dropdown menu with the list of sorting options, *Categories* dropdown menu, *Special Offers* and *Contact Us* links. On the right side, there are *Search bar* that folds into a search icon on smaller screens, *Wishlist* link, *Profile*<small>(for customers only)</small> and *Add Item*<small>(for staff only)</small> links, and *Shopping Bag* link with the total sum of the bag.
+
+The **search bar** is visible only on extra large screens(1200px and up), and on smaller screens it collapsed into a search icon and can be expanded right under the navbar by clicking on icon. It also can be expanded even if the navbar is expanded as well.
+
+The **All Bikes** dropdown menu contains the list of sorting options. It allows the user to sort the products by price, color, brand and category names in ascending order.
+
+The **Categories** dropdown menu contains the list of all existing categories. The category list is dynamic and generated from the database. When a new category is added to the database, it will be automatically added to the navbar dropdown menu. The user can click on the category name to view all products related to this category.
+
+- #### Footer
+...
+
+- #### User Authentication and Authorization
 - [ ] User Registration
 - [ ] User login with email confirmation(temporarily disable in settings.py)
 - [ ] User logout
+
+### Home Page
+The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products. The Products page displays all products available in the store. The Product Details page provides detailed information about a specific product. The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The user can also enter the delivery information and proceed to the checkout page.
+
 
 #### User Profile
 - [ ] Order history
@@ -240,9 +260,6 @@ By incorporating these features, I believe I've managed to craft a seamless and 
 To delete a product, I used defensive design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product. Also the app checks if the user is a superuser, and accepts only post requests that implemented by the `@require_POST` decorator and jquery ajax post method.
 
 
-<!-- TODO: dynamic categories. owner can add new category. it will be displayed in navbar dropdown menu -->
-<!-- TODO: dynamic colors. they use own model -->
-<!-- TODO: dynamic sizes -->
 #### List of Products
 - [ ] All products
 - [ ] Categories
