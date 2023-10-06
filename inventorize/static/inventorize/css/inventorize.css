@@ -32,6 +32,10 @@
   border: 1px solid #000;
 }
 
+.form-control:not(:placeholder-shown):valid {
+  border-color: #139b11 !important;
+}
+
 select,
 select option {
   color: #000000;

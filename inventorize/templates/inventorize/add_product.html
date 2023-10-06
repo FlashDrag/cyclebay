@@ -12,7 +12,7 @@
 <div class="container my-4">
   <div class="mx-auto" style="max-width: 500px;">
     <h4 class="mb-4">Add Product</h4>
-    <form method="POST" action="{% url 'add_product' %}" class="form" enctype="multipart/form-data">
+    <form id="add-product-form" method="POST" action="{% url 'add_product' %}" class="form" enctype="multipart/form-data">
       {% csrf_token %}
 
       {{ form.category | as_crispy_field }}
@@ -92,7 +92,7 @@
       <div class="formset--table table-responsive">
         <table class="table table-borderless table-striped table-sm caption-top">
           <caption class="caption-top py-0">
-            <p class="my-0">Product Sizes*</p>
+            <p class="my-0">Product Sizes</p>
             <p class="my-0 pl-3">
               <small class="text-muted">
               Not excluded sizes will be added to the product, even if quantity is 0.
