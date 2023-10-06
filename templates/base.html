@@ -75,19 +75,19 @@
                 <span class="text-muted">My Profile</span>
               </a>
             {% endif %}
-            <a class="" href="{% url 'account_logout' %}">
-              <i class="fas fa-sign-out-alt text-muted"></i>
-              <span class="text-muted">Logout</span>
+            <a class="text-muted" href="{% url 'account_logout' %}">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
             </a>
           {% else %}
             <!-- add sign up and sign in -->
-            <a class="pr-2" href="{% url 'account_signup' %}">
-              <i class="fas fa-user-plus text-muted"></i>
-              <span class="text-muted">Sign Up</span>
+            <a class="pr-2 text-muted" href="{% url 'account_signup' %}">
+              <i class="fas fa-user-plus"></i>
+              <span>Sign Up</span>
             </a>
-            <a class="" href="{% url 'account_login' %}">
-              <i class="fas fa-sign-in-alt text-muted"></i>
-              <span class="text-muted">Sign In</span>
+            <a class="text-muted" href="{% url 'account_login' %}">
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Sign In</span>
             </a>
           {% endif %}
         </div>
@@ -187,10 +187,9 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="all-products-link"
+            <a class="logo-font font-weight-bold nav-link text-black dropdown-toggle" href="#" id="all-products-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               All Bikes
-              <small><i class="fas fa-chevron-down"></i></small>
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
               <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
@@ -201,10 +200,9 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="all-categories-link"
+            <a class="logo-font font-weight-bold nav-link text-black dropdown-toggle" href="#" id="all-categories-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
-              <small><i class="fas fa-chevron-down"></i></small>
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-categories-link">
               {% for category in all_categories %}
