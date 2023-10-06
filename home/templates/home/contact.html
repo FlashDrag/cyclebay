@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="bg-light py-4 flex-grow-1">
-  <div class="mx-auto" style="max-width: 500px;">
+  <div class="container mx-auto" style="max-width: 500px;">
     <h4 class="mb-4">Contact Us</h4>
     <form action="{% url 'contact' %}" method="POST" >
       {% csrf_token %}
