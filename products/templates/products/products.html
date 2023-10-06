@@ -110,12 +110,10 @@
                     Delete
                   </a>
                 </small>
-              {% else %}
-                <!-- if not superuser display add item to wishlist btn -->
-                <button class="wishlist-toggler p-0 m-0 btn-save{% if product.is_in_wishlist %}-active{% endif %}"
-                  type="button" aria-label="Add to wishlist toggler" data-url="{% url 'add_to_wishlist_toggle' product.id %}">
-                </button>
               {% endif %}
+              <button class="wishlist-toggler p-0 m-0 btn-save{% if product.is_in_wishlist %}-active{% endif %}"
+                type="button" aria-label="Add to wishlist toggler" data-url="{% url 'add_to_wishlist_toggle' product.id %}">
+              </button>
             {% else %}
               <!-- if user not authenticated redirect to login page -->
               <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn-save"
