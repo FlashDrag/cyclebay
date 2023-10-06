@@ -43,11 +43,8 @@
                 <div class="col-12 col-xl-5 mt-4 d-flex flex-column justify-content-center">
                   <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                   <p class="my-0 small text-muted">sku: {{ item.product.sku|lower }}</p>
-                  <p class="my-0">Size: {% if item.product.sizes %}{{ item.size.friendly_name }}{% else %}N/A{% endif %}</p>
-                  <p class="my-0">Color: {% if item.product.color %}
-                    <span style="color: {{ item.product.color }}">
-                      {{ item.color.friendly_name }}
-                    </span>{% else %}N/A{% endif %}
+                  <p class="my-0">Size: {% if item.size %}{{ item.size.friendly_name }}{% else %}N/A{% endif %}</p>
+                  <p class="my-0">Color: {% if item.product.color %}{{ item.color.friendly_name }}{% else %}N/A{% endif %}
                   </p>
                 </div>
 
