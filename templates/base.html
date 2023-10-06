@@ -105,7 +105,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <ul class="list-inline list-unstyled d-flex align-items-center justify-content-end my-0 flex-grow-1 order-lg-last">
+      <ul id="nav-buttons-list" class="list-inline list-unstyled d-flex align-items-center justify-content-end my-0 flex-grow-1 order-lg-last">
         <!-- Centered search bar on large screens -->
         <li class="list-inline-item mx-xl-auto">
           <!-- Search bar for large screens -->
@@ -127,16 +127,16 @@
             data-toggle="collapse" href="#collapse-search-bar"
             aria-expanded="false" aria-controls="collapse-search-bar">
             <div class="text-center">
-              <i class="fa fa-search"></i>
+              <i class="fa fa-search" aria-label="Search button"></i>
               <p class="my-0">Search</p>
             </div>
           </a>
         </li>
         {% if request.user.is_authenticated %}
           <li class="list-inline-item">
-            <a class="text-black nav-link px-0 px-lg-2" href="{% url 'wishlist' %}">
+            <a class="text-black nav-link px-0 px-lg-2" href="{% url 'wishlist' %}" role="button">
               <div class="text-center">
-                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart" aria-label="Wishlist"></i>
                 <p class="my-0">Wishlist</p>
               </div>
             </a>
@@ -145,16 +145,16 @@
         {% if request.user.is_authenticated %}
           <li class="list-inline-item">
             {% if request.user.is_staff %}
-              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'add_product' %}">
+              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'add_product' %}" role="button">
                 <div class="text-center">
-                  <i class="fas fa-plus"></i>
-                  <p class="my-0">Add Product</p>
+                  <i class="fas fa-plus-square" aria-label="Add Product"></i>
+                  <p class="my-0">Add Item</p>
                 </div>
               </a>
             {% else %}
-              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'profile' %}">
+              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'profile' %}" role="button">
                 <div class="text-center">
-                  <i class="fas fa-user"></i>
+                  <i class="fas fa-user" aria-label="My Profile"></i>
                   <p class="my-0">My Profile</p>
                 </div>
               </a>
@@ -164,7 +164,7 @@
         </li>
         <li class="list-inline-item">
           <a class="{% if grand_total %}text-yellow font-weight-bold{% else %}text-secondary{% endif %} nav-link px-0 px-lg-2"
-            href="{% url 'view_bag' %}">
+            href="{% url 'view_bag' %}" role="button">
             <div class="text-center">
               <i class="fas fa-shopping-cart"></i>
               <p class="my-0">

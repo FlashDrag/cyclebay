@@ -240,6 +240,16 @@ body {
   }
 }
 
+#nav-buttons-list a[role="button"] p {
+  font-size: 16px;
+}
+
+@media (max-width: 400px) {
+  #nav-buttons-list a[role="button"] p {
+    font-size: 13px;
+  }
+}
+
 .dropdown-item:active {
   color: #fff;
   text-decoration: none;
