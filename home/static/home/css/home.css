@@ -137,6 +137,10 @@
 }
 
 /* Mailchimp */
+#newsletter-container {
+  background-color: #688e9d8a;
+  padding: 50px 0;
+}
 #mc_embed_signup {
   font: 14px Helvetica, Arial, sans-serif;
 }
@@ -169,7 +173,6 @@
   margin: 0 !important;
   padding: 0 !important;
   padding-bottom: 10px !important;
-  color: #91d055 !important;
 }
 #mc-embedded-subscribe,
 .mce_inline_error {
