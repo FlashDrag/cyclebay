@@ -96,7 +96,7 @@
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light">
-      <a class="navbar-brand d-none d-lg-block mr-5" href="{% url 'home' %}">
+      <a class="navbar-brand d-none d-lg-block mr-4" href="{% url 'home' %}">
         <img src="{% static 'images/logo.png' %}" alt="CycleBay logo" class="img-fluid" width="35px">
         <strong>CycleBay</strong>
       </a>
@@ -123,7 +123,7 @@
             </form>
           </div>
           <!-- Search button for collapsed search bar on small screens -->
-          <a class="text-black nav-link px-0 px-lg-2 d-xl-none" role="button"
+          <a class="text-black nav-link px-0 px-sm-2 d-xl-none" role="button"
             data-toggle="collapse" href="#collapse-search-bar"
             aria-expanded="false" aria-controls="collapse-search-bar">
             <div class="text-center">
@@ -134,7 +134,7 @@
         </li>
         {% if request.user.is_authenticated %}
           <li class="list-inline-item">
-            <a class="text-black nav-link px-0 px-lg-2" href="{% url 'wishlist' %}" role="button">
+            <a class="text-black nav-link px-0 px-sm-2" href="{% url 'wishlist' %}" role="button">
               <div class="text-center">
                 <i class="fas fa-heart" aria-label="Wishlist"></i>
                 <p class="my-0">Wishlist</p>
@@ -145,14 +145,14 @@
         {% if request.user.is_authenticated %}
           <li class="list-inline-item">
             {% if request.user.is_staff %}
-              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'add_product' %}" role="button">
+              <a class="text-black nav-link px-0 px-sm-2" href="{% url 'add_product' %}" role="button">
                 <div class="text-center">
                   <i class="fas fa-plus-square" aria-label="Add Product"></i>
                   <p class="my-0">Add Item</p>
                 </div>
               </a>
             {% else %}
-              <a class="text-black nav-link px-0 px-lg-2" href="{% url 'profile' %}" role="button">
+              <a class="text-black nav-link px-0 px-sm-2" href="{% url 'profile' %}" role="button">
                 <div class="text-center">
                   <i class="fas fa-user" aria-label="My Profile"></i>
                   <p class="my-0">My Profile</p>
@@ -163,7 +163,7 @@
         {% endif %}
         </li>
         <li class="list-inline-item">
-          <a class="{% if grand_total %}text-yellow font-weight-bold{% else %}text-secondary{% endif %} nav-link px-0 px-lg-2"
+          <a class="{% if grand_total %}text-yellow font-weight-bold{% else %}text-secondary{% endif %} nav-link px-0 px-sm-2"
             href="{% url 'view_bag' %}" role="button">
             <div class="text-center">
               <i class="fas fa-shopping-cart"></i>
@@ -190,6 +190,7 @@
             <a class="logo-font font-weight-bold nav-link text-black" href="#" id="all-products-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               All Bikes
+              <small><i class="fas fa-chevron-down"></i></small>
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
               <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
@@ -203,6 +204,7 @@
             <a class="logo-font font-weight-bold nav-link text-black" href="#" id="all-categories-link"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
+              <small><i class="fas fa-chevron-down"></i></small>
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-categories-link">
               {% for category in all_categories %}
@@ -227,7 +229,7 @@
     </nav>
     <!-- Search collapsible bar for small screens -->
     <div class="collapse d-xl-none" id="collapse-search-bar" aria-labelledby="mobile-search">
-      <div class="card-body bg-white py-0 pb-2">
+      <div class="card-body bg-white py-0 pb-3">
         <form class="form container" method="GET" action="{% url 'products' %}">
           <div class="input-group w-100">
             <input class="form-control border border-warning" type="text" name="q"
