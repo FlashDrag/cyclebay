@@ -184,7 +184,7 @@ The ER Diagram below shows the structure of the database and the relationships b
 ## Features
 
 ### Common Features
-- #### Navbar
+#### Navbar
 The navbar is fully responsive and collapses into a hamburger menu on smaller screens. The right side of the navbar is always visible on all screens, since it contains the most important links for the user. I didn't see the point to make the navbar sticky or fixed, since the page content is not too long, except the products page, but in this case the user can use the *Back to top* button. In some cases, the fixed navbar can be annoying and distract the user from the main goal.
 
 The navbar consists of two horizontal sections:
@@ -214,13 +214,86 @@ The **Categories** dropdown menu contains the list of all existing categories. T
 |![Navbar Mobile Expanded](docs/images/features/navbar-mobile-expanded.png)|![Navbar Mobile Expanded & Search](docs/images/features/navbar-mobile-expanded-search.png)|
 
 
-- #### Footer
-...
+#### Footer
+The footer consists of 5 sections:
 
-- #### User Authentication and Authorization
-- [ ] User Registration
-- [ ] User login with email confirmation(temporarily disable in settings.py)
-- [ ] User logout
+- Contact Us
+The Contact Us header is a link to the contact page. The section also contains the physical address of the store.
+- Social
+The Social section contains the link to the Facebook page and the Facebook icon.
+- Payment
+The Payment section contains the Stripe logo with a link to the Stripe website and the icons of the payment methods accepted by the store, such as Visa, MasterCard, American Express.
+- Privacy and Shipping Policy
+- Developer Info
+
+The footer is fully responsive and changes its layout from 3 columns to 1 column on smaller screens.
+
+It also always stays at the bottom of the page, even if the page content is not long enough to fill the screen. This is achieved by using the `d-flex flex-column vh-100` bootstrap classes on the `body` tag and `flex-grow-1` bootstrap class on the child elements of the `body` tag on all pages where the content is long enough to fill the screen.
+
+![footer large](docs/images/features/footer-large.png)
+
+#### User Authentication and Authorization
+- ##### Sign Up
+The user can register a new account by clicking on the *Register* link in the navbar. The user will be redirected to the registration page where they can fill in the registration form. I implemented the custom user model that allows to use email as a username, and removed the username field from the form, since the email address is unique and can be used as a username. The user can register with real email address only, since the email address will be used for the order confirmation and password reset.
+
+The own account allows users to view the order history, save and edit the delivery information and save and view products in a wishlist.
+
+- ###### Password validation
+Django by default has a good set of password validators. The goal of the validators is to ensure that a password is not a simple set of characters that can be easily a victim of a brute-force or dictionary attack.
+
+Django includes a set of built-in password validators that check for the following rules:
+- Similarity of the password and username;
+- Minimum length of the password;
+- Password similar to common passwords (20.000 records);
+- Password not entirely numeric;
+
+The password validators are defined in the `settings.py` file:
+```
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
+```
+If the password fails to meet any of the above requirements, the user will see the appropriate error message.
+![password-backend-validation](docs/images/features/password-backend-validation.png)
+
+Additionally, I added a simple frontend validation to the registration form. The password must be at least 8 characters long and the second password field must match the first one. If the form is invalid, the invalid fields will be highlighted in red without reloading the page. In the future, I plan to make the client-side validation more advanced and add the password strength meter.
+
+The jQuery password validation is implemented in the `templates/account/signup.html` template.
+
+![register](docs/images/features/register.png)
+
+Once the all fields are filled in correctly, the user can click the *Register* button to submit the form. They will be redirected to the *Verification Sent* page and will receive a confirmation email with a link to confirm the registration. Then the user click the link and will be redirected to the home page as authenticated user. So the user can start shopping right away, without the need to login again. This is achieved by using the `ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True` and `ACCOUNT_CONFIRM_EMAIL_ON_GET = True` setting in the `settings.py` file.
+
+![verification sent](docs/images/features/verification-sent.png)
+![email verification](docs/images/features/email-verification.png)
+![verification confirmed](docs/images/features/verification-confirmed.png)
+
+Once the user is successfully registered, the User Profile and WishList are created for this user automatically. This feature is implemented using the `post_save` signal. It allows to ensure that every user has a profile and a wishlist.
+
+![user objects](docs/images/features/user-objects.png)
+
+- ##### Login
+The user can login by clicking on the *Login* link in the navbar. Then they will be redirected to the login page where they can fill in the login form. The user can also use the *Remember Me* checkbox to stay logged in even after closing the browser. This is achieved with the `SESSION_COOKIE_AGE` setting. By default it's 1209600 (2 weeks, in seconds).
+
+![login](docs/images/features/login.png)
+
+- ###### Password Reset
+The user can also use the *Forgot Password?* link to reset the password. The user will receive an email with a link to reset the password. Once the user click the link, they will be redirected to the password reset page where they can enter a new password.
+
+![password reset](docs/images/features/pass-reset.png)
+![password reset email](docs/images/features/pass-reset-email.png)
+![change password](docs/images/features/change-pass.png)
 
 ### Home Page
 The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products. The Products page displays all products available in the store. The Product Details page provides detailed information about a specific product. The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The user can also enter the delivery information and proceed to the checkout page.
