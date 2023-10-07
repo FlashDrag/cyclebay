@@ -238,7 +238,7 @@ The user can register a new account by clicking on the *Register* link in the na
 
 The own account allows users to view the order history, save and edit the delivery information and save and view products in a wishlist.
 
-- ###### Password validation
+###### Password validation
 Django by default has a good set of password validators. The goal of the validators is to ensure that a password is not a simple set of characters that can be easily a victim of a brute-force or dictionary attack.
 
 Django includes a set of built-in password validators that check for the following rules:
@@ -273,13 +273,22 @@ The jQuery password validation is implemented in the `templates/account/signup.h
 
 ![register](docs/images/features/register.png)
 
-Once the all fields are filled in correctly, the user can click the *Register* button to submit the form. They will be redirected to the *Verification Sent* page and will receive a confirmation email with a link to confirm the registration. Then the user click the link and will be redirected to the home page as authenticated user. So the user can start shopping right away, without the need to login again. This is achieved by using the `ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True` and `ACCOUNT_CONFIRM_EMAIL_ON_GET = True` setting in the `settings.py` file.
+Once the all fields are filled in correctly, the user can click the *Sign Up* button to submit the form. They will be redirected to the *Verification Sent* page and will receive a confirmation email with a link to confirm the registration. Then the user click the link and will be redirected to the home page as authenticated user. So the user can start shopping right away, without the need to login again. This is achieved by using the `ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True` and `ACCOUNT_CONFIRM_EMAIL_ON_GET = True` setting in the `settings.py` file.
 
 ![verification sent](docs/images/features/verification-sent.png)
 ![email verification](docs/images/features/email-verification.png)
 ![verification confirmed](docs/images/features/verification-confirmed.png)
 
 Once the user is successfully registered, the User Profile and WishList are created for this user automatically. This feature is implemented using the `post_save` signal. It allows to ensure that every user has a profile and a wishlist.
+
+```
+# wishlist/models.py
+
+@receiver(post_save, sender=get_user_model())
+def create_wishlist(sender, instance, created, **kwargs):
+    if created:
+        Wishlist.objects.create(user=instance)
+```
 
 ![user objects](docs/images/features/user-objects.png)
 
@@ -295,9 +304,25 @@ The user can also use the *Forgot Password?* link to reset the password. The use
 ![password reset email](docs/images/features/pass-reset-email.png)
 ![change password](docs/images/features/change-pass.png)
 
-### Home Page
-The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products. The Products page displays all products available in the store. The Product Details page provides detailed information about a specific product. The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The user can also enter the delivery information and proceed to the checkout page.
+[Back to top](#table-of-contents)
 
+### Home Page
+The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products.
+- ##### Callout
+The callout section is a hero image with a call to action button. The image is a picture of a woman riding a bicycle. I edited the image in Photoshop to make it fit better on the site. Using the AI generative fill tool, I exended the height of the image background, since it has fixed position and doesn't scroll with the page, so the image should be long enough to fit on all screens. I also flipped the image horizontally so the cyclist is facing to the right, which is the direction of the call to action button. This is a common technique called "F-shaped pattern", that helps to guide the user's gaze through natural sight patterns. Also I blurred the background to make the cyclist dynamic and stand out from the background. The callout section is fully responsive and the image right side is cropped on smaller screens.
+
+![hero](docs/images/features/hero.png)
+
+### Products Page
+The Products page displays all products available in the store.
+
+### Product Details Page
+The Product Details page provides detailed information about a specific product.
+
+### Shopping Bag Page
+The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag.
+
+### Checkout Page
 
 #### User Profile
 - [ ] Order history
