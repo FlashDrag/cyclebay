@@ -10,7 +10,14 @@ TODO for app:
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
 - Add breadcrumbs
-- FIXME: Standardize the colors in the database, convert them to hex format
+- FIXME: mailchipm icon on small screens: remove:
+@media screen and (max-width: 400px)
+#mc_embed_signup .foot {
+    /* grid-template-columns: 1fr;
+}
+- Fix callout-container col-12: remove(on small screens, as it overflows the container):
+padding-right: 15px;
+padding-left: 15px;
 
 ## Overview
 The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform, uses the AWS S3 cloud service to store static files and utilizes the Stripe payment system to process payments.
@@ -33,7 +40,7 @@ CycleBay's overarching goal is to substantially increase sales and revenue. To a
 
 Our target audience consists of people who love cycling and are in search of a new bike. These individuals are typically very active on social media and are always on the lookout for new products and discounts. Consequently, I decided to leverage social media marketing and email marketing to promote the app. I've set up a Facebook Business Page and initiated a newsletter. The Facebook page will serve to promote the app, while the newsletters sent to subscribers will feature special offers and discounts. As the project doesn't have a budget for paid ads, I've opted for free marketing strategies.
 
-#### Social Media Marketing: Facebook Business Page
+- #### Social Media Marketing: Facebook Business Page
 I chose the Facebook Business Page because it's an excellent platform for promoting the store and engaging with customers. It provides an opportunity to create a community around the business and to establish lasting relationships with our clients. Furthermore, it offers the potential to create ads and reach a broader audience in the future. I've incorporated a link to the Facebook Business Page in the footer of the store, making it convenient for users to locate and follow the page.
 
 <small>Since the *Buy Now* call to action button is no longer available to link to an external website, I added a store link to the "About" section of the page and added the *Learn More* button.</small>
@@ -42,7 +49,7 @@ I chose the Facebook Business Page because it's an excellent platform for promot
 
 ![Facebook Business Page](docs/images/facebook_page.png)
 
-#### Email Marketing: Newsletter
+- #### Email Marketing: Newsletter
 Newsletters are effective tools for maintaining regular contact with customers and updating them about special offers and discounts. I used [Mailchimp](https://mailchimp.com/) to create the newsletter. Mailchimp is a renowned email marketing service that facilitates communication with customers, clients, and other interested parties. It provides the means to curate a mailing list and dispatch newsletters to subscribers. I've set up a mailing list and embedded a subscription form in the web application. When users opt into the newsletter, their email addresses are added to the mailing list, enabling me to reach out to all subscribers. For instance, I can disseminate discount codes to entice them to finalize a purchase.
 
 ![Newsletter section](docs/images/mailchimp-section.png)
@@ -124,21 +131,17 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to feel my personal and payment information is safe and secure so that I can confidently provide the needed information to make a purchase
 - As a Shopper, I want to be able to view an order confirmation after checkout, so that I can verify I haven't made any mistakes
 - As a Shopper, I want to be able to receive an email confirmation after checking out, so that I can keep the confirmation of what I've purchased for my records
-#### Epic: Newsletters
+#### Epic: Newsletters and Social Media
 - As a Shopper, I want to be able to subscribe to a Newsletter so that I can receive any discounts or special offers available.
-- As a Shopper, I want to be able to unsubscribe from the newsletter so that I can stop receiving emails from the store.
 - As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
 - As a Store Owner, I need a Facebook page, so that I can promote my store on social media.
 #### Epic: Store Management
 - As a Store Owner, I want to be able to add a product to the store, so that I can sell it to customers.
-- As a Store Owner, I want to be able to edit/update a product, so that I can change the price, description, image or any other attribute of the product.
+- As a Store Owner, I want to be able to edit/update a product, so that I can change the price, image or any other attributes of the product.
 - As a Store Owner, I want to be able to delete a product, so that I can remove it from the store.
 - As a Store Owner, I want to be able to add a product category, so that users can group products into categories.
-- As a Store Owner, I want to be able to delete a product category, so that I can remove it from the store.
 - As a Store Owner, I want to be able to add a product brand, so that users can group products into brands.
-- As a Store Owner, I want to be able to delete a product brand, so that I can remove it from the store.
 - As a Store Owner, I want to be able to add a product color, so that users can group products into colors.
-- As a Store Owner, I want to be able to delete a product color, so that I can remove it from the store.
 
 [Back to top](#table-of-contents)
 
@@ -190,11 +193,26 @@ The navbar consists of two horizontal sections:
 
 - The bottom section is main navbar and contains the *CycleBay* logo and the following links on the left side: *Home*, *All Bikes* dropdown menu with the list of sorting options, *Categories* dropdown menu, *Special Offers* and *Contact Us* links. On the right side, there are *Search bar* that folds into a search icon on smaller screens, *Wishlist* link, *Profile*<small>(for customers only)</small> and *Add Item*<small>(for staff only)</small> links, and *Shopping Bag* link with the total sum of the bag.
 
+![Navbar1](docs/images/features/navbar1.png)
+![Navbar2](docs/images/features/navbar2.png)
+
 The **search bar** is visible only on extra large screens(1200px and up), and on smaller screens it collapsed into a search icon and can be expanded right under the navbar by clicking on icon. It also can be expanded even if the navbar is expanded as well.
+
+![Navbar Large](docs/images/features/navbar-large.png)
+![Navbar Large](docs/images/features/navbar-large-search.png)
 
 The **All Bikes** dropdown menu contains the list of sorting options. It allows the user to sort the products by price, color, brand and category names in ascending order.
 
 The **Categories** dropdown menu contains the list of all existing categories. The category list is dynamic and generated from the database. When a new category is added to the database, it will be automatically added to the navbar dropdown menu. The user can click on the category name to view all products related to this category.
+
+| Navbar Mobile | Navbar Mobile Search Expanded |
+|:---:|:---:|
+|![Navbar Mobile](docs/images/features/navbar-mobile.png)|![Navbar Mobile Search](docs/images/features/navbar-mobile-search.png)|
+
+| Navbar Mobile Expanded | Navbar Mobile Expanded & Search |
+|:---:|:---:|
+|![Navbar Mobile Expanded](docs/images/features/navbar-mobile-expanded.png)|![Navbar Mobile Expanded & Search](docs/images/features/navbar-mobile-expanded-search.png)|
+
 
 - #### Footer
 ...
