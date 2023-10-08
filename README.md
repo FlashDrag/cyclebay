@@ -348,6 +348,13 @@ To implement the carousel, I used the [Owl Carousel](https://owlcarousel2.github
     <img src="docs/images/features/carousel.gif" alt="featured carousel mobile" width="300"/>
 </p>
 
+- ##### Newsletter
+The Newsletter section is designed to encourage visitors to subscribe to the newsletter. The section contains a brief description of the newsletter and a subscription form. The subscription form consists of a single input field for the email address and a *Subscribe* button. The form is validated using the [Mailchimp](https://mailchimp.com/) API.
+
+To learn more, please refer to the [Email Marketing: Newsletter](#email-marketing-newsletter) section.
+
+[Back to top](#table-of-contents)
+
 ### Products Page
 The Products page displays all products available in the store.
 
