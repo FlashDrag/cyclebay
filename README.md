@@ -265,7 +265,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 ```
 If the password fails to meet any of the above requirements, the user will see the appropriate error message.
-![password-backend-validation](docs/images/features/password-backend-validation.png)
+<p align="center">
+<img src="docs/images/features/password-backend-validation.png" alt="password-backend-validation" width="300"/>
+</p>
 
 Additionally, I added a simple frontend validation to the registration form. The password must be at least 8 characters long and the second password field must match the first one. If the form is invalid, the invalid fields will be highlighted in red without reloading the page. In the future, I plan to make the client-side validation more advanced and add the password strength meter.
 
@@ -327,6 +329,24 @@ For each card, I used the [Font Awesome](https://fontawesome.com/) icons to visu
 
 As for *assistive technologies*, the textual content ("Best value for money", "5-year warranty", etc.) itself is clear and descriptive enough for users to understand the value proposition without needing the icons. Therefore, I decided to hide the icons from screen readers by adding `aria-hidden="true"` to the `<i>` tags. This ensures that the icons are not read out by screen readers, thereby preventing any confusion.
 
+- ##### Featured Carousel
+This section is designed to showcase a rotating carousel of featured products titled "Top Selections". The Featured Carousel aims to draw attention to a curated selection of standout products, enticing visitors to explore these highlighted items.
+
+The main content consists of a carousel showcasing individual products. Each product card displays:
+- A top corner ribbon indicating the product price.
+- An image of the product. If no image is provided, a default placeholder image (noimage.png) is shown.
+- Below the image, the product name is displayed centered on the card.
+
+![featured carousel](docs/images/features/featured-carousel.png)
+
+All cards are clickable and redirect the user to the product details page. Also I added the *View All* button that allows the user to view all featured products on the products page.
+
+The carousel is fully responsive and collapses into a single element on smaller screens. The card sizes are adjusted to ensure that the cards are of equal height and width, thereby creating a uniform and visually appealing layout.
+
+To implement the carousel, I used the [Owl Carousel](https://owlcarousel2.github.io/OwlCarousel2/) jQuery plugin. This plugin is deprecated, but it still provides the smooth and responsive carousel functionality that I was looking for. It's pretty easy to customize and has a lot of options to play with. I used the `autoplay`, `autoplayHoverPause`, `loop`, and `responsive` options to achieve the desired functionality. Also I used the `animateOut` option in combination with *animate.css* library to add the `rotateOutDownRight` animation to the cards which provides a nice transition effect when the card is removed from the carousel on smaller screens.
+<p align="center">
+    <img src="docs/images/features/carousel.gif" alt="featured carousel mobile" width="300"/>
+</p>
 
 ### Products Page
 The Products page displays all products available in the store.
