@@ -356,7 +356,45 @@ To learn more, please refer to the [Email Marketing: Newsletter](#email-marketin
 [Back to top](#table-of-contents)
 
 ### Products Page
-The Products page displays all products available in the store.
+The Products page displays all bikes available in the store. The list of bikes is sorted by name in ascending order by default.
+
+- #### Sorting
+The sorting functionality allows users to sort the bikes by price, name, category, brand and color names in ascending and descending order. It implemented using the jQuery `change` event listener on client side and Django `order_by` method on server side in the `products/views/all_products` view. When the user selects the sorting option, jQuery builds the url with the selected sorting option and replaces the current url with the new one using `window.location.replace`. Then the Django `all_products` view processes the get request with the selected sorting option, sorts the bikes and renders the page with the results.
+
+![sorting](docs/images/features/sorting.png)
+
+- #### Search
+The search functionality allows users to search for a bike by name and brand. It implemented using the `icontains` lookup that performs a case-insensitive containment test. It's a good choice for searching for a nike by name and brand, since the user can enter the search query in any case and the search will still work.
+
+```
+# products/views/all_products view
+
+if "q" in request.GET:
+    # get the search query
+    query = request.GET["q"]
+    if not query.strip():
+        messages.error(
+            request, "You didn't enter any search criteria!"
+        )
+        return redirect(reverse("products"))
+    # look for the query in the product name or brand name
+    queries = (
+        Q(name__icontains=query)
+        | Q(brand__name__icontains=query)
+    )
+    products = products.filter(queries)
+
+```
+The search results are displayed on the products page. Additionally, the user can see the number of products found and the given search query. The search results are sorted by name in ascending order by default, but the user can change it using the sorting functionality.
+
+![search results](docs/images/features/search-results.png)
+
+If the search query is empty, the user will see the error message and all bikes will be displayed.
+
+![search error](docs/images/features/search-error.png)
+
+- #### Product Cards <!-- TODO -->
+
 
 ### Product Details Page
 The Product Details page provides detailed information about a specific product.
