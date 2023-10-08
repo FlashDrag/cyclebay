@@ -4,19 +4,83 @@
 {% block content %}
 <div class="bg-light py-4 flex-grow-1">
   <div class="container">
-    <div class="row">
+    <div class="row mb-2">
       <div class="col text-center">
-        <h2 class="logo-font">All Bikes</h2>
-        {% for c in current_categories %}
-        <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
-          <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
-        </a>
-        {% endfor %}
+        <h2 class="logo-font">Bikes</h2>
       </div>
     </div>
+    <!-- Show current brand, category or color -->
     <div class="row">
-      <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
-        <div class="sort-select-wrapper w-50">
+      <div class="col">
+        <ul class="list-inline mb-0">
+          {% if current_categories %}
+            <li>
+              <ul class="list-inline">
+                <h6 class="d-inline-block mb-0">
+                  <i class="fas fa-tags mr-1"></i>
+                  Categor{{ current_categories|length|pluralize:"y,ies" }}:
+                </h6>
+                {% for c in current_categories %}
+                  <li class="list-inline-item mr-0">
+                    <a href="{% url 'products' %}?category={{ c.name }}">
+                      {{ c.friendly_name }}
+                    </a>
+                  {% if not forloop.last %},{% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+          {% if current_brands %}
+            <li>
+              <ul class="list-inline">
+                <h6 class="d-inline-block mb-0">
+                  <i class="fas fa-registered mr-1"></i>
+                  Brand{{ current_brands|length|pluralize:"s" }}:
+                </h6>
+                {% for b in current_brands %}
+                  <li class="list-inline-item mr-0">
+                    <a href="{% url 'products' %}?brand={{ b.name }}">
+                      {{ b.friendly_name }}
+                    </a>
+                  {% if not forloop.last %},{% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+          {% if current_colors %}
+            <li>
+              <ul class="list-inline">
+                <h6 class="d-inline-block mb-0">
+                  <i class="fas fa-palette mr-1"></i>
+                  Color{{ current_colors|length|pluralize:"s" }}:
+                </h6>
+                {% for col in current_colors %}
+                <li class="list-inline-item mr-0">
+                  <a href="{% url 'products' %}?brand={{ col.name }}">
+                    {{ col.friendly_name }}
+                  </a>
+                  {% if not forloop.last %},{% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <!-- ./current brand, category or color -->
+
+    <!-- Products count and sort selector -->
+    <div class="row my-3">
+      <div class="col-6 my-auto">
+        <p class="text-muted mb-0">
+          {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+        </p>
+      </div>
+      <div class="col-6 my-auto d-flex justify-content-end">
+        <div class="sort-select-wrapper">
           <select id="sort-selector"
             class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
             <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
@@ -41,15 +105,10 @@
           </select>
         </div>
       </div>
-      <div class="col-12 col-md-6 order-md-first">
-        <p class="text-muted mt-3 text-center text-md-left">
-          {% if search_term or current_categories or current_brands or current_colors or current_sorting != 'None_None' %}
-            <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
-          {% endif %}
-          {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
-        </p>
-      </div>
     </div>
+    <!-- ./products count and sort selector -->
+
+    <!-- Products -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
       {% for product in products %}
       <div class="col px-2 mb-2 mb-sm-3">
@@ -124,8 +183,12 @@
       </div>
       {% endfor %}
     </div>
+    <!-- ./products -->
+
   </div>
 </div>
+
+<!-- back to top button -->
 <div class="btt-button bg-white shadow-sm rounded-0 border border-black">
   <a class="btt-link d-flex h-100">
     <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
