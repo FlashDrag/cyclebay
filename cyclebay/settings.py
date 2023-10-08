@@ -216,7 +216,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 # asks the user to Remember Me at login to keep the user logged in
 # even after closing the browser.
-ACCOUNT_SESSION_REMEMBER = None
+ACCOUNT_SESSION_REMEMBER = None  # optionally remember, depending on user input
 # User gets blocked from logging back in until a timeout.
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 

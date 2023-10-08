@@ -43,7 +43,7 @@ Our target audience consists of people who love cycling and are in search of a n
 - #### Social Media Marketing: Facebook Business Page
 I chose the Facebook Business Page because it's an excellent platform for promoting the store and engaging with customers. It provides an opportunity to create a community around the business and to establish lasting relationships with our clients. Furthermore, it offers the potential to create ads and reach a broader audience in the future. I've incorporated a link to the Facebook Business Page in the footer of the store, making it convenient for users to locate and follow the page.
 
-<small>Since the *Buy Now* call to action button is no longer available to link to an external website, I added a store link to the "About" section of the page and added the *Learn More* button.</small>
+<small>Since the *Buy Now* call to action button is no longer available to link to an external website, I added a store link to the "About" section of the page and set *Learn More* as the call to action button.</small>
 
 [View Facebook Business Page](https://www.facebook.com/people/CycleBay/61552069412658/)
 
@@ -312,6 +312,21 @@ The Home page is the landing page of the website. It provides a brief overview o
 The callout section is a hero image with a call to action button. The image is a picture of a woman riding a bicycle. I edited the image in Photoshop to make it fit better on the site. Using the AI generative fill tool, I exended the height of the image background, since it has fixed position and doesn't scroll with the page, so the image should be long enough to fit on all screens. I also flipped the image horizontally so the cyclist is facing to the right, which is the direction of the call to action button. This is a common technique called "F-shaped pattern", that helps to guide the user's gaze through natural sight patterns. Also I blurred the background to make the cyclist dynamic and stand out from the background. The callout section is fully responsive and the image right side is cropped on smaller screens.
 
 ![hero](docs/images/features/hero.png)
+
+- ##### Value Proposition
+The Value Proposition section aims to highlight the primary benefits and unique selling points of shopping with CycleBay. It's designed to instill confidence in potential customers by emphasizing the superior value and assurance they get when choosing CycleBay. The section showcases four visually appealing cards, each signifying a unique value proposition.
+
+- Best Value for Money - Emphasizes that the bicycles sold on CycleBay provide the utmost value, balancing both quality and cost
+- Individual size consulting - Highlights the importance of choosing the right size of a bicycle and the fact that CycleBay offers a free size consultation to ensure the customer gets the right size
+- 5-Year Warranty - Assures customers of a long-term warranty, signifying the durability and trustworthiness of our products.
+- Certified Quality -  Indicates that the products have undergone rigorous quality checks and have been certified by relevant authorities or institutions.
+
+For each card, I used the [Font Awesome](https://fontawesome.com/) icons to visually reinforce the value proposition mentioned in the corresponding text.
+
+![value proposition](docs/images/features/value-proposition.png)
+
+As for *assistive technologies*, the textual content ("Best value for money", "5-year warranty", etc.) itself is clear and descriptive enough for users to understand the value proposition without needing the icons. Therefore, I decided to hide the icons from screen readers by adding `aria-hidden="true"` to the `<i>` tags. This ensures that the icons are not read out by screen readers, thereby preventing any confusion.
+
 
 ### Products Page
 The Products page displays all products available in the store.
