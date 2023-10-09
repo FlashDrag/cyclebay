@@ -567,7 +567,6 @@ The **stock quantity** will be updated(decreased) only when the user completes t
 Initially, I implemented the stock management functionality that decreased the stock quantity and reserved the product quantity immediately after the user added a product to the bag. Then, using a Celery task and JS script, I set a countdown timer for 30 minutes. If the user didn't complete the checkout process within 30 minutes, the product would be returned to the stock. However, I decided to change this approach because users often add products to the bag for later, rather than using a wishlist.
 <br>
 In the future, I still plan to implement the Celery task and Reservation functionality. However, instead of reserving the product quantity immediately after a user adds a product to the bag, I will reserve it only when the user is on the Checkout page. This change aims to prevent a situation where, while the first user is filling out the checkout form, another user buys the last available product before the first user can submit the form. It will improve the user experience and will ensure that the product is reserved for the user only when they are ready to complete the checkout process.
-
 </sup>
 
 [ProductReservation commit](https://github.com/FlashDrag/cyclebay/commit/12ed1c4b67ed3b198a47a8d23ff9f82ddc90dab6)
@@ -630,21 +629,6 @@ By incorporating these features, I believe I've managed to craft a seamless and 
 To delete a product, I used defensive design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product. Also the app checks if the user is a superuser, and accepts only post requests that implemented by the `@require_POST` decorator and jquery ajax post method.
 
 
-#### List of Products
-- [ ] All products
-- [ ] Categories
-Dynamic categories. owner can add new category. it will be displayed in navbar dropdown menu
-- [ ] Special offers
-
-#### Product Details
-- [ ] Product category(clickable)
-- [ ] Product price
-- [ ] Product image
-- [ ] Product Description
-- [ ] Product sizes
-- [ ] Add to bag button
-
-
 #### Shopping Bag
 - [ ] Add product to bag
 - [ ] Remove a product from the bag
@@ -684,14 +668,13 @@ def cache_checkout_data(request):
 - [ ] Order history
 If not authenticated user made an order for existing email, the order will be added to the order history of the user with this email.
 
-#### Newsletter
-- [ ] Subscribe to newsletter
 
 [Back to top](#table-of-contents)
 
 ### Future Features
 - Product reviews
 - Filters (filtering products simultaneously by multiple categories, brands, colors and price)
+- Product quantity reservation for checkout (refer to product details reservation description)
 
 [Back to top](#table-of-contents)
 
@@ -779,7 +762,7 @@ See [TESTING.md](https://github.com/FlashDrag/cyclebay/blob/master/docs/TESTING.
 
 [Back to top](#table-of-contents)
 
-## Deployment, CI/CD
+## Deployment
 The Get Job platform is deployed on the [Heroku](https://www.heroku.com/) cloud platform and can be accessed here https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
 
@@ -790,13 +773,13 @@ To run this project locally, you will need the following tools:
 - [Python 3](https://www.python.org/)
 - [PIP](https://pypi.org/project/pip/)
 - [Virtualenv](https://virtualenv.pypa.io/en/latest/) and [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
-- [Redis](https://redis.io/)
 
 #### Instructions
 1. Clone the repository
 ```
 git clone
 ```
+
 2. Create a virtual environment
 ```
 # mkvirtualenv <name> <path_to_project>
@@ -811,25 +794,127 @@ $ workon cyclebay
 pip install -r requirements.txt
 ```
 5. Create a .env file in the root directory and add the environment variables from the .env_example file
-```
-6. Run Redis
-```
-redis-server
-```
-7. Run the app
+
+6. Run the app
 ```
 python manage.py runserver
 ```
-8. Run Celery
+
+### Deployment to Cloud Platform
+#### Requirements
+- [Local Deployment](#local-deployment-for-ubuntu)
+- [ElephantSQL](https://www.elephantsql.com/)
+- [AWS S3](https://aws.amazon.com/s3/)
+- [Heroku](https://www.heroku.com/)
+- [GitHub](https://github.com/)
+
+#### Instructions
+1. Create a new database instance on ElephantSQL
+- Register or Login to your ElephantSQL account
+- Click on the *Create New Instance* button
+
+![db-instance-1](docs/images/features/db-instance-1.png)
+
+- Select a plan and add a name for your instance(e.g. cyclebay)
+
+![db-instance-2](docs/images/features/db-instance-2.png)
+
+- Select a region and datacenter that is closest to you
+
+![db-instance-3](docs/images/features/db-instance-3.png)
+
+- Confirm new instance
+
+![db-instance-4](docs/images/features/db-instance-4.png)
+
+- Once the instance is created, open the instance details and copy the connection URL
+
+![db-instance-5](docs/images/features/db-instance-5.png)
+![db-instance-6](docs/images/features/db-instance-6.png)
+
+
+2. Create a new Heroku app (CLI Instructions)
+- Install the Heroku CLI:
+https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli
+
+- Login to your Heroku account
 ```
-celery -A cyclebay worker -l info
+$ heroku login
 ```
+- Create a new app
+```
+$ heroku create <app-name> --region eu
+```
+- Set the environment variables. See the list of required environment variables in the .env_example file in the root directory of the project.
+```
+$ heroku config:set <name of variable>=<value of variable>
+```
+
+**Warning:** Don't forget to set the `DEVELOPMENT` and `DEBUG` variables to `False` in the production environment or don't add them at all. So, they will be set to `False` by default.
+
+**Note:** If the Heroku app is created from the Heroku dashboard, and you want use the Heroku CLI to manage the app, you will need to add the remote manually:
+
+```
+$ heroku git:remote -a <your-heroku-app-name>
+```
+
+Now you can interact with your app using `$ heroku <django_command>` instead of `$ heroku <command> -a <your-heroku-app-name>`. See more details here: https://devcenter.heroku.com/articles/git#creating-a-heroku-remote
+
+3. Configure the Django app for Heroku
+- Create a *Procfile* in the root directory of the project
+```
+$ touch Procfile
+$ echo web: gunicorn cyclebay.wsgi:application > Procfile
+```
+- Install packages
+```
+$ pip install gunicorn psycopg2 dj-database-url
+```
+- Create/Update a *requirements.txt* file
+```
+$ pip freeze > requirements.txt
+```
+- Add the hostname of your Heroku app to the *ALLOWED_HOSTS* list in the *settings.py* file
+```
+ALLOWED_HOSTS = [
+    '<app-name>.herokuapp.com',
+    "127.0.0.1",
+    "localhost"
+]
+```
+- Commit the changes and push to Heroku
+```
+$ git add .
+$ git commit -m "Setup Heroku files for deployment"
+$ git push heroku master
+```
+
+- Migrate the database
+```
+$ heroku run python manage.py migrate
+```
+- Create a superuser
+```
+$ heroku run python manage.py createsuperuser
+```
+- Load data from the fixtures (fixtures are located in the *products/fixtures* directory)
+```
+$ heroku run python manage.py loaddata <fixture-name>
+```
+
+*Note:* The fixtures should be loaded in the following order:
+<!-- FIXME: correct order -->
+categories -> brands -> colors -> sizes -> products -> product_sizes
+
+TODO: add AWS S3 and Heroku deployment instructions
+
 
 ## Credits
 
 ### Content
-- [Person Riding Bicycle](https://www.pexels.com/photo/person-riding-bicycle-2924491/) by [SAurabh Narwade](https://www.pexels.com/@daredevil/)
-- [Man Riding Bicycle](https://www.pexels.com/photo/photo-of-man-riding-bicycle-2989567/) by [Josh Hild](https://www.pexels.com/@josh-hild-1270765/)
+
+- [Riding Bicycle](https://www.pexels.com/photo/person-riding-bicycle-2924491/) by [SAurabh Narwade](https://www.pexels.com/@daredevil/)
+- [Man on BMX](https://www.pexels.com/photo/photo-of-man-riding-bicycle-2989567/) by [Josh Hild](https://www.pexels.com/@josh-hild-1270765/)
 - <a href="https://www.flaticon.com/free-icons/cycling" title="cycling icons">Cycling icon created by amoghdesign - Flaticon</a>
 
 ## Contacts
