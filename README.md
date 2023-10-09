@@ -266,6 +266,16 @@ if form.is_valid():
     return redirect("home")
 ```
 
+### Wishlist Page
+The Wishlist page displays all products added to the wishlist. The list of products is sorted by name in ascending order by default.
+
+Each product card includes Product Image, Name, Color, Price and Control Buttons. The user can remove the product from the wishlist by clicking on the *Remove* button. This functionality is implemented with **Defensive Design**. It uses the jQuery `wishlist_toggler` function to remove the product from the wishlist without reloading the page. When the user clicks on the *Remove* button, the browser will display a modal window with a warning message. The user will have to confirm the deletion. This will prevent accidental deletion of the product. Only post requests are accepted for deletion, which is implemented by the `@require_POST` decorator and jquery ajax post method.
+
+The Wishlist Toggler can be found in the `wishlist/static/wishlist/js/wishlist_toggler.js` and `wishlist/views.py` files.
+
+![wishlist](docs/images/features/wishlist.png)
+![wishlist modal](docs/images/features/wishlist-modal.png)
+![wishlist removed](docs/images/features/wishlist-removed.png)
 
 #### User Authentication and Authorization
 - ##### Sign Up
@@ -442,6 +452,28 @@ If the search query is empty, the user will see the error message and all bikes 
 - #### Product Cards
 The product cards are displayed in a grid layout. The layout consists of 4 columns on extra large screens, 3 columns on large screens, 2 columns on medium screens and 1 column on small screens.
 
+Each product card displays:
+##### Header
+- Brand badge - clickable link that redirects the user to the products page with the selected brand.
+- Color badge - clickable link that redirects the user to the products page with the selected color.
+##### Body
+- Product image - clickable link that redirects the user to the product details page.
+- Product name
+- Product price
+- Product Category - clickable link that redirects the user to the products page with the selected category.
+##### Footer
+- View Product icon - clickable button that redirects the user to the product details page. Since the button is not contain any text, I added the `aria-label` attribute to make it accessible for screen readers. Also if the product is out of stock, the button will be replaced with the *Out of Stock* text. The functionality implemented using the `total_count` method in the `Product` model. So, if I need to check if the product is in stock, I just call the `total_count` method on the product object in the template.
+- Add to Wishlist icon - clickable button that adds the product to the wishlist. If the user is not authenticated, they will be redirected to the login page.
+
+The *Add to Wishlist* functionality is implemented using the jQuery `wishlist_toggler` function. It allows the user to add or remove the product from the wishlist without reloading the page. The function sends the post request to the server with the product id and csrf token. Then the Django `wishlist_toggler` view processes the request and adds or removes the product from the wishlist. The view returns an `is_in_wishlist` boolean value that indicates if the product is in the wishlist or not. Then the jQuery function updates the wishlist icon and shows the appropriate message to the user.
+
+The Wishlist Toggler can be found in the `wishlist/static/wishlist/js/wishlist_toggler.js` and `wishlist/views.py` files.
+
+![wishlist toggler](docs/images/features/wishlist-toggler.png)
+
+- Edit | Delete - clickable links that allow the staff to edit or delete the product. The links are visible only for staff users.
+
+![edit delete](docs/images/features/edit-delete.png)
 
 ### Product Details Page
 The Product Details page provides detailed information about a specific product.

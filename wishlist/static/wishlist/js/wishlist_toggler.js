@@ -42,7 +42,6 @@ $(document).ready(function () {
                 }
             }
         }).fail(function (xhr, textStatus, error) {
-            // TODO: return error page based on status code 'xhr.status', e.g. 404, 500, etc.
             alert(`Error:  ${xhr.status} ${error}! \nPlease, contact the administrator.`);
             console.error("Something went wrong in add_to_wishlist_toggle view");
         })
