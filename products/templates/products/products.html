@@ -2,111 +2,113 @@
 {% load static %}
 
 {% block content %}
-<div class="bg-light py-4 flex-grow-1">
+<section class="bg-light py-4 flex-grow-1">
   <div class="container">
-    <div class="row mb-2">
-      <div class="col text-center">
-        <h2 class="logo-font">Bikes</h2>
-      </div>
-    </div>
-    <!-- Show current brand, category or color -->
-    <div class="row">
-      <div class="col">
-        <ul class="list-inline mb-0">
-          {% if current_categories %}
-            <li>
-              <ul class="list-inline">
-                <h6 class="d-inline-block mb-0">
-                  <i class="fas fa-tags mr-1"></i>
-                  Categor{{ current_categories|length|pluralize:"y,ies" }}:
-                </h6>
-                {% for c in current_categories %}
-                  <li class="list-inline-item mr-0">
-                    <a href="{% url 'products' %}?category={{ c.name }}">
-                      {{ c.friendly_name }}
-                    </a>
-                  {% if not forloop.last %},{% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            </li>
-          {% endif %}
-          {% if current_brands %}
-            <li>
-              <ul class="list-inline">
-                <h6 class="d-inline-block mb-0">
-                  <i class="fas fa-registered mr-1"></i>
-                  Brand{{ current_brands|length|pluralize:"s" }}:
-                </h6>
-                {% for b in current_brands %}
-                  <li class="list-inline-item mr-0">
-                    <a href="{% url 'products' %}?brand={{ b.name }}">
-                      {{ b.friendly_name }}
-                    </a>
-                  {% if not forloop.last %},{% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            </li>
-          {% endif %}
-          {% if current_colors %}
-            <li>
-              <ul class="list-inline">
-                <h6 class="d-inline-block mb-0">
-                  <i class="fas fa-palette mr-1"></i>
-                  Color{{ current_colors|length|pluralize:"s" }}:
-                </h6>
-                {% for col in current_colors %}
-                <li class="list-inline-item mr-0">
-                  <a href="{% url 'products' %}?brand={{ col.name }}">
-                    {{ col.friendly_name }}
-                  </a>
-                  {% if not forloop.last %},{% endif %}
-                </li>
-                {% endfor %}
-              </ul>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-    <!-- ./current brand, category or color -->
-
-    <!-- Products count and sort selector -->
-    <div class="row my-3">
-      <div class="col-6 my-auto">
-        <p class="text-muted mb-0">
-          {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
-        </p>
-      </div>
-      <div class="col-6 my-auto d-flex justify-content-end">
-        <div class="sort-select-wrapper">
-          <select id="sort-selector"
-            class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
-            <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-            <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)
-            </option>
-            <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)
-            </option>
-            <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-            <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-            <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)
-            </option>
-            <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)
-            </option>
-            <option value="brand_asc" {% if current_sorting == 'brand_asc' %}selected{% endif %}>Brand (A-Z)
-            </option>
-            <option value="brand_desc" {% if current_sorting == 'brand_desc' %}selected{% endif %}>Brand (Z-A)
-            </option>
-            <option value="color_asc" {% if current_sorting == 'color_asc' %}selected{% endif %}>Color (A-Z)
-            </option>
-            <option value="color_desc" {% if current_sorting == 'color_desc' %}selected{% endif %}>Color (Z-A)
-            </option>
-          </select>
+    <header role="products-header">
+      <div class="row mb-2">
+        <div class="col text-center">
+          <h2 class="logo-font">Bikes</h2>
         </div>
       </div>
-    </div>
-    <!-- ./products count and sort selector -->
+      <!-- Show current brand, category or color -->
+      <div class="row">
+        <div class="col">
+          <ul class="list-inline mb-0">
+            {% if current_categories %}
+              <li>
+                <ul class="list-inline">
+                  <h6 class="d-inline-block mb-0">
+                    <i class="fas fa-tags mr-1"></i>
+                    Categor{{ current_categories|length|pluralize:"y,ies" }}:
+                  </h6>
+                  {% for c in current_categories %}
+                    <li class="list-inline-item mr-0">
+                      <a href="{% url 'products' %}?category={{ c.name }}">
+                        {{ c.friendly_name }}
+                      </a>
+                    {% if not forloop.last %},{% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% if current_brands %}
+              <li>
+                <ul class="list-inline">
+                  <h6 class="d-inline-block mb-0">
+                    <i class="fas fa-registered mr-1"></i>
+                    Brand{{ current_brands|length|pluralize:"s" }}:
+                  </h6>
+                  {% for b in current_brands %}
+                    <li class="list-inline-item mr-0">
+                      <a href="{% url 'products' %}?brand={{ b.name }}">
+                        {{ b.friendly_name }}
+                      </a>
+                    {% if not forloop.last %},{% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% if current_colors %}
+              <li>
+                <ul class="list-inline">
+                  <h6 class="d-inline-block mb-0">
+                    <i class="fas fa-palette mr-1"></i>
+                    Color{{ current_colors|length|pluralize:"s" }}:
+                  </h6>
+                  {% for col in current_colors %}
+                  <li class="list-inline-item mr-0">
+                    <a href="{% url 'products' %}?brand={{ col.name }}">
+                      {{ col.friendly_name }}
+                    </a>
+                    {% if not forloop.last %},{% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <!-- ./current brand, category or color -->
+
+      <!-- Products count and sort selector -->
+      <div class="row my-3">
+        <div class="col-6 my-auto">
+          <p class="text-muted mb-0">
+            {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+          </p>
+        </div>
+        <div class="col-6 my-auto d-flex justify-content-end">
+          <div class="sort-select-wrapper">
+            <select id="sort-selector"
+              class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+              <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+              <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)
+              </option>
+              <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)
+              </option>
+              <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+              <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+              <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)
+              </option>
+              <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)
+              </option>
+              <option value="brand_asc" {% if current_sorting == 'brand_asc' %}selected{% endif %}>Brand (A-Z)
+              </option>
+              <option value="brand_desc" {% if current_sorting == 'brand_desc' %}selected{% endif %}>Brand (Z-A)
+              </option>
+              <option value="color_asc" {% if current_sorting == 'color_asc' %}selected{% endif %}>Color (A-Z)
+              </option>
+              <option value="color_desc" {% if current_sorting == 'color_desc' %}selected{% endif %}>Color (Z-A)
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- ./products count and sort selector -->
+    </header>
 
     <!-- Products -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
@@ -186,7 +188,7 @@
     <!-- ./products -->
 
   </div>
-</div>
+</section>
 
 <!-- back to top button -->
 <div class="btt-button bg-white shadow-sm rounded-0 border border-black">
