@@ -393,12 +393,23 @@ To learn more, please refer to the [Email Marketing: Newsletter](#email-marketin
 ### Products Page
 The Products page displays all bikes available in the store. The list of bikes is sorted by name in ascending order by default.
 
-- #### Sorting
+- #### Products Header
+The products header consists of 3 rows:
+    - *Bikes* - heading
+    - *Current Category, Brand and Color*
+    - *Products Count* and *Sorting*.
+
+- ##### Current Category, Brand and Color
+This row is hidden if the user is on the *All Bikes* page. If the user is selected a category, brand or color, the *Current Category, Brand and Color* row will be displayed with appropriate values.
+
+![products header](docs/images/features/products-header.png)
+
+- ##### Sorting
 The sorting functionality allows users to sort the bikes by price, name, category, brand and color names in ascending and descending order. It implemented using the jQuery `change` event listener on client side and Django `order_by` method on server side in the `products/views/all_products` view. When the user selects the sorting option, jQuery builds the url with the selected sorting option and replaces the current url with the new one using `window.location.replace`. Then the Django `all_products` view processes the get request with the selected sorting option, sorts the bikes and renders the page with the results.
 
 ![sorting](docs/images/features/sorting.png)
 
-- #### Search
+- ##### Search
 The search functionality allows users to search for a bike by name and brand. It implemented using the `icontains` lookup that performs a case-insensitive containment test. It's a good choice for searching for a nike by name and brand, since the user can enter the search query in any case and the search will still work.
 
 ```
@@ -428,7 +439,8 @@ If the search query is empty, the user will see the error message and all bikes 
 
 ![search error](docs/images/features/search-error.png)
 
-- #### Product Cards <!-- TODO -->
+- #### Product Cards
+The product cards are displayed in a grid layout. The layout consists of 4 columns on extra large screens, 3 columns on large screens, 2 columns on medium screens and 1 column on small screens.
 
 
 ### Product Details Page
