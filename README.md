@@ -405,9 +405,10 @@ The Products page displays all bikes available in the store. The list of bikes i
 
 - #### Products Header
 The products header consists of 3 rows:
-    - *Bikes* - heading
-    - *Current Category, Brand and Color*
-    - *Products Count* and *Sorting*.
+
+- *Bikes* - heading
+- *Current Category, Brand and Color*
+- *Products Count* and *Sorting*.
 
 - ##### Current Category, Brand and Color
 This row is hidden if the user is on the *All Bikes* page. If the user is selected a category, brand or color, the *Current Category, Brand and Color* row will be displayed with appropriate values.
@@ -455,7 +456,13 @@ The product cards are displayed in a grid layout. The layout consists of 4 colum
 Each product card displays:
 ##### Header
 - Brand badge - clickable link that redirects the user to the products page with the selected brand.
-- Color badge - clickable link that redirects the user to the products page with the selected color.
+- Color badge - clickable link that redirects the user to the products page with the selected color. Since the colors stored in the database as hex values, I created a JavaScript function that parses the hex value and replace `#` with `%23` to pass hex color in url, since `#` is a special character in url and it will be ignored by the browser. It allows to sort the products by specific color.
+
+```
+// products/templates/products/products.html
+const parsedColor = color.startsWith('#') ? color.replace("#", "%23") : color;
+```
+
 ##### Body
 - Product image - clickable link that redirects the user to the product details page.
 - Product name
@@ -471,12 +478,100 @@ The Wishlist Toggler can be found in the `wishlist/static/wishlist/js/wishlist_t
 
 ![wishlist toggler](docs/images/features/wishlist-toggler.png)
 
-- Edit | Delete - clickable links that allow the staff to edit or delete the product. The links are visible only for staff users.
+- Edit | Delete - clickable links that allow the staff to edit or delete the product. The links are visible only for staff users. If the user still tries to access the edit or delete page using the url, the error message will be displayed and the user will be redirected to the home page.
+
+The delete functionality is implemented using **Defensive Design**. When the staff user tries to delete the product, the browser will display a modal window with a warning message. The staff user will have to confirm the deletion. This will prevent accidental deletion of the product.
 
 ![edit delete](docs/images/features/edit-delete.png)
 
 ### Product Details Page
 The Product Details page provides detailed information about a specific product.
+It includes the product image, name, price, brand, category, color, sizes and controls.
+
+- Image is clickable and opens the full size image in a new tab.
+- Brand, category and color names are clickable and redirect the user to the products page with the selected brand, category or color.
+- Edit | Delete - clickable links that allow the staff to edit or delete the product. The links are visible and available only for staff users.
+
+The Delete functionality is implemented using **Defensive Design**.
+
+The color is displayed as a friendly name, but passed to the link as a hex value. So, if the user clicks on the color name, the products page will be opened with the selected color. Since the colors stored in the database as hex values, I created a custom template filter `encode_query_param` based on `urllib.parse.quote_plus` function that encodes the value to be used as a query parameter. For example, the color `#ff0000` will be encoded to `%23ff0000`, that allows to pass hex color in url.
+
+```
+# products/templatetags/custom_filters.py
+
+from django import template
+from urllib.parse import quote_plus
+
+register = template.Library()
+
+@register.filter(name="encode_query_param")
+def encode_query_param(value):
+    return quote_plus(value)
+```
+
+- Sizes
+This functionality is based on complex many-to-many relationships between the `Product`, `Size` and `ProductSize` models. The `ProductSize` model is an intermediate model that allows to store additional information about the product size, such as quantity. The `ProductSize` model has a foreign key to the `Product` and `Size` models. The `Product` model has a many-to-many relationship with the `Size` model through the `ProductSize` model. This allows to add multiple sizes to the product and store the quantity for each size.
+
+```
+class ProductSize(models.Model):
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    count = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(999)]
+    )
+
+    class Meta:
+        # ensure that the combination of size and product is unique
+        unique_together = ("size", "product")
+        ordering = ["size"]
+
+    def __str__(self) -> str:
+        return f"{self.product.name} - {self.size.name}"
+```
+
+
+Also I added the `total_count` method to the `Product` model that returns the total count of all sizes of a specific product.
+
+```
+class Product(TimeStampModel):
+# ...
+    def total_count(self):
+        return ProductSize.objects.filter(product=self).aggregate(
+            total=models.Sum("count")
+        )["total"]
+```
+
+To display the sizes to the user, first the app checks if the total count of all sizes is greater than 0. If the total count is 0, the user will see the *Out of Stock* text and the *Add to Bag* button will be disabled.
+
+If the total count is greater than 0, the app will display the existing sizes and the quantity for each size. If a particular size was added to the product by the staff with 0 count or the size stock was out, the appropriate size button will be disabled, and the user will see the tooltip with the *Out of Stock* text on hover. Otherwise, the user can see the quantity for each size on hover, and Add to Bag the product with the selected size.
+
+If the user not selected the size, and clicks on the *Add to Bag* button, the app will display the error message *Please select a size*. The error message is displayed using the jQuery script, that allows to validate the form without reloading the page.
+
+![product details](docs/images/features/product-details.gif)
+
+Once the user selects the size and clicks on the *Add to Bag* button, the app will send the post request to the server with the product id, size id and csrf token.
+
+Since I implemented the **stock management** functionality, there are several possible scenarios when the user clicks on the *Add to Bag* button:
+
+- If the product was last in stock, and another user bought it before the current user, the app will display the error message: *Sorry, this product is out of stock. Please try again later.*.
+- If the product was deleted by the staff the app will display the error message: *Sorry, this product is no longer available.* and redirect the user to all products page.
+- If the product size was deleted by the staff the app will display the error message: *Sorry, {product-name} is not available in {size-name}. Select another size or try again later.*
+- If the product size quantity in the shopping bag the same than in stock the app will display the error message: *Sorry, only {product-size-quantity} {product-size-name} available. Please check your cart!*
+- If the product size already in the shopping bag, and the shopping bag quantity is less than the quantity available in stock the app will display the success message: *Updated {product-size-name} quantity to {updated-quantity}* and update the shopping bag quantity.
+- If the product size is the first in the shopping bag, the app will display the success message: *Added {product-size-name} to your cart* and add the product to the shopping bag.
+
+The **stock quantity** will be updated(decreased) only when the user completes the checkout process. Otherwise, it still available for other users.
+
+
+<sup>
+Initially, I implemented the stock management functionality that decreased the stock quantity and reserved the product quantity immediately after the user added a product to the bag. Then, using a Celery task and JS script, I set a countdown timer for 30 minutes. If the user didn't complete the checkout process within 30 minutes, the product would be returned to the stock. However, I decided to change this approach because users often add products to the bag for later, rather than using a wishlist.
+<br>
+In the future, I still plan to implement the Celery task and Reservation functionality. However, instead of reserving the product quantity immediately after a user adds a product to the bag, I will reserve it only when the user is on the Checkout page. This change aims to prevent a situation where, while the first user is filling out the checkout form, another user buys the last available product before the first user can submit the form. It will improve the user experience and will ensure that the product is reserved for the user only when they are ready to complete the checkout process.
+
+</sup>
+
+[ProductReservation commit](https://github.com/FlashDrag/cyclebay/commit/12ed1c4b67ed3b198a47a8d23ff9f82ddc90dab6)
+
 
 ### Shopping Bag Page
 The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag.
@@ -664,13 +759,16 @@ The static files are hosted on the cloud service [AWS S3](https://aws.amazon.com
 - [Redis](https://redis.io/)
 - [Git](https://git-scm.com/)
 - [GitHub Actions](https://docs.github.com/en/actions)
-- [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html)
 - [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/)
 - [Google Fonts](https://fonts.google.com/)
 - [Heroku](https://www.heroku.com/)
 - [AWS S3](https://aws.amazon.com/s3/)
 - [Balsamiq](https://balsamiq.com/)
 - [Sass](https://sass-lang.com/)
+
+- [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html)
+- [ezgif](https://ezgif.com/)
+- [iLoveIMG](https://www.iloveimg.com/)
 - ### Django packages
 - [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
 - [cripsy-bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
