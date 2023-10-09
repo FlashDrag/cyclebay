@@ -232,6 +232,41 @@ It also always stays at the bottom of the page, even if the page content is not 
 
 ![footer large](docs/images/features/footer-large.png)
 
+
+#### Contact Page
+The Contact page is designed to provide the user with a convenient way to contact the store owner. The page can be accessed by clicking on the *Contact Us* link in the footer or from the navbar. The contact form contains name, email, phone number, subject and message fields. If the user authenticated, the name and email fields will be pre-filled with the user's name and email address. The form is built with Django forms and validated on the server side.
+
+![contact](docs/images/features/contact.png)
+
+Once the user submits the form, they will be redirected to the *Home* page and will see the success message. The form data will be sent to the store owner's email address using the `django.core.mail.send_mail` method.
+
+```
+# home.views.contact
+
+# ...
+if form.is_valid():
+    message = (
+        f"Contact Form Message\n\n"
+        f"Name: {form.cleaned_data['name']}\n"
+        f"Phone: {form.cleaned_data['phone']}\n"
+        f"From Email: {form.cleaned_data['email']}\n\n"
+        f"{form.cleaned_data['message']}"
+    )
+    send_mail(
+        subject=form.cleaned_data["subject"],
+        message=message,
+        from_email=form.cleaned_data["email"],
+        recipient_list=[settings.DEFAULT_FROM_EMAIL],
+        fail_silently=False,
+    )
+    messages.success(
+        request,
+        "Thank you for your message. We will get back to you soon.",
+    )
+    return redirect("home")
+```
+
+
 #### User Authentication and Authorization
 - ##### Sign Up
 The user can register a new account by clicking on the *Register* link in the navbar. The user will be redirected to the registration page where they can fill in the registration form. I implemented the custom user model that allows to use email as a username, and removed the username field from the form, since the email address is unique and can be used as a username. The user can register with real email address only, since the email address will be used for the order confirmation and password reset.
@@ -470,14 +505,6 @@ Dynamic categories. owner can add new category. it will be displayed in navbar d
 - [ ] Product sizes
 - [ ] Add to bag button
 
-#### Search
-- [ ] Search by keywords in the product name and description
-
-#### Sorting
-- [ ] Sort by price (ascending and descending)
-- [ ] Sort by rating (ascending and descending)
-- [ ] Sort by name (ascending and descending)
-- [ ] Sort by category (ascending and descending)
 
 #### Shopping Bag
 - [ ] Add product to bag
@@ -524,7 +551,8 @@ If not authenticated user made an order for existing email, the order will be ad
 [Back to top](#table-of-contents)
 
 ### Future Features
-...
+- Product reviews
+- Filters (filtering products simultaneously by multiple categories, brands, colors and price)
 
 [Back to top](#table-of-contents)
 
