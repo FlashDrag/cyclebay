@@ -903,8 +903,7 @@ $ heroku run python manage.py loaddata <fixture-name>
 ```
 
 *Note:* The fixtures should be loaded in the following order:
-<!-- FIXME: correct order -->
-categories -> brands -> colors -> sizes -> products -> product_sizes
+`categories -> brands -> colors -> sizes -> products -> product_sizes`
 
 TODO: add AWS S3 and Heroku deployment instructions
 

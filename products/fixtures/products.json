@@ -3,13 +3,16 @@
         "model": "products.product",
         "pk": 1,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BLA-1",
             "name": "Cube Acid 2023",
             "brand": 6,
-            "price": 945.99,
-            "colour": 1,
+            "price": "945.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "cube-acid-29-grey-n-pearlgrey-88571-01.jpg"
         }
     },
@@ -17,13 +20,16 @@
         "model": "products.product",
         "pk": 2,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "AXE-AXE-BLA-2",
             "name": "Axess GRADE 2022",
             "brand": 2,
-            "price": 759.99,
-            "colour": 1,
+            "price": "759.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "axess-grade-29-grey-black-neon-yellow-87654-01-.jpg"
         }
     },
@@ -31,13 +37,16 @@
         "model": "products.product",
         "pk": 3,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "AXE-AXE-BLA-3",
             "name": "Axess SANDEE 2023",
             "brand": 2,
-            "price": 429.99,
-            "colour": 1,
+            "price": "429.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "axess-sandee-27-5-grey-90281-01.jpg"
         }
     },
@@ -45,13 +54,16 @@
         "model": "products.product",
         "pk": 4,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BLA-4",
             "name": "Cube Acid 240 Disc 2023",
             "brand": 6,
-            "price": 499.99,
-            "colour": 1,
+            "price": "499.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "cube-acid-240-disc-black-n-green-88559-01.jpg"
         }
     },
@@ -59,13 +71,16 @@
         "model": "products.product",
         "pk": 5,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BLA-5",
             "name": "Cube Aim 2023",
             "brand": 6,
-            "price": 475.99,
-            "colour": 1,
+            "price": "475.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-29-black-n-blue-88602-01.jpg"
         }
     },
@@ -73,13 +88,16 @@
         "model": "products.product",
         "pk": 6,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BLU-6",
             "name": "Cube Aim PRO 2023",
             "brand": 6,
-            "price": 495.99,
-            "colour": 2,
+            "price": "495.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-pro-shiftverde-n-black-88592-01.jpg"
         }
     },
@@ -87,13 +105,16 @@
         "model": "products.product",
         "pk": 7,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-08T18:42:51.668Z",
             "category": 1,
             "sku": "CUB-CUB-BLU-7",
             "name": "Cube Access WS EXC 2023",
             "brand": 6,
-            "price": 559.99,
-            "colour": 2,
+            "price": "559.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-access-ws-exc-275-eucalyptus-n-black-88538-01.jpg"
         }
     },
@@ -101,13 +122,16 @@
         "model": "products.product",
         "pk": 8,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BLU-8",
             "name": "Cube Access WS Pro 2022",
             "brand": 6,
-            "price": 599.99,
-            "colour": 2,
+            "price": "599.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-access-ws-pro-85290-85291-01.jpg"
         }
     },
@@ -115,13 +139,16 @@
         "model": "products.product",
         "pk": 9,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BLU-9",
             "name": "Cube Access WS Pro Allroad 2022",
             "brand": 6,
-            "price": 849.0,
-            "colour": 2,
+            "price": "849.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-access-ws-pro-allroad-aqua-n-blue-85288-85289-01.jpg"
         }
     },
@@ -129,13 +156,16 @@
         "model": "products.product",
         "pk": 10,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:41:55.327Z",
             "category": 1,
             "sku": "CUB-CUB-GRE-10",
             "name": "Cube Stereo 120 HPC TM 2022",
             "brand": 6,
-            "price": 2999.0,
-            "colour": 4,
+            "price": "2999.00",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-stereo-120-hpc-tm-flashgrey-n-olive-85578-01.jpg"
         }
     },
@@ -143,13 +173,16 @@
         "model": "products.product",
         "pk": 11,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "SCO-SCO-GRE-11",
             "name": "Scott Ransom 600 2023",
             "brand": 15,
-            "price": 2199.0,
-            "colour": 4,
+            "price": "2199.00",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "scott-ransom-600-savana-green-90506-01.jpg"
         }
     },
@@ -157,13 +190,16 @@
         "model": "products.product",
         "pk": 12,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:53:32.287Z",
             "category": 1,
             "sku": "SCO-SCO-RED-12",
             "name": "Scott Aspect 960 2022",
             "brand": 15,
-            "price": 529.99,
-            "colour": 5,
-            "featured": false,
+            "price": "529.99",
+            "color": 5,
+            "featured": true,
+            "image_url": null,
             "image": "scott-aspect-960-florida-black-red-82870-01.jpg"
         }
     },
@@ -171,13 +207,16 @@
         "model": "products.product",
         "pk": 13,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "SCO-SCO-RED-13",
             "name": "Scott Aspect 760 2022",
             "brand": 15,
-            "price": 529.99,
-            "colour": 5,
+            "price": "529.99",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "scott-aspect-760-florida-red-black-87455-01.jpg"
         }
     },
@@ -185,13 +224,16 @@
         "model": "products.product",
         "pk": 14,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "TRE-TRE-RED-14",
             "name": "Trek Slash 7",
             "brand": 19,
-            "price": 3199.0,
-            "colour": 5,
+            "price": "3199.00",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "trek-slash-7-gloss-radioactive-red-matte-black-82881-01.jpg"
         }
     },
@@ -199,13 +241,16 @@
         "model": "products.product",
         "pk": 15,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "SCO-SCO-RED-15",
             "name": "Scott Aspect 950 2022",
             "brand": 15,
-            "price": 589.99,
-            "colour": 5,
+            "price": "589.99",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "scott-aspect-950-tangerine-orange-black-82871-01.jpg"
         }
     },
@@ -213,13 +258,16 @@
         "model": "products.product",
         "pk": 16,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-WHI-16",
             "name": "Cube Aim SL 2022",
             "brand": 6,
-            "price": 599.99,
-            "colour": 6,
+            "price": "599.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-sl-prismagrey-n-blue-n-red-85327-85328-01.jpg"
         }
     },
@@ -227,13 +275,16 @@
         "model": "products.product",
         "pk": 17,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-WHI-17",
             "name": "Cube Aim SLX 2023",
             "brand": 6,
-            "price": 595.99,
-            "colour": 6,
+            "price": "595.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-slx-29-white-blue-n-red-88600-01.jpg"
         }
     },
@@ -241,13 +292,16 @@
         "model": "products.product",
         "pk": 18,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-WHI-18",
             "name": "Cube Access WS EXC 2023",
             "brand": 6,
-            "price": 559.99,
-            "colour": 6,
+            "price": "559.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-access-ws-exc-275-lightgrey-n-rose-88539-01.jpg"
         }
     },
@@ -255,13 +309,16 @@
         "model": "products.product",
         "pk": 19,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-08T18:43:33.334Z",
             "category": 1,
             "sku": "CUB-CUB-WHI-19",
             "name": "Cube Access WS EXC 2022",
             "brand": 6,
-            "price": 519.99,
-            "colour": 6,
+            "price": "519.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-access-ws-exc-stonegrey-n-fern-85286-85287-01.jpg"
         }
     },
@@ -269,13 +326,16 @@
         "model": "products.product",
         "pk": 20,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BRO-20",
             "name": "Cube Aim EX 2023",
             "brand": 6,
-            "price": 575.99,
-            "colour": 3,
+            "price": "575.99",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-ex-29-caramel-n-black-88590-01.jpg"
         }
     },
@@ -283,13 +343,16 @@
         "model": "products.product",
         "pk": 21,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-BRO-21",
             "name": "Cube Aim Allroad 2022",
             "brand": 6,
-            "price": 584.99,
-            "colour": 3,
+            "price": "584.99",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-allroad-27-5-29-desert-n-orange-85315-85316-01.jpg"
         }
     },
@@ -297,13 +360,16 @@
         "model": "products.product",
         "pk": 22,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-YEL-22",
             "name": "Cube Analog 2022",
             "brand": 6,
-            "price": 679.99,
-            "colour": 7,
+            "price": "679.99",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "cube-analog-flashlime-n-black-85331-85332-01.jpg"
         }
     },
@@ -311,13 +377,16 @@
         "model": "products.product",
         "pk": 23,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:05.594Z",
             "category": 1,
             "sku": "CUB-CUB-GRE-23",
             "name": "Cube Aim 2022",
             "brand": 6,
-            "price": 439.99,
-            "colour": 4,
+            "price": "439.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-aim-27-5-29-green-n-moss-85329-85330-01.jpg"
         }
     },
@@ -325,13 +394,16 @@
         "model": "products.product",
         "pk": 24,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "CUB-CUB-YEL-24",
             "name": "Cube Analog 2023",
             "brand": 6,
-            "price": 665.99,
-            "colour": 7,
+            "price": "665.99",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "cube-analog-29-flashlime-n-black-88604-01.jpg"
         }
     },
@@ -339,13 +411,16 @@
         "model": "products.product",
         "pk": 25,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 1,
             "sku": "SCO-SCO-YEL-25",
             "name": "Scott Aspect 950 2023",
             "brand": 15,
-            "price": 699.99,
-            "colour": 7,
+            "price": "699.99",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "scott-aspect-950-sunflower-yellow-90407-01.jpg"
         }
     },
@@ -353,13 +428,16 @@
         "model": "products.product",
         "pk": 26,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "MAR-MAR-BLA-26",
             "name": "Marin Lombard 1 2023",
             "brand": 11,
-            "price": 899.99,
-            "colour": 1,
+            "price": "899.99",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "marin-lombard-1-satin-charcoal-89070-01.jpg"
         }
     },
@@ -367,13 +445,16 @@
         "model": "products.product",
         "pk": 27,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLA-27",
             "name": "Cube Nuroad Pro FE 2022",
             "brand": 6,
-            "price": 1299.0,
-            "colour": 1,
+            "price": "1299.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuraod-pro-fe-inkgrey-n-black-85461-01.jpg"
         }
     },
@@ -381,13 +462,16 @@
         "model": "products.product",
         "pk": 28,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLA-28",
             "name": "Cube Nuroad Race FE 2022",
             "brand": 6,
-            "price": 1799.0,
-            "colour": 1,
+            "price": "1799.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuroad-race-fe-grey-n-black-85463-01.jpg"
         }
     },
@@ -395,13 +479,16 @@
         "model": "products.product",
         "pk": 29,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLA-29",
             "name": "Cube Nuroad Race 2022",
             "brand": 6,
-            "price": 1599.0,
-            "colour": 1,
+            "price": "1599.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuroad-race-grey-n-black-85462-01.jpg"
         }
     },
@@ -409,13 +496,16 @@
         "model": "products.product",
         "pk": 30,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "SCO-SCO-BLA-30",
             "name": "Scott Speedster Gravel 30 2023",
             "brand": 15,
-            "price": 1899.0,
-            "colour": 1,
+            "price": "1899.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "scott-speedster-gravel-30-black-90571-01.jpg"
         }
     },
@@ -423,13 +513,16 @@
         "model": "products.product",
         "pk": 31,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLA-31",
             "name": "Cube Nuroad Pro 2022",
             "brand": 6,
-            "price": 1099.0,
-            "colour": 1,
+            "price": "1099.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuroad-pro-inkgrey-n-black-85460-01.jpg"
         }
     },
@@ -437,13 +530,16 @@
         "model": "products.product",
         "pk": 32,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLA-32",
             "name": "Cube Nuroad C:62 PRO 2022",
             "brand": 6,
-            "price": 2199.0,
-            "colour": 1,
+            "price": "2199.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuroad-c-62-pro-carbon-n-red-85454-01.jpg"
         }
     },
@@ -451,13 +547,16 @@
         "model": "products.product",
         "pk": 33,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:13.374Z",
             "category": 2,
             "sku": "SCO-SCO-BLA-33",
             "name": "Scott Speedster Gravel 50 2023",
             "brand": 15,
-            "price": 1179.99,
-            "colour": 1,
+            "price": "1179.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "scott-speedster-gravel50-prism-iridium-black-90573-01.jpg"
         }
     },
@@ -465,13 +564,16 @@
         "model": "products.product",
         "pk": 34,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLA-34",
             "name": "Cube Nuroad RACE FE 2023",
             "brand": 6,
-            "price": 1899.0,
-            "colour": 1,
+            "price": "1899.00",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuroad-race-fe-grey-n-black-88774-01.jpg"
         }
     },
@@ -479,13 +581,16 @@
         "model": "products.product",
         "pk": 35,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLU-35",
             "name": "Cube Attain RACE 2023",
             "brand": 6,
-            "price": 1199.0,
-            "colour": 2,
+            "price": "1199.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-attain-race-blue-n-spectral-88609-01.jpg"
         }
     },
@@ -493,13 +598,16 @@
         "model": "products.product",
         "pk": 36,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLU-36",
             "name": "Cube Cross Race 2023",
             "brand": 6,
-            "price": 1199.0,
-            "colour": 2,
+            "price": "1199.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-cross-race-flashpetrol-n-green-88632-01.jpg"
         }
     },
@@ -507,13 +615,16 @@
         "model": "products.product",
         "pk": 37,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BLU-37",
             "name": "Cube Attain 2023",
             "brand": 6,
-            "price": 949.0,
-            "colour": 2,
+            "price": "949.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-attain-deepblue-n-white-88605-01.jpg"
         }
     },
@@ -521,13 +632,16 @@
         "model": "products.product",
         "pk": 38,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:20.573Z",
             "category": 2,
             "sku": "CUB-CUB-GRE-38",
             "name": "Cube Nuroad Race 2022",
             "brand": 6,
-            "price": 1599.0,
-            "colour": 4,
+            "price": "1599.00",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuroad-race-olive-n-black-85462-01.jpg"
         }
     },
@@ -535,13 +649,16 @@
         "model": "products.product",
         "pk": 39,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:31.564Z",
             "category": 2,
             "sku": "SCO-SCO-GRE-39",
             "name": "Scott Contessa Speedster Gravel 25 EQ 2023",
             "brand": 15,
-            "price": 1699.0,
-            "colour": 4,
+            "price": "1699.00",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "scott-contessa-speedster-gravel25-eq-rainforest-green-90457-01.jpg"
         }
     },
@@ -549,13 +666,16 @@
         "model": "products.product",
         "pk": 40,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:55:40.181Z",
             "category": 2,
             "sku": "CUB-CUB-RED-40",
             "name": "Cube Attain SLX 2023",
             "brand": 6,
-            "price": 1599.0,
-            "colour": 5,
-            "featured": false,
+            "price": "1599.00",
+            "color": 5,
+            "featured": true,
+            "image_url": null,
             "image": "cube-attain-slx-deepred-n-red-88610-01.jpg"
         }
     },
@@ -563,13 +683,16 @@
         "model": "products.product",
         "pk": 41,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-RED-41",
             "name": "Cube Nulane Race 2023",
             "brand": 6,
-            "price": 1299.0,
-            "colour": 5,
+            "price": "1299.00",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "cube-nulane-race-rubyred-n-black-88732-01.jpg"
         }
     },
@@ -577,13 +700,16 @@
         "model": "products.product",
         "pk": 42,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-RED-42",
             "name": "Cube Agree C:62 Race 2023",
             "brand": 6,
-            "price": 3599.0,
-            "colour": 5,
+            "price": "3599.00",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "cube-agree-c62-race-fireorange-n-black-88584-01.jpg"
         }
     },
@@ -591,13 +717,16 @@
         "model": "products.product",
         "pk": 43,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:53:50.887Z",
             "category": 2,
             "sku": "MAR-MAR-WHI-43",
             "name": "Marin Gestalt 1 2023",
             "brand": 11,
-            "price": 1099.99,
-            "colour": 6,
-            "featured": false,
+            "price": "1099.99",
+            "color": 6,
+            "featured": true,
+            "image_url": null,
             "image": "marin-gestalt-1-white-grey-89058-01.jpg"
         }
     },
@@ -605,13 +734,16 @@
         "model": "products.product",
         "pk": 44,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-WHI-44",
             "name": "Cube Attain GTC Race 2023",
             "brand": 6,
-            "price": 1899.0,
-            "colour": 6,
+            "price": "1899.00",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-attain-gtc-race-flashwhite-n-black-88606-01.jpg"
         }
     },
@@ -619,13 +751,16 @@
         "model": "products.product",
         "pk": 45,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "CUB-CUB-BRO-45",
             "name": "Cube Nuroad EX 2022",
             "brand": 6,
-            "price": 1499.0,
-            "colour": 3,
+            "price": "1499.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuraod-ex-flashstone-n-orange-85458-01.jpg"
         }
     },
@@ -633,13 +768,16 @@
         "model": "products.product",
         "pk": 46,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "SCO-SCO-BRO-46",
             "name": "Scott Speedster Gravel 30 2022",
             "brand": 15,
-            "price": 1799.0,
-            "colour": 3,
+            "price": "1799.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "scott-speedster-gravel-30-storm-beige-86500-01.jpg"
         }
     },
@@ -647,13 +785,16 @@
         "model": "products.product",
         "pk": 47,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "BER-BER-BRO-47",
             "name": "Bergamont Grandurance RD 7 2023",
             "brand": 4,
-            "price": 2399.0,
-            "colour": 3,
+            "price": "2399.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "bergamont-grandurance-rd-7-matt-dark-brown-90745-01.jpg"
         }
     },
@@ -661,13 +802,16 @@
         "model": "products.product",
         "pk": 48,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 2,
             "sku": "SCO-SCO-YEL-48",
             "name": "Scott Speedster Gravel 40 EQ 2022",
             "brand": 15,
-            "price": 1399.0,
-            "colour": 7,
+            "price": "1399.00",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "scott-speedster-gravel-40-eq-mustard-yellow-86501-01.jpg"
         }
     },
@@ -675,13 +819,16 @@
         "model": "products.product",
         "pk": 49,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-BLA-49",
             "name": "Cube Nature 2023",
             "brand": 6,
-            "price": 539.99,
-            "colour": 1,
+            "price": "539.99",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-graphite-n-black-88712-01.jpg"
         }
     },
@@ -689,13 +836,16 @@
         "model": "products.product",
         "pk": 50,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "AXE-AXE-BLA-50",
             "name": "Axess VERIS CROSS 2022",
             "brand": 2,
-            "price": 549.99,
-            "colour": 1,
+            "price": "549.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "axess-veris-cross-grey-black-turquoise-87676-01.jpg"
         }
     },
@@ -703,13 +853,16 @@
         "model": "products.product",
         "pk": 51,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "AXE-AXE-BLA-51",
             "name": "Axess VERIS CROSS Trapez 2022",
             "brand": 2,
-            "price": 549.99,
-            "colour": 1,
+            "price": "549.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "axess-veris-cross-trapez-grey-black-turquoise-87677-01.jpg"
         }
     },
@@ -717,13 +870,16 @@
         "model": "products.product",
         "pk": 52,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "AXE-AXE-BLA-52",
             "name": "Axess VERIS STREET 2022",
             "brand": 2,
-            "price": 599.99,
-            "colour": 1,
+            "price": "599.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "axess-veris-street-grey-black-turquoise-87678-01.jpg"
         }
     },
@@ -731,13 +887,16 @@
         "model": "products.product",
         "pk": 53,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "KTM-KTM-BLA-53",
             "name": "KTM X-LIFE RACE Trapez 2023",
             "brand": 9,
-            "price": 1899.0,
-            "colour": 1,
+            "price": "1899.00",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "ktm-xlife-race-trapez-89907-01.jpg"
         }
     },
@@ -745,13 +904,16 @@
         "model": "products.product",
         "pk": 54,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:41.625Z",
             "category": 3,
             "sku": "CUB-CUB-GRE-54",
             "name": "Cube Nature Pro 2022",
             "brand": 6,
-            "price": 899.0,
-            "colour": 4,
+            "price": "899.00",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-pro-silvergreen-n-black-85428-01.jpg"
         }
     },
@@ -759,13 +921,16 @@
         "model": "products.product",
         "pk": 55,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:50.524Z",
             "category": 3,
             "sku": "CUB-CUB-GRE-55",
             "name": "Cube Nature Trapez 2023",
             "brand": 6,
-            "price": 539.99,
-            "colour": 4,
+            "price": "539.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-trapez-shinymoss-n-black-88725-01.jpg"
         }
     },
@@ -773,13 +938,16 @@
         "model": "products.product",
         "pk": 56,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:42:59.264Z",
             "category": 3,
             "sku": "CUB-CUB-GRE-56",
             "name": "Cube Nature Pro Trapez 2022",
             "brand": 6,
-            "price": 899.0,
-            "colour": 4,
+            "price": "899.00",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-pro-trapez-silvergreen-n-black-85431-01.jpg"
         }
     },
@@ -787,13 +955,16 @@
         "model": "products.product",
         "pk": 57,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:07.003Z",
             "category": 3,
             "sku": "CUB-CUB-GRE-57",
             "name": "Cube Nature 2023",
             "brand": 6,
-            "price": 539.99,
-            "colour": 4,
+            "price": "539.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-shinymoss-n-black-88712-01.jpg"
         }
     },
@@ -801,13 +972,16 @@
         "model": "products.product",
         "pk": 58,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CIC-CIC-WHI-58",
             "name": "Ciclista All Road",
             "brand": 5,
-            "price": 429.99,
-            "colour": 6,
+            "price": "429.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "ciclista-all-road-grey-black-white-85023-01.jpg"
         }
     },
@@ -815,13 +989,16 @@
         "model": "products.product",
         "pk": 59,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-WHI-59",
             "name": "Cube Nature EXC Trapez 2023",
             "brand": 6,
-            "price": 1129.99,
-            "colour": 6,
+            "price": "1129.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-exc-trapez-88718-01.jpg"
         }
     },
@@ -829,13 +1006,16 @@
         "model": "products.product",
         "pk": 60,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-WHI-60",
             "name": "Cube Nature PRO Trapez 2023",
             "brand": 6,
-            "price": 799.99,
-            "colour": 6,
+            "price": "799.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-pro-trapez-frostwhite-n-grey-88722-01.jpg"
         }
     },
@@ -843,13 +1023,16 @@
         "model": "products.product",
         "pk": 61,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-WHI-61",
             "name": "Cube Nature PRO 2023",
             "brand": 6,
-            "price": 799.99,
-            "colour": 6,
+            "price": "799.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-pro-frostwhite-n-grey-88719-01.jpg"
         }
     },
@@ -857,13 +1040,16 @@
         "model": "products.product",
         "pk": 62,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CIC-CIC-WHI-62",
             "name": "Ciclista All Road Trapez",
             "brand": 5,
-            "price": 429.99,
-            "colour": 6,
+            "price": "429.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "ciclista-all-road-trapez-grey-black-white-85022-01.jpg"
         }
     },
@@ -871,13 +1057,16 @@
         "model": "products.product",
         "pk": 63,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-BLU-63",
             "name": "Cube Nature EXC Trapez 2022",
             "brand": 6,
-            "price": 1099.0,
-            "colour": 2,
+            "price": "1099.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-exc-trapez-blue-n-blue-85427-01.jpg"
         }
     },
@@ -885,13 +1074,16 @@
         "model": "products.product",
         "pk": 64,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-BRO-64",
             "name": "Cube Nature Pro 2022",
             "brand": 6,
-            "price": 899.0,
-            "colour": 3,
+            "price": "899.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-pro-desert-n-black-85428-01.jpg"
         }
     },
@@ -899,13 +1091,16 @@
         "model": "products.product",
         "pk": 65,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 3,
             "sku": "CUB-CUB-BRO-65",
             "name": "Cube Nature Pro Trapez 2022",
             "brand": 6,
-            "price": 899.0,
-            "colour": 3,
+            "price": "899.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-nature-pro-trapez-desert-n-black-85431-01.jpg"
         }
     },
@@ -913,13 +1108,16 @@
         "model": "products.product",
         "pk": 66,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:54:43.265Z",
             "category": 3,
             "sku": "CUB-CUB-RED-66",
             "name": "Cube Nature Trapez 2022",
             "brand": 6,
-            "price": 611.99,
-            "colour": 5,
-            "featured": false,
+            "price": "611.99",
+            "color": 5,
+            "featured": true,
+            "image_url": null,
             "image": "cube-trapez-darkred-n-red-85434-01.jpg"
         }
     },
@@ -927,13 +1125,16 @@
         "model": "products.product",
         "pk": 67,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BLA-67",
             "name": "Cube Stereo Hybrid 120 RACE 750 2023",
             "brand": 6,
-            "price": 3899.99,
-            "colour": 1,
+            "price": "3899.99",
+            "color": 15,
             "featured": false,
+            "image_url": null,
             "image": "cube-stereo-hybrid-120-race-750-polarsilver-n-black-88870-01.jpg"
         }
     },
@@ -941,13 +1142,16 @@
         "model": "products.product",
         "pk": 68,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BLA-68",
             "name": "Cube Kathmandu Hybrid EXC 750 2023",
             "brand": 6,
-            "price": 3489.99,
-            "colour": 1,
+            "price": "3489.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "cube-kathmandu-hybrid-exc-750-grey-n-silver-88676-01.jpg"
         }
     },
@@ -955,13 +1159,16 @@
         "model": "products.product",
         "pk": 69,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "AXE-AXE-BLA-69",
             "name": "Axess Element 2023",
             "brand": 2,
-            "price": 3799.99,
-            "colour": 1,
+            "price": "3799.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "axess-element-29-black-matt-rainbow-turquoise-88311-01.jpg"
         }
     },
@@ -969,13 +1176,16 @@
         "model": "products.product",
         "pk": 70,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "2R -2RM-BLA-70",
             "name": "2R Manufaktur CXK10 Compact 2022",
             "brand": 1,
-            "price": 2799.99,
-            "colour": 1,
+            "price": "2799.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "2r-manufaktur-cxk10-compact-black-89326-01.jpg"
         }
     },
@@ -983,13 +1193,16 @@
         "model": "products.product",
         "pk": 71,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-WHI-71",
             "name": "Cube Stereo Hybrid 160 HPC SLX 750 2023",
             "brand": 6,
-            "price": 4399.99,
-            "colour": 6,
+            "price": "4399.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "cube-stereo-hybrid-160-hpc-slx-grey-n-grey-88900-01.jpg"
         }
     },
@@ -997,13 +1210,16 @@
         "model": "products.product",
         "pk": 72,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:53:16.385Z",
             "category": 4,
             "sku": "AXE-AXE-WHI-72",
             "name": "Axess FORCE WS Allroad 2023",
             "brand": 2,
-            "price": 3449.99,
-            "colour": 6,
-            "featured": false,
+            "price": "3449.99",
+            "color": 6,
+            "featured": true,
+            "image_url": null,
             "image": "axess-force-ws-27-5-allroad-shimmer-white-black-blue-88325-01.jpg"
         }
     },
@@ -1011,13 +1227,16 @@
         "model": "products.product",
         "pk": 73,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:54:02.012Z",
             "category": 4,
             "sku": "CUB-CUB-WHI-73",
             "name": "Cube Reaction Hybrid PRO 750 2023",
             "brand": 6,
-            "price": 2899.99,
-            "colour": 6,
-            "featured": false,
+            "price": "2899.99",
+            "color": 6,
+            "featured": true,
+            "image_url": null,
             "image": "cube-reaction-hybrid-pro-flashwhite-n-black-88826-01.jpg"
         }
     },
@@ -1025,13 +1244,16 @@
         "model": "products.product",
         "pk": 74,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "KAL-KAL-WHI-74",
             "name": "Kalkhoff ENDEAVOUR 3.B MOVE LB 2023",
             "brand": 10,
-            "price": 3379.99,
-            "colour": 6,
+            "price": "3379.99",
+            "color": 6,
             "featured": false,
+            "image_url": null,
             "image": "kalkhoff-endeavour-3-b-move-lb-lightgrey-glossy-90240-01.jpg"
         }
     },
@@ -1039,13 +1261,16 @@
         "model": "products.product",
         "pk": 75,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BLU-75",
             "name": "Cube Reaction Hybrid Race 750 Wave 2023",
             "brand": 6,
-            "price": 3385.99,
-            "colour": 2,
+            "price": "3385.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-reaction-hybrid-race-750-wave-switchblue-n-black-88831-01.jpg"
         }
     },
@@ -1053,13 +1278,16 @@
         "model": "products.product",
         "pk": 76,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BLU-76",
             "name": "Cube Kathmandu Hybrid ONE 750 2023",
             "brand": 6,
-            "price": 3009.99,
-            "colour": 2,
+            "price": "3009.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-kathmandu-hybrid-one-750-blue-n-black-88682-01.jpg"
         }
     },
@@ -1067,13 +1295,16 @@
         "model": "products.product",
         "pk": 77,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BLU-77",
             "name": "Cube Nuride Hybrid SLX 750 Allroad Wave 2023",
             "brand": 6,
-            "price": 3329.99,
-            "colour": 2,
+            "price": "3329.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuride-hybrid-slx-verde-n-black-88763-01.jpg"
         }
     },
@@ -1081,13 +1312,16 @@
         "model": "products.product",
         "pk": 78,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "FOC-FOC-BLU-78",
             "name": "Focus JAM2 6.8 2024",
             "brand": 7,
-            "price": 6499.0,
-            "colour": 2,
+            "price": "6499.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "focus-jam2-6-8-stoneblue-slategrey-89637-01-.jpg"
         }
     },
@@ -1095,13 +1329,16 @@
         "model": "products.product",
         "pk": 79,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:14.374Z",
             "category": 4,
             "sku": "AXE-AXE-GRE-79",
             "name": "Axess Element 2023",
             "brand": 2,
-            "price": 3799.99,
-            "colour": 4,
+            "price": "3799.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "axess-element-29-metallic-olive-grey-green-matt-88311-01-.jpg"
         }
     },
@@ -1109,13 +1346,16 @@
         "model": "products.product",
         "pk": 80,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-GRE-80",
             "name": "Cube Reaction Hybrid RACE 750 2023",
             "brand": 6,
-            "price": 3385.99,
-            "colour": 4,
+            "price": "3385.99",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-reaction-hybrid-race-750-olive-n-green-88832-01.jpg"
         }
     },
@@ -1123,13 +1363,16 @@
         "model": "products.product",
         "pk": 81,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:44:13.881Z",
             "category": 4,
             "sku": "CUB-CUB-GRE-81",
             "name": "Cube Touring Hybrid ONE 625 2023",
             "brand": 6,
-            "price": 2499.99,
-            "colour": 4,
+            "price": "2499.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "cube-touring-hybrid-one-darkgreen-n-green-88958-01.jpg"
         }
     },
@@ -1137,13 +1380,16 @@
         "model": "products.product",
         "pk": 82,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:21.304Z",
             "category": 4,
             "sku": "KAL-KAL-GRE-82",
             "name": "Kalkhoff ENDEAVOUR 1.B MOVE LB Comfort 2023",
             "brand": 10,
-            "price": 2979.99,
-            "colour": 4,
+            "price": "2979.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "kalkhoff-endeavaour-1b-move-lb-comfort-techgreen-matt-90238-01.jpg"
         }
     },
@@ -1151,13 +1397,16 @@
         "model": "products.product",
         "pk": 83,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:28.083Z",
             "category": 4,
             "sku": "KAL-KAL-GRE-83",
             "name": "Kalkhoff ENDEAVOUR 1.B MOVE LB Trapez 2023",
             "brand": 10,
-            "price": 2979.99,
-            "colour": 4,
+            "price": "2979.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "kalkhoff-endeavour-1-b-move-lb-trapez-techgreen-matt-90239-01.jpg"
         }
     },
@@ -1165,13 +1414,16 @@
         "model": "products.product",
         "pk": 84,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "AXE-AXE-BRO-84",
             "name": "Axess FORCE Allroad 2023",
             "brand": 2,
-            "price": 3399.99,
-            "colour": 3,
+            "price": "3399.99",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "axess-force-27-5-allroad-khakigrey-matt-black-lime-88327-01.jpg"
         }
     },
@@ -1179,13 +1431,16 @@
         "model": "products.product",
         "pk": 85,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-04T12:58:16.732Z",
             "category": 4,
             "sku": "2R -2RM-BRO-85",
             "name": "2R Manufaktur ETX 9 2023",
             "brand": 1,
-            "price": 2599.99,
-            "colour": 3,
+            "price": "2599.99",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "2r-manufaktur-etx-9-dark-champagne-blue-92071-01.jpg"
         }
     },
@@ -1193,13 +1448,16 @@
         "model": "products.product",
         "pk": 86,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BRO-86",
             "name": "Cube Nuride Hybrid EXC 750 Allroad Wave 2023",
             "brand": 6,
-            "price": 3649.0,
-            "colour": 3,
+            "price": "3649.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-nuride-hybrid-exc-caramel-n-black-88745-01.jpg"
         }
     },
@@ -1207,13 +1465,16 @@
         "model": "products.product",
         "pk": 87,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-BRO-87",
             "name": "Cube Reaction Hybrid Performance 500 Allroad Trapez 2023",
             "brand": 6,
-            "price": 2649.0,
-            "colour": 3,
+            "price": "2649.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "cube-reaction-hybrid-performance-allroad-500-trapez-metallicbrown-n-orange-88794-88796-01.jpg"
         }
     },
@@ -1221,13 +1482,16 @@
         "model": "products.product",
         "pk": 88,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:53:00.857Z",
             "category": 4,
             "sku": "BAB-BAB-BRO-88",
             "name": "Babboe Carve Mountain ENV HD 500",
             "brand": 3,
-            "price": 5949.0,
-            "colour": 3,
-            "featured": false,
+            "price": "5949.00",
+            "color": 3,
+            "featured": true,
+            "image_url": null,
             "image": "babboe-carve-mountain-hd-500-braun-85056-01.jpg"
         }
     },
@@ -1235,13 +1499,16 @@
         "model": "products.product",
         "pk": 89,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "SUP-SUP-BRO-89",
             "name": "Superior SBC 400i L Wave 2022",
             "brand": 17,
-            "price": 2899.99,
-            "colour": 3,
+            "price": "2899.99",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "superior-sbc-400i-l-wave-brown-89975.jpg"
         }
     },
@@ -1249,13 +1516,16 @@
         "model": "products.product",
         "pk": 90,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-RED-90",
             "name": "Cube Supreme Sport Hybrid PRO 500 Wave 2023",
             "brand": 6,
-            "price": 2949.0,
-            "colour": 5,
+            "price": "2949.00",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "cube-supreme-sport-hybrid-pro-500-red-n-black-88942-01.jpg"
         }
     },
@@ -1263,13 +1533,16 @@
         "model": "products.product",
         "pk": 91,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-RED-91",
             "name": "Cube Reaction Hybrid SLX 750 Wave 2023",
             "brand": 6,
-            "price": 3679.99,
-            "colour": 5,
+            "price": "3679.99",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "cube-reaction-hybrid-slx-wave-rubyred-n-black-88841-01.jpg"
         }
     },
@@ -1277,13 +1550,16 @@
         "model": "products.product",
         "pk": 92,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "QIO-QIO-RED-92",
             "name": "QIO EINS A-8 RBN 2023",
             "brand": 12,
-            "price": 2999.0,
-            "colour": 5,
+            "price": "2999.00",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "qio-eins-a-8-rbn-ferrari-red-matt-87417-01.jpg"
         }
     },
@@ -1291,13 +1567,16 @@
         "model": "products.product",
         "pk": 93,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "TER-TER-YEL-93",
             "name": "Tern GSD S10 20 LR 2023",
             "brand": 18,
-            "price": 6199.0,
-            "colour": 7,
+            "price": "6199.00",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "tern-gsd-s10-20-lr-yellow-83361-01.jpg"
         }
     },
@@ -1305,13 +1584,16 @@
         "model": "products.product",
         "pk": 94,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:30:16.469Z",
             "category": 4,
             "sku": "CUB-CUB-YEL-94",
             "name": "Cube Ella Ride Hybrid 500 Wave 2023",
             "brand": 6,
-            "price": 2749.0,
-            "colour": 7,
-            "featured": false,
+            "price": "2749.00",
+            "color": 7,
+            "featured": true,
+            "image_url": null,
             "image": "cube-ella-ride-hybrid-500-wave-honey-n-white-88657-01.jpg"
         }
     },
@@ -1319,13 +1601,16 @@
         "model": "products.product",
         "pk": 95,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 4,
             "sku": "CUB-CUB-YEL-95",
             "name": "Cube Stereo Hybrid 140 HPC PRO 750 2023",
             "brand": 6,
-            "price": 4039.99,
-            "colour": 7,
+            "price": "4039.99",
+            "color": 7,
             "featured": false,
+            "image_url": null,
             "image": "cube-stereo-hybrid-140-hpc-pro-vivid-n-sun-88885-01.jpg"
         }
     },
@@ -1333,13 +1618,16 @@
         "model": "products.product",
         "pk": 96,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SIB-SIB-BLA-96",
             "name": "SIBMX ST 1 2022",
             "brand": 14,
-            "price": 299.99,
-            "colour": 1,
+            "price": "299.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "sibmx-st1-schwarz-66939-01.jpg"
         }
     },
@@ -1347,13 +1635,16 @@
         "model": "products.product",
         "pk": 97,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "KHE-KHE-BLA-97",
             "name": "KHEbikes Prism LB",
             "brand": 8,
-            "price": 219.99,
-            "colour": 1,
+            "price": "219.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "khebikes-prism-lb-black-84515-01.jpg"
         }
     },
@@ -1361,13 +1652,16 @@
         "model": "products.product",
         "pk": 98,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLA-98",
             "name": "Sunday Blueprint 20 2022",
             "brand": 16,
-            "price": 489.99,
-            "colour": 1,
+            "price": "489.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "sunday-blueprint-20-schwarz-86122-01-.jpg"
         }
     },
@@ -1375,13 +1669,16 @@
         "model": "products.product",
         "pk": 99,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLA-99",
             "name": "Sunday Blueprint 20 2022",
             "brand": 16,
-            "price": 489.99,
-            "colour": 1,
+            "price": "489.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "sunday-blueprint-20-schwarz-pink-86122-01.jpg"
         }
     },
@@ -1389,13 +1686,16 @@
         "model": "products.product",
         "pk": 100,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLA-100",
             "name": "Sunday Primer 20 2022",
             "brand": 16,
-            "price": 549.99,
-            "colour": 1,
+            "price": "549.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "sunday-primer-20-matt-schwarz-86119-01-.jpg"
         }
     },
@@ -1403,13 +1703,16 @@
         "model": "products.product",
         "pk": 101,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "WET-WET-BLA-101",
             "name": "wethepeople Nova 20",
             "brand": 20,
-            "price": 499.99,
-            "colour": 1,
+            "price": "499.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-nova-20-schwarz-84656-004-01.jpg"
         }
     },
@@ -1417,13 +1720,16 @@
         "model": "products.product",
         "pk": 102,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "WET-WET-BLA-102",
             "name": "wethepeople Nova 20",
             "brand": 20,
-            "price": 499.99,
-            "colour": 1,
+            "price": "499.99",
+            "color": 14,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-nova-20-raw-84656-01.jpg"
         }
     },
@@ -1431,13 +1737,16 @@
         "model": "products.product",
         "pk": 103,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "WET-WET-BLA-103",
             "name": "wethepeople CRS 20 FC 2022",
             "brand": 20,
-            "price": 699.99,
-            "colour": 1,
+            "price": "699.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-crs-20-fc-schwarz-84652-01-1.jpg"
         }
     },
@@ -1445,13 +1754,16 @@
         "model": "products.product",
         "pk": 104,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "WET-WET-BLA-104",
             "name": "wethepeople Arcade 20 2022",
             "brand": 20,
-            "price": 699.99,
-            "colour": 1,
+            "price": "699.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-arcade-20-schwarz-84645-01.jpg"
         }
     },
@@ -1459,13 +1771,16 @@
         "model": "products.product",
         "pk": 105,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLA-105",
             "name": "Sunday Blueprint 20",
             "brand": 16,
-            "price": 399.99,
-            "colour": 1,
+            "price": "399.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "sunday-blueprint-20-schwarz-82824-01.jpg"
         }
     },
@@ -1473,13 +1788,16 @@
         "model": "products.product",
         "pk": 106,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SCO-SCO-BLA-106",
             "name": "SCOOL Xtrix mini 16-1S",
             "brand": 13,
-            "price": 255.99,
-            "colour": 1,
+            "price": "255.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "scool-xtrix-mini-16-1s-dark-grey-beige-85238-01.jpg"
         }
     },
@@ -1487,13 +1805,16 @@
         "model": "products.product",
         "pk": 107,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SIB-SIB-BLU-107",
             "name": "SIBMX Duvel 2022",
             "brand": 14,
-            "price": 379.0,
-            "colour": 2,
+            "price": "379.00",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "sibmx-duevel-blaumetallic-84027-01-.jpg"
         }
     },
@@ -1501,13 +1822,16 @@
         "model": "products.product",
         "pk": 108,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLU-108",
             "name": "Sunday Blueprint 20 2022",
             "brand": 16,
-            "price": 489.99,
-            "colour": 2,
+            "price": "489.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "sunday-blueprint-20-blau-86122-01-.jpg"
         }
     },
@@ -1515,13 +1839,16 @@
         "model": "products.product",
         "pk": 109,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SIB-SIB-BLU-109",
             "name": "SIBMX Duvel 18 2022",
             "brand": 14,
-            "price": 429.99,
-            "colour": 2,
+            "price": "429.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "sibmx-blau-metallic-87002-01.jpg"
         }
     },
@@ -1529,13 +1856,16 @@
         "model": "products.product",
         "pk": 110,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLU-110",
             "name": "Sunday Primer 20 2022",
             "brand": 16,
-            "price": 549.99,
-            "colour": 2,
+            "price": "549.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "sunday-primer-20-blau-86119-01.jpg"
         }
     },
@@ -1543,13 +1873,16 @@
         "model": "products.product",
         "pk": 111,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SUN-SUN-BLU-111",
             "name": "Sunday Blueprint 20",
             "brand": 16,
-            "price": 399.99,
-            "colour": 2,
+            "price": "399.99",
+            "color": 2,
             "featured": false,
+            "image_url": null,
             "image": "sunday-blueprint-20-sky-blue-matt-82824-01.jpg"
         }
     },
@@ -1557,13 +1890,16 @@
         "model": "products.product",
         "pk": 112,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T17:03:17.332Z",
             "category": 5,
             "sku": "SUN-SUN-GRE-112",
             "name": "Sunday Primer 18 2022",
             "brand": 16,
-            "price": 549.99,
-            "colour": 4,
-            "featured": false,
+            "price": "549.99",
+            "color": 19,
+            "featured": true,
+            "image_url": null,
             "image": "sunday-primer-18-mint-86123-01.jpg"
         }
     },
@@ -1571,13 +1907,16 @@
         "model": "products.product",
         "pk": 113,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:35.974Z",
             "category": 5,
             "sku": "SUN-SUN-GRE-113",
             "name": "Sunday Blueprint 16 2022",
             "brand": 16,
-            "price": 379.99,
-            "colour": 4,
+            "price": "379.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "sunday-blueprint-16-billard-green-86109-01.jpg"
         }
     },
@@ -1585,13 +1924,16 @@
         "model": "products.product",
         "pk": 114,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:41.783Z",
             "category": 5,
             "sku": "WET-WET-GRE-114",
             "name": "wethepeople Nova 20",
             "brand": 20,
-            "price": 499.99,
-            "colour": 4,
+            "price": "499.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-nova-20-gruen-84656-01.jpg"
         }
     },
@@ -1599,13 +1941,16 @@
         "model": "products.product",
         "pk": 115,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T18:49:01.284Z",
             "category": 5,
             "sku": "KHE-KHE-GRE-115",
             "name": "KHEbikes Prism LB",
             "brand": 8,
-            "price": 219.99,
-            "colour": 4,
+            "price": "219.99",
+            "color": 19,
             "featured": false,
+            "image_url": null,
             "image": "khe-prism-lb-neon-green-84515-01.jpg"
         }
     },
@@ -1613,13 +1958,16 @@
         "model": "products.product",
         "pk": 116,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-06T19:43:47.724Z",
             "category": 5,
             "sku": "SCO-SCO-GRE-116",
             "name": "SCool XtriX 40",
             "brand": 13,
-            "price": 293.99,
-            "colour": 4,
+            "price": "293.99",
+            "color": 13,
             "featured": false,
+            "image_url": null,
             "image": "scool_xtrix_40_black_gold_matt_76423_01(1).jpg"
         }
     },
@@ -1627,13 +1975,16 @@
         "model": "products.product",
         "pk": 117,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "WET-WET-RED-117",
             "name": "wethepeople Arcade 20 2022",
             "brand": 20,
-            "price": 699.99,
-            "colour": 5,
+            "price": "699.99",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-arcade-20-rot-84645-01.jpg"
         }
     },
@@ -1641,13 +1992,16 @@
         "model": "products.product",
         "pk": 118,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "WET-WET-RED-118",
             "name": "wethepeople Riot 14 2022",
             "brand": 20,
-            "price": 469.99,
-            "colour": 5,
+            "price": "469.99",
+            "color": 5,
             "featured": false,
+            "image_url": null,
             "image": "wethepeople-riot4-rot-84660-01.jpg"
         }
     },
@@ -1655,13 +2009,16 @@
         "model": "products.product",
         "pk": 119,
         "fields": {
+            "created_at": "2023-10-03T11:15:33.471Z",
+            "updated_at": "2023-10-03T11:15:33.483Z",
             "category": 5,
             "sku": "SCO-SCO-BRO-119",
             "name": "SCool XtriX 20",
             "brand": 13,
-            "price": 259.0,
-            "colour": 3,
+            "price": "259.00",
+            "color": 3,
             "featured": false,
+            "image_url": null,
             "image": "scool-xtrix-20-brown-gold-matt-76422-01.jpg"
         }
     }
