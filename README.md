@@ -2,14 +2,11 @@
 
 TODO for app:
 - Add robots.txt
-- SEO: Add meta tags
+- Add tasks to the user stories
 - Add sitemap.xml
-- Test error pages
-- 3 Custom models
 - Test stripe webhook
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
-- Add breadcrumbs
 - FIXME: mailchipm icon on small screens: remove:
 @media screen and (max-width: 400px)
 #mc_embed_signup .foot {
