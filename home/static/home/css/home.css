@@ -1,7 +1,7 @@
 /* Hero section */
 .callout-container {
   height: 60vh;
-  background: url("/media/hero_img.png") no-repeat fixed;
+  background: url("/static/home/images/hero_img.png") no-repeat fixed;
   background-position: left top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
