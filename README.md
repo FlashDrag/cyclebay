@@ -775,7 +775,7 @@ To run this project locally, you will need the following tools:
 - [Virtualenv](https://virtualenv.pypa.io/en/latest/) and [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
 #### Instructions
-1. Clone the repository
+1. Clone the repository to your local machine
 ```
 git clone
 ```
@@ -802,14 +802,23 @@ python manage.py runserver
 
 ### Deployment to Cloud Platform
 #### Requirements
-- [Local Deployment](#local-deployment-for-ubuntu)
+- [Local repository of the project](#local-deployment-for-ubuntu)
 - [ElephantSQL](https://www.elephantsql.com/)
 - [AWS S3](https://aws.amazon.com/s3/)
 - [Heroku](https://www.heroku.com/)
 - [GitHub](https://github.com/)
 
 #### Instructions
-1. Create a new database instance on ElephantSQL
+##### Table of contents
+- [ElephantSQL Configuration](#elephantsql-configuration)
+- [Heroku CLI Deployment](#heroku-cli-deployment)
+    - [Django project Configuration for Heroku](#django-project-configuration-for-heroku)
+- [AWS S3 Configuration](#aws-s3-configuration)
+    - [Connecting Django to S3](#connecting-django-to-s3)
+    - [Uploading static and media files to S3](#uploading-static-and-media-files-to-s3)
+
+
+#### ElephantSQL Configuration
 - Register or Login to your ElephantSQL account
 - Click on the *Create New Instance* button
 
@@ -833,7 +842,7 @@ python manage.py runserver
 ![db-instance-6](docs/images/features/db-instance-6.png)
 
 
-2. Create a new Heroku app (CLI Instructions)
+#### Heroku CLI Deployment
 - Install the Heroku CLI:
 https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli
 
@@ -860,7 +869,7 @@ $ heroku git:remote -a <your-heroku-app-name>
 
 Now you can interact with your app using `$ heroku <django_command>` instead of `$ heroku <command> -a <your-heroku-app-name>`. See more details here: https://devcenter.heroku.com/articles/git#creating-a-heroku-remote
 
-3. Configure the Django app for Heroku
+##### Django project Configuration for Heroku
 - Create a *Procfile* in the root directory of the project
 ```
 $ touch Procfile
@@ -905,8 +914,207 @@ $ heroku run python manage.py loaddata <fixture-name>
 *Note:* The fixtures should be loaded in the following order:
 `categories -> brands -> colors -> sizes -> products -> product_sizes`
 
-TODO: add AWS S3 and Heroku deployment instructions
+#### AWS S3 Configuration
+- ##### Create an AWS account (https://aws.amazon.com/)
+- ##### Bucket Setup
+1. Create a new bucket:
+    - Bucket name: cyclebay-bucket
+    - Region: Choose the region closest to you
+    - Object ownership:
+        - ACLs enabled
+        - Bucket owner preferred
+    - Uncheck Block all public access
+    - Check 'I acknowledge ... becoming public'.
+    - Create bucket
 
+![awss3-bucket-1](docs/images/features/awss3-bucket-1.png)
+![awss3-bucket-2](docs/images/features/awss3-bucket-2.png)
+
+2. Bucket settings:
+    - Properties:
+        - Static website hosting:
+            - Enable
+            - Index document: home.html
+            - Error document: error.html
+    - Permissions:
+        - CORS configuration (Paste the following code):
+            ```
+            [
+                {
+                    "AllowedHeaders": [
+                        "Authorization"
+                    ],
+                    "AllowedMethods": [
+                        "GET"
+                    ],
+                    "AllowedOrigins": [
+                        "*"
+                    ],
+                    "ExposeHeaders": []
+                }
+            ]
+            ```
+        - Bucket policy:
+            - Policy generator:
+                - Type of policy: S3 Bucket Policy
+                - Principal: *
+                - Actions: GetObject
+                - Amazon Resource Name (ARN):
+                    **Bucket ARN** - Copy from the Bucket policy editor ```arn:aws:s3:::cyclebay-bucket```
+                - Add statement
+                - Generate policy
+                - Copy the policy
+                - Paste the policy in the Bucket policy editor
+                - **Add /* to the end value of the Resource key in the statement**
+                - Save changes
+        - Access control list:
+            - Everyone:
+                - Check *List*
+            - Save changes
+
+- ##### Identity and Access Management (IAM)
+![aws-iam-dashboard](docs/images/features/aws-iam-dashboard.png)
+
+1. Groups and policies
+    - Create a new group `manage-cyclebay` without any policies attached to it yet.
+    - Create a new policy:
+        - Service: S3
+        - Select JSON
+        - Select *Import policy* from *Actions* dropdown
+        - Find *AmazonS3FullAccess* typing *S3* in the search bar
+        - Select and import the policy
+
+        - Go to S3 bucket settings (don't close the policy editor of the IAM group)
+        - Copy the *Bucket ARN* from the Bucket policy editor
+        - Paste the *Bucket ARN* in the *Resource* key of the policy. The policy should look like this:
+            ```
+            {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Sid": "Statement1",
+                        "Effect": "Allow",
+                        "Action": [
+                            "s3:*",
+                            "s3-object-lambda:*"
+                        ],
+                        "Resource": [
+                            "arn:aws:s3:::cyclebay-bucket",
+                            "arn:aws:s3:::cyclebay-bucket/*"
+                        ]
+                    }
+                ]
+            }
+            ```
+        - Submit the form
+        - Give the policy a name: *cyclebay-policy*
+        - Add description: *Access to cyclebay S3 bucket for static files*
+        - Create policy
+    - Attach the policy to the group `manage-cyclebay`:
+        - Go to the group > Permissions
+        - Click *Attach policies* from the *Add permissions* dropdown
+        - Search for the policy name: *cyclebay-policy*
+        - Attach policy
+2. Users
+    - Create a new user:
+        - User name: *cyclebay-staticfiles-user*
+        - Access type: *Programmatic access*
+        - Click Next: *Permissions options*
+        - Select *Add user to group* in the *Permissions options* section.
+        - Select the *manage-cyclebay* group to add the user to.
+        - Create user
+
+- ##### Retrieve credentials
+    - Go to IAM and select 'Users'
+    - Select the *cyclebay-staticfiles-user* user
+    - Select the *Security Credentials* tab
+    - Scroll to *Access Keys* section and click *Create access key*
+    - Select **Application running outside AWS**, and click next
+    - Leave the *Description tag value* blank
+    - Create Access Key
+    - Click the *Download .csv file* button or copy the *Access Key ID* and *Secret Access Key* values into a secure location
+
+#### Connecting Django to S3
+- Install boto3 and django-storages using pip:
+    ```
+    pip install boto3 django-storages
+    ```
+- Freeze the requirements
+    ```
+    pip freeze > requirements.txt
+    ```
+- Add 'storages' to INSTALLED_APPS in settings.py
+- Add AWS S3 settings to the settings.py file:
+```
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+if not DEVELOPMENT:
+    # aws settings
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_REGION_NAME = 'eu-west-1'  # Ireland
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
+    # s3 static settings
+    STATICFILES_LOCATION = 'static'
+    # URL path for your static files where they will be served from
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    STATICFILES_STORAGE = 'cyclebay.custom_storages.StaticStorage'
+
+    # s3 media settings
+    MEDIAFILES_LOCATION = 'media'
+    # URL path for media files where they will be served from
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'cyclebay.custom_storages.MediaStorage'
+else:
+    # URL path for your static files where they
+    # will be served from during development
+    STATIC_URL = '/static/'
+    # Dir where static files will be collected using
+    # python manage.py collectstatic
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # URL path for media files where they will be served from
+    MEDIA_URL = '/media/'
+    # Dir where media files are stored during development
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+```
+- Create a file called `custom_storages.py` in the root directory of the project:
+```
+from django.conf import settings
+from storages.backends.s3boto3 import S3Boto3Storage
+
+class StaticStorage(S3Boto3Storage):
+    location = settings.STATICFILES_LOCATION
+
+class MediaStorage(S3Boto3Storage):
+    location = settings.MEDIAFILES_LOCATION
+```
+- Add access key credentials to Heroku Config Vars. See the `.env_example` file in the root directory of the project.
+
+#### Uploading static and media files to S3
+- ##### Collect static files
+- Set `DISABLE_COLLECTSTATIC` to `0` in Heroku Config Vars
+
+    *It automatically uploads all static files to S3 using ```python3 manage.py collectstatic```*
+- Deploy the app to Heroku
+```
+$ git push heroku master
+```
+
+- ##### Upload media files
+- Create a folder called `media` in the S3 bucket next to the `static` folder
+- Manually upload all media files to the media folder in the S3 bucket
+- Set *Grand public-read access* in the *Access control list(ACL)* of the *Permissions* section
+- Click *Upload*
 
 ## Credits
 
