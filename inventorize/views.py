@@ -6,12 +6,14 @@ from django.contrib import messages
 from django.urls import reverse
 
 from products.models import Product, ProductSize, Size
-from .forms import ProductForm, ProductSizeFormSet
+from .forms import ProductForm, create_product_size_formset
 
 
 @login_required
 def add_product(request):
     """Add a product to the store"""
+
+    ProductSizeFormSet = create_product_size_formset()
 
     # only store owners can manage products
     if not request.user.is_superuser:
@@ -67,6 +69,8 @@ def add_product(request):
 @login_required
 def edit_product(request, product_id):
     """Edit a product in the store"""
+
+    ProductSizeFormSet = create_product_size_formset()
 
     # only store owners can manage products
     if not request.user.is_superuser:

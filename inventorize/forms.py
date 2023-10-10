@@ -217,12 +217,17 @@ class ProductSizeForm(forms.ModelForm):
         }
 
 
-# The formset allows to create multiple forms for each size
-# of a product, and to edit the quantity of each size.
-ProductSizeFormSet = inlineformset_factory(
-    Product,
-    ProductSize,
-    form=ProductSizeForm,
-    extra=Size.objects.count(),
-    can_delete=True,
-)
+def create_product_size_formset():
+    '''
+    Create a formset for the ProductSize model.
+
+    The formset allows to create multiple forms for each size
+    of a product, and to edit the quantity of each size.
+    '''
+    return inlineformset_factory(
+        Product,
+        ProductSize,
+        form=ProductSizeForm,
+        extra=Size.objects.count(),
+        can_delete=True,
+    )
