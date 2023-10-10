@@ -128,7 +128,9 @@
             </div>
             <!-- color badges -->
             <ul class="list-inline mb-0 text-center color-list"
-              data-color="{{ product.color.name }}"></ul>
+              data-color="{{ product.color.name }}"
+              data-colorFriendlyName="{{ product.color.friendly_name }}">
+            </ul>
           </div>
           <!-- product image -->
           {% if product.image %}
@@ -224,25 +226,30 @@
     const colorLists = document.querySelectorAll('.color-list');
 
     colorLists.forEach(list => {
-      let colors = list.dataset.color;
-      // splits string at any sequence of characters that aren't standard for color representations
-      // "black/grey" or "red-blue" will be split into ["black", "grey"] and ["red", "blue"]
-      const potentialColors = colors.split(/[^a-zA-Z0-9#]+/);
+      const color = list.dataset.color;
+      const friendlyName = list.dataset.colorfriendlyname;
 
-      potentialColors.forEach(color => {
-        // if color is a valid hex code or whole word color
-        // add a list item color badge with a background color of that color
-        if (color.startsWith('#') || /^[a-zA-Z]+$/.test(color)) {
-          const li = document.createElement('li');
-          // replace # with %23 to pass hex color in url
-          const parsedColor = color.startsWith('#') ? color.replace("#", "%23") : color;
-          li.classList.add("list-inline-item","color-badge", "position-relative");
-          li.style.backgroundColor = color;
-          // add a stretched-link to filter by that color
-          li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${parsedColor}"></a>`;
-          list.appendChild(li);
-        }
-      });
+      // if color is a valid hex code or whole word color
+      // add a list item color badge with a background color of that color
+      if (color.startsWith('#') || /^[a-zA-Z]+$/.test(color)) {
+        const li = document.createElement('li');
+        // replace # with %23 to pass hex color in url
+        const parsedColor = color.startsWith('#') ? color.replace("#", "%23") : color;
+        li.classList.add("list-inline-item","color-badge", "position-relative");
+        li.style.backgroundColor = color;
+        // add a stretched-link to filter by that color
+        li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${parsedColor}"></a>`;
+
+        // Add tooltip to color badge
+        li.setAttribute('data-toggle', 'tooltip');
+        li.setAttribute('data-placement', 'top');
+        li.setAttribute('title', friendlyName);
+        // initialize tooltip
+        li.addEventListener('mouseover', function() {
+          $(this).tooltip('show');
+        });
+        list.appendChild(li);
+      }
     });
   });
 </script>

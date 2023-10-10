@@ -456,12 +456,12 @@ The product cards are displayed in a grid layout. The layout consists of 4 colum
 Each product card displays:
 ##### Header
 - Brand badge - clickable link that redirects the user to the products page with the selected brand.
-- Color badge - clickable link that redirects the user to the products page with the selected color. Since the colors stored in the database as hex values, I created a JavaScript function that parses the hex value and replace `#` with `%23` to pass hex color in url, since `#` is a special character in url and it will be ignored by the browser. It allows to sort the products by specific color.
-
+- Color badge - clickable link that redirects the user to the products page with the selected color. Since the colors stored in the database as hex values, I created a JavaScript function that parses the hex value and replace `#` with `%23` to pass hex color in url, since `#` is a special character in url and it will be ignored by the browser. It allows to sort the products by specific color. Also I added the tooltips with the color friendly name to make it more readable for the user. The tooltip appears on hover.
 ```
-// products/templates/products/products.html
+// ...
 const parsedColor = color.startsWith('#') ? color.replace("#", "%23") : color;
 ```
+The full script can be found in the `products/templates/products/products.html` template.
 
 ##### Body
 - Product image - clickable link that redirects the user to the product details page.
