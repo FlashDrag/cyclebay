@@ -31,7 +31,6 @@ class UserManager(BaseUserManager):
             is_active=True,
             is_superuser=is_superuser,
             last_login=now,
-            date_joined=now,
             **extra_fields
         )
         # set password
