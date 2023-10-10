@@ -1,9 +1,7 @@
 # CycleBay
 
 TODO for app:
-- FIXME: sign up
 - Add tasks to the user stories
-- Test stripe webhook
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
 - FIXME: mailchipm icon on small screens: remove:
@@ -68,6 +66,26 @@ The Project link: https://github.com/users/FlashDrag/projects/11
 
 Each siqnificant feature is presented as an _Epic_ and then broken down into smaller _User Stories_ that are then added to the _Project Backlog_. _Epics_ are marked with labels to indicate the feature. It allows me to filter the _User Stories_ by feature and then allocate them to _Milestones_ and prioritize them.
 
+##### Issue Templates
+I created the following _Issue Templates_ to ensure that all issues are created in a consistent manner:
+- *Bug* - for reporting bugs
+- *Story* - for creating new _User Stories_
+- *Task* - for creating new tasks
+- *Technical Task* - for creating new development tasks
+
+I configured the _Issue Templates_ by creating YAML forms. It allows me to create issues with pre-filled fields, placeholders and drop-down lists, as well as assign labels to the issues initially. Also I can add a description to each field to provide more information about the field.
+
+![Issue Template](docs/images/issue-templates.png)
+
+The _Issue Templates_ are available in the _Issues_ tab. When the user clicks on the *New Issue* button, they will see the list of available templates. The user can select the appropriate template and fill in the form. The form will be validated on the client side and the user will see the error message if the form is invalid. Once the form is filled in correctly, the user can click the *Submit new issue* button to create the issue.
+
+*Issues*
+![Issues](docs/images/github-issues.png)
+
+*Milestones*
+![Milestones](docs/images/milestones.png)
+
+#### Kanban Board
 The _GitHub__ Kanban_ board is used to manage the process and track the progress of the development. When _User Story_ is created, it is automatically added to the _Backlog_ column to be prioritized. The product _Backlog_ is never complete, as it is a dynamic document to respond to changes effectively. As new features are identified, they are added to the product _Backlog_. As the product is released, the product _Backlog_ is constantly updated to reflect changes in the product and changes in the market. The Kanban board includes the following columns:
 - **Backlog** - the list of all _User _Stories_ that have not yet been scheduled to be completed. As new _User Stories_ are created, they are automatically added to the _Backlog_ column.
 - **Sprint Backlog** - the collection of prioritized _User Stories_ that have been selected for the current _Sprint_.
@@ -75,7 +93,11 @@ The _GitHub__ Kanban_ board is used to manage the process and track the progress
 - **Testing** - user stories that are currently being tested.
 - **Done** - all completed and tested _User Stories_.
 
+*GitHub Kanban Board*
+![GitHub Kanban Board](docs/images/github-project-board.png)
 
+
+#### MoSCoW Prioritization
 The Project Table is used to filter and then allocate _User Stories_ to _Milestones_ and prioritize them. At the start of each sprint, the _User_ Stories_ are selected from the _Backlog_ and added to the _Sprint Backlog_ with attached priority labels.
 The _User Stories_ prioritized using the _MoSCoW_ method. The prioritization was based on the following criteria:
 - **Must Have** - The _User Story_ is crucial and add significant value to the product and must be delivered in the current iteration.
@@ -84,14 +106,8 @@ The _User Stories_ prioritized using the _MoSCoW_ method. The prioritization was
 - **Won't Have** - The _User Story_ will not be delivered in the current delivery timebox but may be considered for the future.
 The prioritization is based on the 60-20-20 rule where 60% of the effort is spent on the Must Have, 20% on the Should Have and the rest 20% on the Could Have. When the Sprint starts, the _User Stories_ are moved to the _Development_ column, where first the Must Have items. When the development of a particular _User Story__ is completed, it is moved to the _Testing_ column, tested and then moved to the _Done_ column manually or using the _commit_ message concerning the User Story ID. If the time is running out and the _User Stories_ are not completed, the Could Have items are dropped back to the _Backlog_ column for re-prioritization.
 
-*GitHub Kanban Board*
-![GitHub Kanban Board](docs/images/Board.png)
-
 *GitHub Project Table*
-![GitHub Project Table](docs/images/Table.png)
-
-*Milestones*
-![Milestones](docs/images/Milestones.png)
+![GitHub Project Table](docs/images/github-project-table.png)
 
 [Back to top](#table-of-contents)
 
