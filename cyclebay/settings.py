@@ -38,6 +38,8 @@ else:
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
+INTERNAL_IPS = os.getenv("INTERNAL_IPS", [])
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
