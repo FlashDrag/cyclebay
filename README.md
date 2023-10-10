@@ -1,9 +1,7 @@
 # CycleBay
 
 TODO for app:
-- Add robots.txt
 - Add tasks to the user stories
-- Add sitemap.xml
 - Test stripe webhook
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
