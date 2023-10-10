@@ -252,6 +252,7 @@ def checkout_success(request, order_number):
         # Save the user's info
         if save_info:
             profile_data = {
+                "name": order.full_name,
                 "default_phone_number": order.phone_number,
                 "default_country": order.country,
                 "default_postcode": order.postcode,
@@ -260,7 +261,11 @@ def checkout_success(request, order_number):
                 "default_street_address2": order.street_address2,
                 "default_county": order.county,
             }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            user_profile_form = UserProfileForm(
+                profile_data,
+                instance=profile,
+                user=request.user
+                )
             if user_profile_form.is_valid():
                 user_profile_form.save()
     else:

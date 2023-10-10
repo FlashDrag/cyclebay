@@ -1,15 +1,18 @@
 # CycleBay
 
 TODO for app:
+- FIXME: sign up
 - Add tasks to the user stories
 - Test stripe webhook
 - Check if there is no commented code and no broken internal links
 - Ensure that all pages on the site can be reached by a link from another findable page
 - FIXME: mailchipm icon on small screens: remove:
+```
 @media screen and (max-width: 400px)
 #mc_embed_signup .foot {
     /* grid-template-columns: 1fr;
 }
+```
 - Fix callout-container col-12: remove(on small screens, as it overflows the container):
 padding-right: 15px;
 padding-left: 15px;
