@@ -92,7 +92,11 @@ class Product(TimeStampModel):
         on_delete=models.SET_NULL,
         related_name="products",
     )
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        validators=[MinValueValidator(0.01)],
+        )
     sizes = models.ManyToManyField(
         Size,
         # specify the intermediate model that will be used

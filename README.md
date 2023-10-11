@@ -23,6 +23,7 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 ![mockup](docs/images/mockup.png)
 
 ## Table of Contents
+...
 
 ### Projects Goals
 - Develop a web application enabling users to purchase bicycles online.

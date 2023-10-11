@@ -275,7 +275,7 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 # Allows avoiding the need to confirm the email address
 # on page form and can be done only by clicking the link
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-# Force sets the prefix for the e-mail subject line.
+# (not reccomended) Force sets the prefix for the e-mail subject line.
 # By default, the name of the current Site (django.contrib.sites)
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[CycleBay] '
 
