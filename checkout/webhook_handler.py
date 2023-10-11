@@ -166,7 +166,7 @@ class StripeWH_Handler:
                         # select_for_update allows to lock the selected
                         # product size to prevent race conditions until
                         # the transaction is complete
-                        product_size_obj = ProductSize.select_for_update().objects.get(  # noqa
+                        product_size_obj = ProductSize.objects.select_for_update().get(  # noqa
                             pk=product_size_id
                         )
                         order_line_item = OrderLineItem(
