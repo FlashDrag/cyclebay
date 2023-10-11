@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col">
       <h2 class="logo-font mb-4">Thank You</h2>
-      <p class="text-black">Your order information is below. A confirmation email will be sent to
+      <p class="text-black">Your order information is below. A confirmation email has been sent to
         <strong>{{ order.email }}</strong>.</p>
     </div>
   </div>
@@ -182,21 +182,12 @@
   </div>
   <div class="row w-100">
     <div class="col-12 col-lg-7 mx-auto text-right">
-      {% if from_profile %}
-        <a href="{% url 'profile' %}" class="btn btn-outline-secondary rounded-0 my-2">
-          <span class="icon mr-2">
-            <i class="fas fa-angle-left"></i>
-          </span>
-          <span class="text-uppercase">Back to Profile</span>
-        </a>
-      {% else %}
-        <a href="{% url 'products' %}" class="btn btn-outline-secondary rounded-0 my-2">
-          <span class="icon mr-2">
-            <i class="fas fa-angle-left"></i>
-          </span>
-          <span class="text-uppercase">Back to Products</span>
-        </a>
-      {% endif %}
+      <a href="{% url 'products' %}" class="btn btn-outline-secondary rounded-0 my-2">
+        <span class="icon mr-2">
+          <i class="fas fa-angle-left"></i>
+        </span>
+        <span class="text-uppercase">Back to Products</span>
+      </a>
       <!-- receipt -->
       <a href="{{ order.receipt_url }}" class="btn btn-info rounded-0 my-2" target="_blank">
         <span class="icon mr-2">

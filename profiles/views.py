@@ -56,7 +56,6 @@ def order_history(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        'from_profile': True,
         'order_items': json.loads(order.original_bag),
     }
 
