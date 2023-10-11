@@ -575,8 +575,7 @@ Since I implemented the **stock management** functionality, there are several po
 - If the product size already in the shopping bag, and the shopping bag quantity is less than the quantity available in stock the app will display the success message: *Updated {product-size-name} quantity to {updated-quantity}* and update the shopping bag quantity.
 - If the product size is the first in the shopping bag, the app will display the success message: *Added {product-size-name} to your cart* and add the product to the shopping bag.
 
-The **stock quantity** will be updated(decreased) only when the user completes the checkout process. Otherwise, it still available for other users.
-
+The **stock quantity** will be updated(decreased) only when the user completes the checkout process and the payment is successful. Otherwise, it still available for other users.
 
 <sup>
 Initially, I implemented the stock management functionality that decreased the stock quantity and reserved the product quantity immediately after the user added a product to the bag. Then, using a Celery task and JS script, I set a countdown timer for 30 minutes. If the user didn't complete the checkout process within 30 minutes, the product would be returned to the stock. However, I decided to change this approach because users often add products to the bag for later, rather than using a wishlist.
@@ -589,6 +588,52 @@ In the future, I still plan to implement the Celery task and Reservation functio
 
 ### Shopping Bag Page
 The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag.
+
+The shopping bag page is fully responsive and changes its layout from 2 columns to 1 column on smaller screens.
+- The left column displays the list of product added to the shopping bag.
+- The right column displays the order summary and the *Secure Checkout* and *Keep Shopping* buttons.
+
+![bag](docs/images/features/bag.png)
+
+##### Product Card
+The product card includes Product Image, Name, SKU, Size, Color, Quantity, Subtotal and Delete Button.
+
+- Quantity Input
+The quantity of each product can be adjusted using the arrows or by typing the quantity in the input field. The quantity is validated on the client and backend sides. The quantity must be greater than 0 and can't be greater than the quantity available in stock. The `max` attribute of the input field is set to the quantity available in stock, so the user can increase the quantity value with arrows until it reaches the maximum.
+
+![bag-updated](docs/images/features/bag-updated.png)
+
+If the user tries to enter the quantity greater than the quantity available in stock, the app will display the error box: *Only {quantity-available-in-stock} available.*. To make it more clear to the user, I also added the tooltip with the quantity available in stock to the input box. The tooltip appears on hover.
+
+In case, where a malicious user tries to change the quantity value by unlocking the `max` value in the input field using the browser developer tools, the app `adjust_bag` view still validates the quantity and returns the warning message: *Only {quantity-available-in-stock} product is available*.
+
+![bag-validation-error](docs/images/features/bag-validation-error.png)
+
+- Subtotal
+The subtotal is calculated by multiplying the product price by the quantity. The subtotal is updated automatically when the user changes the quantity value and submits the form.
+
+- Delete Button
+The delete button allows the user to remove the product from the shopping bag. The functionality implemented using **Defensive Design**. When the user clicks on the *Delete* button, the browser will display a modal window with a warning message. The user will have to confirm the deletion. This will prevent accidental deletion of the product. Only post requests are accepted for deletion.
+
+![bag-delete](docs/images/features/bag-delete.png)
+
+- ##### Summary
+The summary section displays the cart total, delivery cost and grand total. The delivery cost is calculated based on the cart total and delivery threshold. The delivery threshold is set to 100, and the delivery cost is 10% of the cart total. It can be changed in the `settings.py` file.
+
+If the cart total is greater than the delivery threshold, the delivery cost will be 0. The delivery cost is calculated in the `bag/context.py` file. The grand total is calculated by adding the cart total and delivery cost.
+
+```
+def bag_contents(request):
+# ...
+if total < settings.FREE_DELIVERY_THRESHOLD:
+    delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
+    free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
+else:
+    delivery = 0
+    free_delivery_delta = 0
+
+grand_total = delivery + total
+```
 
 ### Checkout Page
 
@@ -659,6 +704,8 @@ To delete a product, I used defensive design. When a store owner tries to delete
 As I'm dealing with stock quantities, I used `transaction.atomic` and `select_for_update` to prevent race conditions and
 ensure that the stock quantity is updated correctly. All rows with `select_for_update()` method (in this case, the `product_size_obj` rows) are fetched are locked for the duration of the transaction, which is in the `transaction.atomic()` block. Once the transaction is committed, the lock is released, and other transactions can access the locked rows. If an exception occurs within the `transaction.atomic()` block, the transaction will be rolled back, and the lock will also be released.
 
+By using select_for_update(), once the first customer's order reaches the stage of updating the stock level, the relevant row in the database gets locked. The second customer's order will then have to wait until the first is complete (and the lock is released) before it can proceed. This ensures that the stock level is updated correctly.
+
 ```
 @require_POST
 def cache_checkout_data(request):
@@ -690,6 +737,7 @@ If not authenticated user made an order for existing email, the order will be ad
 - Product reviews
 - Filters (filtering products simultaneously by multiple categories, brands, colors and price)
 - Product quantity reservation for checkout (refer to product details reservation description)
+- Select color of the product right on the product details page
 
 [Back to top](#table-of-contents)
 
