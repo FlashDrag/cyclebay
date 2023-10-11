@@ -78,7 +78,7 @@ class Order(models.Model):
         """
         current_site = Site.objects.get_current()
         domain = current_site.domain
-        return f"https://{domain}/checkout/order/{self.order_number}/"
+        return f"https://{domain}/checkout/checkout_success/{self.order_number}/"  # noqa: E501
 
     def save(self, *args, **kwargs):
         """
