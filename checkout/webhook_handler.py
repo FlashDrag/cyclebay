@@ -1,4 +1,6 @@
 import stripe
+from django.db import transaction
+from django.db.models import F
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
@@ -134,43 +136,59 @@ class StripeWH_Handler:
             )
         else:
             order = None
-            try:
-                order = Order.objects.create(
-                    full_name=shipping_details.name,
-                    user_profile=profile,
-                    email=billing_details.email,
-                    phone_number=shipping_details.phone,
-                    country=shipping_details.address.country,
-                    postcode=shipping_details.address.postal_code,
-                    town_or_city=shipping_details.address.city,
-                    street_address1=shipping_details.address.line1,
-                    street_address2=shipping_details.address.line2,
-                    county=shipping_details.address.state,
-                    delivery_cost=metadata.get("delivery_cost", 0),
-                    order_total=metadata.get("order_total", 0),
-                    grand_total=metadata.get("grand_total", 0),
-                    original_bag=bag,
-                    stripe_pid=pid,
-                    receipt_url=receipt_url,
-                )
-                for item in json.loads(bag):
-                    product_size_obj = ProductSize.objects.get(
-                        pk=item.get('product_size_id')
+            with transaction.atomic():
+                # savepoint allows to rollback the transaction;
+                # in this case, it is used to manually rollback the
+                # transaction as the raised exception is handled
+                savepoint = transaction.savepoint()
+                try:
+                    order = Order.objects.create(
+                        full_name=shipping_details.name,
+                        user_profile=profile,
+                        email=billing_details.email,
+                        phone_number=shipping_details.phone,
+                        country=shipping_details.address.country,
+                        postcode=shipping_details.address.postal_code,
+                        town_or_city=shipping_details.address.city,
+                        street_address1=shipping_details.address.line1,
+                        street_address2=shipping_details.address.line2,
+                        county=shipping_details.address.state,
+                        delivery_cost=metadata.get("delivery_cost", 0),
+                        order_total=metadata.get("order_total", 0),
+                        grand_total=metadata.get("grand_total", 0),
+                        original_bag=bag,
+                        stripe_pid=pid,
+                        receipt_url=receipt_url,
                     )
-                    order_line_item = OrderLineItem(
-                        order=order,
-                        product=product_size_obj.product,
-                        product_size=product_size_obj,
-                        quantity=item.get('quantity'),
+                    for item in json.loads(bag):
+                        product_size_id = item.get("product_size_id")
+                        item_quantity = item.get("quantity")
+                        # select_for_update allows to lock the selected
+                        # product size to prevent race conditions until
+                        # the transaction is complete
+                        product_size_obj = ProductSize.select_for_update().objects.get(  # noqa
+                            pk=product_size_id
+                        )
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            product=product_size_obj.product,
+                            product_size=product_size_obj,
+                            quantity=item_quantity,
+                        )
+                        order_line_item.save()
+
+                        # update the product size count in stock
+                        product_size_obj.count = F("count") - item_quantity
+                        product_size_obj.save()
+                except Exception as e:
+                    # rollback the transaction if there is an error
+                    transaction.savepoint_rollback(savepoint)
+                    if order:
+                        order.delete()
+                    return HttpResponse(
+                        content=f'Webhook received: {event["type"]} | ERROR: {e}',
+                        status=500,
                     )
-                    order_line_item.save()
-            except Exception as e:
-                if order:
-                    order.delete()
-                return HttpResponse(
-                    content=f'Webhook received: {event["type"]} | ERROR: {e}',
-                    status=500,
-                )
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} |'

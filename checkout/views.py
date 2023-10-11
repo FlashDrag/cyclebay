@@ -26,6 +26,9 @@ from .models import Order, OrderLineItem
 
 @require_POST
 def cache_checkout_data(request):
+
+    # Verify that the bag hasn't changed between the time
+    # the user started the checkout and when they submitted the form
     session_bag = request.session.get("bag", {})
     # make a copy of the bag in the session to compare with the updated bag
     session_bag_copy = session_bag.copy()
@@ -35,9 +38,7 @@ def cache_checkout_data(request):
         item["product_size_id"]: item["quantity"]
         for item in current_bag["bag_items"]  # noqa
     }
-
-    # check if the bag in the session is the same as the updated bag,
-    # to ensure that the items availibility in the bag has not changed
+    # Bag consistency check
     if session_bag_copy != updated_bag:
         messages.error(
             request,
@@ -45,59 +46,44 @@ def cache_checkout_data(request):
         )
         return HttpResponse(status=400, content="Bag changed")
 
-    with transaction.atomic():
-        # savepoint allows to rollback the transaction;
-        # in this case, it is used to manually rollback the
-        # transaction as the raised exception is handled
-        savepoint = transaction.savepoint()
-        try:
-            bag_for_metadata = []
-            for item in current_bag["bag_items"]:
-                # select_for_update allows to lock the selected
-                # product size to prevent race conditions until
-                # the transaction is complete
-                product_size_obj = ProductSize.objects.select_for_update().get(
-                    id=item["product_size_id"]
-                )
-                # update the product size count in stock
-                product_size_obj.count = F("count") - item["quantity"]
-                product_size_obj.save()
-                if item["quantity"] > 0:
-                    bag_for_metadata.append(
-                        {
-                            "product_id": item["product"].id,
-                            "product_name": item["product"].name,
-                            "product_size_id": item["product_size_id"],
-                            "size": item["size"].name,
-                            "quantity": item["quantity"],
-                            "price": str(item["product"].price),
-                            "color": item["product"].color.name,
-                        }
-                    )
+    # Clean the bag with empty product sizes
+    bag_for_metadata = []
+    for item in current_bag["bag_items"]:
+        if item["quantity"] > 0:
+            bag_for_metadata.append(
+                {
+                    "product_id": item["product"].id,
+                    "product_name": item["product"].name,
+                    "product_size_id": item["product_size_id"],
+                    "size": item["size"].name,
+                    "quantity": item["quantity"],
+                    "price": str(item["product"].price),
+                    "color": item["product"].color.name,
+                }
+            )
 
-            pid = request.POST.get("client_secret").split("_secret")[0]
-            stripe.api_key = settings.STRIPE_SECRET_KEY
-            stripe.PaymentIntent.modify(
-                pid,
-                metadata={
-                    "bag": json.dumps(bag_for_metadata),
-                    "save_info": request.POST.get("save_info"),
-                    "user": request.user,
-                    "order_total": current_bag["total"],
-                    "delivery_cost": current_bag["delivery"],
-                    "grand_total": current_bag["grand_total"],
-                },
-            )
-            return HttpResponse(status=200)
-        except Exception as e:
-            # rollback the transaction if there is an error
-            transaction.savepoint_rollback(savepoint)
-            messages.error(
-                request,
-                "Sorry, your payment cannot be \
-                processed right now. Please try again later.",
-            )
-            return HttpResponse(content=e, status=400)
+    pid = request.POST.get("client_secret").split("_secret")[0]
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    try:
+        stripe.PaymentIntent.modify(
+            pid,
+            metadata={
+                "bag": json.dumps(bag_for_metadata),
+                "save_info": request.POST.get("save_info"),
+                "user": request.user,
+                "order_total": current_bag["total"],
+                "delivery_cost": current_bag["delivery"],
+                "grand_total": current_bag["grand_total"],
+            },
+        )
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(
+            request,
+            "Sorry, your payment cannot be \
+            processed right now. Please try again later.",
+        )
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
@@ -144,29 +130,43 @@ def checkout(request):
             order.receipt_url = receipt_url
             order.original_bag = metadata.get("bag", "")
             order.save()
-            for product_size_id, quantity in bag.items():
-                try:
-                    product_size_obj = ProductSize.objects.get(
-                        pk=product_size_id
-                    )
-                    order_line_item = OrderLineItem(
-                        order=order,
-                        product=product_size_obj.product,
-                        product_size=product_size_obj,
-                        quantity=quantity,
-                    )
-                    order_line_item.save()
-                except Product.DoesNotExist:
-                    messages.error(
-                        request,
-                        (
-                            "One of the products in your bag wasn't"
-                            " found in our database.\n"
-                            "Please call us for assistance!"
-                        ),
-                    )
-                    order.delete()
-                    return redirect(reverse("view_bag"))
+            with transaction.atomic():
+                # savepoint allows to rollback the transaction;
+                # in this case, it is used to manually rollback the
+                # transaction as the raised exception is handled
+                savepoint = transaction.savepoint()
+                for product_size_id, quantity in bag.items():
+                    try:
+                        # select_for_update allows to lock the selected
+                        # product size to prevent race conditions until
+                        # the transaction is complete
+                        product_size_obj = ProductSize.objects.select_for_update().get(  # noqa
+                            pk=product_size_id
+                        )
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            product=product_size_obj.product,
+                            product_size=product_size_obj,
+                            quantity=quantity,
+                        )
+                        order_line_item.save()
+
+                        # Decrease the product size quantity
+                        product_size_obj.count = F("count") - quantity
+                        product_size_obj.save()
+                    except Product.DoesNotExist:
+                        # rollback the transaction if there is an error
+                        transaction.savepoint_rollback(savepoint)
+                        order.delete()
+                        messages.error(
+                            request,
+                            (
+                                "One of the products in your bag wasn't"
+                                " found in our database.\n"
+                                "Please call us for assistance!"
+                            ),
+                        )
+                        return redirect(reverse("view_bag"))
 
             request.session["save_info"] = "save-info" in request.POST
             return redirect(
