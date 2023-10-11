@@ -38,6 +38,9 @@ def add_product(request):
             )
             return redirect(reverse("product_detail", args=[product.id]))
         else:
+            for sub_form, size in zip(formset.forms, Size.objects.all()):
+                sub_form.size_friendly_name = size.friendly_name
+                sub_form.size_name = size.name
             messages.error(
                 request,
                 "Failed to add product. Please ensure the form is valid.",
