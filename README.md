@@ -577,6 +577,7 @@ Since I implemented the **stock management** functionality, there are several po
 
 The **stock quantity** will be updated(decreased) only when the user completes the checkout process and the payment is successful. Otherwise, it still available for other users.
 
+###### Product Reservation
 <sup>
 Initially, I implemented the stock management functionality that decreased the stock quantity and reserved the product quantity immediately after the user added a product to the bag. Then, using a Celery task and JS script, I set a countdown timer for 30 minutes. If the user didn't complete the checkout process within 30 minutes, the product would be returned to the stock. However, I decided to change this approach because users often add products to the bag for later, rather than using a wishlist.
 <br>
@@ -678,13 +679,21 @@ If not authenticated user made an order for existing email, the order will be ad
 ![receipt](docs/images/features/receipt.png)
 
 - Stock Update
+
 As I'm dealing with stock quantities, I used `transaction.atomic` and `select_for_update` functionality to prevent race conditions and
 ensure that the stock quantity is updated correctly. All ProductSize rows with `select_for_update()` method are fetched are locked for the duration of the transaction, which is in the `transaction.atomic()` block. Once the transaction is committed, the lock is released, and other transactions can access the locked rows. If an exception occurs within the `transaction.atomic()` block, the transaction will be rolled back, and the lock will also be released.
 
-So when the user submits the checkout form, the app will check if the product quantity in the shopping bag is the same as in stock. If the quantity is correct and the payment is successful the app will update the stock quantity and create the order. Otherwise, the app will display the error message and redirect the user to the shopping bag page or home page if the product is no longer available.
+So, when user submits the checkout form, the app will check if the product quantity in the shopping bag not greater than the quantity available in stock or the product was deleted by the staff. If the quantity is correct and the payment is successful the app will update the stock quantity and create an order. Otherwise, the app will display the error message and redirect the user to the shopping bag page or products page if the bag is empty, since thel last product was bought by another user or deleted by the staff.
 
-I added this functionality to the `checkout/views.py` and `checkout/webhook_handler.py` files to ensure that the stock quantity is updated correctly even if the user accidentally refreshes the page or closes the browser during the checkout process.
+I added this functionality to the `checkout/views.py` and `checkout/webhook_handler.py` files to ensure that the stock quantity is updated correctly and the only one user can buy the last available product.
 
+In the future, I plan to implement the Celery task and Reservation functionality to improve the user experience and ensure that the product is reserved for the user when they are ready to complete the checkout process. Refer to the [Product Reservation](#product-reservation) section for more details.
+
+Here is the example screenshot of the error message when the user submits the checkout form, but the product was deleted by the staff while the user was filling out the form.
+
+![checkout error](docs/images/features/checkout-error.png)
+
+*Atomic transaction code snippet*
 ```
 # checkout/views.py
 
@@ -698,7 +707,7 @@ if request.method == "POST":
         savepoint = transaction.savepoint()
         for product_size_id, quantity in bag.items():
             try:
-                product_size_obj = ProductSize.objects.select_for_update().get(  # noqa
+                product_size_obj = ProductSize.objects.select_for_update().get(
                     pk=product_size_id
                 )
                 order_line_item = OrderLineItem(
