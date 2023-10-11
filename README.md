@@ -466,7 +466,7 @@ If the search query is empty, the user will see the error message and all bikes 
 ![search error](docs/images/features/search-error.png)
 
 - #### Product Cards
-The product cards are displayed in a grid layout. The layout consists of 4 columns on extra large screens, 3 columns on large screens, 2 columns on medium screens and 1 column on small screens.
+The product cards are displayed in a grid layout. The layout consists of 4 columns on extra large screens ( > 1200px), 3 columns on large screens ( > 992px), 2 columns on medium screens ( > 768px) and 1 column on small screens.
 
 Each product card displays:
 ##### Header
@@ -587,7 +587,7 @@ In the future, I still plan to implement the Celery task and Reservation functio
 
 
 ### Shopping Bag Page
-The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag.
+The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The shopping is stored in the session and is available throughout the full site by using the `bag` context processor.
 
 The shopping bag page is fully responsive and changes its layout from 2 columns to 1 column on smaller screens.
 - The left column displays the list of product added to the shopping bag.
@@ -635,7 +635,94 @@ else:
 grand_total = delivery + total
 ```
 
-### Checkout Page
+### Checkout
+The checkout page is a crucial step in the purchasing process, enabling users to review their cart items, input their shipping and payment details, and finalize their purchase.
+
+#### Checkout Page
+The checkout page consists of 2 columns on large screens (> 992px) and 1 column on smaller screens.
+
+![checkout](docs/images/features/checkout.png)
+
+- ##### Delivery Information
+The delivery information section displays the delivery address form. The form is pre-populated with the user's saved delivery information if the user is authenticated. Otherwise, the user can fill in the form manually. If the user is authenticated, the delivery information will be added/updated, since the *Save delivery information to profile* checkbox is checked by default. The user can uncheck it if they don't want to save the delivery information to the profile.
+
+![checkout checkbox](docs/images/features/checkout-checkbox.png)
+
+The form is validated on the client and backend sides. The client-side validation is simple and checks if the required fields are not empty. Once the fields are filled in correctly, they will be highlighted in green. The backend validation is more complex and checks if the user is authenticated, if the user has saved delivery information in the profile, and if the form is valid using the `OrderForm`.
+
+- ##### Order Summary
+The order summary section displays the list of products added to the shopping bag with subtotal for each product, order total, delivery cost and grand total. Refer to the [Shopping Bag Summary](#summary) section for more details about the calculation of the order total, delivery cost and grand total.
+
+- ##### Payment
+The payment functionality is powered by [Stripe](https://stripe.com/). Stripe is a secure and reliable payment processing platform that allows users to make payments using their credit cards. The Stripe API is used to create a payment intent and process the payment. It allows to validate the payment on the client and backend sides.
+
+The payment process begins when the user goes to the checkout page.
+
+In the `checkout` view stripe creates a payment intent with the grand total and currency. Then when the user submits the checkout form, the js function handles the form submission, disables the card element and submit button and shows loading animation. Then the jQuery calls the post request to the `cache_checkout_data` view. The view verifies that the bag hasn't changed between the time the user started the checkout and when they submitted the form, cleans the bag with zero quantity items and saves the bag, total etc. to the payment intent metadata using the `stripe.PaymentIntent.modify()` method. If the payment intent was updated successfully, the view returns the Http response with the `success` status. Then the jQuery function handles the response and calls the `stripe.confirmCardPayment()` method to confirm the payment. If the payment is successful, jQuery submits the form.
+
+The checkout view creates the order and updates the stock quantity. If the user accidentally refreshes the page or closes the browser during the checkout process, the `webhook_handler` view still creates the order and updates the stock quantity. Also the webhook handler view sends the confirmation email to the user. If everything is ok, the checkout view redirects the user to the checkout success page, that saves the user's delivery information to the profile and displays the order details.
+
+If not authenticated user made an order for existing email, the order will be added to the order history of the user with this email.
+
+*Checkout Success*
+![checkout success](docs/images/features/order-success.png)
+*Stripe Events*
+![stripe events](docs/images/features/stripe-events.png)
+*Hosted Endpoint*
+![stripe webhook](docs/images/features/stripe-webhooks.png)
+*Stripe Webhook events*
+![stripe webhooks](docs/images/features/stripe-webhooks-success.png)
+*Email Confirmation*
+![email confirmation](docs/images/features/order-email.png)
+*Receipt*
+![receipt](docs/images/features/receipt.png)
+
+- Stock Update
+As I'm dealing with stock quantities, I used `transaction.atomic` and `select_for_update` functionality to prevent race conditions and
+ensure that the stock quantity is updated correctly. All ProductSize rows with `select_for_update()` method are fetched are locked for the duration of the transaction, which is in the `transaction.atomic()` block. Once the transaction is committed, the lock is released, and other transactions can access the locked rows. If an exception occurs within the `transaction.atomic()` block, the transaction will be rolled back, and the lock will also be released.
+
+So when the user submits the checkout form, the app will check if the product quantity in the shopping bag is the same as in stock. If the quantity is correct and the payment is successful the app will update the stock quantity and create the order. Otherwise, the app will display the error message and redirect the user to the shopping bag page or home page if the product is no longer available.
+
+I added this functionality to the `checkout/views.py` and `checkout/webhook_handler.py` files to ensure that the stock quantity is updated correctly even if the user accidentally refreshes the page or closes the browser during the checkout process.
+
+```
+# checkout/views.py
+
+def checkout(request):
+# ...
+if request.method == "POST":
+    # ...
+    if order_form.is_valid():
+    # ...
+    with transaction.atomic():
+        savepoint = transaction.savepoint()
+        for product_size_id, quantity in bag.items():
+            try:
+                product_size_obj = ProductSize.objects.select_for_update().get(  # noqa
+                    pk=product_size_id
+                )
+                order_line_item = OrderLineItem(
+                    order=order,
+                    product=product_size_obj.product,
+                    product_size=product_size_obj,
+                    quantity=quantity,
+                )
+                order_line_item.save()
+                product_size_obj.count = F("count") - quantity
+                product_size_obj.save()
+            except Product.DoesNotExist:
+                transaction.savepoint_rollback(savepoint)
+                order.delete()
+                messages.error(
+                    request,
+                    (
+                        "One of the products in your bag wasn't"
+                        " found in our database.\n"
+                        "Please call us for assistance!"
+                    ),
+                )
+                return redirect(reverse("view_bag"))
+```
 
 #### User Profile
 - [ ] Order history
@@ -687,49 +774,6 @@ By incorporating these features, I believe I've managed to craft a seamless and 
 - [ ] Edit product
 - [ ] Delete product
 To delete a product, I used defensive design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product. Also the app checks if the user is a superuser, and accepts only post requests that implemented by the `@require_POST` decorator and jquery ajax post method.
-
-
-#### Shopping Bag
-- [ ] Add product to bag
-- [ ] Remove a product from the bag
-- [ ] View bag
-- [ ] Countdown timer and auto remove products from the bag after the timer expires
-- [ ] View and adjust the number of each product in the bag
-- [ ] View a subtotal cost of each product in the bag
-- [ ] Delivery calculation
-- [ ] Grand total
-
-#### Checkout (Stripe)
-- [ ] Checkout form with delivery information
-As I'm dealing with stock quantities, I used `transaction.atomic` and `select_for_update` to prevent race conditions and
-ensure that the stock quantity is updated correctly. All rows with `select_for_update()` method (in this case, the `product_size_obj` rows) are fetched are locked for the duration of the transaction, which is in the `transaction.atomic()` block. Once the transaction is committed, the lock is released, and other transactions can access the locked rows. If an exception occurs within the `transaction.atomic()` block, the transaction will be rolled back, and the lock will also be released.
-
-By using select_for_update(), once the first customer's order reaches the stage of updating the stock level, the relevant row in the database gets locked. The second customer's order will then have to wait until the first is complete (and the lock is released) before it can proceed. This ensures that the stock level is updated correctly.
-
-```
-@require_POST
-def cache_checkout_data(request):
-    # ...
-    with transaction.atomic():
-        try:
-            for item in current_bag["bag_items"]:
-                # select_for_update allows to lock the selected
-                # product size to prevent race conditions until
-                # the transaction is complete
-                product_size_obj = ProductSize.objects.select_for_update().get(
-                    id=item["product_size_id"]
-                )
-                # update the product size count in stock using F() expression
-                product_size_obj.count = F("count") - item["quantity"]
-                product_size_obj.save()
-    # ...
-```
-
-- [ ] Card payment
-- [ ] Email confirmation
-- [ ] Order history
-If not authenticated user made an order for existing email, the order will be added to the order history of the user with this email.
-
 
 [Back to top](#table-of-contents)
 
