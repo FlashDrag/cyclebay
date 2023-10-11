@@ -44,7 +44,7 @@ def contact(request):
                 recipient_list=[settings.DEFAULT_FROM_EMAIL],
                 fail_silently=False,
             )
-            messages.success(
+            messages.info(
                 request,
                 "Thank you for your message. We will get back to you soon.",
             )

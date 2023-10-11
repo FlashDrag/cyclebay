@@ -31,7 +31,7 @@ def add_product(request):
                 instance.product = product
                 instance.save()
 
-            messages.success(
+            messages.info(
                 request,
                 f"<b>{product.name}</b> successfully added",
                 extra_tags="safe",
@@ -118,7 +118,7 @@ def edit_product(request, product_id):
                         instance.product = product
                         instance.save()
 
-            messages.success(
+            messages.info(
                 request,
                 f"<b>{product.name}</b> successfully updated!",
                 extra_tags="safe",
@@ -196,7 +196,7 @@ def delete_product(request, product_id):
         product = Product.objects.get(pk=product_id)
         product_name = product.name
         product.delete()
-        messages.success(
+        messages.info(
             request, f"<b>{product_name}</b> deleted!", extra_tags="safe"
         )
     except Product.DoesNotExist:
