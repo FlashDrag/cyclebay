@@ -48,6 +48,7 @@
                   </p>
                 </div>
 
+                <div id="error-box-{{ item.product_size_id }}" class="d-none col-12 col-xl-5 mt-2 mb-0 text-danger"></div>
                 <!-- Forms -->
                 <div class="col-12 col-xl-7 text-xl-center d-flex align-items-center justify-content-xl-center">
                   <div class="row mt-3 mt-xl-5">
@@ -57,7 +58,7 @@
                       <form class="form update-form" action="{% url 'adjust_bag' item.product_size_id %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                          <div class="input-group-prepend">
+                          <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="{{ item.product_size_obj.count }} in stock">
                             <input class="form-control form-control-sm qty_input border-info border-right-0" type="number" name="quantity" value="{{ item.quantity }}"
                               min="1" max="{{ item.product_size_obj.count }}" data-product_size_id="{{ item.product_size_id }}"
                               id="id_qty_{{ item.product_size_id }}" style="min-width: 50px; max-width: 60px;">
@@ -201,5 +202,26 @@
           });
       });
     });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+
+      // Show error msg if user tries to increase product quanity
+      // beyond what is available in stock
+      $('.qty_input').on('input', function() {
+        const productSizeId = $(this).attr('data-product_size_id');
+        const errorBox = $(`#error-box-${productSizeId}`);
+        const maxQty = $(this).attr('max');
+        const currentQty = $(this).val();
+
+        if (currentQty > maxQty) {
+          $(errorBox).text('Only ' + maxQty + ' available').addClass('d-block');
+        } else {
+          $(errorBox).removeClass('d-block');
+        }
+      });
+    })
   </script>
 {% endblock %}
