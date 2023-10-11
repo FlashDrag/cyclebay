@@ -9,7 +9,8 @@ $(document).ready(function () {
      * @param {string} elementPrefix - The prefix of the element (category, brand, color)
      * */
     function setUpCollapseHandlers(elementPrefix) {
-        const collapseId = `#collapseNew${elementPrefix.substring(0, 1).toUpperCase() + elementPrefix.substring(1)}`;
+        const capitalizedElementPrefix = elementPrefix.substring(0, 1).toUpperCase() + elementPrefix.substring(1);
+        const collapseId = `#collapseNew${capitalizedElementPrefix}`;
         const newElementInputId = `#id_new_${elementPrefix}_name`;
         const defaultContainerDivId = `#div_id_${elementPrefix}`;
         const defaultSelect = `#div_id_${elementPrefix} select`;
@@ -45,7 +46,7 @@ $(document).ready(function () {
             // smoothly show the select element and set it to required
             $(defaultSelect).show('swing').attr('required', true);
             // revert the toggle button to its original state
-            $(toggleButton).removeClass('btn-outline-warning').addClass('btn-outline-info').html(`<i class="fas fa-plus"></i> Add New ${elementPrefix}`);
+            $(toggleButton).removeClass('btn-outline-warning').addClass('btn-outline-info').html(`<i class="fas fa-plus"></i> Add new ${capitalizedElementPrefix} to database`);
             $(newElementInputId).val('');
         });
     }
