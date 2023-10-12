@@ -14,9 +14,10 @@ TODO for app:
 - Fix callout-container col-12: remove(on small screens, as it overflows the container):
 padding-right: 15px;
 padding-left: 15px;
+- Enable collectstatic on Heroku on final deployment
 
 ## Overview
-The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform, uses the AWS S3 cloud service to store static files and utilizes the Stripe payment system to process payments.
+The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform and uses the AWS S3 cloud service to store static and media files and utilizes the Stripe payment system to process secure payments.
 
 Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
@@ -40,8 +41,6 @@ Our target audience consists of people who love cycling and are in search of a n
 - #### Social Media Marketing: Facebook Business Page
 I chose the Facebook Business Page because it's an excellent platform for promoting the store and engaging with customers. It provides an opportunity to create a community around the business and to establish lasting relationships with our clients. Furthermore, it offers the potential to create ads and reach a broader audience in the future. I've incorporated a link to the Facebook Business Page in the footer of the store, making it convenient for users to locate and follow the page.
 
-<small>Since the *Buy Now* call to action button is no longer available to link to an external website, I added a store link to the "About" section of the page and set *Learn More* as the call to action button.</small>
-
 [View Facebook Business Page](https://www.facebook.com/people/CycleBay/61552069412658/)
 
 ![Facebook Business Page](docs/images/facebook_page.png)
@@ -53,7 +52,7 @@ Newsletters are effective tools for maintaining regular contact with customers a
 ![Newsletter admin](docs/images/mailchimp.png)
 
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ## Agile Methodology
 The main goal of the app is to deliver a solution that creates real value for the users and _UX design_ and _Agile Methodology_ are the best way to achieve this goal.
@@ -110,11 +109,11 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 *GitHub Project Table*
 ![GitHub Project Table](docs/images/github-project-table.png)
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 
 #### User Stories
-#### Epic: Viewing and Navigation
+##### Epic: Viewing and Navigation
 - As a Shopper, I want to be able to see a home page so that I can quickly understand the purpose of the site and learn more about the business
 - As a Shopper, I want to be able to easily navigate throughout the site to find content so that I can find what I'm looking for efficiently
 - As a Shopper, I want to be able to view a list of bikes so that I can select one to purchase
@@ -122,22 +121,22 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to quickly identify special offers so that I can take advantage of special savings on products I'd like to purchase
 - As a Shopper, I want to be able to easily view the total of my purchases at any time so that I can avoid spending too much
 - As a Shopper, I want to be able to contact the store owner using the contact form so that I can ask any questions I may have
-#### Epic: Registration and User Accounts
+##### Epic: Registration and User Accounts
 - As a Shopper, I want to be able to easily register for an account so that I can have a personal account and be able to view my profile
 - As a Shopper, I want to be able to easily login or logout so that I can access my personal account information
 - As a Shopper, I want to be able to easily recover my password in case I forget it so that I can recover access to my account
 - As a Shopper, I want to be able to receive an email confirmation after registering so that I can verify that my account registration was successful
-#### Epic: User Profile and Purchases
+##### Epic: User Profile and Purchases
 - As a Shopper, I want to be able to have a personalized user profile so that I can view my personal order history and order confirmations, and save my payment information
 - As a Shopper, I want to be able to save the products I want to buy later so that I can keep track of them
 - As a Shopper, I want to be able to view my wish list so that I can see what I want to buy later
-#### Epic: Sorting and Searching
+##### Epic: Sorting and Searching
 - As a Site User, I want to be able to sort the list of available products so that I can easily identify the best-priced, categorically, brandly and colored products
 - As a Shopper, I want to be able to sort a specific category of products so that I can find the best-priced product in a specific category or sort the products in that category by name
 - As a Shopper, I want to be able to use filters so that I can sort multiple categories, brands, colors, price and sizes of products simultaneously
 - As a Shopper, I want to be able to search for a product by name, brand or color so that I can find a specific product I'd like to purchase
 - As a Shopper, I want to be able to easily see what I've searched for and the number of results so that I can quickly decide whether the product I want is available
-#### Epic: Purchasing and Checkout
+##### Epic: Purchasing and Checkout
 - As a Shopper, I want to be able to easily select the size and quantity of a bike when purchasing it, so that I can ensure I don't accidentally select the wrong bike, size or quantity
 - As a Shopper, I want to be able to view bikes in my bag to be purchased, so that I can identify the total cost of my purchase and all items I will receive
 - As a Shopper, I want to be able to adjust the quantity of individual items in my bag, so that I can easily make changes to my purchase before checkout
@@ -146,11 +145,11 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Shopper, I want to be able to feel my personal and payment information is safe and secure so that I can confidently provide the needed information to make a purchase
 - As a Shopper, I want to be able to view an order confirmation after checkout, so that I can verify I haven't made any mistakes
 - As a Shopper, I want to be able to receive an email confirmation after checking out, so that I can keep the confirmation of what I've purchased for my records
-#### Epic: Newsletters and Social Media
+##### Epic: Newsletters and Social Media
 - As a Shopper, I want to be able to subscribe to a Newsletter so that I can receive any discounts or special offers available.
 - As a Store Owner, I want to be able to send a newsletter to subscribers, so that I can inform them about special offers or discounts.
 - As a Store Owner, I need a Facebook page, so that I can promote my store on social media.
-#### Epic: Store Management
+##### Epic: Store Management
 - As a Store Owner, I want to be able to add a product to the store, so that I can sell it to customers.
 - As a Store Owner, I want to be able to edit/update a product, so that I can change the price, image or any other attributes of the product.
 - As a Store Owner, I want to be able to delete a product, so that I can remove it from the store.
@@ -158,7 +157,7 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 - As a Store Owner, I want to be able to add a product brand, so that users can group products into brands.
 - As a Store Owner, I want to be able to add a product color, so that users can group products into colors.
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ## UX Design
 The CycleBay website is designed to be simple and easy to navigate. The site has a responsive design to provide an optimal viewing experience across a wide range of devices.
@@ -171,7 +170,15 @@ The wireframes were created using [Balsamiq](https://balsamiq.com/). Here are so
 
 <!-- TODO add wireframes -->
 
-[Back to top](#table-of-contents)
+### Database Design
+The Get Job platform uses a relational database to store and manage data. The RDBMS used for this project is [PostgreSQL](https://www.postgresql.org/) which is hosted on the cloud service [ElephantSQL](https://www.elephantsql.com/).
+
+The ER Diagram below shows the structure of the database and the relationships between the tables. This diagram was created using [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/).
+
+<!-- TODO add db scheme -->
+![er_diagram](docs/images/erd.png)
+
+[Back to top ↑](#table-of-contents)
 
 ### Design Choices
 #### Color Scheme
@@ -184,20 +191,9 @@ As a primary font, I have chosen to use the [Montserrat](https://fonts.google.co
 
 ![Montserrat](docs/images/typography.png)
 
-[Back to top](#table-of-contents)
-
-### Database Design
-The Get Job platform uses a relational database to store and manage data. The RDBMS used for this project is [PostgreSQL](https://www.postgresql.org/) which is hosted on the cloud service [ElephantSQL](https://www.elephantsql.com/).
-
-The ER Diagram below shows the structure of the database and the relationships between the tables. This diagram was created using [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/).
-
-<!-- TODO add db scheme -->
-![er_diagram](docs/images/erd.png)
-
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ## Features
-
 ### Common Features
 #### Navbar
 The navbar is fully responsive and collapses into a hamburger menu on smaller screens. The right side of the navbar is always visible on all screens, since it contains the most important links for the user. I didn't see the point to make the navbar sticky or fixed, since the page content is not too long, except the products page, but in this case the user can use the *Back to top* button. In some cases, the fixed navbar can be annoying and distract the user from the main goal.
@@ -228,7 +224,6 @@ The **Categories** dropdown menu contains the list of all existing categories. T
 |:---:|:---:|
 |![Navbar Mobile Expanded](docs/images/features/navbar-mobile-expanded.png)|![Navbar Mobile Expanded & Search](docs/images/features/navbar-mobile-expanded-search.png)|
 
-
 #### Footer
 The footer consists of 5 sections:
 
@@ -247,7 +242,6 @@ It also always stays at the bottom of the page, even if the page content is not 
 
 ![footer large](docs/images/features/footer-large.png)
 
-
 #### Contact Page
 The Contact page is designed to provide the user with a convenient way to contact the store owner. The page can be accessed by clicking on the *Contact Us* link in the footer or from the navbar. The contact form contains name, email, phone number, subject and message fields. If the user authenticated, the name and email fields will be pre-filled with the user's name and email address. The form is built with Django forms and validated on the server side.
 
@@ -256,8 +250,9 @@ The Contact page is designed to provide the user with a convenient way to contac
 Once the user submits the form, they will be redirected to the *Home* page and will see the success message. The form data will be sent to the store owner's email address using the `django.core.mail.send_mail` method.
 
 ```
-# home.views.contact
+# home.views
 
+def contact(request):
 # ...
 if form.is_valid():
     message = (
@@ -366,7 +361,7 @@ The user can also use the *Forgot Password?* link to reset the password. The use
 ![password reset email](docs/images/features/pass-reset-email.png)
 ![change password](docs/images/features/change-pass.png)
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ### Home Page
 The Home page is the landing page of the website. It provides a brief overview of the store and showcases the featured products.
@@ -413,7 +408,7 @@ The Newsletter section is designed to encourage visitors to subscribe to the new
 
 To learn more, please refer to the [Email Marketing: Newsletter](#email-marketing-newsletter) section.
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ### Products Page
 The Products page displays all bikes available in the store. The list of bikes is sorted by name in ascending order by default.
@@ -784,7 +779,7 @@ By incorporating these features, I believe I've managed to craft a seamless and 
 - [ ] Delete product
 To delete a product, I used defensive design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product. Also the app checks if the user is a superuser, and accepts only post requests that implemented by the `@require_POST` decorator and jquery ajax post method.
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ### Future Features
 - Product reviews
@@ -792,91 +787,64 @@ To delete a product, I used defensive design. When a store owner tries to delete
 - Product quantity reservation for checkout (refer to product details reservation description)
 - Select color of the product right on the product details page
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ### Development Features
 ...
 
-[Back to top](#table-of-contents)
-
-## Database
-The app uses a relational database service [ElephantSQL](https://www.elephantsql.com/) to store and manage data.
-
-*Database Configuration*
-```
-development = os.getenv('DEVELOPMENT', False) == 'True'
-
-if development:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL')
-        )
-    }
-```
-
-*ElephantSQL Instance*
-![Instances-ElephantSQL](docs/images/Instances-ElephantSQL.png)
-
-[Back to top](#table-of-contents)
-
-## Static Files
-The static files are hosted on the cloud service [AWS S3](https://aws.amazon.com/s3/).
-
-*AWS S3 Bucket*
-![AWS S3 Bucket](docs/images/AWS-S3-Bucket.png)
-
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ## Technologies Used
 ### Languages
-- [HTML5](https://en.wikipedia.org/wiki/HTML5)
 - [CSS3](https://en.wikipedia.org/wiki/CSS)
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
-### Frameworks, Libraries
-- [Django 3.2](https://docs.djangoproject.com/en/3.2/)
-- [Celery 5.3.4](https://docs.celeryproject.org/en/stable/)
-- [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
-- [jQuery 3.6.4](https://releases.jquery.com/)
-- [Spectrum 1.8](https://bgrins.github.io/spectrum/)
-- [Font Awesome 6.4](https://fontawesome.com/)
-- [OwlCarousel2 2.3.4](https://owlcarousel2.github.io/)
-- [Animate.css](https://animate.style/)<small>(included to the owlcarousel library)</small>
-- [Stripe](https://stripe.com/docs)
-### Tools
-- [Redis](https://redis.io/)
-- [Git](https://git-scm.com/)
-- [GitHub Actions](https://docs.github.com/en/actions)
-- [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/)
-- [Google Fonts](https://fonts.google.com/)
-- [Heroku](https://www.heroku.com/)
-- [AWS S3](https://aws.amazon.com/s3/)
-- [Balsamiq](https://balsamiq.com/)
-- [Sass](https://sass-lang.com/)
 
-- [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html)
-- [ezgif](https://ezgif.com/)
-- [iLoveIMG](https://www.iloveimg.com/)
-- ### Django packages
-- [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+### Frameworks, Libraries
+- [Animate.css](https://animate.style/) _(included in the owlcarousel library)_
+- [Bootstrap 4.6](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+- [Django 3.2](https://docs.djangoproject.com/en/3.2/)
+- [dj-database-url](https://pypi.org/project/dj-database-url/)
+- [Font Awesome](https://fontawesome.com/)
+- [gunicorn](https://pypi.org/project/gunicorn/)
+- [jQuery 3.6.4](https://releases.jquery.com/)
+- [OwlCarousel2 2.3.4](https://owlcarousel2.github.io/)
+- [Pillow](https://pillow.readthedocs.io/en/stable/)
+- [psycopg2](https://pypi.org/project/psycopg2)
+- [pycodestyle](https://pypi.org/project/pycodestyle/)
+- [python-dotenv](https://pypi.org/project/python-dotenv/)
+- [Spectrum 1.8](https://bgrins.github.io/spectrum/)
+- [Stripe](https://stripe.com/docs)
+- [urllib3](https://pypi.org/project/urllib3/)
+
+### Django packages
 - [cripsy-bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
 - [django-allauth](https://django-allauth.readthedocs.io/en/latest/)
+- [django-countries](https://pypi.org/project/django-countries/)
+- [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+- [django-storages](https://django-storages.readthedocs.io/en/latest/)
+
+### Tools
+- [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html)
+- [AWS S3](https://aws.amazon.com/s3/)
+- [Balsamiq](https://balsamiq.com/)
+- [ezgif](https://ezgif.com/)
+- [Git](https://git-scm.com/)
+- [GitHub](https://github.com/)
+- [Google Fonts](https://fonts.google.com/)
+- [Heroku](https://www.heroku.com/)
+- [iLoveIMG](https://www.iloveimg.com/)
+- [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/)
+- [VS Code](https://code.visualstudio.com/)
+
+[Back to top ↑](#table-of-contents)
 
 ## Testing
 See [TESTING.md](https://github.com/FlashDrag/cyclebay/blob/master/docs/TESTING.md) for an overview of the app testing and debugging.
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
 
 ## Deployment
 The Get Job platform is deployed on the [Heroku](https://www.heroku.com/) cloud platform and can be accessed here https://cyclebay-bc1e75ddbf8e.herokuapp.com/
@@ -926,7 +894,9 @@ python manage.py runserver
 
 #### Instructions
 ##### Table of contents
-- [ElephantSQL Configuration](#elephantsql-configuration)
+- [Database](#database)
+    - [ElephantSQL Setup](#elephantsql-setup)
+    - [Project Configuration for Database](#project-configuration-for-database)
 - [Heroku CLI Deployment](#heroku-cli-deployment)
     - [Django project Configuration for Heroku](#django-project-configuration-for-heroku)
 - [AWS S3 Configuration](#aws-s3-configuration)
@@ -934,7 +904,10 @@ python manage.py runserver
     - [Uploading static and media files to S3](#uploading-static-and-media-files-to-s3)
 
 
-#### ElephantSQL Configuration
+#### Database
+The app uses a relational database service [ElephantSQL](https://www.elephantsql.com/) to store and manage data.
+
+##### ElephantSQL Setup
 - Register or Login to your ElephantSQL account
 - Click on the *Create New Instance* button
 
@@ -957,6 +930,32 @@ python manage.py runserver
 ![db-instance-5](docs/images/features/db-instance-5.png)
 ![db-instance-6](docs/images/features/db-instance-6.png)
 
+##### Project Configuration for Database
+- Install the `dj_database_url` and `psycopg2` packages
+```
+$ pip install dj_database_url psycopg2
+```
+- Add the following code to the *settings.py* file
+```
+if DEVELOPMENT:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL')
+        )
+    }
+```
 
 #### Heroku CLI Deployment
 - Install the Heroku CLI:
@@ -1247,4 +1246,4 @@ If you have any questions about the project, or you would like to contact me for
 
 [<img src='https://img.shields.io/badge/Telegram-333333?style=for-the-badge&logo=telegram&logoColor=white&style=plastic&logoWidth=20&labelColor=2CA5E0' alt='Telegram'>](https://t.me/flashdrag) [<img src='https://img.shields.io/badge/LinkedIn-333333?style=for-the-badge&logo=linkedin&logoColor=white&style=plastic&logoWidth=20&labelColor=0077B5' alt='Telegram'>](https://www.linkedin.com/in/pavlo-myskov)
 
-[Back to top](#table-of-contents)
+[Back to top ↑](#table-of-contents)
