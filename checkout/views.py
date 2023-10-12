@@ -168,7 +168,7 @@ def checkout(request):
                         )
                         return redirect(reverse("view_bag"))
 
-            request.session["save_info"] = "save-info" in request.POST
+            request.session["save_info"] = bool(request.POST.get("save_info"))
             return redirect(
                 reverse("checkout_success", args=[order.order_number])
             )

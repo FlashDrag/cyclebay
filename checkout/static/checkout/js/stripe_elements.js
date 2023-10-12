@@ -66,7 +66,7 @@ form.addEventListener('submit', function (ev) {
     // Capture form data that cannot be
     // added to payment intent here in confirmCardPayment method,
     // and send it to cache_checkout_data view as a post request instead
-    var saveInfo = Boolean($('#id-save-info').attr('checked'));
+    var saveInfo = $('#id-save-info').is(':checked');
     // From using {% csrf_token %} in the form
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     var postData = {
