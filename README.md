@@ -768,14 +768,36 @@ In the pursuit of enhancing the overall user experience and streamlining the pro
 
 A crucial part of this implementation is how store owner manages stock. The stock levels for the products are intrinsically linked to the `ProductSize` model. This design decision enables a more granular control over the inventory. This means each size of a bike has its own stock count. So, if a medium-sized bike is selling fast, we can easily adjust the stock for just that size. This helps the store run smoothly and makes sure customers know exactly what's available.
 
-- ##### Add Product Feature
+- ##### Add Product
+The store owner can add a new product using the *Add Item* button in the navigation bar. This button is only visible and available for staff users.
+
+![add item button](docs/images/features/add-item-button.png)
+
+The *Add Product* form includes the following fields: Category, Brand, Name, SKU, Name, Price, Color, Special Offer, Product Sizes and Image.
+
+- Category/Brand/Color
+
+The Category, Brand and Color fields are dropdown lists with all available categories, brands and colors. Also the store owner can add a new category, brand or color to database by clicking on the `Add new {category/brand/color}` button. The button opens collapsible form with the input fields. The new category/brand/color will be added to the database and selected for the product when the store owner submits the add product form.
+
+This functionality is implemented using the jQuery `setUpCollapseHandlers` function that is defined in the `inventorize/static/inventorize/js/collapse_elements.js` file.
+
+![category collapsible](docs/images/features/category-collapsible.gif)
+
+The color field additionally has the color picker that allows the store owner to choose any color for the product. The color picker is powered by [Spectrum](https://bgrins.github.io/spectrum/) library. Once the store owner selects the color from the color picker, the hex value will be added to the color field. The hex value will be stored to the database and displayed as a friendly name to the user.
+
+![color picker](docs/images/features/color-picker.png)
+
+- Product Sizes
+
 The architecture of this feature is rooted in Django's `inlineformset_factory`, which has played a pivotal role in shaping the functionality. This tool allowed me to facilitate the creation of multiple forms for each size of a product, enabling the store owner to edit the quantity for each size individually without having to navigate to a separate page.
+
+![product sizes](docs/images/features/product-sizes.png)
 
 The essence of this feature is captured in the `ProductSize` intermediate model. Here, each product size is represented as a unique combination of the product and size, thereby allowing the store owner to allocate different quantities for different sizes of the same product. This mechanism is neatly encapsulated within two forms – `ProductForm` and `ProductSizeForm`. The `ProductForm` is tasked with managing the core attributes of the product, while `ProductSizeForm` handles the sizing details.
 
 ```
 class ProductForm(forms.ModelForm):
-    # ... (as shown in the provided code)
+    # ...
 
 class ProductSizeForm(forms.ModelForm):
     class Meta:
@@ -784,24 +806,31 @@ class ProductSizeForm(forms.ModelForm):
         widgets = {'size': forms.HiddenInput()}
         labels = {"count": "Quantity",}
 
-ProductSizeFormSet = inlineformset_factory(
-    Product,
-    ProductSize,
-    form=ProductSizeForm,
-    extra=Size.objects.count(),
-    can_delete=True,
-)
+def create_product_size_formset():
+    return inlineformset_factory(
+        Product,
+        ProductSize,
+        form=ProductSizeForm,
+        extra=Size.objects.count(),
+        can_delete=True,
+    )
 ```
 
 In the template, the formset is rendered as a table, where each row corresponds to a different size of the product. The user has the ability to set the quantity for each size, and optionally exclude sizes.
 
 By incorporating these features, I believe I've managed to craft a seamless and intuitive experience for store owners. They can now effortlessly manage their products, allowing them to focus more on growing their business and less on navigating through cumbersome interfaces.
 
-* Add product category
-* Add product color
-- [ ] Edit product
-- [ ] Delete product
-To delete a product, I used defensive design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product. Also the app checks if the user is a superuser, and accepts only post requests that implemented by the `@require_POST` decorator and jquery ajax post method.
+- ##### Edit Product
+The edit and delete buttons are available on every product card and product details page for staff users only. The edit button redirects the user to the edit product page, which is the same as the add product page, but with pre-populated fields. The store owner can edit the product details and save the changes.
+
+- Image
+
+The image field is powered by Pillow library. It allows the store owner to upload the new image, replace existing image or delete the image. The uploaded image are stored in the AWS S3 bucket.
+
+![edit product image](docs/images/features/edit-product-image.png)
+
+- ##### Delete product
+For delete functionality I implemented Defensive Design. When a store owner tries to delete a product, the browser will display a modal window with a warning message. The store owner will have to confirm the deletion. This will prevent accidental deletion of the product.
 
 [Back to top ↑](#table-of-contents)
 
