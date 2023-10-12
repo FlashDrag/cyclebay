@@ -1216,33 +1216,45 @@ class MediaStorage(S3Boto3Storage):
 - Add access key credentials to Heroku Config Vars. See the `.env_example` file in the root directory of the project.
 
 #### Uploading static and media files to S3
-- ##### Collect static files
-- Set `DISABLE_COLLECTSTATIC` to `0` in Heroku Config Vars
+1. Collect static files
+    - Set `DISABLE_COLLECTSTATIC` to `0` in Heroku Config Vars
 
-    *It automatically uploads all static files to S3 using ```python3 manage.py collectstatic```*
-- Deploy the app to Heroku
-```
-$ git push heroku master
-```
+        *It automatically uploads all static files to S3 using ```python3 manage.py collectstatic```*
+    - Deploy the app to Heroku
+    ```
+    $ git push heroku master
+    ```
 
-- ##### Upload media files
+2. Upload media files
 - Create a folder called `media` in the S3 bucket next to the `static` folder
 - Manually upload all media files to the media folder in the S3 bucket
 - Set *Grand public-read access* in the *Access control list(ACL)* of the *Permissions* section
 - Click *Upload*
 
 ## Credits
+#### Code
+The CycleBay web application is based on my implementation of code, applying what I learned in the Code Institute [Diploma in Full-Stack Software Development](https://codeinstitute.net/ie/full-stack-software-development-diploma/) course and other educational resources.
 
-### Content
+_All code snippets taken from external sources are credited in the code comments._
 
+#### Images
 - [Riding Bicycle](https://www.pexels.com/photo/person-riding-bicycle-2924491/) by [SAurabh Narwade](https://www.pexels.com/@daredevil/)
 - [Man on BMX](https://www.pexels.com/photo/photo-of-man-riding-bicycle-2989567/) by [Josh Hild](https://www.pexels.com/@josh-hild-1270765/)
 - <a href="https://www.flaticon.com/free-icons/cycling" title="cycling icons">Cycling icon created by amoghdesign - Flaticon</a>
 
+## Acknowledgements
+I would like to extend my deepest gratitude to:
+
+- [Rory Patrick Sheridan](https://www.linkedin.com/in/rp-sheridan/), my dedicated mentor, for their invaluable guidance, patience, and unwavering support throughout this project.
+
+- The entire team at [Code Institute](https://codeinstitute.net/), for providing an outstanding learning platform and resources that have immensely contributed to my growth as a developer.
+
+Special thanks to everyone who provided feedback, shared insights, or pointed out issues during the development phase, as it has been essential in refining the project.
+
 ## Contacts
 If you have any questions about the project, or you would like to contact me for any other reason, please feel free to contact me by email or via social media.
 
-[![Gmail Badge](https://img.shields.io/badge/-flashdrag@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:flashdrag@gmail.com)](mailto:flashdrag@gmail.com)
+[![Gmail Badge](https://img.shields.io/badge/-pavlo.myskov@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:pavlo.myskov@gmail.com)](mailto:pavlo.myskov@gmail.com)
 
 [<img src='https://img.shields.io/badge/Telegram-333333?style=for-the-badge&logo=telegram&logoColor=white&style=plastic&logoWidth=20&labelColor=2CA5E0' alt='Telegram'>](https://t.me/flashdrag) [<img src='https://img.shields.io/badge/LinkedIn-333333?style=for-the-badge&logo=linkedin&logoColor=white&style=plastic&logoWidth=20&labelColor=0077B5' alt='Telegram'>](https://www.linkedin.com/in/pavlo-myskov)
 
