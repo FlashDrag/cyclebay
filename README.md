@@ -1,21 +1,5 @@
 # CycleBay
 
-TODO for app:
-- Add tasks to the user stories
-- Check if there is no commented code and no broken internal links
-- Ensure that all pages on the site can be reached by a link from another findable page
-- FIXME: mailchipm icon on small screens: remove:
-```
-@media screen and (max-width: 400px)
-#mc_embed_signup .foot {
-    /* grid-template-columns: 1fr;
-}
-```
-- Fix callout-container col-12: remove(on small screens, as it overflows the container):
-padding-right: 15px;
-padding-left: 15px;
-- Enable collectstatic on Heroku on final deployment
-
 ## Overview
 The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform and uses the AWS S3 cloud service to store static and media files and utilizes the Stripe payment system to process secure payments.
 
@@ -49,9 +33,7 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
         - [Contact Page](#contact-page)
         - [User Authentication and Authorization](#user-authentication-and-authorization)
             - [Sign Up](#sign-up)
-                - [Password Validation](#password-validation)
             - [Login](#login)
-                - [Password Reset](#password-reset)
     - [Home Page](#home-page)
         - [Callout](#callout)
         - [Value Proposition](#value-proposition)
@@ -935,6 +917,8 @@ The custom error pages are implemented using the `permission_denied, `bad_reques
 The views are defined in the `cyclebay/views.py` file and handlers in the `cyclebay/urls.py` file. Each view renders the appropriate template.
 
 ![error pages](docs/images/features/error-pages.png)
+
+[Back to top ↑](#table-of-contents)
 
 ### Features Left to Implement
 - Product reviews and ratings
