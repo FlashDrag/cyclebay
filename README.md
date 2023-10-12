@@ -729,15 +729,39 @@ if request.method == "POST":
 ```
 
 #### User Profile
-- [ ] Order history
-All ordered item details additionally stored in json format in the Order model in original_bag field. This allows to display the items in the order history even without reference to the Product model. So the user can see the ordered product details even if the product was deleted from the store. Its kind of a snapshot of the product at the time of purchase. Here is the list of the saved product details:
-product id, product name, product size id, size, quantity, price, color.
+The UserProfile model has a one-to-one relationship with the User model. When new `User` is created the app creates a new `UserProfile` object for this user using `post_save` signal. This allows to ensure that every user has a profile.
 
-- [ ] Order email confirmation
-- [ ] Save delivery information
-- [ ] Wish list
-Defensive design.
-When new user profile is created I used post_save signal to create a new WishList object for this user. This allows to ensure that every user has a wish list.
+The user profile page is accessible from the navigation bar for authenticated users only. The profile page consists of 2 columns on large screens (> 992px) and 1 column on smaller screens. There are two sections on the profile page: Delivery Information and Order History.
+
+![profile](docs/images/features/profile-large.png)
+
+##### Delivery Information
+The delivery information section is the form that allows the user to add/update their delivery details. The form includes the user's full name that stored in the custom user model, phone number, street address, town or city, county, postcode and country that stored in the `UserProfile` model.
+
+The form is pre-populated with the user's saved delivery information if the user saved it during the checkout process.
+Also the user can update the delivery information manually.
+
+The country field is a dropdown list with all countries based on the `CountryField` from `django_countries` package. This field provides all ISO 3166-1 countries as choices.
+
+The delivery information section is responsive and collapsed by default into a button on smaller screens. It allows them to focus on the order history and view the delivery information form only when they need it.
+
+| Delivery Collapsed | Delivery Expanded |
+| --- | --- |
+| ![profile collapsed](docs/images/features/profile-collapsed.png) | ![profile expanded](docs/images/features/profile-expanded.png) |
+
+##### Order history
+The order history section displays the list of orders placed by the user. The list is represented as a table with the following columns: Order Number, Date, Items and Total.
+
+The order number is a clickable link that redirects the user to the order details page. This page is the same as the checkout success page, but with different toast message.
+
+![order history details](docs/images/features/order-history-details.png)
+
+All ordered item details additionally stored in json format in the `Order`` model in `original_bag` field, as well as in the metadata of the payment intent.
+
+This allows to display the items in the order history even without reference to the Product model. So, the user can see the ordered product details even if the product was deleted from the store. Its kind of a snapshot of the product at the time of purchase.
+
+Here is the list of the saved product details in the original_bag field:
+product id, product name, product size id, size, quantity, price, color.
 
 #### Store Management
 In the pursuit of enhancing the overall user experience and streamlining the product management process, I developed a user-friendly interface for store owners. This interface is a significant leap forward as it grants the owners the ability to manage products without having to navigate through the admin panel. It's here that store owners can seamlessly add new products, adjust quantities for different sizes, edit existing products, delete them, and manage a plethora of other product attributes.
