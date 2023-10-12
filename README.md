@@ -23,7 +23,84 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
 ![mockup](docs/images/responsive-mockup.png)
 
-
+## Table of Contents
+- [CycleBay](#overview)
+    - [Project Goals](#projects-goals)
+    - [Marketing Strategy](#marketing-strategy)
+        - [Facebook Business Page](#social-media-marketing-facebook-business-page)
+        - [Newsletter](#email-marketing-newsletter)
+- [Agile Methodology](#agile-methodology)
+    - [Development process](#development-process)
+        - [Issue Templates](#issue-templates)
+        - [Kanban Board](#kanban-board)
+        - [MoSCoW Prioritization](#moscow-prioritization)
+    - [User Stories](#user-stories)
+- [UX Design](#ux-design)
+    - [Site Structure](#site-structure)
+    - [Wireframes](#wireframes)
+    - [Database Design](#database-design)
+    - [Design Choices](#design-choices)
+        - [Color Scheme](#color-scheme)
+        - [Typography](#typography)
+- [Features](#features)
+    - [Common Features](#common-features)
+        - [Navbar](#navbar)
+        - [Footer](#footer)
+        - [Contact Page](#contact-page)
+        - [User Authentication and Authorization](#user-authentication-and-authorization)
+            - [Sign Up](#sign-up)
+                - [Password Validation](#password-validation)
+            - [Login](#login)
+                - [Password Reset](#password-reset)
+    - [Home Page](#home-page)
+        - [Callout](#callout)
+        - [Value Proposition](#value-proposition)
+        - [Featured Carousel](#featured-carousel)
+        - [Newsletter](#newsletter)
+    - [Products Page](#products-page)
+        - [Products Page Header](#products-page-header)
+            - [Current Category/Brand/Color](#current-category-brand-and-color)
+            - [Sorting](#sorting)
+            - [Search](#search)
+        - [Product Cards](#product-cards)
+            - [Card Header](#card-header)
+            - [Card Body](#card-body)
+            - [Card Footer](#card-footer)
+    - [Product Details Page](#product-details-page)
+    - [Shopping Bag Page](#shopping-bag-page)
+        - [Product Card](#product-card)
+        - [Summary](#summary)
+    - [Checkout](#checkout)
+        - [Checkout Page](#checkout-page)
+            - [Delivery Information](#delivery-information)
+            - [Order Summary](#order-summary)
+        - [Payment](#payment)
+    - [Wishlist Page](#wishlist-page)
+    - [User Profile](#user-profile)
+        - [Delivery Information](#delivery-information-1)
+        - [Order History](#order-history)
+    - [Store Management](#store-management)
+        - [Add Product](#add-product)
+        - [Edit Product](#edit-product)
+        - [Delete Product](#delete-product)
+    - [Custom Error Pages](#custom-error-pages)
+    - [Features Left to Implement](#features-left-to-implement)
+- [Technologies Used](#technologies-used)
+    - [Languages](#languages)
+    - [Frameworks and Libraries](#frameworks-and-libraries)
+    - [Django packages](#django-packages)
+    - [Tools](#tools)
+- [Testing](#testing)
+- [Deployment](#deployment)
+    - [Local Deployment for Ubuntu](#local-deployment-for-ubuntu)
+    - [Deployment to Cloud Platform](#deployment-to-cloud-platform)
+        - [Database](#database)
+        - [Heroku CLI Deployment](#heroku-cli-deployment)
+        - [AWS S3 Configuration](#aws-s3-configuration)
+TODO:- [Stripe Configuration](#stripe-configuration)
+- [Credits](#credits)
+- [Acknowledgements](#acknowledgements)
+- [Contacts](#contacts)
 
 
 ### Projects Goals
@@ -409,12 +486,12 @@ To learn more, please refer to the [Email Marketing: Newsletter](#email-marketin
 ### Products Page
 The Products page displays all bikes available in the store. The list of bikes is sorted by name in ascending order by default.
 
-- #### Products Header
-The products header consists of 3 rows:
+#### Products Page Header
+    The products header consists of 3 rows:
 
-- *Bikes* - heading
-- *Current Category, Brand and Color*
-- *Products Count* and *Sorting*.
+    - *Bikes* - heading
+    - *Current Category, Brand and Color*
+    - *Products Count* and *Sorting*.
 
 - ##### Current Category, Brand and Color
 This row is hidden if the user is on the *All Bikes* page. If the user is selected a category, brand or color, the *Current Category, Brand and Color* row will be displayed with appropriate values.
@@ -456,11 +533,11 @@ If the search query is empty, the user will see the error message and all bikes 
 
 ![search error](docs/images/features/search-error.png)
 
-- #### Product Cards
+#### Product Cards
 The product cards are displayed in a grid layout. The layout consists of 4 columns on extra large screens ( > 1200px), 3 columns on large screens ( > 992px), 2 columns on medium screens ( > 768px) and 1 column on small screens.
 
 Each product card displays:
-##### Header
+- ##### Card Header
 - Brand badge - clickable link that redirects the user to the products page with the selected brand.
 - Color badge - clickable link that redirects the user to the products page with the selected color. Since the colors stored in the database as hex values, I created a JavaScript function that parses the hex value and replace `#` with `%23` to pass hex color in url, since `#` is a special character in url and it will be ignored by the browser. It allows to sort the products by specific color. Also I added the tooltips with the color friendly name to make it more readable for the user. The tooltip appears on hover.
 ```
@@ -469,12 +546,12 @@ const parsedColor = color.startsWith('#') ? color.replace("#", "%23") : color;
 ```
 The full script can be found in the `products/templates/products/products.html` template.
 
-##### Body
+- ##### Card Body
 - Product image - clickable link that redirects the user to the product details page.
 - Product name
 - Product price
 - Product Category - clickable link that redirects the user to the products page with the selected category.
-##### Footer
+- ##### Card Footer
 - View Product icon - clickable button that redirects the user to the product details page. Since the button is not contain any text, I added the `aria-label` attribute to make it accessible for screen readers. Also if the product is out of stock, the button will be replaced with the *Out of Stock* text. The functionality implemented using the `total_count` method in the `Product` model. So, if I need to check if the product is in stock, I just call the `total_count` method on the product object in the template.
 - Add to Wishlist icon - clickable button that adds the product to the wishlist. If the user is not authenticated, they will be redirected to the login page.
 
@@ -591,7 +668,7 @@ The shopping bag page is fully responsive and changes its layout from 2 columns 
 
 ![bag](docs/images/features/bag.png)
 
-##### Product Card
+- ##### Product Card
 The product card includes Product Image, Name, SKU, Size, Color, Quantity, Subtotal and Delete Button.
 
 - Quantity Input
@@ -651,7 +728,7 @@ The form is validated on the client and backend sides. The client-side validatio
 - ##### Order Summary
 The order summary section displays the list of products added to the shopping bag with subtotal for each product, order total, delivery cost and grand total. Refer to the [Shopping Bag Summary](#summary) section for more details about the calculation of the order total, delivery cost and grand total.
 
-- ##### Payment
+#### Payment
 The payment functionality is powered by [Stripe](https://stripe.com/). Stripe is a secure and reliable payment processing platform that allows users to make payments using their credit cards. The Stripe API is used to create a payment intent and process the payment. It allows to validate the payment on the client and backend sides.
 
 The payment process begins when the user goes to the checkout page.
@@ -752,7 +829,7 @@ The user profile page is accessible from the navigation bar for authenticated us
 
 ![profile](docs/images/features/profile-large.png)
 
-##### Delivery Information
+- ##### Delivery Information
 The delivery information section is the form that allows the user to add/update their delivery details. The form includes the user's full name that stored in the custom user model, phone number, street address, town or city, county, postcode and country that stored in the `UserProfile` model.
 
 The form is pre-populated with the user's saved delivery information if the user saved it during the checkout process.
@@ -766,7 +843,7 @@ The delivery information section is responsive and collapsed by default into a b
 | --- | --- |
 | ![profile collapsed](docs/images/features/profile-collapsed.png) | ![profile expanded](docs/images/features/profile-expanded.png) |
 
-##### Order history
+- ##### Order history
 The order history section displays the list of orders placed by the user. The list is represented as a table with the following columns: Order Number, Date, Items and Total.
 
 The order number is a clickable link that redirects the user to the order details page. This page is the same as the checkout success page, but with different toast message.
@@ -853,8 +930,14 @@ For delete functionality I implemented Defensive Design. When a store owner trie
 
 [Back to top ↑](#table-of-contents)
 
-### Future Features
-- Product reviews
+#### Custom Error Pages
+The custom error pages are implemented using the `permission_denied, `bad_request`, `page_not_found`, `server_error` views and `handler400`, `handler403`, `handler404` and `handler500` handlers.
+The views are defined in the `cyclebay/views.py` file and handlers in the `cyclebay/urls.py` file. Each view renders the appropriate template.
+
+![error pages](docs/images/features/error-pages.png)
+
+### Features Left to Implement
+- Product reviews and ratings
 - Filters (filtering products simultaneously by multiple categories, brands, colors and price)
 - Product quantity reservation for checkout (refer to product details reservation description)
 - Select color of the product right on the product details page
@@ -869,7 +952,7 @@ For delete functionality I implemented Defensive Design. When a store owner trie
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 
-### Frameworks, Libraries
+### Frameworks and Libraries
 - [Animate.css](https://animate.style/) _(included in the owlcarousel library)_
 - [Bootstrap 4.6](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
@@ -960,7 +1043,7 @@ python manage.py runserver
 - [GitHub](https://github.com/)
 
 #### Instructions
-##### Table of contents
+##### Contents
 - [Database](#database)
     - [ElephantSQL Setup](#elephantsql-setup)
     - [Project Configuration for Database](#project-configuration-for-database)
