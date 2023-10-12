@@ -21,10 +21,10 @@ The CycleBay is a business to customer (B2C) e-commerce platform that allows cus
 
 Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
-![mockup](docs/images/mockup.png)
+![mockup](docs/images/responsive-mockup.png)
 
-## Table of Contents
-...
+
+
 
 ### Projects Goals
 - Develop a web application enabling users to purchase bicycles online.
@@ -66,7 +66,7 @@ The Project link: https://github.com/users/FlashDrag/projects/11
 
 Each siqnificant feature is presented as an _Epic_ and then broken down into smaller _User Stories_ that are then added to the _Project Backlog_. _Epics_ are marked with labels to indicate the feature. It allows me to filter the _User Stories_ by feature and then allocate them to _Milestones_ and prioritize them.
 
-##### Issue Templates
+#### Issue Templates
 I created the following _Issue Templates_ to ensure that all issues are created in a consistent manner:
 - *Bug* - for reporting bugs
 - *Story* - for creating new _User Stories_
@@ -111,8 +111,7 @@ The prioritization is based on the 60-20-20 rule where 60% of the effort is spen
 
 [Back to top ↑](#table-of-contents)
 
-
-#### User Stories
+### User Stories
 ##### Epic: Viewing and Navigation
 - As a Shopper, I want to be able to see a home page so that I can quickly understand the purpose of the site and learn more about the business
 - As a Shopper, I want to be able to easily navigate throughout the site to find content so that I can find what I'm looking for efficiently
@@ -224,6 +223,8 @@ The **Categories** dropdown menu contains the list of all existing categories. T
 |:---:|:---:|
 |![Navbar Mobile Expanded](docs/images/features/navbar-mobile-expanded.png)|![Navbar Mobile Expanded & Search](docs/images/features/navbar-mobile-expanded-search.png)|
 
+[Back to top ↑](#table-of-contents)
+
 #### Footer
 The footer consists of 5 sections:
 
@@ -241,6 +242,8 @@ The footer is fully responsive and changes its layout from 3 columns to 1 column
 It also always stays at the bottom of the page, even if the page content is not long enough to fill the screen. This is achieved by using the `d-flex flex-column vh-100` bootstrap classes on the `body` tag and `flex-grow-1` bootstrap class on the child elements of the `body` tag on all pages where the content is long enough to fill the screen.
 
 ![footer large](docs/images/features/footer-large.png)
+
+[Back to top ↑](#table-of-contents)
 
 #### Contact Page
 The Contact page is designed to provide the user with a convenient way to contact the store owner. The page can be accessed by clicking on the *Contact Us* link in the footer or from the navbar. The contact form contains name, email, phone number, subject and message fields. If the user authenticated, the name and email fields will be pre-filled with the user's name and email address. The form is built with Django forms and validated on the server side.
@@ -276,16 +279,7 @@ if form.is_valid():
     return redirect("home")
 ```
 
-### Wishlist Page
-The Wishlist page displays all products added to the wishlist. The list of products is sorted by name in ascending order by default.
-
-Each product card includes Product Image, Name, Color, Price and Control Buttons. The user can remove the product from the wishlist by clicking on the *Remove* button. This functionality is implemented with **Defensive Design**. It uses the jQuery `wishlist_toggler` function to remove the product from the wishlist without reloading the page. When the user clicks on the *Remove* button, the browser will display a modal window with a warning message. The user will have to confirm the deletion. This will prevent accidental deletion of the product. Only post requests are accepted for deletion, which is implemented by the `@require_POST` decorator and jquery ajax post method.
-
-The Wishlist Toggler can be found in the `wishlist/static/wishlist/js/wishlist_toggler.js` and `wishlist/views.py` files.
-
-![wishlist](docs/images/features/wishlist.png)
-![wishlist modal](docs/images/features/wishlist-modal.png)
-![wishlist removed](docs/images/features/wishlist-removed.png)
+[Back to top ↑](#table-of-contents)
 
 #### User Authentication and Authorization
 - ##### Sign Up
@@ -348,6 +342,8 @@ def create_wishlist(sender, instance, created, **kwargs):
 ```
 
 ![user objects](docs/images/features/user-objects.png)
+
+[Back to top ↑](#table-of-contents)
 
 - ##### Login
 The user can login by clicking on the *Login* link in the navbar. Then they will be redirected to the login page where they can fill in the login form. The user can also use the *Remember Me* checkbox to stay logged in even after closing the browser. This is achieved with the `SESSION_COOKIE_AGE` setting. By default it's 1209600 (2 weeks, in seconds).
@@ -494,6 +490,8 @@ The delete functionality is implemented using **Defensive Design**. When the sta
 
 ![edit delete](docs/images/features/edit-delete.png)
 
+[Back to top ↑](#table-of-contents)
+
 ### Product Details Page
 The Product Details page provides detailed information about a specific product.
 It includes the product image, name, price, brand, category, color, sizes and controls.
@@ -582,6 +580,8 @@ In the future, I still plan to implement the Celery task and Reservation functio
 [ProductReservation commit](https://github.com/FlashDrag/cyclebay/commit/12ed1c4b67ed3b198a47a8d23ff9f82ddc90dab6)
 
 
+[Back to top ↑](#table-of-contents)
+
 ### Shopping Bag Page
 The Shopping Bag page displays the products added to the shopping bag and allows the user to adjust the quantity of each product and remove products from the bag. The shopping is stored in the session and is available throughout the full site by using the `bag` context processor.
 
@@ -630,6 +630,8 @@ else:
 
 grand_total = delivery + total
 ```
+
+[Back to top ↑](#table-of-contents)
 
 ### Checkout
 The checkout page is a crucial step in the purchasing process, enabling users to review their cart items, input their shipping and payment details, and finalize their purchase.
@@ -728,6 +730,21 @@ if request.method == "POST":
                 return redirect(reverse("view_bag"))
 ```
 
+[Back to top ↑](#table-of-contents)
+
+### Wishlist Page
+The Wishlist page displays all products added to the wishlist. The list of products is sorted by name in ascending order by default.
+
+Each product card includes Product Image, Name, Color, Price and Control Buttons. The user can remove the product from the wishlist by clicking on the *Remove* button. This functionality is implemented with **Defensive Design**. It uses the jQuery `wishlist_toggler` function to remove the product from the wishlist without reloading the page. When the user clicks on the *Remove* button, the browser will display a modal window with a warning message. The user will have to confirm the deletion. This will prevent accidental deletion of the product. Only post requests are accepted for deletion, which is implemented by the `@require_POST` decorator and jquery ajax post method.
+
+The Wishlist Toggler can be found in the `wishlist/static/wishlist/js/wishlist_toggler.js` and `wishlist/views.py` files.
+
+![wishlist](docs/images/features/wishlist.png)
+![wishlist modal](docs/images/features/wishlist-modal.png)
+![wishlist removed](docs/images/features/wishlist-removed.png)
+
+[Back to top ↑](#table-of-contents)
+
 #### User Profile
 The UserProfile model has a one-to-one relationship with the User model. When new `User` is created the app creates a new `UserProfile` object for this user using `post_save` signal. This allows to ensure that every user has a profile.
 
@@ -762,6 +779,8 @@ This allows to display the items in the order history even without reference to 
 
 Here is the list of the saved product details in the original_bag field:
 product id, product name, product size id, size, quantity, price, color.
+
+[Back to top ↑](#table-of-contents)
 
 #### Store Management
 In the pursuit of enhancing the overall user experience and streamlining the product management process, I developed a user-friendly interface for store owners. This interface is a significant leap forward as it grants the owners the ability to manage products without having to navigate through the admin panel. It's here that store owners can seamlessly add new products, adjust quantities for different sizes, edit existing products, delete them, and manage a plethora of other product attributes.
@@ -839,11 +858,7 @@ For delete functionality I implemented Defensive Design. When a store owner trie
 - Filters (filtering products simultaneously by multiple categories, brands, colors and price)
 - Product quantity reservation for checkout (refer to product details reservation description)
 - Select color of the product right on the product details page
-
-[Back to top ↑](#table-of-contents)
-
-### Development Features
-...
+- Add product to the wishlist from the product details page
 
 [Back to top ↑](#table-of-contents)
 
@@ -901,7 +916,6 @@ See [TESTING.md](https://github.com/FlashDrag/cyclebay/blob/master/docs/TESTING.
 
 ## Deployment
 The Get Job platform is deployed on the [Heroku](https://www.heroku.com/) cloud platform and can be accessed here https://cyclebay-bc1e75ddbf8e.herokuapp.com/
-
 
 ### Local Deployment for Ubuntu
 #### Requirements
@@ -1284,6 +1298,8 @@ class MediaStorage(S3Boto3Storage):
 - Set *Grand public-read access* in the *Access control list(ACL)* of the *Permissions* section
 - Click *Upload*
 
+[Back to top ↑](#table-of-contents)
+
 ## Credits
 #### Code
 The CycleBay web application is based on my implementation of code, applying what I learned in the Code Institute [Diploma in Full-Stack Software Development](https://codeinstitute.net/ie/full-stack-software-development-diploma/) course and other educational resources.
@@ -1295,6 +1311,8 @@ _All code snippets taken from external sources are credited in the code comments
 - [Man on BMX](https://www.pexels.com/photo/photo-of-man-riding-bicycle-2989567/) by [Josh Hild](https://www.pexels.com/@josh-hild-1270765/)
 - <a href="https://www.flaticon.com/free-icons/cycling" title="cycling icons">Cycling icon created by amoghdesign - Flaticon</a>
 
+[Back to top ↑](#table-of-contents)
+
 ## Acknowledgements
 I would like to extend my deepest gratitude to:
 
@@ -1303,6 +1321,8 @@ I would like to extend my deepest gratitude to:
 - The entire team at [Code Institute](https://codeinstitute.net/), for providing an outstanding learning platform and resources that have immensely contributed to my growth as a developer.
 
 Special thanks to everyone who provided feedback, shared insights, or pointed out issues during the development phase, as it has been essential in refining the project.
+
+[Back to top ↑](#table-of-contents)
 
 ## Contacts
 If you have any questions about the project, or you would like to contact me for any other reason, please feel free to contact me by email or via social media.
