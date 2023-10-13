@@ -55,6 +55,11 @@ var form = document.getElementById('payment-form');
 form.addEventListener('submit', function (ev) {
     ev.preventDefault();
 
+    var formIsValid = validateForm(this);
+    if (!formIsValid) {
+        return false;
+    }
+
     // disable card element and submit button to prevent multiple submissions
     card.update({ 'disabled': true });
     $('#submit-button').attr('disabled', true);
@@ -140,3 +145,51 @@ form.addEventListener('submit', function (ev) {
         location.reload();
     })
 });
+
+
+// Validate form
+function validateForm(form) {
+    const emailIsValid = validateEmail(form.email.value);
+    if (!emailIsValid) {
+        const emailElement = $('#id_email');
+        emailElement.before('<div class="text-danger">Please enter a valid email address.</div>');
+        emailElement.addClass('is-invalid');
+        emailElement.focus();
+        return false;
+    }
+
+    const phoneIsValid = validatePhoneNumber(form.phone_number.value);
+    if (!phoneIsValid) {
+        const phoneElement = $('#id_phone_number');
+        phoneElement.before('<div class="text-danger">Please enter a valid phone number.</div>');
+        phoneElement.addClass('is-invalid');
+        phoneElement.focus();
+    }
+}
+
+
+// Validate email address
+// https://www.w3resource.com/javascript/form/email-validation.php
+function validateEmail(email) {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (emailRegex.test(email)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// https://developerking.medium.com/how-to-integrate-international-phone-number-validation-in-input-field-with-javascript-55d8e4b432c4
+// Validate international phone number
+function validatePhoneNumber(phoneNumber) {
+    // Regular expression to match most international phone number formats
+    var phoneNumberRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+    // Test the phone number against the regular expression
+    if (phoneNumberRegex.test(phoneNumber)) {
+      // Phone number is valid
+      return true;
+    } else {
+      // Phone number is not valid
+      return false;
+    }
+  }
