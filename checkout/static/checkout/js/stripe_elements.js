@@ -143,7 +143,7 @@ form.addEventListener('submit', function (ev) {
         console.log(xhr.responseText);
         console.error('Failed to cache checkout data.');
         location.reload();
-    })
+    });
 });
 
 

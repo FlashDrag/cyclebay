@@ -52,7 +52,7 @@ $(document).ready(function () {
     }
 
     // Set up collapse handlers for each element
-    for (prefix of elementPrefixes) {
+    for (let prefix of elementPrefixes) {
         setUpCollapseHandlers(prefix);
     }
 
@@ -70,7 +70,7 @@ $(document).ready(function () {
         }
     }
 
-    for (prefix of elementPrefixes) {
+    for (let prefix of elementPrefixes) {
         collapseElementIfError(prefix);
     }
 

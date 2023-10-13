@@ -44,6 +44,6 @@ $(document).ready(function () {
         }).fail(function (xhr, textStatus, error) {
             alert(`Error:  ${xhr.status} ${error}! \nPlease, contact the administrator.`);
             console.error("Something went wrong in add_to_wishlist_toggle view");
-        })
+        });
     });
 });
