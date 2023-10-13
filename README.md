@@ -8,7 +8,9 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 ![mockup](docs/images/responsive-mockup.png)
 
 ## Table of Contents
-- [CycleBay](#overview)
+- [Bussiness Model](#business-model)
+    - [Value Proposition](#value-proposition)
+    - [Audience](#audience)
     - [Project Goals](#projects-goals)
     - [Marketing Strategy](#marketing-strategy)
         - [Facebook Business Page](#social-media-marketing-facebook-business-page)
@@ -36,7 +38,7 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
             - [Login](#login)
     - [Home Page](#home-page)
         - [Callout](#callout)
-        - [Value Proposition](#value-proposition)
+        - [Value Proposition](#value-proposition-1)
         - [Featured Carousel](#featured-carousel)
         - [Newsletter](#newsletter)
     - [Products Page](#products-page)
@@ -85,12 +87,21 @@ TODO:- [Stripe Configuration](#stripe-configuration)
 - [Contacts](#contacts)
 
 
+## Business Model
+### Value Proposition
+CycleBay provides a one-stop platform for cycling enthusiasts to explore, compare, and purchase bicycles from the comfort of their homes. The platform offers a variety of bicycles catering to diverse user preferences and needs. With a user-friendly design, secure payment gateway, and responsive design for optimal viewing on various devices, CycleBay offers an enhanced shopping experience to its customers.
+
+### Audience
+- Cycling enthusiasts looking for a new bicycle.
+- Individuals who prefer online shopping for its convenience.
+- Those who are active on social media platforms and are influenced by digital promotions and offers.
+
 ### Projects Goals
-- Develop a web application enabling users to purchase bicycles online.
-- Cater to cycling enthusiasts in search of a new bicycle.
-- Ensure the app facilitates a quick and user-friendly bike search experience.
-- Incorporate a responsive design to ensure an optimal viewing experience on various devices.
-- Integrate a secure payment system.
+- **Platform Excellence**: Develop a robust, user-friendly web platform that streamlines the online bicycle buying process.
+- **Audience Engagement**: Target and cater to cycling enthusiasts, ensuring they find what they're seeking.
+- **Adaptive Design**: Implement a design that provides a seamless experience across various devices.
+- **Transaction Security**: Integrate a secure and reliable payment gateway, instilling customer trust.
+- **Dynamic Marketing**: Craft and execute a potent marketing strategy that leverages digital platforms, especially social media, to enhance brand visibility and drive sales.
 
 ### Marketing Strategy
 CycleBay's overarching goal is to substantially increase sales and revenue. To achieve this, we are prioritizing product visibility by showcasing our range on digital platforms. Expanding our digital footprint through the creation and active management of our Facebook page will facilitate direct engagement with our target audience. Additionally, our strategic push on social media aims to grow our brand awareness, ensuring that CycleBay becomes the go-to e-commerce platform for cycling enthusiasts.
