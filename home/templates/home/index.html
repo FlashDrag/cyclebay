@@ -14,15 +14,15 @@
   <section class="callout-container">
     <div class="row">
       <div class="col-12">
-        <section class="text-white">
+        <div class="text-white">
           <h1 class="mb-3 mb-md-4">Journey with <br> CycleBay</h1>
           <p class="lead mb-4 mb-md-5">
             We're not just selling bicycles - <br> we're promoting a lifestyle!
           </p>
-          <a class="btn btn-cta border-white py-1" href="{% url 'products' %}" type="button">
+          <a class="btn btn-cta border-white py-1" href="{% url 'products' %}" role="button">
             Shop Now
           </a>
-        </section>
+        </div>
       </div>
     </div>
   </section>
@@ -178,7 +178,7 @@
 {{ block.super }}
 <!-- Owl Carousel -->
 <!-- https://owlcarousel2.github.io -->
-<script type="text/javascript" src="{% static 'libs/owl_carousel/docs/assets/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'libs/owl_carousel/docs/assets/owlcarousel/owl.carousel.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('.owl-carousel').owlCarousel({
@@ -211,7 +211,7 @@
 </script>
 
 <!-- Mailchimp scripts -->
-<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+<script src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 <script type="text/javascript">
   (function ($) {
     window.fnames = new Array();
