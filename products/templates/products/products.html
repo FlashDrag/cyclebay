@@ -4,7 +4,7 @@
 {% block content %}
 <section class="bg-light py-4 flex-grow-1">
   <div class="container">
-    <header role="banner">
+    <header>
       <div class="row mb-2">
         <div class="col text-center">
           <h2 class="logo-font">Bikes</h2>
@@ -209,18 +209,18 @@
 {% block postloadjs %}
 {{ block.super }}
 <!-- pass csrf token -->
-<script type="text/javascript">
+<script>
   var csrfToken = '{{ csrf_token }}';
 </script>
-<script type="text/javascript" src="{% static 'wishlist/js/wishlist_toggler.js' %}"></script>
+<script src="{% static 'wishlist/js/wishlist_toggler.js' %}"></script>
 
-<script type="text/javascript">
+<script>
   $('.btt-link').click(function (e) {
     window.scrollTo(0, 0)
   })
 </script>
 
-<script type="text/javascript">
+<script>
   document.addEventListener('DOMContentLoaded', function() {
     // Attach color badges to each product
     const colorLists = document.querySelectorAll('.color-list');
@@ -254,7 +254,7 @@
   });
 </script>
 
-<script type="text/javascript">
+<script>
   $('#sort-selector').change(function () {
     var selector = $(this);
     var currentUrl = new URL(window.location);
@@ -277,7 +277,7 @@
   })
 </script>
 <!-- Delete product script that use the error modal for superusers  -->
-<script type="text/javascript">
+<script>
   // Remove item and reload on click
   $(document).ready(function () {
     // modal trigger

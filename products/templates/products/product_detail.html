@@ -120,12 +120,12 @@
 
 {% block postloadjs %}
   {{ block.super }}
-  <script type="text/javascript">
+  <script>
     $(document).ready(function(){
       $('.sizes label').tooltip();
     });
   </script>
-  <script type="text/javascript">
+  <script>
     // Alert if radio button not checked
     $('#add-to-bag-form').submit(function(e) {
       if (!$("form input[type='radio']").is(':checked')) {
@@ -150,7 +150,7 @@
   </script>
 {% if request.user.is_superuser %}
 <!-- Delete product script that use the error modal for superusers  -->
-<script type="text/javascript">
+<script>
   // Remove item and reload on click
   $(document).ready(function () {
     // modal trigger
