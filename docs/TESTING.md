@@ -9,6 +9,8 @@
 - [Compatibility Testing](#compatibility-testing)
   - [Browser Compatibility](#browser-compatibility)
   - [Device Compatibility](#device-compatibility)
+- [User Stories Manual Testing](#user-stories-manual-testing)
+- [Bugs/Issues](#bugsissues)
 - [Back to README.md](../README.md#table-of-contents)
 
 
@@ -201,4 +203,14 @@ Here are some screenshots of the website on iPhone 12 Pro:
 ![iPhone 12 Pro Checkout Page](images/testing/iphone12_checkout.png)
 
 [Back to top](#contents)
+
+## User Stories Manual Testing
+Manual testing was performed to ensure that all features work as intended.
+
+## Bugs/Issues
+- #### Checkout
+    - **Issue:** The backend form validation executes using *stripe_elements.js* after the Stripe payment is confirmed. This means that if the form is invalid, the user will still be charged for the order.
+    - **Solution:** The form validation is done on the frontend using JavaScript. If the form is invalid, the user will be notified and the payment will not be processed.
+    - **Future Update:** The functionality will be completely refactored to use the Django forms validation before the payment is processed, to ensure that the user cannot bypass the frontend validation.
+
 [Back to README.md](../README.md#table-of-contents)
