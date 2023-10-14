@@ -5,7 +5,7 @@
 - [Back to README.md](../README.md#table-of-contents)
 
 
-## PEP8 - Flakes8 Validation
+## Python - Flakes8 Validation
 The Flake8 linting tool is used to identify code-quality issues and check the Python code for PEP8 requirements.
 
 In some cases, the Flake8 validation was ignored for a specific line of code. This was done by adding a `# noqa` comment at the end of the line.
@@ -35,3 +35,31 @@ The JavaScript separate files were validated using [JSHint](https://jshint.com/)
 ![jshint_wishlist_toggler](images/testing/jshint_wishlist.png)
 
 [Back to top](#contents)
+
+## HTML Validation
+The HTML markup was validated using [W3C Markup Validation Service](https://validator.w3.org/). Since the Django templating language was used, the validation was done on the public rendered HTML pages, that not required a user to be logged in.
+
+*Home Page*
+![HTML Validation Home Page](images/testing/html_validation_home.png)
+
+*Products Page*
+![HTML Validation Products Page](images/testing/html_validation_products.png)
+
+*Product Detail Page*
+![HTML Validation Product Detail Page](images/testing/html_validation_product_detail.png)
+
+*Featured Products Page*
+![HTML Validation Featured Products Page](images/testing/html_validation_featured_products.png)
+
+*Login Page*
+![HTML Validation Login Page](images/testing/html_validation_login.png)
+
+*Register Page*
+![HTML Validation Register Page](images/testing/html_validation_register.png)
+
+*Empty Bag Page*
+![HTML Validation Empty Bag Page](images/testing/html_validation_empty_bag.png)
+
+*Contact Page*
+![HTML Validation Contact Page](images/testing/html_validation_contact.png)
+
