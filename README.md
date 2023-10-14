@@ -243,9 +243,20 @@ The wireframes were created using [Balsamiq](https://balsamiq.com/). Here are so
 ### Database Design
 The Get Job platform uses a relational database to store and manage data. The RDBMS used for this project is [PostgreSQL](https://www.postgresql.org/) which is hosted on the cloud service [ElephantSQL](https://www.elephantsql.com/).
 
-The ER Diagram below shows the structure of the database and the relationships between the tables. This diagram was created using [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/).
+The Entity-Relationship Diagram below shows the structure of the database and the relationships between the tables. This diagram was created using [Microsoft Visio](https://www.microsoft.com/en-ie/microsoft-365/visio/). The relationships between the tables are represented by the *Crow's Foot Notation*.
 
-<!-- TODO add db scheme -->
+There are the following relations:
+- 1 : 1 - one-to-one relationship
+- 1 : 0..1 - one-to-zero or one relationship
+- 1 : N - one-to-many relationship
+- 1 : 1..N - one-to-one and more relationship
+- 1 : 0..N - one-to-zero and more relationship
+- N : N - many-to-many relationship
+- 1..N : 1..N - one or more to one or more relationship
+- 0..N : 0..N - zero or more to zero or more relationship
+
+![crow's foot notation](docs/images/crow-s-foot-notation.jpeg)
+
 ![er_diagram](docs/images/erd.png)
 
 [Back to top ↑](#table-of-contents)
@@ -929,6 +940,9 @@ The views are defined in the `cyclebay/views.py` file and handlers in the `cycle
 - Product quantity reservation for checkout (refer to product details reservation description)
 - Select color of the product right on the product details page
 - Add product to the wishlist from the product details page
+- Pagination for products
+- Automated testing with Django test framework
+- CI/CD with GitHub Actions and Heroku pipelines
 
 [Back to top ↑](#table-of-contents)
 
