@@ -17,10 +17,10 @@
             {% if current_categories %}
               <li>
                 <ul class="list-inline">
-                  <h6 class="d-inline-block mb-0">
+                  <h3 class="display-6 d-inline-block mb-0">
                     <i class="fas fa-tags mr-1"></i>
                     Categor{{ current_categories|length|pluralize:"y,ies" }}:
-                  </h6>
+                  </h3>
                   {% for c in current_categories %}
                     <li class="list-inline-item mr-0">
                       <a href="{% url 'products' %}?category={{ c.name|urlencode }}">
@@ -35,10 +35,10 @@
             {% if current_brands %}
               <li>
                 <ul class="list-inline">
-                  <h6 class="d-inline-block mb-0">
+                  <h3 class="display-6 d-inline-block mb-0">
                     <i class="fas fa-registered mr-1"></i>
                     Brand{{ current_brands|length|pluralize:"s" }}:
-                  </h6>
+                  </h3>
                   {% for b in current_brands %}
                     <li class="list-inline-item mr-0">
                       <a href="{% url 'products' %}?brand={{ b.name|urlencode }}">
@@ -53,10 +53,10 @@
             {% if current_colors %}
               <li>
                 <ul class="list-inline">
-                  <h6 class="d-inline-block mb-0">
+                  <h3 class="display-6 d-inline-block mb-0">
                     <i class="fas fa-palette mr-1"></i>
                     Color{{ current_colors|length|pluralize:"s" }}:
-                  </h6>
+                  </h3>
                   {% for col in current_colors %}
                   <li class="list-inline-item mr-0">
                     <a href="{% url 'products' %}?color={{ col.name|urlencode }}">
@@ -82,6 +82,7 @@
         </div>
         <div class="col-6 my-auto d-flex justify-content-end">
           <div class="sort-select-wrapper">
+            <label for="sort-selector" class="sr-only">Sort by:</label>
             <select id="sort-selector"
               class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
               <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
@@ -150,7 +151,7 @@
           </div>
           <!-- product name -->
           <div class="card-body py-2">
-            <h6 class="card-title mb-0">{{ product.name }}</h6>
+            <h4 class="display-6 card-title mb-0">{{ product.name }}</h4>
             <p class="card-text mb-0 font-weight-bold">
               &euro;{{ product.price }}
             </p>
@@ -201,7 +202,7 @@
 
 <!-- back to top button -->
 <div class="btt-button bg-white shadow-sm rounded-0 border border-black">
-  <a class="btt-link d-flex h-100">
+  <a class="btt-link d-flex h-100" href="#" aria-label="Back to top">
     <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
   </a>
 </div>
@@ -244,7 +245,7 @@
         li.classList.add("list-inline-item","color-badge", "position-relative");
         li.style.backgroundColor = color;
         // add a stretched-link to filter by that color
-        li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${parsedColor}"></a>`;
+        li.innerHTML = `<a class="stretched-link" href="{% url 'products' %}?color=${parsedColor}" aria-label="Filter by ${friendlyName}"></a>`;
 
         // Add tooltip to color badge
         li.setAttribute('data-toggle', 'tooltip');

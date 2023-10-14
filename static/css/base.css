@@ -47,6 +47,10 @@ body {
   color: #ba8b00b9 !important;
 }
 
+.display-6 {
+  font-size: 1rem;
+}
+
 .nav-link.text-yellow:hover {
   color: #ba8b00b9 !important;
 }
