@@ -28,21 +28,21 @@
        <ul class="list-unstyled mt-2 mt-md-3">
           {% if product.brand %}
             <li class="small mt-1 mb-0">
-              <a class="text-muted" href="{% url 'products' %}?brand={{ product.brand.name }}">
+              <a class="text-muted" href="{% url 'products' %}?brand={{ product.brand.name|urlencode }}">
                 <i class="fas fa-trademark mr-1"></i>{{ product.brand.friendly_name }}
               </a>
             </li>
           {% endif %}
           {% if product.category %}
             <li class="small mt-1 mb-0">
-              <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+              <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name|urlencode }}">
                 <i class="fas fa-folder-open mr-1"></i>{{ product.category.friendly_name }}
               </a>
             </li>
           {% endif %}
           {% if product.color %}
             <li class="small mt-1 mb-0">
-              <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name|encode_query_param  }}">
+              <a class="text-muted" href="{% url 'products' %}?color={{ product.color.name|urlencode  }}">
                 <i class="fas fa-palette mr-1"></i>{{ product.color.friendly_name }}
               </a>
             </li>

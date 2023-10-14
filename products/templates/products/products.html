@@ -4,7 +4,7 @@
 {% block content %}
 <section class="bg-light py-4 flex-grow-1">
   <div class="container">
-    <header role="products-header">
+    <header role="banner">
       <div class="row mb-2">
         <div class="col text-center">
           <h2 class="logo-font">Bikes</h2>
@@ -23,7 +23,7 @@
                   </h6>
                   {% for c in current_categories %}
                     <li class="list-inline-item mr-0">
-                      <a href="{% url 'products' %}?category={{ c.name }}">
+                      <a href="{% url 'products' %}?category={{ c.name|urlencode }}">
                         {{ c.friendly_name }}
                       </a>
                     {% if not forloop.last %},{% endif %}
@@ -41,7 +41,7 @@
                   </h6>
                   {% for b in current_brands %}
                     <li class="list-inline-item mr-0">
-                      <a href="{% url 'products' %}?brand={{ b.name }}">
+                      <a href="{% url 'products' %}?brand={{ b.name|urlencode }}">
                         {{ b.friendly_name }}
                       </a>
                     {% if not forloop.last %},{% endif %}
@@ -59,7 +59,7 @@
                   </h6>
                   {% for col in current_colors %}
                   <li class="list-inline-item mr-0">
-                    <a href="{% url 'products' %}?brand={{ col.name }}">
+                    <a href="{% url 'products' %}?color={{ col.name|urlencode }}">
                       {{ col.friendly_name }}
                     </a>
                     {% if not forloop.last %},{% endif %}
@@ -120,7 +120,7 @@
             <div>
               {% if product.brand %}
                 <a class="badge badge-pill badge-light brand-badge text-muted"
-                  href="{% url 'products' %}?brand={{ product.brand.name }}">
+                  href="{% url 'products' %}?brand={{ product.brand.name|urlencode }}">
                   <i class="fas fa-registered mr-1"></i>
                   {{ product.brand.friendly_name }}
                 </a>
@@ -150,7 +150,7 @@
             </p>
             {% if product.category %}
             <p class="card-text small mt-1 mb-0">
-              <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+              <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name|urlencode }}">
                 <small><i class="fas fa-tags mr-1"></i>{{ product.category.friendly_name }}</small>
               </a>
             </p>
