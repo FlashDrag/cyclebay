@@ -29,7 +29,7 @@
         {% if item.quantity > 0 %}
           <div class="row">
             <div class="col-2 mb-1">
-              <a href="{% url 'product_detail' item.product.id %}">
+              <a href="{% url 'product_detail' item.product.id %}" aria-label="View {{ item.product.name }}">
                 {% if item.product.image %}
                 <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
                 {% else %}
@@ -146,4 +146,8 @@
   {{ stripe_public_key | json_script:"id_stripe_public_key" }}
   {{ client_secret | json_script:"id_client_secret" }}
   <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+  <script>
+    // sr-only label for country select
+    $('#div_id_country').prepend('<label class="sr-only" for="id_country">Select Country:</label>');
+  </script>
 {% endblock %}
