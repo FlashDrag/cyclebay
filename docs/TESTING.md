@@ -1,7 +1,14 @@
 # TESTING
 
 ## Contents
-...
+- [Python - Flakes8 Validation](#python---flakes8-validation)
+- [JavaScript Validation](#javascript-validation)
+- [HTML Validation](#html-validation)
+- [CSS Validation](#css-validation)
+- [Lighthouse Testing](#lighthouse-testing)
+- [Compatibility Testing](#compatibility-testing)
+  - [Browser Compatibility](#browser-compatibility)
+  - [Device Compatibility](#device-compatibility)
 - [Back to README.md](../README.md#table-of-contents)
 
 
@@ -23,15 +30,19 @@ The following Flake8 errors were ignored:
 The JavaScript separate files were validated using [JSHint](https://jshint.com/).
 
 *checkout/stripe_elements.js*
+
 ![jshint_stripe_elements](images/testing/jshint_checkout.png)
 
 *inventorize/collapse_elements.js*
+
 ![jshint_collapse_elements](images/testing/jshint_inventorize.png)
 
 *profiles/countryfield.js*
+
 ![jshint_countryfield](images/testing/jshint_profiles.png)
 
 *wishlist/wishlist_toggler.js*
+
 ![jshint_wishlist_toggler](images/testing/jshint_wishlist.png)
 
 [Back to top](#contents)
@@ -40,27 +51,35 @@ The JavaScript separate files were validated using [JSHint](https://jshint.com/)
 The HTML markup was validated using [W3C Markup Validation Service](https://validator.w3.org/). Since the Django templating language was used, the validation was done on the public rendered HTML pages, that not required a user to be logged in.
 
 *Home Page*
+
 ![HTML Validation Home Page](images/testing/html_validation_home.png)
 
 *Products Page*
+
 ![HTML Validation Products Page](images/testing/html_validation_products.png)
 
 *Product Detail Page*
+
 ![HTML Validation Product Detail Page](images/testing/html_validation_product_detail.png)
 
 *Featured Products Page*
+
 ![HTML Validation Featured Products Page](images/testing/html_validation_featured_products.png)
 
 *Login Page*
+
 ![HTML Validation Login Page](images/testing/html_validation_login.png)
 
 *Register Page*
+
 ![HTML Validation Register Page](images/testing/html_validation_register.png)
 
 *Empty Bag Page*
+
 ![HTML Validation Empty Bag Page](images/testing/html_validation_empty_bag.png)
 
 *Contact Page*
+
 ![HTML Validation Contact Page](images/testing/html_validation_contact.png)
 
 [Back to top](#contents)
@@ -69,45 +88,59 @@ The HTML markup was validated using [W3C Markup Validation Service](https://vali
 To validate the CSS code I used the [Jigsaw](https://jigsaw.w3.org/css-validator/) css validator.
 
 *checkout.css*
+
 ![CSS Validation Checkout](images/testing/css_validation_checkout.png)
 
 *home.css*
+
 There are 4 parse errors in the home.css file, since the `:has()` pseudo-class is part of a level 4 selectors draft and is not yet supported by the validator.
 
 ![CSS Validation Home](images/testing/css_validation_home.png)
 
 *inventorize.css*
+
 ![CSS Validation Inventorize](images/testing/css_validation_inventorize.png)
 
 *profile.css*
+
 ![CSS Validation Profile](images/testing/css_validation_profile.png)
 
 *base.css*
+
 ![CSS Validation Base](images/testing/css_validation_base.png)
+
+[Back to top](#contents)
 
 ## Lighthouse Testing
 The [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) tool was used to check the performance, accessibility, best practices, and SEO of the website. The tests were run on the deployed website.
 
-### Desktop
 *Home Page*
+
 ![Lighthouse Home Page](images/testing/lighthouse_home.png)
 
 *Products Page*
+
 <small>To enhance the performance of the products page, I plan to implement pagination to limit the number of products loaded at once. Given that the products page features various types of sorting and filtering options, which complicate the implementation of pagination, I have decided to postpone this feature to a future update.</small>
 
 ![Lighthouse Products Page](images/testing/lighthouse_products.png)
 
 *Product Detail Page*
+
 ![Lighthouse Product Detail Page](images/testing/lighthouse_product_detail.png)
 
 *Empty Bag Page*
+
 ![Lighthouse Empty Bag Page](images/testing/lighthouse_empty_bag.png)
 
 *Bag Page with Products*
+
 ![Lighthouse Bag Page](images/testing/lighthouse_bag.png)
 
 *Checkout Page*
+
 ![Lighthouse Checkout Page](images/testing/lighthouse_checkout.png)
+
+[Back to top](#contents)
 
 ## Compatibility Testing
 - ### Browser Compatibility
@@ -140,22 +173,32 @@ Tested devices:
 Here are some screenshots of the website on iPhone 12 Pro:
 
 *Home Page*
+
 ![iPhone 12 Pro Home Page](images/testing/iphone12_home.png)
 
 *Profile Page*
+
 ![iPhone 12 Pro Profile Page](images/testing/iphone12_profile.png)
 
 *Wishlist Page*
+
 ![iPhone 12 Pro Wishlist Page](images/testing/iphone12_wishlist.png)
 
 *Products Page*
+
 ![iPhone 12 Pro Products Page](images/testing/iphone12_products.png)
 
 *Product Detail Page*
+
 ![iPhone 12 Pro Product Detail Page](images/testing/iphone12_product_detail.png)
 
 *Bag Page*
+
 ![iPhone 12 Pro Bag Page](images/testing/iphone12_bag.png)
 
 *Checkout Page*
+
 ![iPhone 12 Pro Checkout Page](images/testing/iphone12_checkout.png)
+
+[Back to top](#contents)
+[Back to README.md](../README.md#table-of-contents)
