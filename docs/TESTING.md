@@ -63,3 +63,24 @@ The HTML markup was validated using [W3C Markup Validation Service](https://vali
 *Contact Page*
 ![HTML Validation Contact Page](images/testing/html_validation_contact.png)
 
+[Back to top](#contents)
+
+## CSS Validation
+To validate the CSS code I used the [Jigsaw](https://jigsaw.w3.org/css-validator/) css validator.
+
+*checkout.css*
+![CSS Validation Checkout](images/testing/css_validation_checkout.png)
+
+*home.css*
+There are 4 parse errors in the home.css file, since the `:has()` pseudo-class is part of a level 4 selectors draft and is not yet supported by the validator.
+
+![CSS Validation Home](images/testing/css_validation_home.png)
+
+*inventorize.css*
+![CSS Validation Inventorize](images/testing/css_validation_inventorize.png)
+
+*profile.css*
+![CSS Validation Profile](images/testing/css_validation_profile.png)
+
+*base.css*
+![CSS Validation Base](images/testing/css_validation_base.png)
