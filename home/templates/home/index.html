@@ -3,8 +3,8 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
-<link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/owlcarousel/assets/owl.carousel.min.css' %}">
-<link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/owlcarousel/assets/owl.theme.default.min.css' %}">
+<link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/owlcarousel/assets/owl.carousel.min.css' %}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{% static 'libs/owl_carousel/docs/assets/owlcarousel/assets/owl.theme.default.min.css' %}" media="print" onload="this.media='all'">
 <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
