@@ -63,7 +63,7 @@
     <div class="border-bottom px-3 py-1 bg-light">
       <div class="d-flex justify-content-between">
         <div class="">
-          <a href="https://www.facebook.com/people/CycleBay/61552069412658/" class="text-muted" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/people/CycleBay/61552069412658/" class="text-muted-black" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-facebook"></i>
             <strong class="d-none d-sm-inline">Join us on Facebook</strong>
             <strong class="d-inline d-sm-none">Join us</strong>
@@ -72,22 +72,22 @@
         <div class="text-right">
           {% if request.user.is_authenticated %}
             {% if request.user.is_staff %}
-              <a class="pr-2" href="{% url 'profile' %}">
-                <i class="fas fa-user text-muted"></i>
-                <span class="text-muted">My Profile</span>
+              <a class="pr-2 text-muted-black" href="{% url 'profile' %}">
+                <i class="fas fa-user"></i>
+                <span>My Profile</span>
               </a>
             {% endif %}
-            <a class="text-muted" href="{% url 'account_logout' %}">
+            <a class="text-muted-black" href="{% url 'account_logout' %}">
               <i class="fas fa-sign-out-alt"></i>
               <span>Logout</span>
             </a>
           {% else %}
             <!-- add sign up and sign in -->
-            <a class="pr-2 text-muted" href="{% url 'account_signup' %}">
+            <a class="pr-2 text-muted-black" href="{% url 'account_signup' %}">
               <i class="fas fa-user-plus"></i>
               <span>Sign Up</span>
             </a>
-            <a class="text-muted" href="{% url 'account_login' %}">
+            <a class="text-muted-black" href="{% url 'account_login' %}">
               <i class="fas fa-sign-in-alt"></i>
               <span>Sign In</span>
             </a>

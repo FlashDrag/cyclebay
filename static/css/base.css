@@ -31,6 +31,10 @@ body {
   background-color: black;
 }
 
+.text-muted-black {
+  color: #4a525a !important;
+}
+
 .text-black {
   color: black !important;
 }
