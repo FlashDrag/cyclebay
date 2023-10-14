@@ -109,3 +109,53 @@ The [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) tool
 *Checkout Page*
 ![Lighthouse Checkout Page](images/testing/lighthouse_checkout.png)
 
+## Compatibility Testing
+- ### Browser Compatibility
+The website was tested on the following browsers:
+- Chrome
+- Firefox
+- Edge
+
+The app worked well across all browsers and discrepancies were not found.
+
+- ### Device Compatibility
+The app was tested using Google Chrome Developer Tool - Device Mode Toolbar.
+Tested devices:
+- MacBook Pro
+- iPhone SE
+- iPhone 12 Pro
+- Pixel 5
+- Samsung Galaxy S8+
+- Samsung Galaxy S20 Ultra
+- iPad Air
+- iPad Mini
+- Surface Pro 7
+- Surface Duo
+- Samsung Galaxy A51
+- Nest Hub
+- Nest Hub Max
+- iPad
+- iPadPro
+
+Here are some screenshots of the website on iPhone 12 Pro:
+
+*Home Page*
+![iPhone 12 Pro Home Page](images/testing/iphone12_home.png)
+
+*Profile Page*
+![iPhone 12 Pro Profile Page](images/testing/iphone12_profile.png)
+
+*Wishlist Page*
+![iPhone 12 Pro Wishlist Page](images/testing/iphone12_wishlist.png)
+
+*Products Page*
+![iPhone 12 Pro Products Page](images/testing/iphone12_products.png)
+
+*Product Detail Page*
+![iPhone 12 Pro Product Detail Page](images/testing/iphone12_product_detail.png)
+
+*Bag Page*
+![iPhone 12 Pro Bag Page](images/testing/iphone12_bag.png)
+
+*Checkout Page*
+![iPhone 12 Pro Checkout Page](images/testing/iphone12_checkout.png)
