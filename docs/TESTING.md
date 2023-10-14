@@ -84,3 +84,28 @@ There are 4 parse errors in the home.css file, since the `:has()` pseudo-class i
 
 *base.css*
 ![CSS Validation Base](images/testing/css_validation_base.png)
+
+## Lighthouse Testing
+The [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) tool was used to check the performance, accessibility, best practices, and SEO of the website. The tests were run on the deployed website.
+
+### Desktop
+*Home Page*
+![Lighthouse Home Page](images/testing/lighthouse_home.png)
+
+*Products Page*
+<small>To enhance the performance of the products page, I plan to implement pagination to limit the number of products loaded at once. Given that the products page features various types of sorting and filtering options, which complicate the implementation of pagination, I have decided to postpone this feature to a future update.</small>
+
+![Lighthouse Products Page](images/testing/lighthouse_products.png)
+
+*Product Detail Page*
+![Lighthouse Product Detail Page](images/testing/lighthouse_product_detail.png)
+
+*Empty Bag Page*
+![Lighthouse Empty Bag Page](images/testing/lighthouse_empty_bag.png)
+
+*Bag Page with Products*
+![Lighthouse Bag Page](images/testing/lighthouse_bag.png)
+
+*Checkout Page*
+![Lighthouse Checkout Page](images/testing/lighthouse_checkout.png)
+
