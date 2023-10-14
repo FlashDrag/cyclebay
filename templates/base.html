@@ -164,8 +164,8 @@
           </li>
         {% endif %}
         <li class="list-inline-item">
-          <a class="{% if grand_total %}text-yellow font-weight-bold{% else %}text-secondary{% endif %} nav-link px-0 px-sm-2"
-            href="{% url 'view_bag' %}" role="button">
+          <a class="{% if grand_total %}font-weight-bold{% else %}text-secondary{% endif %} nav-link px-0 px-sm-2"
+            href="{% url 'view_bag' %}" role="button" style="color: #136e28;">
             <div class="text-center">
               <i class="fas fa-shopping-cart"></i>
               <p class="my-0">

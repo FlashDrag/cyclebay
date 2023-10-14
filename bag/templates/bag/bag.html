@@ -42,7 +42,7 @@
                 <!-- Product info -->
                 <div class="col-12 col-xl-5 mt-4 d-flex flex-column justify-content-center">
                   <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                  <p class="my-0 small text-muted">sku: {{ item.product.sku|lower }}</p>
+                  <p class="my-0 small text-muted-black">sku: {{ item.product.sku|lower }}</p>
                   <p class="my-0">Size: {% if item.size %}{{ item.size.friendly_name }}{% else %}N/A{% endif %}</p>
                   <p class="my-0">Color: {% if item.product.color %}{{ item.color.friendly_name }}{% else %}N/A{% endif %}
                   </p>
@@ -58,12 +58,14 @@
                         {% csrf_token %}
                         <div class="form-group">
                           <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="{{ item.product_size_obj.count }} in stock">
+                            <label for="id_qty_{{ item.product_size_id }}" class="sr-only">Quantity</label>
                             <input class="form-control form-control-sm qty_input border-info border-right-0" type="number" name="quantity" value="{{ item.quantity }}"
                               min="1" max="{{ item.product_size_obj.count }}" data-product_size_id="{{ item.product_size_id }}"
                               id="id_qty_{{ item.product_size_id }}" style="min-width: 50px; max-width: 60px;">
                             <!-- submit -->
                             <div class="input-group-append">
-                              <button type="submit" class="btn btn-sm btn-outline-info rounded-0">
+                              <button type="submit" class="btn btn-sm btn-outline-info rounded-0"
+                                aria-label="Update Quantity">
                                 <i class="fas fa-sync-alt"></i>
                               </button>
                             </div>
@@ -84,7 +86,8 @@
                     </div>
                     <!-- Remove item -->
                     <div class="col-12 col-sm-auto">
-                      <button class="btn btn-sm btn-outline-danger rounded-0 remove-item" id="remove_{{ item.product_size_id }}">
+                      <button class="btn btn-sm btn-outline-danger rounded-0 remove-item"
+                        id="remove_{{ item.product_size_id }}" aria-label="Remove item">
                         <span class="d-sm-none">
                           <small>Remove</small>
                         </span>
