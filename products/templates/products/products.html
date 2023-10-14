@@ -133,15 +133,21 @@
             </ul>
           </div>
           <!-- product image -->
-          {% if product.image %}
-          <a href="{% url 'product_detail' product.id %}">
-            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
-          </a>
-          {% else %}
-          <a href="{% url 'product_detail' product.id %}">
-            <img class="card-img-top" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-          </a>
-          {% endif %}
+          <div class="position-relative">
+            {% if product.featured %}
+            <!-- attach badge if product is featured -->
+              <span class="ribbon-featured">Hot</span>
+            {% endif %}
+            {% if product.image %}
+            <a href="{% url 'product_detail' product.id %}">
+              <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+            {% else %}
+            <a href="{% url 'product_detail' product.id %}">
+              <img class="card-img-top" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+            </a>
+            {% endif %}
+          </div>
           <!-- product name -->
           <div class="card-body py-2">
             <h6 class="card-title mb-0">{{ product.name }}</h6>

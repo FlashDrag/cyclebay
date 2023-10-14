@@ -81,6 +81,7 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
         - [Database](#database)
         - [Heroku CLI Deployment](#heroku-cli-deployment)
         - [AWS S3 Configuration](#aws-s3-configuration)
+
 TODO:- [Stripe Configuration](#stripe-configuration)
 - [Credits](#credits)
 - [Acknowledgements](#acknowledgements)
@@ -469,6 +470,10 @@ To implement the carousel, I used the [Owl Carousel](https://owlcarousel2.github
     <img src="docs/images/features/carousel.gif" alt="featured carousel mobile" width="300"/>
 </p>
 
+On the products page each featured product has a *folded ribbon* in the top right corner of a product image. The ribbon is a visual indicator that the product is featured.
+
+![featured ribbon](docs/images/features/featured-ribbon.png)
+
 - ##### Newsletter
 The Newsletter section is designed to encourage visitors to subscribe to the newsletter. The section contains a brief description of the newsletter and a subscription form. The subscription form consists of a single input field for the email address and a *Subscribe* button. The form is validated using the [Mailchimp](https://mailchimp.com/) API.
 
@@ -572,20 +577,7 @@ It includes the product image, name, price, brand, category, color, sizes and co
 
 The Delete functionality is implemented using **Defensive Design**.
 
-The color is displayed as a friendly name, but passed to the link as a hex value. So, if the user clicks on the color name, the products page will be opened with the selected color. Since the colors stored in the database as hex values, I created a custom template filter `encode_query_param` based on `urllib.parse.quote_plus` function that encodes the value to be used as a query parameter. For example, the color `#ff0000` will be encoded to `%23ff0000`, that allows to pass hex color in url.
-
-```
-# products/templatetags/custom_filters.py
-
-from django import template
-from urllib.parse import quote_plus
-
-register = template.Library()
-
-@register.filter(name="encode_query_param")
-def encode_query_param(value):
-    return quote_plus(value)
-```
+The color is displayed as a friendly name, but passed to the link as a hex value. So, if the user clicks on the color name, the products page will be opened with the selected color. Since the colors stored in the database as hex values, I used `urlencode` template filter to pass hex color in url. The `urlencode` filter encodes the value to be used as a query parameter. For example, the color `#ff0000` will be encoded to `%23ff0000`, that allows to pass hex color in url. Also the `urlencode` filter is used for the brand and category names, since they can contain spaces and special characters.
 
 - Sizes
 This functionality is based on complex many-to-many relationships between the `Product`, `Size` and `ProductSize` models. The `ProductSize` model is an intermediate model that allows to store additional information about the product size, such as quantity. The `ProductSize` model has a foreign key to the `Product` and `Size` models. The `Product` model has a many-to-many relationship with the `Size` model through the `ProductSize` model. This allows to add multiple sizes to the product and store the quantity for each size.
@@ -647,7 +639,7 @@ Initially, I implemented the stock management functionality that decreased the s
 In the future, I still plan to implement the Celery task and Reservation functionality. However, instead of reserving the product quantity immediately after a user adds a product to the bag, I will reserve it only when the user is on the Checkout page. This change aims to prevent a situation where, while the first user is filling out the checkout form, another user buys the last available product before the first user can submit the form. It will improve the user experience and will ensure that the product is reserved for the user only when they are ready to complete the checkout process.
 </sup>
 
-[ProductReservation commit](https://github.com/FlashDrag/cyclebay/commit/12ed1c4b67ed3b198a47a8d23ff9f82ddc90dab6)
+[ProductReservation commit](https://github.com/FlashDrag/cyclebay/commit/39c3a58d6d7fcf7a17b7889618171fb0ab9bec6d)
 
 
 [Back to top ↑](#table-of-contents)
