@@ -3,6 +3,19 @@
 
 {% block extra_title %}- Products{% endblock %}
 
+{% block extra_css %}
+<style>
+  .lazy-load {
+    background: url('{{ MEDIA_URL }}loading.gif') no-repeat center;
+    background-size: auto;
+    min-height: 15rem;
+    opacity: 0.6;
+    transition: opacity 1s ease-in-out;
+  }
+</style>
+
+{% endblock %}
+
 {% block content %}
 <section class="bg-light py-4 flex-grow-1">
   <div class="container">
@@ -136,18 +149,18 @@
             </ul>
           </div>
           <!-- product image -->
-          <div class="position-relative">
+          <div class="position-relative text-center">
             {% if product.featured %}
             <!-- attach badge if product is featured -->
               <span class="ribbon-featured">Hot</span>
             {% endif %}
             {% if product.image %}
             <a href="{% url 'product_detail' product.id %}">
-              <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+              <img class="card-img-top lazy-load" data-src="{{ product.image.url }}" alt="{{ product.name }}">
             </a>
             {% else %}
             <a href="{% url 'product_detail' product.id %}">
-              <img class="card-img-top" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+              <img class="card-img-top lazy-load" data-src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
             </a>
             {% endif %}
           </div>
@@ -316,6 +329,30 @@
         .fail(function (xhr, status, error) {
           location.href = homeUrl;
         });
+    });
+  });
+</script>
+<script>
+  // Lazy load images using Intersection Observer
+  $(document).ready(function() {
+    // Initialize Intersection Observer
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let el = $(entry.target);
+          el.attr('src', el.data('src'));
+          el.removeClass('lazy-load'); // remove the class to avoid re-loading
+          observer.unobserve(entry.target); // Stop observing this element
+        }
+      });
+    }, {
+      // Load images 100px before they appear on viewport.
+      rootMargin: '100px'
+    });
+
+    // Observe each element with the 'lazy-load' class
+    $('.lazy-load').each(function() {
+      observer.observe(this);
     });
   });
 </script>
