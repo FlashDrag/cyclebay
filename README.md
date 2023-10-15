@@ -1,7 +1,10 @@
 # CycleBay
 
 ## Overview
-The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to buy bicycles online. This is a full stack website built using the Django framework and uses the PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform and uses the AWS S3 cloud service to store static and media files and utilizes the Stripe payment system to process secure payments.
+The CycleBay is a business to customer (B2C) e-commerce platform that allows customers to purchase bicycles online. The website is a full-stack application built using the Django framework and utilizes a PostgreSQL database to store and manage data. The app is deployed on the Heroku cloud platform and leverages AWS S3 cloud service for storing static and media files.
+
+Additionally, it employs the Stripe payment system to process secure transactions. To test the payment system, see the [Payment Intents Testing](#payment-intents-testing) section.
+
 
 Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
@@ -81,8 +84,8 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
         - [Database](#database)
         - [Heroku CLI Deployment](#heroku-cli-deployment)
         - [AWS S3 Configuration](#aws-s3-configuration)
+    - [Stripe Configuration](#stripe-configuration)
 
-TODO:- [Stripe Configuration](#stripe-configuration)
 - [Credits](#credits)
 - [Acknowledgements](#acknowledgements)
 - [Contacts](#contacts)
@@ -936,6 +939,7 @@ The views are defined in the `cyclebay/views.py` file and handlers in the `cycle
 
 ### Features Left to Implement
 - Product reviews and ratings
+- Discount codes
 - Filters (filtering products simultaneously by multiple categories, brands, colors and price)
 - Product quantity reservation for checkout (refer to product details reservation description)
 - Select color of the product right on the product details page
@@ -1053,7 +1057,10 @@ python manage.py runserver
 - [AWS S3 Configuration](#aws-s3-configuration)
     - [Connecting Django to S3](#connecting-django-to-s3)
     - [Uploading static and media files to S3](#uploading-static-and-media-files-to-s3)
-
+- [Stripe Configuration](#stripe-configuration)
+    - [Stripe Setup](#stripe-setup)
+    - [Webhook Setup](#webhooks)
+    - [Payment Intents Testing](#payment-intents-testing)
 
 #### Database
 The app uses a relational database service [ElephantSQL](https://www.elephantsql.com/) to store and manage data.
@@ -1381,6 +1388,46 @@ class MediaStorage(S3Boto3Storage):
 - Manually upload all media files to the media folder in the S3 bucket
 - Set *Grand public-read access* in the *Access control list(ACL)* of the *Permissions* section
 - Click *Upload*
+
+
+### Stripe Configuration
+##### Stripe Setup
+- Create a Stripe account (https://stripe.com/)
+- Go to the Stripe dashboard and click on the *Developers* tab
+- Click on the *API keys* tab
+- Copy the *Publishable key* and *Secret key*
+- Add the *Publishable key* and *Secret key* to the Heroku Config Vars. See the `.env_example` file in the root directory of the project.
+
+![stripe-api-keys](docs/images/features/stripe-api-keys.png)
+
+##### Webhooks
+- Go to Stripe Developer Dashboard -> Webhooks
+- Add endpoint:
+    - Endpoint URL: `https://<your-heroku-app-name>.herokuapp.com/checkout/wh/`
+    - Events to send: select all events
+    - Click *Add endpoint*
+- Copy the *Signing secret* and add it to the Heroku Config Vars and .env file. The variable name should be `STRIPE_WH_SECRET`
+
+![stripe-webhooks](docs/images/features/stripe-webhooks.png)
+
+##### Payment Intents Testing
+For testing purposes, you can use the following Stripe Test card numbers:
+- Successful payments
+
+    - `4242 4242 4242 4242` - succeeds and immediately processes the payment.
+    - `4000002500003155` - 3D Secure 2 authentication is required.
+
+- Unsuccessful payments
+
+    - `4000000000000002` - card declined
+    - `4000000000009995` - insufficient funds
+    - `4000000000009987` - lost card
+    - `4000000000009979` - stolen card
+
+_The expiration date, CVC and postal code can be any valid future date, 3 digits and 5 digits respectively._
+
+![stripe-payment-card](docs/images/features/stripe-payment-card.png)
+
 
 [Back to top ↑](#table-of-contents)
 
