@@ -2,5 +2,3 @@
 __pycache__/
 db.sqlite3
 .vscode/
-bag-total.html
-quantity-form.html
