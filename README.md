@@ -952,15 +952,23 @@ The views are defined in the `cyclebay/views.py` file and handlers in the `cycle
 [Back to top ↑](#table-of-contents)
 
 ### Features Left to Implement
-- Product reviews and ratings
-- Discount codes
-- Filters (filtering products simultaneously by multiple categories, brands, colors and price)
-- Product quantity reservation for checkout (refer to product details reservation description)
-- Select color of the product right on the product details page
-- Add product to the wishlist from the product details page
-- Pagination for products
+- Product description.
+    The store owner can add the product description using the WYSIWYG editor.
+
+- Product reviews and ratings.
+    The user can add a review and rating to the bought product.
+- Discount codes and coupons.
+    The store owner can send the discount codes to the customers using the mailchimp integration. The customer can apply the discount code in the shopping bag page.
+- Filters.
+    Filtering sidebar allows users to filter products simultaneously by multiple categories, brands, colors and price range.
+- Product quantity reservation for checkout process using Celery task.
+    The product quantity will be reserved for 15 minutes, only when the user is on the checkout page.
+- Select color of the product right on the product details page.
+    Avoiding the duplication of the products with different colors.
+- Add product to the wishlist from the product details page or shopping bag page.
+- Pagination for products to improve the performance of the products page.
 - Automated testing with Django test framework
-- CI/CD with GitHub Actions and Heroku pipelines
+- CI/CD with GitHub Actions and Heroku pipelines to automate the deployment and testing process
 
 [Back to top ↑](#table-of-contents)
 
