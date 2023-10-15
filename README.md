@@ -241,7 +241,21 @@ The website has 4 main pages with a clear and semantic structure, the informatio
 ### Wireframes
 The wireframes were created using [Balsamiq](https://balsamiq.com/). Here are some initial wireframes created at the beginning of the project. The final design may differ from the initial wireframes.
 
-<!-- TODO add wireframes -->
+*Home Page*
+
+![Home Page](docs/images/wireframes/Home.png)
+
+*Products Page*
+
+![Products Page](docs/images/wireframes/products.png)
+
+*Product Details Page*
+
+![Product Details Page](docs/images/wireframes/product-details.png)
+
+*Shopping Bag Page*
+
+![Shopping Bag Page](docs/images/wireframes/bag.png)
 
 ### Database Design
 The Get Job platform uses a relational database to store and manage data. The RDBMS used for this project is [PostgreSQL](https://www.postgresql.org/) which is hosted on the cloud service [ElephantSQL](https://www.elephantsql.com/).
