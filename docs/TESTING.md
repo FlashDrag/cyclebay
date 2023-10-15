@@ -9,7 +9,7 @@
 - [Compatibility Testing](#compatibility-testing)
   - [Browser Compatibility](#browser-compatibility)
   - [Device Compatibility](#device-compatibility)
-- [User Stories Manual Testing](#user-stories-manual-testing)
+- [User Stories - Manual Testing](#user-stories---manual-testing)
 - [Bugs/Issues](#bugsissues)
 - [Back to README.md](../README.md#table-of-contents)
 
@@ -204,8 +204,79 @@ Here are some screenshots of the website on iPhone 12 Pro:
 
 [Back to top](#contents)
 
-## User Stories Manual Testing
+## User Stories - Manual Testing
 Manual testing was performed to ensure that all features work as intended.
+
+##### Epic: Viewing and Navigation
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+| Home Page | As a Shopper, I want to be able to see a home page so that I can quickly understand the purpose of the site and learn more about the business | Home page is displayed with essential business information and site purpose. |
+Navigate the site | As a Shopper, I want to be able to easily navigate throughout the site to find content so that I can find what I'm looking for efficiently | Navigation bar is displayed on all pages, and the user can easily navigate to the desired page. |
+View a list of bikes | As a Shopper, I want to be able to view a list of bikes so that I can select one to purchase | List of bikes is displayed on the products page, and the user can click on a product to view the product detail page. |
+View bike details | As a Shopper, I want to be able to view the details of a bike so that I can identify the price, color, type, size and image | Product detail page shows all relevant information about the product. |
+Identify special offers | As a Shopper, I want to be able to quickly identify special offers so that I can take advantage of special savings | The user can see the special offers on the home page and the products page. |
+View total of purchases | As a Shopper, I want to be able to easily view the total of my purchases at any time so that I can avoid spending too much | Cart shows the total cost of selected items. |
+Contact via form | As a Shopper, I want to be able to contact the store owner using the contact form so that I can ask any questions I may have | Contact form is easily accessible from the navigation bar and footer and functions as intended. |
+
+##### Epic: Registration and User Accounts
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+Register for an account | As a Shopper, I want to be able to easily register for an account | User can register through a simple form and receives a confirmation email. |
+Login/Logout | As a Shopper, I want to be able to easily login or logout | User can login or logout |
+Recover password | As a Shopper, I want to be able to easily recover my password | Password recovery option is available and sends reset instructions to the user's email. |
+Receive email confirmation | As a Shopper, I want to be able to receive an email confirmation after registering | User receives a confirmation email after successful registration |
+
+
+##### Epic: User Profile and Purchases
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+Personalized profile | As a Shopper, I want to be able to have a personalized user profile | User profile shows order history and saved payment information |
+Save products for later | As a Shopper, I want to be able to save the products I want to buy later | User can add products to the wishlist from the products page|
+View wishlist | As a Shopper, I want to be able to view my wish list | Wishlist is accessible and shows saved items |
+
+##### Epic: Sorting and Searching
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+Sort products | As a Site User, I want to be able to sort the list of available products | Sorting options are available for price, category, brand, color and name in ascending and descending order. |
+Filter products | As a Shopper, I want to be able to use filters | To be implemented in a future update. |
+Search for products | As a Shopper, I want to be able to search for a product | Search bar is available and functional. |
+
+##### Epic: Purchasing and Checkout
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+Select size and quantity | As a Shopper, I want to be able to easily select the size and quantity of a bike | Select size is available on the product detail page, and quantity can be selected on the bag page. |
+View items in bag | As a Shopper, I want to be able to view bikes in my bag | User can view items and total cost in the shopping bag |
+Adjust quantity in bag | As a Shopper, I want to be able to adjust the quantity of individual items in my bag | Option to adjust quantity for items in the shopping bag is available and valid. |
+Remove items from bag | As a Shopper, I want to be able to remove a bike from my bag | Option to remove items from the shopping bag is available and valid. |
+Enter payment information | As a Shopper, I want to be able to easily enter my payment information | Payment form is user-friendly and accepts all necessary information |
+Feel information is secure | As a Shopper, I want to be able to feel my personal and payment information is safe | Payment is processed using Stripe, and the user can feel confident that their information is secure. |
+View order confirmation | As a Shopper, I want to be able to view an order confirmation after checkout | User is directed to an order confirmation page after successful payment |
+Receive email confirmation | As a Shopper, I want to be able to receive an email confirmation after checking out | User receives an order confirmation email after successful payment. |
+
+
+##### Epic: Newsletters and Social Media
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+Subscribe to a Newsletter | As a Shopper, I want to be able to subscribe to a Newsletter | Newsletter subscription form is available and functional. |
+Send Newsletter | As a Store Owner, I want to be able to send a newsletter to subscribers | Newsletter can be sent to all subscribers through the mailchimp account. |
+Facebook page | As a Store Owner, I need a Facebook page to promote my business | Facebook page for the store is set up and active |
+
+##### Epic: Store Management
+
+| User Story | Requirements to be met | Result |
+| --- | --- | --- |
+Add a product | As a Store Owner, I want to be able to add a product to the store | Interface for adding new products is available and functional |
+Edit a product | As a Store Owner, I want to be able to edit/update a product | Options for editing existing products are available and functional |
+Delete a product | As a Store Owner, I want to be able to delete a product | Option to delete a product is available and functional |
+Add a category | As a Store Owner, I want to be able to add a product category | Interface for adding new categories is available and functional |
+Add a brand | As a Store Owner, I want to be able to add a product brand | Interface for adding new brands is available and functional |
+Add a color | As a Store Owner, I want to be able to add a product color | Interface for adding new colors is available and functional |
 
 ## Bugs/Issues
 - #### Checkout
