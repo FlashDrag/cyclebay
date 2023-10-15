@@ -6,7 +6,7 @@ The CycleBay is a business to customer (B2C) e-commerce platform that allows cus
 Additionally, it employs the Stripe payment system to process secure transactions. To test the payment system, see the [Payment Intents Testing](#payment-intents-testing) section.
 
 
-Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
+**Live Demo**: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
 
 ![mockup](docs/images/responsive-mockup.png)
 
@@ -45,6 +45,7 @@ Live Demo: https://cyclebay-bc1e75ddbf8e.herokuapp.com/
         - [Featured Carousel](#featured-carousel)
         - [Newsletter](#newsletter)
     - [Products Page](#products-page)
+        - [Lazy Loading Images](#lazy-loading-images)
         - [Products Page Header](#products-page-header)
             - [Current Category/Brand/Color](#current-category-brand-and-color)
             - [Sorting](#sorting)
@@ -512,12 +513,48 @@ To learn more, please refer to the [Email Marketing: Newsletter](#email-marketin
 ### Products Page
 The Products page displays all bikes available in the store. The list of bikes is sorted by name in ascending order by default.
 
-#### Products Page Header
-    The products header consists of 3 rows:
+#### Lazy Loading Images
+I implemented a lazy-loading feature for images using the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 
-    - *Bikes* - heading
-    - *Current Category, Brand and Color*
-    - *Products Count* and *Sorting*.
+This is designed to improve the performance of the application by deferring the loading of off-screen images until the user scrolls to them. It's an ideal feature for eCommerce applications with a large number of product images, as it allows the app to maintain high performance while supporting an extensive product catalog.
+
+The JavaScript code initializes an Intersection Observer to monitor all elements with a lazy-load class. As the user scrolls through the page, the Intersection Observer detects when each image element comes into view and updates its src attribute to trigger the actual image loading.
+
+This makes it much easier to add a large number of products without affecting the performance.
+
+```
+  $(document).ready(function() {
+    // Initialize Intersection Observer
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let el = $(entry.target);
+          el.attr('src', el.data('src'));
+          el.removeClass('lazy-load'); // remove the class to avoid re-loading
+          observer.unobserve(entry.target); // Stop observing this element
+        }
+      });
+    }, {
+      // Load images 100px before they appear on viewport.
+      rootMargin: '100px'
+    });
+
+    // Observe each element with the 'lazy-load' class
+    $('.lazy-load').each(function() {
+      observer.observe(this);
+    });
+  });
+```
+
+![lazy loading](docs/images/features/lazy-load.png)
+
+#### Products Page Header
+
+The products header consists of 3 rows:
+
+- *Bikes* - heading
+- *Current Category, Brand and Color*
+- *Products Count* and *Sorting*.
 
 - ##### Current Category, Brand and Color
 This row is hidden if the user is on the *All Bikes* page. If the user is selected a category, brand or color, the *Current Category, Brand and Color* row will be displayed with appropriate values.
@@ -954,7 +991,6 @@ The views are defined in the `cyclebay/views.py` file and handlers in the `cycle
 ### Features Left to Implement
 - Product description.
     The store owner can add the product description using the WYSIWYG editor.
-
 - Product reviews and ratings.
     The user can add a review and rating to the bought product.
 - Discount codes and coupons.

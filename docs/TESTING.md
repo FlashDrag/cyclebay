@@ -282,15 +282,15 @@ Add a color | As a Store Owner, I want to be able to add a product color | Inter
 ## Manual Tests
 Manual testing was performed to ensure that all features work as intended.
 
-- All pages on the site can be reached by a link from another findable page
+- All pages on the site reached by links from another findable page.
 
-- All external links open in a new tab with rel="noopener noreferrer"
+- All external links open in a new tab with rel="noopener" and target="_blank" attributes.
 
-- Forms are validated and show error messages if invalid data is entered
+- Forms are validated with client-side and server-side validation. Error messages are displayed if invalid data is entered.
 
-- Toast messages are displayed when it's appropriate
+- User feedback are all evident in the code and the working application. Toast messages are displayed when it's appropriate.
 
-- Stripe webhooks are received and processed correctly, even if the user accidentally closes the browser before the payment is confirmed
+- Payments work as expected. Stripe webhooks are received and processed correctly, even if the user accidentally closes the browser before the payment is confirmed.
 
 
 ## Bugs/Issues
@@ -298,5 +298,9 @@ Manual testing was performed to ensure that all features work as intended.
     - **Issue:** The backend form validation executes using *stripe_elements.js* after the Stripe payment is confirmed. This means that if the form is invalid, the user will still be charged for the order.
     - **Solution:** The form validation is done on the frontend using JavaScript. If the form is invalid, the user will be notified and the payment will not be processed.
     - **Future Update:** The functionality will be completely refactored to use the Django forms validation before the payment is processed, to ensure that the user cannot bypass the frontend validation.
+
+- #### Products
+    - **Issue:** The performance of the products page is not optimal. The page loads all product images at once, which can cause a delay in loading the page.
+    - **Solution:** Lazy Loading Images with Intersection Observer. As images are only loaded as they are about to be displayed, the initial page load is much faster.
 
 [Back to README.md](../README.md#table-of-contents)
