@@ -9,7 +9,8 @@
 - [Compatibility Testing](#compatibility-testing)
   - [Browser Compatibility](#browser-compatibility)
   - [Device Compatibility](#device-compatibility)
-- [User Stories - Manual Testing](#user-stories---manual-testing)
+- [User Stories Testing](#user-stories-testing)
+- [Manual Tests](#manual-tests)
 - [Bugs/Issues](#bugsissues)
 - [Back to README.md](../README.md#table-of-contents)
 
@@ -204,9 +205,7 @@ Here are some screenshots of the website on iPhone 12 Pro:
 
 [Back to top](#contents)
 
-## User Stories - Manual Testing
-Manual testing was performed to ensure that all features work as intended.
-
+## User Stories Testing
 ##### Epic: Viewing and Navigation
 
 | User Story | Requirements to be met | Result |
@@ -277,6 +276,22 @@ Delete a product | As a Store Owner, I want to be able to delete a product | Opt
 Add a category | As a Store Owner, I want to be able to add a product category | Interface for adding new categories is available and functional |
 Add a brand | As a Store Owner, I want to be able to add a product brand | Interface for adding new brands is available and functional |
 Add a color | As a Store Owner, I want to be able to add a product color | Interface for adding new colors is available and functional |
+
+[Back to top](#contents)
+
+## Manual Tests
+Manual testing was performed to ensure that all features work as intended.
+
+- All pages on the site can be reached by a link from another findable page
+
+- All external links open in a new tab with rel="noopener noreferrer"
+
+- Forms are validated and show error messages if invalid data is entered
+
+- Toast messages are displayed when it's appropriate
+
+- Stripe webhooks are received and processed correctly, even if the user accidentally closes the browser before the payment is confirmed
+
 
 ## Bugs/Issues
 - #### Checkout
