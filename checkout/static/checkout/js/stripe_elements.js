@@ -57,7 +57,7 @@ form.addEventListener('submit', function (ev) {
 
     var formIsValid = validateForm(this);
     if (!formIsValid) {
-        return false;
+        return;
     }
 
     // disable card element and submit button to prevent multiple submissions
@@ -152,8 +152,8 @@ function validateForm(form) {
     const emailIsValid = validateEmail(form.email.value);
     if (!emailIsValid) {
         const emailElement = $('#id_email');
-        emailElement.before('<div class="text-danger">Please enter a valid email address.</div>');
         emailElement.addClass('is-invalid');
+        $('#email--error').removeClass('d-none');
         emailElement.focus();
         return false;
     }
@@ -161,10 +161,13 @@ function validateForm(form) {
     const phoneIsValid = validatePhoneNumber(form.phone_number.value);
     if (!phoneIsValid) {
         const phoneElement = $('#id_phone_number');
-        phoneElement.before('<div class="text-danger">Please enter a valid phone number.</div>');
         phoneElement.addClass('is-invalid');
+        $('#phone--error').removeClass('d-none');
         phoneElement.focus();
+        return false;
     }
+
+    return true;
 }
 
 
@@ -182,8 +185,11 @@ function validateEmail(email) {
 // https://developerking.medium.com/how-to-integrate-international-phone-number-validation-in-input-field-with-javascript-55d8e4b432c4
 // Validate international phone number
 function validatePhoneNumber(phoneNumber) {
-    // Regular expression to match most international phone number formats
-    var phoneNumberRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+    // Regular expression for phone number:
+    // + is optional
+    // minimum 6 digits, maximum 14 digits
+    // can contain spaces, hyphens, dots as separators
+    var phoneNumberRegex = /^(?:\+)?(?:[0-9][ -.]?){6,14}[0-9]$/;
     // Test the phone number against the regular expression
     if (phoneNumberRegex.test(phoneNumber)) {
       // Phone number is valid

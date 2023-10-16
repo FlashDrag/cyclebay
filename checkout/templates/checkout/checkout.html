@@ -72,10 +72,12 @@
         <fieldset class="rounded px-3 mb-5">
           <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
           {{ order_form.full_name | as_crispy_field }}
+          <div id="email--error" class="text-danger d-none">Please enter a valid email address.</div>
           {{ order_form.email | as_crispy_field }}
         </fieldset>
         <fieldset class="rounded px-3 mb-5">
           <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
+          <div id="phone--error" class="text-danger d-none">Phone can start with +, and must contain 7-15 digits with separators `<b>-</b>` or without them.</div>
           {{ order_form.phone_number | as_crispy_field }}
           {{ order_form.street_address1 | as_crispy_field }}
           {{ order_form.street_address2 | as_crispy_field }}
