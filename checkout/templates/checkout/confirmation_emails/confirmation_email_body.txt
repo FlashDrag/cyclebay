@@ -9,7 +9,7 @@ Order Total: ${{ order.order_total }}
 Delivery: ${{ order.delivery_cost }}
 Grand Total: ${{ order.grand_total }}
 
-Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
+Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.get_country_display }}.
 
 Your receipt can be found at {{ order.receipt_url }}.
 
