@@ -89,6 +89,7 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = stripe_secret_key
 
     if request.method == "POST":
         # clean the bag with empty product sizes
